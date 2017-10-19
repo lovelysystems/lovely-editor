@@ -1,4 +1,7 @@
-// NOTE - Read more about it here
+import Enzyme from 'enzyme' //eslint-disable-line
+import Adapter from 'enzyme-adapter-react-16' //eslint-disable-line
+
+// NOTE
 // - https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 // - https://semaphoreci.com/community/tutorials/testing-react-components-with-enzyme-and-mocha
 const { JSDOM } = require('jsdom') // eslint-disable-line
@@ -20,3 +23,6 @@ global.navigator = {
 }
 
 copyProps(window, global)
+
+// Enzyme Config
+Enzyme.configure({ adapter: new Adapter() })

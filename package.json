@@ -18,7 +18,7 @@
     "prestart": "npm run test:node",
     "start": "cd example && webpack-dev-server",
     "pretest": "npm run lint",
-    "test": "_mocha --require babel-core/register --require src/tests/helpers/browser.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
+    "test": "_mocha --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:node": "./node_modules/check-node-version/bin.js --node '>='$(cat .nvmrc) --npm '>= 3.10.0'"
   },
   "pre-commit": [
