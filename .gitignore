@@ -13,3 +13,6 @@ npm-debug.log
 
 ## Other Files
 .DS_Store
+
+## Build
+dist
