@@ -31,6 +31,7 @@
     "handle-callback-err": "error",
     "indent": ["error", 2],
     "import/no-dynamic-require": "off",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["src/tests/helpers/test-setup.js", "**/*.test.js", "**/*.spec.js"]}],
     "import/prefer-default-export": 0,
     "max-nested-callbacks": [
       "error",

@@ -1,10 +1,10 @@
-import Enzyme from 'enzyme' //eslint-disable-line
-import Adapter from 'enzyme-adapter-react-16' //eslint-disable-line
+import Enzyme from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
 // NOTE
 // - https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 // - https://semaphoreci.com/community/tutorials/testing-react-components-with-enzyme-and-mocha
-const { JSDOM } = require('jsdom') // eslint-disable-line
+import { JSDOM } from 'jsdom'
 
 const jsdom = new JSDOM('<!doctype html><html><body><div id="app"></div></body></html>')
 const { window } = jsdom
