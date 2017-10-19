@@ -12,7 +12,7 @@ import ExampleImage from '../src/components/example-image'
 import { BemHelper } from '../src/helpers/bem-helper'
 
 // Styles
-require('../sass/main.scss')
+require('./sass/main.scss')
 
 const classes = new BemHelper('example-app')
 

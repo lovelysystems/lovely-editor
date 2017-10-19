@@ -8,7 +8,7 @@ const extractSass = new ExtractTextPlugin({
 
 module.exports = {
   entry: {
-    'js/bundle.js': ['babel-polyfill', '../example/index.js'],
+    'js/bundle.js': ['babel-polyfill', './index.js']
   },
   output: {
     filename: '[name]',
@@ -38,14 +38,14 @@ module.exports = {
             options: {
               'sourceMap': true,
               config: {
-                path: '../postcss.config.js'
+                path: './postcss.config.js'
               }
             }
           }, {
             loader: 'sass-loader',
             options: {
                includePaths: [
-                 resolve(__dirname, '..', 'sass', 'components'),
+                 resolve(__dirname, 'sass', 'components'),
                ],
               'sourceMap': true
             }

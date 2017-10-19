@@ -2,7 +2,6 @@ module.exports = {
   extends: "stylelint-config-sass-guidelines",
   ignoreFiles: [
     "./node_modules/**/*",
-    "./example/**/*",
   ],
   rules: {
     "order/properties-alphabetical-order": null,

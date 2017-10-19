@@ -1,26 +1,12 @@
 ## Node
 node_modules
 
-## Development
-bin
-develop-eggs
-parts
-.installed.cfg
-
 ## Examples
 example/css
 example/js
 
-## Coverage Reports
-coverage
-
 ## Log Files
 npm-debug.log
-.log
-log
 
-## Stuff
+## Other Files
 .DS_Store
-
-## Temp Files
-tmp
