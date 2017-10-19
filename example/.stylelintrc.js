@@ -6,14 +6,6 @@ module.exports = {
   rules: {
     "order/properties-alphabetical-order": null,
     "rule-empty-line-before": null,
-    "max-nesting-depth": 3, // neede because of BEM, try to not increase this number
-    // stylelint-config-sass-guidelines requires
-    // you to omit the '.scss' ending in @import statements.
-    // However, since we are using webpack to build the css,
-    // and there are also non-scss files (like .js) in folders like /components,
-    // webpack would try to import them into the scss and produce an error.
-    // Hence, we need to be able to specify the file ending to actually
-    // only import the .scss files.
-    "scss/at-import-partial-extension-blacklist": null
+    "max-nesting-depth": 3, // needed because of BEM, try to not increase this number
   }
 };
