@@ -1,0 +1,8 @@
+# `node_modules` ignored by default.
+# Compiled src.
+example
+
+# configs etc.
+webpack.config.js
+postcss.config.js
+.stylelintrc.js

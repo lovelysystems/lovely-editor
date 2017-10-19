@@ -1,0 +1,10 @@
+.oy-example-app {
+  &__container {
+    margin: 10px;
+  }
+}
+
+@import 'editor-block/styles.scss';
+@import 'editor/styles.scss';
+@import 'example-input/styles.scss';
+@import 'example-image/styles.scss';

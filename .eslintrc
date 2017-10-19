@@ -1,0 +1,73 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "parserOptions": {
+    ecmaFeatures: {
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "classes": true,
+      "defaultParams": true,
+      "modules": true,
+      "spread": true,
+      "globalReturn": true,
+    }
+  },
+  "globals": {
+    "document": true,
+  },
+  "rules": {
+    "arrow-body-style": [0],
+    "class-methods-use-this": "off",
+    "comma-dangle": [0],
+    "func-names": ["error", "never"],
+    "function-paren-newline": ["off"],
+    "handle-callback-err": "error",
+    "indent": ["error", 2],
+    "import/no-dynamic-require": "off",
+    "import/prefer-default-export": 0,
+    "max-nested-callbacks": [
+      "error",
+      5
+    ],
+    "no-console": ["error"],
+    'no-else-return': "error", //["error", { allowElseIf: true }]
+    "no-eval": "error",
+    "no-extra-boolean-cast": "off",
+    "no-plusplus": "off",
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "no-unused-vars": ["error", {"args": "none"}],
+    "no-use-before-define": [
+      "error", {
+        "functions": true,
+        "classes": true
+      }
+    ],
+    "no-var": 1,
+    "quotes": ["error", "single"],
+    "padded-blocks": ["error", { "classes": "always" }],
+    "prefer-arrow-callback": [0, { "allowNamedFunctions": true }],
+    "react/jsx-filename-extension": 0, // we don't require all files containing JSX code to end with ,jsx, e.g. test files and stories
+    "semi": ["error", "never"],
+    "space-before-blocks": [0],
+    "space-before-function-paren": ["error", "never"],
+    "strict": ["warn", "global"]
+  },
+  "overrides": [{
+    "files": [ "src/**/*.spec.js"],
+    "rules": {
+      "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
+      "no-undef": "off",
+      "no-underscore-dangle": ["warning"],
+      "no-unused-vars": ["error", { "varsIgnorePattern": "should|wrapper" }],
+      "import/no-extraneous-dependencies": "off",
+      "react/no-find-dom-node": 0
+    }
+  }]
+}
