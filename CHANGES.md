@@ -1,4 +1,4 @@
-# Changelog for LS Editor
+# Changelog for Oyez Editor
 
 All notable changes to this project will be documented in this file.
 

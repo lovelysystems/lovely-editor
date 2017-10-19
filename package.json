@@ -1,14 +1,14 @@
 {
-  "name": "OyezEditor",
-  "version": "0.1.0",
+  "name": "oyez-editor",
+  "version": "0.0.1",
   "description": "Oyez Editor",
   "private": true,
   "main": "app/index.js",
   "author": "Stefan Natter <natter@lovelysystems.com>",
   "license": "MIT",
   "engines": {
-    "node": ">=6.11",
-    "npm": ">=3.10"
+    "node": ">=8.6",
+    "npm": ">=5.3"
   },
   "scripts": {
     "bundle": "cd example && webpack",
@@ -19,22 +19,13 @@
     "start": "cd example && webpack-dev-server",
     "pretest": "npm run lint",
     "test": "_mocha --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
-    "test:node": "./node_modules/check-node-version/bin.js --node '>='$(cat .nvmrc) --npm '>= 3.10.0'"
+    "test:node": "./node_modules/check-node-version/bin.js --node '>='$(cat .nvmrc) --npm '>= 5.3.0'"
   },
   "pre-commit": [
     "lint:js",
     "lint:styles",
     "test"
   ],
-  "keywords": [
-    "lovelysystems",
-    "ls-editor",
-    "editor"
-  ],
-  "peerDependencies": {
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
-  },
   "dependencies": {
     "lodash": "4.17.4",
     "prop-types": "15.6.0",

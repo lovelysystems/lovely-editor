@@ -3,8 +3,8 @@
 ## Requirements
 
 ```
- node 6.11.x
- npm 3.10.x
+ node 8.6.x
+ npm 5.3.x
 ```
 
 ## Setup
