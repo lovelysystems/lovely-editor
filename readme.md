@@ -19,6 +19,7 @@ Read more about the Example (How to Setup and Start) in the [Example's Readme](e
 
 * `npm run lint`: lints JS code
 * `npm run test`: runs the tests (test files path and pattern: `src/**/*.spec.js`)
+* `npm run test:coverage`: runs the tests and reports the coverage with [Istanbul](https://www.npmjs.com/package/istanbul)
 * `npm run test:node`: verifies the installed and used node version
 
 ### Pre-commit Hooks

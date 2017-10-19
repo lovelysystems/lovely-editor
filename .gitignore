@@ -1,6 +1,9 @@
 ## Node
 node_modules
 
+## Development && Coverage Reports
+coverage
+
 ## Examples
 example/css
 example/js
