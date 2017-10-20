@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import Component from '../index'
+import { ExampleImage } from '../'
 
 // mocks
 import validConfig from './mocks/validConfig.json'
@@ -10,7 +10,7 @@ describe('<ExampleImage />', () => {
 
   it('component renders', () => {
     const wrapper = shallow(
-      <Component
+      <ExampleImage
         data={validConfig.data}
         meta={validConfig.meta}
         index={0}

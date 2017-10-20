@@ -7,8 +7,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('example-image')
 
-// Main App
-const ExampleImage = function(props, context) {
+export function ExampleImage(props, context) {
 
   const { data, meta } = props
   const title = meta.title || 'Image Block'
@@ -25,5 +24,3 @@ ExampleImage.propTypes = {
   data: PropTypes.objectOf(PropTypes.string).isRequired,
   meta: PropTypes.objectOf(PropTypes.string).isRequired
 }
-
-export default ExampleImage

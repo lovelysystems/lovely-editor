@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import ExampleInput from '../index'
+import { ExampleInput } from '../'
 
 // mocks
 import validConfig from './mocks/validConfig.json'

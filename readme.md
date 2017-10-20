@@ -26,7 +26,7 @@ Read more about the Example (How to Setup and Start) in the [Example's Readme](e
 
 When attempting to commit files in this repository, some taks will automatically run to ensure a consistently high level of code quality:
 
-* __JavaScript files (.js and .jsx):__
+* __JavaScript files (.js):__
   * runs `eslint` and automatically fixes auto-fixable issues ([see related JS guidelines here](https://github.com/airbnb/javascript))
   * runs `prettier` and auto-formats your code ([see what it does here](https://github.com/prettier/prettier))
   * runs all unit tests concerning the committed files with `mocha`

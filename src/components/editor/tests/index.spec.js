@@ -1,25 +1,15 @@
-import React from 'react'
+import * as React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-import Component from '../index'
+import { Editor } from '../'
 
 describe('<Editor />', () => {
 
-  let editorConfig
-  let editorContent
-
-  before(() => {
-    // current Value
-    editorContent = []
-    // current EditorConfig
-    editorConfig = []
-  })
-
   it('component renders', () => {
     const wrapper = shallow(
-      <Component
-        editorContent={editorContent}
-        editorConfig={editorConfig}
+      <Editor
+        editorContent={[]}
+        editorConfig={[]}
         onChange={() => {}}
       />
     )

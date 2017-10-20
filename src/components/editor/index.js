@@ -6,13 +6,12 @@ import { map } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Editor Components
-import EditorBlock from '../editor-block'
+import { EditorBlock } from '../editor-block'
 
 // Styling
 const classes = new BemHelper('editor')
 
-// Main App
-export default class Editor extends React.Component {
+export class Editor extends React.Component {
 
   onChange(newData, index) {
     const { editorContent } = this.props

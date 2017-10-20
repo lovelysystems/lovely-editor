@@ -8,8 +8,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('example-input')
 
-// Main App
-export default class ExampleInput extends React.Component {
+export class ExampleInput extends React.Component {
 
   onChange(event) {
     const { index } = this.props

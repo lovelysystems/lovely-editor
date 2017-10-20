@@ -20,7 +20,7 @@ module.exports = {
     inline: true
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js'],
   },
   module: {
     rules: [
@@ -52,7 +52,7 @@ module.exports = {
           }]
         })
       }, {
-        test: /\.js?$/,
+        test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader'

@@ -7,7 +7,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('editor-block')
 
-const EditorBlock = function(props, context) {
+export function EditorBlock(props, context) {
 
   return (
     <div {...classes('container')}>
@@ -21,5 +21,3 @@ const EditorBlock = function(props, context) {
 EditorBlock.propTypes = {
   children: PropTypes.element.isRequired
 }
-
-export default EditorBlock

@@ -1,12 +1,8 @@
 import * as React from 'react'
 import { render } from 'react-dom'
 
-// Editor Components
-import Editor from '../src/components/editor'
-
-// Editors
-import ExampleInput from '../src/components/example-input'
-import ExampleImage from '../src/components/example-image'
+// Editor and Editor Components
+import { Editor, ExampleInput, ExampleImage } from '../src'
 
 // Helpers
 import { BemHelper } from '../src/helpers/bem-helper'
@@ -18,7 +14,7 @@ const classes = new BemHelper('example-app')
 
 // current Value
 const currentEditorContent = [{
-  id: 5, // TODO: define who is responsible for creating this id
+  id: 5, // TODO: define who is responsible for creating this id; and use it in the Editor
   type: 'text',
   data: {
     value: 'This is the current Text.'
@@ -50,7 +46,7 @@ const editorConfig = [
 ]
 
 // Main App
-export default class ExampleApp extends React.Component {
+export class ExampleApp extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -67,7 +63,7 @@ export default class ExampleApp extends React.Component {
   render() {
     const { editorContent } = this.state
     return (
-      <div {...classes('app')}>
+      <div {...classes('container')}>
         <Editor
           editorContent={editorContent}
           editorConfig={editorConfig}
