@@ -1,5 +1,6 @@
 {
-  "type": "text",
+  "id": 6,
+  "type": "image",
   "data": {
     "value": "http://example.com/example.png"
   },

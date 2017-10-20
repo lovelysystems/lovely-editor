@@ -13,11 +13,11 @@ const classes = new BemHelper('editor')
 
 export class Editor extends React.Component {
 
-  onChange(change) {
+  onChange(change, id) {
     const { editorContent } = this.props
 
     // find the block we just changed and update it's data
-    const block = find(editorContent, ['id', change.id])
+    const block = find(editorContent, ['id', id])
     block.data = change.data
 
     const editorChange = {
@@ -31,19 +31,16 @@ export class Editor extends React.Component {
   renderEditorBlocks() {
     const { editorContent, editorConfig } = this.props
     const editorBlocksArray = map(editorContent, (block) => {
-      const { data, id, meta } = block
 
       return map(editorConfig, (element) => { //eslint-disable-line
         if (block.type === element.type) {
           if (!!element.component) {
             const Component = element.component
             return (
-              <EditorBlock key={id}>
+              <EditorBlock key={block.id}>
                 <Component
-                  data={data}
-                  meta={meta}
-                  id={id}
-                  onChange={(change) => this.onChange(change)}
+                  block={block}
+                  onChange={(change) => this.onChange(change, block.id)}
                 />
               </EditorBlock>
             )
@@ -73,7 +70,8 @@ Editor.propTypes = {
   editorContent: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
-    date: PropTypes.shape.isRequired,
+    data: PropTypes.shape.isRequired,
+    meta: PropTypes.shape.isRequired,
   })).isRequired,
   onChange: PropTypes.func.isRequired
 }

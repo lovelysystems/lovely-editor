@@ -11,9 +11,7 @@ describe('<ExampleImage />', () => {
   it('component renders', () => {
     const wrapper = shallow(
       <ExampleImage
-        data={validConfig.data}
-        meta={validConfig.meta}
-        index={0}
+        block={validConfig}
         onChange={() => {}}
       />
     )

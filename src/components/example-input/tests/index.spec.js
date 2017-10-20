@@ -11,9 +11,7 @@ describe('<ExampleInput />', () => {
   it('component renders', () => {
     const wrapper = shallow(
       <ExampleInput
-        data={validConfig.data}
-        meta={validConfig.meta}
-        id={0}
+        block={validConfig}
         onChange={() => {}}
       />
     )

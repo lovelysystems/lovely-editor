@@ -14,7 +14,7 @@ const classes = new BemHelper('example-app')
 
 // current Value
 const currentEditorContent = [{
-  id: 5, // TODO: define who is responsible for creating this id; and use it in the Editor
+  id: 5, // TODO: define who is responsible for creating this id
   type: 'text',
   data: {
     value: 'This is the current Text.'
