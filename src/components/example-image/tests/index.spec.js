@@ -16,6 +16,5 @@ describe('<ExampleImage />', () => {
       />
     )
     expect(wrapper.exists()).to.equal(true)
-    expect(wrapper.contains(<h1>Image Block</h1>)).to.equal(true)
   })
 })

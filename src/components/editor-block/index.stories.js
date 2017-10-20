@@ -4,20 +4,28 @@ import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
 // Component imports
-import { ExampleImage } from './'
+import { EditorBlock, ExampleInput } from '../..'
 import componentReadme from './README.md'
 
 const block = {
-  id: 6,
+  id: 5,
   data: {
-    value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+    value: 'Hello World.'
+  },
+  meta: {
+    titel: 'Input Box'
   }
 }
 
-storiesOf('Example Components/Image', module)
+storiesOf('Editor/Editor-Block', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
-    <ExampleImage
+    <EditorBlock
       block={block}
-    />
+    >
+      <ExampleInput
+        block={block}
+        onChange={action('changed')}
+      />
+    </EditorBlock>
   ))

@@ -1,1 +1,3 @@
-## TEST README
+## Example Image
+
+Component renders an image.

@@ -10,6 +10,7 @@ function loadStories() {
 
 setOptions({
   name: 'Oyez Editor',
+  url: '#',
 });
 
 configure(loadStories, module);

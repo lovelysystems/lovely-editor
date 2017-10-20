@@ -16,6 +16,5 @@ describe('<ExampleInput />', () => {
       />
     )
     expect(wrapper.exists()).to.equal(true)
-    expect(wrapper.contains(<h1>Input Block</h1>)).to.equal(true)
   })
 })
