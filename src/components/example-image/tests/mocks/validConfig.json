@@ -1,0 +1,9 @@
+{
+  "type": "text",
+  "data": {
+    "value": "http://example.com/example.png"
+  },
+  "meta": {
+    "title": "Image Block"
+  }
+}
