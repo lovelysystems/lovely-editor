@@ -11,17 +11,20 @@ const classes = new BemHelper('example-input')
 export class ExampleInput extends React.Component {
 
   onChange(event) {
-    const { index } = this.props
+    const { id } = this.props
     const value = get(event, 'target.value', '')
-    const newData = {
-      value
+    const change = {
+      id,
+      data: {
+        value
+      }
     }
-    this.props.onChange(newData, index)
+    this.props.onChange(change)
   }
 
   render() {
     const { data, meta } = this.props
-    const title = meta.title || 'Image Block'
+    const title = get(meta, 'title', 'Input Block')
 
     return (
       <div {...classes('container')}>
@@ -42,7 +45,7 @@ export class ExampleInput extends React.Component {
 
 ExampleInput.propTypes = {
   data: PropTypes.objectOf(PropTypes.string).isRequired,
-  index: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   meta: PropTypes.objectOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired
 }

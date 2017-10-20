@@ -13,7 +13,7 @@ describe('<ExampleInput />', () => {
       <ExampleInput
         data={validConfig.data}
         meta={validConfig.meta}
-        index={0}
+        id={0}
         onChange={() => {}}
       />
     )

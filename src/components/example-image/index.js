@@ -2,6 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
+import { get } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Styling
@@ -10,7 +11,7 @@ const classes = new BemHelper('example-image')
 export function ExampleImage(props, context) {
 
   const { data, meta } = props
-  const title = meta.title || 'Image Block'
+  const title = get(meta, 'title', 'Image Block')
 
   return (
     <div {...classes('container')}>

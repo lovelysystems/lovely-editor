@@ -56,8 +56,8 @@ export class ExampleApp extends React.Component {
     }
   }
 
-  onChange(newState, delta) {
-    this.setState({ editorContent: newState })
+  onChange(change) {
+    this.setState({ editorContent: change.editorContent })
   }
 
   render() {
@@ -75,6 +75,6 @@ export class ExampleApp extends React.Component {
 
 }
 
-// Render EditorApp
+// Render ExampleApp
 const ROOT_NODE = document.querySelector('#app')
 render(<ExampleApp />, ROOT_NODE)

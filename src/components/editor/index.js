@@ -2,7 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
-import { map } from 'lodash'
+import { map, find } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Editor Components
@@ -13,31 +13,37 @@ const classes = new BemHelper('editor')
 
 export class Editor extends React.Component {
 
-  onChange(newData, index) {
+  onChange(change) {
     const { editorContent } = this.props
-    const delta = {
-      id: editorContent[index].id,
-      data: newData
+
+    // find the block we just changed and update it's data
+    const block = find(editorContent, ['id', change.id])
+    block.data = change.data
+
+    const editorChange = {
+      editorContent,
+      block
     }
-    editorContent[index].data = newData
-    this.props.onChange(editorContent, delta)
+
+    this.props.onChange(editorChange)
   }
 
   renderEditorBlocks() {
     const { editorContent, editorConfig } = this.props
-    const editorBlocksArray = map(editorContent, (block, index) => {
+    const editorBlocksArray = map(editorContent, (block) => {
+      const { data, id, meta } = block
 
-      return map(editorConfig, (element, confIndex) => { //eslint-disable-line
+      return map(editorConfig, (element) => { //eslint-disable-line
         if (block.type === element.type) {
           if (!!element.component) {
             const Component = element.component
             return (
-              <EditorBlock key={index}>
+              <EditorBlock key={id}>
                 <Component
-                  data={editorContent[index].data}
-                  meta={editorContent[index].meta}
-                  index={index}
-                  onChange={(newData, blockIndex) => this.onChange(newData, blockIndex)}
+                  data={data}
+                  meta={meta}
+                  id={id}
+                  onChange={(change) => this.onChange(change)}
                 />
               </EditorBlock>
             )
