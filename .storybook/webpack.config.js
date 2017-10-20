@@ -6,6 +6,10 @@ module.exports = {
       {
         test: /\.md$/,
         use: 'raw-loader'
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader?sourceMap', 'sass-loader?sourceMap'],
       }
     ]
   }

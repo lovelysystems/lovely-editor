@@ -1,0 +1,12 @@
+.oy-example-app {
+
+  &__container {
+    margin: 10px;
+  }
+
+}
+
+@import 'components/editor-block/styles';
+@import 'components/editor/styles';
+@import 'components/example-input/styles';
+@import 'components/example-image/styles';
