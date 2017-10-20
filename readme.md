@@ -11,6 +11,10 @@
 
 Once you have cloned the repository and enter `nvm use && npm install` to install all the dependencies, required to develop.
 
+## Example
+
+Read more about the Example (How to Setup and Start) in the [Example's Readme](example/README.md).
+
 ## How to develop
 
 * `npm run lint`: lints JS code

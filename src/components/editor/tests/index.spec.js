@@ -7,7 +7,11 @@ describe('<Editor />', () => {
 
   it('component renders', () => {
     const wrapper = shallow(
-      <Editor />
+      <Editor
+        editorContent={[]}
+        editorConfig={[]}
+        onChange={() => {}}
+      />
     )
     expect(wrapper.exists()).to.equal(true)
   })
