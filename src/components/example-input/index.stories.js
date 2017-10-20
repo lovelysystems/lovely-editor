@@ -7,18 +7,43 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import { ExampleInput } from './'
 import componentReadme from './README.md'
 
-const block = {
+// Example Config
+const exampleConfig = {
   id: 5,
   data: {
     value: 'Hello World.'
   }
 }
 
+class Wrapper extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      block: exampleConfig
+    }
+    this.onChange = this.onChange.bind(this)
+  }
+
+  onChange(change) {
+    exampleConfig.data = change.data
+    action('onChange')(change)
+    this.setState({ block: exampleConfig })
+  }
+
+  render() {
+    return (
+      <ExampleInput
+        block={this.state.block}
+        onChange={this.onChange}
+      />
+    )
+  }
+
+}
+
 storiesOf('Example Components/Input', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
-    <ExampleInput
-      block={block}
-      onChange={action('onChange')}
-    />
+    <Wrapper />
   ))

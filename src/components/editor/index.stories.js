@@ -40,7 +40,7 @@ const editorConfig = [
   }
 ]
 
-export class ExampleApp extends React.Component {
+class Wrapper extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -71,5 +71,5 @@ export class ExampleApp extends React.Component {
 storiesOf('Editor/Editor', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
-    <ExampleApp />
+    <Wrapper />
   ))
