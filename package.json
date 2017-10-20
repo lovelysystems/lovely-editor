@@ -1,0 +1,57 @@
+{
+  "name": "oyez-editor",
+  "version": "0.0.1",
+  "description": "Oyez Editor",
+  "private": true,
+  "main": "dist/index.js",
+  "author": "Lovely Systems GmbH <office@lovelysystems.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.6",
+    "npm": ">=5.3"
+  },
+  "scripts": {
+    "lint": "eslint src/**/*.js --fix",
+    "pretest": "npm run test:node && npm run lint",
+    "test": "_mocha --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
+    "test:coverage": "./node_modules/.bin/istanbul cover _mocha -- --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
+    "test:node": "./node_modules/check-node-version/bin.js --node '>='$(cat .nvmrc) --npm '>= 5.3.0'",
+    "prebuild": "rimraf dist",
+    "build": "babel src --out-dir dist --ignore *.spec.js,test --source-maps",
+    "postinstall": "npm build"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "dependencies": {
+    "react": "16.0.0",
+    "react-bem-helper": "1.4.1",
+    "react-dom": "16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-core": "6.26.0",
+    "babel-eslint": "8.0.1",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "chai": "4.1.2",
+    "check-node-version": "2.1.0",
+    "enzyme": "3.1.0",
+    "enzyme-adapter-react-16": "1.0.2",
+    "eslint": "4.9.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-config-prettier": "2.6.0",
+    "eslint-plugin-import": "2.7.0",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-prettier": "2.3.1",
+    "eslint-plugin-react": "7.4.0",
+    "istanbul": "1.0.0-alpha.2",
+    "jsdom": "11.3.0",
+    "mocha": "4.0.1",
+    "pre-commit": "1.2.2",
+    "react-test-renderer": "16.0.0",
+    "rimraf": "2.6.2"
+  }
+}
