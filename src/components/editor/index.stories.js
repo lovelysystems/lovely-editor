@@ -90,8 +90,8 @@ class Wrapper extends React.Component {
     }
 
     if (!!newBlock) {
-      editorState.push(newBlock)
-      this.setState({ editorState})
+      const newState = [ ...editorState, newBlock ]
+      this.setState({ editorState: newState })
     }
   }
 

@@ -16,7 +16,7 @@ export function EditorBlock(props) {
       action,
       id: block.id
     }
-    props.onClick(event)
+    props.onAction(event)
   }
 
   const { block } = props
@@ -44,9 +44,9 @@ EditorBlock.propTypes = {
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   children: PropTypes.element.isRequired,
-  onClick: PropTypes.func,
+  onAction: PropTypes.func,
 }
 
 EditorBlock.defaultProps = {
-  onClick: () => { console.log('... onClick triggered') }, //eslint-disable-line
+  onAction: () => { console.log('... onAction triggered') }, //eslint-disable-line
 }

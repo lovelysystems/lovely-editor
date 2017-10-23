@@ -28,7 +28,7 @@ export class Editor extends React.Component {
 
     this.props.onChange(editorChange)
   }
-  onBlockClick(event) {
+  onBlockAction(event) {
     const { editorState } = this.props
     let newState = null
     let block = null
@@ -66,7 +66,7 @@ export class Editor extends React.Component {
               <EditorBlock
                 key={block.id}
                 block={block}
-                onClick={(event) => this.onBlockClick(event)}
+                onAction={(event) => this.onBlockAction(event)}
               >
                 <Component
                   block={block}
