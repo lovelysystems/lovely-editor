@@ -29,8 +29,8 @@ export class Editor extends React.Component {
 
     this.props.onChange(editorChange)
   }
-  onMenuClick(action, type) {
-    this.props.onMenuClick(action, type) // TODO: consider using one parm
+  onMenuClick(event) {
+    this.props.onMenuClick(event)
   }
   onBlockClick(event) {
     this.props.onBlockClick(event)
@@ -49,7 +49,7 @@ export class Editor extends React.Component {
               <EditorBlock
                 key={block.id}
                 block={block}
-                onBlockClick={(event) => this.onBlockClick(event)}
+                onClick={(event) => this.onBlockClick(event)}
               >
                 <Component
                   block={block}
@@ -76,7 +76,7 @@ export class Editor extends React.Component {
     return (
       <EditorMenu
         menu={dummyMenu}
-        onClick={(action, type) => this.onMenuClick(action, type)}
+        onClick={(event) => this.onMenuClick(event)}
       />
     )
   }

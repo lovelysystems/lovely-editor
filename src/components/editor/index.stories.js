@@ -63,13 +63,13 @@ class Wrapper extends React.Component {
     action('onChange')(change)
     this.setState({ editorContent: change.editorContent })
   }
-  onMenuClick(menuAction, type) { // TODO: consider using one parm
+  onMenuClick(event) {
     const { editorContent } = this.state
-    action('onMenuClick')(menuAction, type)
+    action('onMenuClick')(event)
 
     // simulate add
     let newMenu = null
-    switch (type) {
+    switch (event.type) {
     case 'text':
       newMenu = {
         id: Math.floor((Math.random() * 1000) + 1),
@@ -93,7 +93,7 @@ class Wrapper extends React.Component {
   }
   onBlockClick(event) {
     const { editorContent } = this.state
-    action('onMenuClick')(event)
+    action('onBlockClick')(event)
 
     const newState = filter(editorContent, function(blockObj) {
       return blockObj.id !== event.id

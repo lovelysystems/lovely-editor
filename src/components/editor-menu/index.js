@@ -10,12 +10,16 @@ const classes = new BemHelper('editor-menu')
 
 export function EditorMenu(props) {
 
-  const { menu } = props
-  const title = get(menu, 'meta.title', 'Editor-Menu')
+  function onClick(action, type) {
+    const event = { action, type }
+    props.onClick(event)
+  }
 
   // TODO
   // - add dynamic typ
   // - add new block with data (define who's responsible)
+  const { menu } = props
+  const title = get(menu, 'meta.title', 'Editor-Menu')
 
   return (
     <div {...classes('container')} >
@@ -23,7 +27,7 @@ export function EditorMenu(props) {
         {title}
       </div>
       <div {...classes('content')}>
-        <button onClick={() => props.onClick('add', 'text')}>
+        <button onClick={() => onClick('add', 'text')}>
           Text-Block hinzufügen
         </button>
       </div>
