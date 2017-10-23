@@ -2,12 +2,18 @@
 
 The main component of this package. It renderes all the blocks and manages them.
 
+## Properties
+
+* `editorState`: represents the current state of the Editor
+* `blocksConfig`: maps `type` to a component or render function
+* `onChange`: emits changes of the editor
+
 ## Example
 
 ```js
 
 // the current content, can also be an empty array
-const editorContent = [
+const editorState = [
   {
     id: 5,
     type: 'text',
@@ -29,22 +35,26 @@ const editorContent = [
   }
 ]
 
+renderImage = (props) => {
+  return <ExampleImage {...props} filter='grayscale'/>
+}
+
 // renders a specific component for the given block type
-const editorConfig = [
+const blocksConfig = [
   {
     type: 'text',
-    component: ExampleInput // React Component
+    component: ExampleInput // eg. React Component
   },
   {
     type: 'image',
-    component: ExampleImage // React Component
+    component: renderImage // eg. function, which wraps the requested component
   }
 ]
 
 <Editor
-  editorContent={editorContent}
-  editorConfig={editorConfig}
-  onChange={(change) => console.log(change)} // change contains the updated editorContent
+  editorState={editorState}
+  blocksConfig={blocksConfig}
+  onChange={(change) => console.log(change)}
 />
 
 ```

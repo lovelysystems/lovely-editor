@@ -1,8 +1,9 @@
 {
+  "plugins": ["transform-class-properties"],
   "presets": [
     ["env",
-      { "targets":
-        {
+      {
+        "targets": {
           "browsers": [
             "> 1%",
             "last 2 versions",

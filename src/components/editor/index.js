@@ -2,7 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
-import { map, find } from 'lodash'
+import { map, find, filter } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Editor Components
@@ -13,26 +13,52 @@ const classes = new BemHelper('editor')
 
 export class Editor extends React.Component {
 
-  onChange(change, id) {
-    const { editorContent } = this.props
+  // event listeners and handlers
+  onContentChange(change, id) {
+    const { editorState } = this.props
 
-    // find the block we just changed and update it's data
-    const block = find(editorContent, ['id', id])
+    // find the block we just changed and update its data
+    const block = find(editorState, ['id', id])
     block.data = change.data
 
     const editorChange = {
-      editorContent,
+      editorState,
+      block
+    }
+
+    this.props.onChange(editorChange)
+  }
+  onBlockAction(event) {
+    const { editorState } = this.props
+    let newState = null
+    let block = null
+
+    switch (event.action) {
+    case 'remove':
+      // find the block we just changed and remove it
+      block = find(editorState, ['id', event.id])
+      newState = filter(editorState, function(blockObj) {
+        return blockObj.id !== event.id
+      })
+      break
+    default:
+      break
+    }
+
+    const editorChange = {
+      editorState: newState,
       block
     }
 
     this.props.onChange(editorChange)
   }
 
+  // render helpers
   renderEditorBlocks() {
-    const { editorContent, editorConfig } = this.props
-    const editorBlocksArray = map(editorContent, (block) => {
+    const { editorState, blocksConfig } = this.props
+    const editorBlocksArray = map(editorState, (block) => {
 
-      return map(editorConfig, (element) => { //eslint-disable-line
+      return map(blocksConfig, (element) => { //eslint-disable-line
         if (block.type === element.type) {
           if (!!element.component) {
             const Component = element.component
@@ -40,10 +66,11 @@ export class Editor extends React.Component {
               <EditorBlock
                 key={block.id}
                 block={block}
+                onAction={(event) => this.onBlockAction(event)}
               >
                 <Component
                   block={block}
-                  onChange={(change) => this.onChange(change, block.id)}
+                  onChange={(change) => this.onContentChange(change, block.id)}
                 />
               </EditorBlock>
             )
@@ -58,7 +85,9 @@ export class Editor extends React.Component {
   render() {
     return (
       <div {...classes('container')}>
-        { this.renderEditorBlocks() }
+        <div {...classes('blocks')}>
+          { this.renderEditorBlocks() }
+        </div>
       </div>
     )
   }
@@ -66,19 +95,15 @@ export class Editor extends React.Component {
 }
 
 Editor.propTypes = {
-  editorConfig: PropTypes.arrayOf(PropTypes.shape({
+  blocksConfig: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     component: PropTypes.func.isRequired,
   })).isRequired,
-  editorContent: PropTypes.arrayOf(PropTypes.shape({
+  editorState: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
   onChange: PropTypes.func.isRequired
-}
-
-Editor.defaultProps = {
-  onChange: () => { console.log('... on Change clicked') } //eslint-disable-line
 }

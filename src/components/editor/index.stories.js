@@ -3,12 +3,18 @@ import { storiesOf } from '@storybook/react' //eslint-disable-line
 import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
+// Helpers
+import { BemHelper } from '../../helpers/bem-helper'
+
 // Component imports
-import { Editor, ExampleInput, ExampleImage } from '../..'
+import { Editor, ExampleMenu, ExampleInput, ExampleImage } from '../..'
 import componentReadme from './README.md'
 
+// Styling
+const classes = new BemHelper('editor')
+
 // Example Configs
-const currentEditorContent = [
+const currentEditorState = [
   {
     id: 5,
     type: 'text',
@@ -29,16 +35,6 @@ const currentEditorContent = [
     }
   }
 ]
-const editorConfig = [
-  {
-    type: 'text',
-    component: ExampleInput
-  },
-  {
-    type: 'image',
-    component: ExampleImage
-  }
-]
 
 class Wrapper extends React.Component {
 
@@ -46,23 +42,93 @@ class Wrapper extends React.Component {
     super(props, context)
     this.onChange = this.onChange.bind(this)
     this.state = {
-      editorContent: currentEditorContent
+      editorState: currentEditorState
+    }
+
+    // bindings
+    this.onChange = this.onChange.bind(this)
+    this.onMenuClick = this.onMenuClick.bind(this)
+  }
+
+  // event listeners
+  onChange(change) {
+    action('onChange')(change)
+    this.setState({ editorState: change.editorState })
+  }
+  onMenuClick(event) {
+    const { editorState } = this.state
+    action('onMenuClick')(event)
+
+    let newBlock = null
+    switch (event.type) {
+    case 'text':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'text',
+        data: {
+          value: 'This is the current Text.'
+        },
+        meta: {
+          title: 'Input Block'
+        }
+      }
+      break
+    case 'image':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'image',
+        data: {
+          value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+        },
+        meta: {
+          title: 'Image Block'
+        }
+      }
+      break
+    default:
+      break
+    }
+
+    if (!!newBlock) {
+      const newState = [ ...editorState, newBlock ]
+      this.setState({ editorState: newState })
     }
   }
 
-  onChange(change) {
-    action('onChange')(change)
-    this.setState({ editorContent: change.editorContent })
+  renderImage = (props) => {
+    return <ExampleImage {...props} />
   }
 
   render() {
-    const { editorContent } = this.state
+    const { editorState } = this.state
+    const menuState = {
+      meta: {
+        title: 'Example-Menu'
+      }
+    }
+    const blocksConfig = [
+      {
+        type: 'text',
+        component: ExampleInput
+      },
+      {
+        type: 'image',
+        component: this.renderImage
+      }
+    ]
+
     return (
-      <Editor
-        editorContent={editorContent}
-        editorConfig={editorConfig}
-        onChange={this.onChange}
-      />
+      <div {...classes('container')}>
+        <ExampleMenu
+          menuState={menuState}
+          onClick={(event) => this.onMenuClick(event)}
+        />
+        <Editor
+          editorState={editorState}
+          blocksConfig={blocksConfig}
+          onChange={this.onChange}
+        />
+      </div>
     )
   }
 

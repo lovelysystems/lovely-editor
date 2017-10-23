@@ -7,25 +7,24 @@ Renders an Editor-Block containing specific meta data (eg. `title`) and the requ
 ```js
 
 // the content of the Editor-Block
-const editorContent = [
-  {
-    id: 5,
-    type: 'text',
-    data: {
-      value: 'Hello World.'
-    },
-    meta: {
-      title: 'Editor-Block'
-    }
+const block = {
+  id: 5,
+  type: 'text',
+  data: {
+    value: 'Hello World.'
+  },
+  meta: {
+    title: 'Editor-Block'
   }
-]
+}
 
 <EditorBlock
-  key={editorContent.id}
-  block={editorContent}
+  key={block.id}
+  block={block}
+  onClick={(event) => console.log(event)}
 >
   <Component
-    block={editorContent}
+    block={block}
     onChange={(change) => console.log(change)} // change contains the updated component data
   /> // the actual editor (eg. Quill)
 </EditorBlock>

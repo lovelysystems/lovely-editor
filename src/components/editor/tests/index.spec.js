@@ -8,8 +8,8 @@ describe('<Editor />', () => {
   it('component renders', () => {
     const wrapper = shallow(
       <Editor
-        editorContent={[]}
-        editorConfig={[]}
+        editorState={[]}
+        blocksConfig={[]}
         onChange={() => {}}
       />
     )
