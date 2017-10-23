@@ -12,7 +12,7 @@ import { Editor, EditorQuill, ExampleMenu, ExampleInput, ExampleImage } from '..
 import componentReadme from './README.md'
 
 // Styling
-const classes = new BemHelper('editor')
+const classes = new BemHelper('example-app')
 
 // Story Setup
 const menuState = {
@@ -122,15 +122,19 @@ class Wrapper extends React.Component {
 
     return (
       <div {...classes('container')}>
-        <ExampleMenu
-          menuState={menuState}
-          onClick={(event) => this.onMenuClick(event)}
-        />
-        <Editor
-          editorState={editorState}
-          blocksConfig={blocksConfig}
-          onChange={this.onChange}
-        />
+        <div {...classes('menu')}>
+          <ExampleMenu
+            menuState={menuState}
+            onClick={(event) => this.onMenuClick(event)}
+          />
+        </div>
+        <div {...classes('editor')}>
+          <Editor
+            editorState={editorState}
+            blocksConfig={blocksConfig}
+            onChange={this.onChange}
+          />
+        </div>
       </div>
     )
   }
