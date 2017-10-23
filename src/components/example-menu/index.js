@@ -6,20 +6,17 @@ import { get } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Styling
-const classes = new BemHelper('editor-menu')
+const classes = new BemHelper('example-menu')
 
-export function EditorMenu(props) {
+export function ExampleMenu(props) {
 
   function onClick(action, type) {
     const event = { action, type }
     props.onClick(event)
   }
 
-  // TODO
-  // - add dynamic typ
-  // - add new block with data (define who's responsible)
-  const { menu } = props
-  const title = get(menu, 'meta.title', 'Editor-Menu')
+  const { menuState } = props
+  const title = get(menuState, 'meta.title', 'Editor-Menu')
 
   return (
     <div {...classes('container')} >
@@ -30,18 +27,21 @@ export function EditorMenu(props) {
         <button onClick={() => onClick('add', 'text')}>
           Text-Block hinzufügen
         </button>
+        <button onClick={() => onClick('add', 'image')}>
+          Bild-Block hinzufügen
+        </button>
       </div>
     </div>
   )
 }
 
-EditorMenu.propTypes = {
-  menu: PropTypes.shape({
+ExampleMenu.propTypes = {
+  menuState: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired
 }
 
-EditorMenu.defaultProps = {
-  onClick: () => { console.log('... onClick trigggered') } //eslint-disable-line
+ExampleMenu.defaultProps = {
+  onClick: () => { console.log('... onClick triggered') } //eslint-disable-line
 }

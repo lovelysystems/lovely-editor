@@ -5,13 +5,17 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
 // Helpers
 import { filter } from 'lodash'
+import { BemHelper } from '../../helpers/bem-helper'
 
 // Component imports
-import { Editor, ExampleInput, ExampleImage } from '../..'
+import { Editor, ExampleMenu, ExampleInput, ExampleImage } from '../..'
 import componentReadme from './README.md'
 
+// Styling
+const classes = new BemHelper('editor')
+
 // Example Configs
-const currentEditorContent = [
+const currentEditorState = [
   {
     id: 5,
     type: 'text',
@@ -32,16 +36,6 @@ const currentEditorContent = [
     }
   }
 ]
-const editorConfig = [
-  {
-    type: 'text',
-    component: ExampleInput
-  },
-  {
-    type: 'image',
-    component: ExampleImage
-  }
-]
 
 class Wrapper extends React.Component {
 
@@ -49,7 +43,7 @@ class Wrapper extends React.Component {
     super(props, context)
     this.onChange = this.onChange.bind(this)
     this.state = {
-      editorContent: currentEditorContent
+      editorState: currentEditorState
     }
 
     // bindings
@@ -61,13 +55,12 @@ class Wrapper extends React.Component {
   // event listeners
   onChange(change) {
     action('onChange')(change)
-    this.setState({ editorContent: change.editorContent })
+    this.setState({ editorState: change.editorState })
   }
   onMenuClick(event) {
-    const { editorContent } = this.state
+    const { editorState } = this.state
     action('onMenuClick')(event)
 
-    // simulate add
     let newMenu = null
     switch (event.type) {
     case 'text':
@@ -82,36 +75,72 @@ class Wrapper extends React.Component {
         }
       }
       break
+    case 'image':
+      newMenu = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'image',
+        data: {
+          value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+        },
+        meta: {
+          title: 'Image Block'
+        }
+      }
+      break
     default:
       break
     }
 
     if (!!newMenu) {
-      editorContent.push(newMenu)
-      this.setState({ editorContent})
+      editorState.push(newMenu)
+      this.setState({ editorState})
     }
   }
   onBlockClick(event) {
-    const { editorContent } = this.state
+    const { editorState } = this.state
     action('onBlockClick')(event)
 
-    const newState = filter(editorContent, function(blockObj) {
+    const newState = filter(editorState, function(blockObj) {
       return blockObj.id !== event.id
     })
-    this.setState({ editorContent: newState})
+    this.setState({ editorState: newState})
   }
 
+  renderImage = (props) => {
+    return <ExampleImage {...props} />
+  }
 
   render() {
-    const { editorContent } = this.state
+    const { editorState } = this.state
+    const menuState = {
+      meta: {
+        title: 'Example-Menu'
+      }
+    }
+    const blocksConfig = [
+      {
+        type: 'text',
+        component: ExampleInput
+      },
+      {
+        type: 'image',
+        component: this.renderImage
+      }
+    ]
+
     return (
-      <Editor
-        editorContent={editorContent}
-        editorConfig={editorConfig}
-        onChange={this.onChange}
-        onMenuClick={this.onMenuClick}
-        onBlockClick={this.onBlockClick}
-      />
+      <div {...classes('container')}>
+        <ExampleMenu
+          menuState={menuState}
+          onClick={(event) => this.onMenuClick(event)}
+        />
+        <Editor
+          editorState={editorState}
+          blocksConfig={blocksConfig}
+          onChange={this.onChange}
+          onBlockClick={this.onBlockClick}
+        />
+      </div>
     )
   }
 
