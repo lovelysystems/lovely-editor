@@ -9,20 +9,21 @@
     "mocha": true
   },
   "parserOptions": {
-    ecmaFeatures: {
+    "ecmaFeatures": {
       "arrowFunctions": true,
       "blockBindings": true,
       "classes": true,
       "defaultParams": true,
       "modules": true,
       "spread": true,
-      "globalReturn": true,
+      "globalReturn": true
     }
   },
   "globals": {
-    "document": true,
+    "document": true
   },
   "rules": {
+    "eol-last": ["error", "always"],
     "arrow-body-style": [0],
     "class-methods-use-this": "off",
     "comma-dangle": [0],
@@ -38,7 +39,7 @@
       5
     ],
     "no-console": ["error"],
-    'no-else-return': "error", //["error", { allowElseIf: true }]
+    "no-else-return": "error", //["error", { allowElseIf: true }]
     "no-eval": "error",
     "no-extra-boolean-cast": "off",
     "no-plusplus": "off",
