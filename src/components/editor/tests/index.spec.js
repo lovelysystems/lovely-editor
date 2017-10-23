@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { expect } from 'chai'
+import { expect } from 'code'
 import { shallow } from 'enzyme'
 import { Editor } from '../'
 

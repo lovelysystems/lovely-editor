@@ -1,4 +1,4 @@
-import { expect } from 'chai'
+import { expect } from 'code'
 import { BemHelper } from '../bem-helper'
 
 describe('BemHelper', () => {
