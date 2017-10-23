@@ -2,9 +2,10 @@ import * as React from 'react'
 
 // Example Toolbar
 // - http://quilljs.com/standalone/full/
-export const CustomToolbar = function() {
+export const CustomToolbar = function(props) {
+  const { id } = props
   return (
-    <div id="toolbar">
+    <div id={`toolbar-${id}`}>
       <select className="ql-header" defaultValue="">
         <option value="1" />
         <option value="2" />

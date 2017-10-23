@@ -38,7 +38,7 @@ const currentEditorState = [
     id: 7,
     type: 'richtext',
     data: {
-      value: 'Hello World'
+      value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
     },
     meta: {
       title: 'Quill Block'
@@ -92,6 +92,18 @@ class Wrapper extends React.Component {
         },
         meta: {
           title: 'Image Block'
+        }
+      }
+      break
+    case 'richtext':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'richtext',
+        data: {
+          value: ''
+        },
+        meta: {
+          title: 'Quill Block'
         }
       }
       break

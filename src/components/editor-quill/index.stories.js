@@ -3,40 +3,38 @@ import { storiesOf } from '@storybook/react' //eslint-disable-line
 import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
+// Helpers
+import { clone } from 'lodash'
+
 // Component imports
 import { EditorQuill } from '../..'
 import componentReadme from './README.md'
-
-// Example Config
-const exampleBlock = {
-  id: 5,
-  data: {
-    value: 'Hello World.'
-  },
-  meta: {
-    titel: 'Input Box'
-  }
-}
 
 class Wrapper extends React.Component {
 
   constructor(props) {
     super(props)
+
     this.state = {
-      block: exampleBlock
+      block: this.props.block //eslint-disable-line
     }
     this.onChange = this.onChange.bind(this)
   }
 
   onChange(change) {
-    exampleBlock.data = change.data
+    const newState = clone(this.state.block)
+    newState.data = change.data
     action('onChange')(change)
-    this.setState({ block: exampleBlock })
+    this.setState({ block: newState })
   }
 
   render() {
+    const { block } = this.state
     return (
-      <EditorQuill />
+      <EditorQuill
+        block={block}
+        onChange={this.onChange}
+      />
     )
   }
 
@@ -44,6 +42,54 @@ class Wrapper extends React.Component {
 
 storiesOf('Editors/Editor-Quill', module)
   .addDecorator(withReadme(componentReadme))
-  .add('default', () => (
-    <Wrapper />
-  ))
+  .add('default', () => {
+    const exampleBlock = {
+      id: 5,
+      data: {
+        value: ''
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+    return(
+      <Wrapper block={exampleBlock}  />
+    )
+  })
+  .add('with imported data', () => {
+    const exampleBlock = {
+      id: 5,
+      data: {
+        value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+    return(
+      <Wrapper block={exampleBlock}  />
+    )
+  })
+  .add('with imported nested list', () => {
+    const exampleBlock = {
+      id: 5,
+      data: {
+        value: `<ul>
+                  <li>Coffee</li>
+                  <li>Tea
+                    <ul>
+                    <li>Black tea</li>
+                    <li>Green tea</li>
+                    </ul>
+                  </li>
+                  <li>Milk</li>
+                </ul>`
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+    return(
+      <Wrapper block={exampleBlock}  />
+    )
+  })

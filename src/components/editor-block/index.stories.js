@@ -14,7 +14,7 @@ const exampleBlock = {
     value: 'Hello World.'
   },
   meta: {
-    titel: 'Input Box'
+    title: 'Input Box'
   }
 }
 

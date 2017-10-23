@@ -1,9 +1,11 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
-import { CustomToolbar } from './navigation'
 
 // Helpers
+import { get } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
+import { CustomToolbar } from './navigation'
 
 // Styling
 const classes = new BemHelper('editor-quill')
@@ -13,10 +15,8 @@ export class EditorQuill extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    // one can import text, html or the raw delta
-    this.state = {
-      value: this.initState()
-    }
+    // one can import text, html or the raw delta. Related:
+    // - https://github.com/quilljs/quill/issues/1088
     this.onChange = this.onChange.bind(this)
 
     this.quillRef = null      // Quill instance
@@ -36,7 +36,12 @@ export class EditorQuill extends React.Component {
   onChange(html) {
     if (!!this.quillRef) {
       const storedContent = this.getContent(html)
-      this.setState({ value: storedContent.html })
+      const change = {
+        data: {
+          value: storedContent.html
+        }
+      }
+      this.props.onChange(change)
     }
   }
 
@@ -54,27 +59,26 @@ export class EditorQuill extends React.Component {
     this.quillRef = this.reactQuillRef.getEditor()
   }
 
-  initState() {
-    const html = 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World !!! <b class="test-bold"><b class="star">This is bold. </b></b></p>' // https://github.com/quilljs/quill/issues/1088
-    return html
-  }
-
   // Docu: https://quilljs.com/docs/modules/toolbar/
   modules() {
+    const { block } = this.props
     return {
       toolbar: {
-        container: '#toolbar'
+        container: `#toolbar-${block.id}`
       }
     }
   }
 
   // render
   render() {
+    const { block } = this.props
+    const currentValue = get(block, 'data.value', '')
     return (
       <div {...classes('container')}>
-        <CustomToolbar />
+        <CustomToolbar id={block.id} />
         <ReactQuill
-          value={this.state.value}
+          theme="snow"
+          value={currentValue}
           onChange={this.onChange}
           placeholder='Write a text...'
           modules={this.modules()}
@@ -84,4 +88,16 @@ export class EditorQuill extends React.Component {
     )
   }
 
+}
+
+EditorQuill.propTypes = {
+  block: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    data: PropTypes.objectOf(PropTypes.string).isRequired,
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
+}
+
+EditorQuill.defaultProps = {
+  onChange: (change) => { console.log('... on Change triggered', change) } //eslint-disable-line
 }
