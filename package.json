@@ -11,14 +11,16 @@
     "npm": ">=5.3"
   },
   "scripts": {
+    "build": "babel src --out-dir dist --ignore *.spec.js,test,*.stories.js --source-maps",
+    "build:storybook": "build-storybook -o dist/storybook",
     "lint": "eslint src/**/*.js --fix",
-    "pretest": "npm run test:node && npm run lint",
     "test": "_mocha --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:coverage": "./node_modules/.bin/istanbul cover _mocha -- --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:node": "./node_modules/check-node-version/bin.js --node '>='$(cat .nvmrc) --npm '>= 5.3.0'",
     "prebuild": "rimraf dist",
-    "build": "babel src --out-dir dist --ignore *.spec.js,test --source-maps",
-    "postinstall": "npm build"
+    "pretest": "npm run test:node && npm run lint",
+    "postinstall": "npm build",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "pre-commit": [
     "lint",
@@ -32,6 +34,9 @@
     "react-dom": "16.0.0"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "3.2.12",
+    "@storybook/addon-options": "3.2.12",
+    "@storybook/react": "3.2.12",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-eslint": "8.0.1",
@@ -39,6 +44,7 @@
     "babel-preset-react": "6.24.1",
     "chai": "4.1.2",
     "check-node-version": "2.1.0",
+    "css-loader": "0.28.7",
     "enzyme": "3.1.0",
     "enzyme-adapter-react-16": "1.0.2",
     "eslint": "4.9.0",
@@ -53,8 +59,14 @@
     "istanbul": "1.0.0-alpha.2",
     "jsdom": "11.3.0",
     "mocha": "4.0.1",
+    "node-sass": "4.5.3",
     "pre-commit": "1.2.2",
+    "prettier": "1.7.4",
+    "raw-loader": "0.5.1",
     "react-test-renderer": "16.0.0",
-    "rimraf": "2.6.2"
+    "rimraf": "2.6.2",
+    "sass-loader": "6.0.6",
+    "storybook-readme": "3.0.6",
+    "style-loader": "0.19.0"
   }
 }

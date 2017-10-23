@@ -37,7 +37,10 @@ export class Editor extends React.Component {
           if (!!element.component) {
             const Component = element.component
             return (
-              <EditorBlock key={block.id}>
+              <EditorBlock
+                key={block.id}
+                block={block}
+              >
                 <Component
                   block={block}
                   onChange={(change) => this.onChange(change, block.id)}
