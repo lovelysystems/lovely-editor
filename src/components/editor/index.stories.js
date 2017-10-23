@@ -5,6 +5,7 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
 // Helpers
 import { BemHelper } from '../../helpers/bem-helper'
+import { EditorState } from '../../model/editor-state'
 
 // Component imports
 import { Editor, ExampleMenu, ExampleInput, ExampleImage } from '../..'
@@ -90,8 +91,7 @@ class Wrapper extends React.Component {
     }
 
     if (!!newBlock) {
-      const newState = [ ...editorState, newBlock ]
-      this.setState({ editorState: newState })
+      this.setState({ editorState: EditorState.appendBlock(editorState, newBlock) })
     }
   }
 
