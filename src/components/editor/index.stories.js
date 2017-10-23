@@ -3,6 +3,9 @@ import { storiesOf } from '@storybook/react' //eslint-disable-line
 import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
+// Helpers
+import { filter } from 'lodash'
+
 // Component imports
 import { Editor, ExampleInput, ExampleImage } from '../..'
 import componentReadme from './README.md'
@@ -48,12 +51,56 @@ class Wrapper extends React.Component {
     this.state = {
       editorContent: currentEditorContent
     }
+
+    // bindings
+    this.onChange = this.onChange.bind(this)
+    this.onMenuClick = this.onMenuClick.bind(this)
+    this.onBlockClick = this.onBlockClick.bind(this)
   }
 
+  // event listeners
   onChange(change) {
     action('onChange')(change)
     this.setState({ editorContent: change.editorContent })
   }
+  onMenuClick(menuAction, type) { // TODO: consider using one parm
+    const { editorContent } = this.state
+    action('onMenuClick')(menuAction, type)
+
+    // simulate add
+    let newMenu = null
+    switch (type) {
+    case 'text':
+      newMenu = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'text',
+        data: {
+          value: 'This is the current Text.'
+        },
+        meta: {
+          title: 'Input Block'
+        }
+      }
+      break
+    default:
+      break
+    }
+
+    if (!!newMenu) {
+      editorContent.push(newMenu)
+      this.setState({ editorContent})
+    }
+  }
+  onBlockClick(event) {
+    const { editorContent } = this.state
+    action('onMenuClick')(event)
+
+    const newState = filter(editorContent, function(blockObj) {
+      return blockObj.id !== event.id
+    })
+    this.setState({ editorContent: newState})
+  }
+
 
   render() {
     const { editorContent } = this.state
@@ -62,6 +109,8 @@ class Wrapper extends React.Component {
         editorContent={editorContent}
         editorConfig={editorConfig}
         onChange={this.onChange}
+        onMenuClick={this.onMenuClick}
+        onBlockClick={this.onBlockClick}
       />
     )
   }

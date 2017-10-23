@@ -18,6 +18,11 @@ export function EditorBlock(props) {
       <div {...classes('title')}>
         {title}
       </div>
+      <div {...classes('menu')}>
+        <button onClick={() => props.onBlockClick({action: 'remove', id: block.id})} >
+          Löschen
+        </button>
+      </div>
       <div {...classes('content')}>
         {props.children}
       </div>
@@ -29,5 +34,10 @@ EditorBlock.propTypes = {
   block: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  onBlockClick: PropTypes.func
+}
+
+EditorBlock.defaultProps = {
+  onBlockClick: () => { console.log('... onBlockClick trigggered') } //eslint-disable-line
 }

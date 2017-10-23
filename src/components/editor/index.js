@@ -7,12 +7,14 @@ import { BemHelper } from '../../helpers/bem-helper'
 
 // Editor Components
 import { EditorBlock } from '../editor-block'
+import { EditorMenu } from '../editor-menu'
 
 // Styling
 const classes = new BemHelper('editor')
 
 export class Editor extends React.Component {
 
+  // event listeners
   onChange(change, id) {
     const { editorContent } = this.props
 
@@ -27,7 +29,14 @@ export class Editor extends React.Component {
 
     this.props.onChange(editorChange)
   }
+  onMenuClick(action, type) {
+    this.props.onMenuClick(action, type) // TODO: consider using one parm
+  }
+  onBlockClick(event) {
+    this.props.onBlockClick(event)
+  }
 
+  // render helpers
   renderEditorBlocks() {
     const { editorContent, editorConfig } = this.props
     const editorBlocksArray = map(editorContent, (block) => {
@@ -40,6 +49,7 @@ export class Editor extends React.Component {
               <EditorBlock
                 key={block.id}
                 block={block}
+                onBlockClick={(event) => this.onBlockClick(event)}
               >
                 <Component
                   block={block}
@@ -55,10 +65,31 @@ export class Editor extends React.Component {
     return editorBlocksArray
   }
 
+  renderEditorMenu() {
+    // NOTE: move Menu Config to User/Wrapper component who uses the Editor
+    const dummyMenu = {
+      meta: {
+        title: 'Dummy-Menu'
+      }
+    }
+
+    return (
+      <EditorMenu
+        menu={dummyMenu}
+        onClick={(action, type) => this.onMenuClick(action, type)}
+      />
+    )
+  }
+
   render() {
     return (
       <div {...classes('container')}>
-        { this.renderEditorBlocks() }
+        <div {...classes('menu')}>
+          { this.renderEditorMenu() }
+        </div>
+        <div {...classes('blocks')}>
+          { this.renderEditorBlocks() }
+        </div>
       </div>
     )
   }
@@ -76,9 +107,13 @@ Editor.propTypes = {
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onMenuClick: PropTypes.func.isRequired,
+  onBlockClick: PropTypes.func.isRequired
 }
 
 Editor.defaultProps = {
-  onChange: () => { console.log('... on Change clicked') } //eslint-disable-line
+  onChange: () => { console.log('... onChange triggered') }, //eslint-disable-line
+  onMenuClick: () => { console.log('... onMenuClick triggered') }, //eslint-disable-line
+  onBlockClick: () => { console.log('... onBlockClick triggered') } //eslint-disable-line
 }
