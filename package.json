@@ -10,6 +10,10 @@
     "node": ">=8.6",
     "npm": ">=5.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lovelysystems/oyez-editor.git"
+  },
   "scripts": {
     "build": "babel src --out-dir dist --ignore *.spec.js,test,*.stories.js --source-maps",
     "build:storybook": "build-storybook -o dist/storybook",
