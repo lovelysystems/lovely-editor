@@ -26,7 +26,9 @@ export class EditorQuill extends React.Component {
   // Mounting and attaching
   componentDidMount() {
     this.attachQuillRefs()
-    this.quillRef.focus()
+    if (!!this.quillRef) {
+      this.quillRef.focus()
+    }
   }
   componentDidUpdate() {
     this.attachQuillRefs()
@@ -55,7 +57,7 @@ export class EditorQuill extends React.Component {
   }
 
   attachQuillRefs = () => {
-    if (typeof this.reactQuillRef.getEditor !== 'function') return
+    if (!this.reactQuillRef || typeof this.reactQuillRef.getEditor !== 'function') return
     this.quillRef = this.reactQuillRef.getEditor()
   }
 
@@ -96,8 +98,4 @@ EditorQuill.propTypes = {
     data: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   onChange: PropTypes.func.isRequired
-}
-
-EditorQuill.defaultProps = {
-  onChange: (change) => { console.log('... on Change triggered', change) } //eslint-disable-line
 }

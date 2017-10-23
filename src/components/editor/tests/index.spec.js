@@ -15,4 +15,7 @@ describe('<Editor />', () => {
     )
     expect(wrapper.exists()).to.equal(true)
   })
+
+  // pending tests
+  it('component renders imported editorState')
 })
