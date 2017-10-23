@@ -49,7 +49,6 @@ class Wrapper extends React.Component {
     // bindings
     this.onChange = this.onChange.bind(this)
     this.onMenuClick = this.onMenuClick.bind(this)
-    this.onBlockClick = this.onBlockClick.bind(this)
   }
 
   // event listeners
@@ -61,10 +60,10 @@ class Wrapper extends React.Component {
     const { editorState } = this.state
     action('onMenuClick')(event)
 
-    let newMenu = null
+    let newBlock = null
     switch (event.type) {
     case 'text':
-      newMenu = {
+      newBlock = {
         id: Math.floor((Math.random() * 1000) + 1),
         type: 'text',
         data: {
@@ -76,7 +75,7 @@ class Wrapper extends React.Component {
       }
       break
     case 'image':
-      newMenu = {
+      newBlock = {
         id: Math.floor((Math.random() * 1000) + 1),
         type: 'image',
         data: {
@@ -91,19 +90,10 @@ class Wrapper extends React.Component {
       break
     }
 
-    if (!!newMenu) {
-      editorState.push(newMenu)
+    if (!!newBlock) {
+      editorState.push(newBlock)
       this.setState({ editorState})
     }
-  }
-  onBlockClick(event) {
-    const { editorState } = this.state
-    action('onBlockClick')(event)
-
-    const newState = filter(editorState, function(blockObj) {
-      return blockObj.id !== event.id
-    })
-    this.setState({ editorState: newState})
   }
 
   renderImage = (props) => {
@@ -138,7 +128,7 @@ class Wrapper extends React.Component {
           editorState={editorState}
           blocksConfig={blocksConfig}
           onChange={this.onChange}
-          onBlockClick={this.onBlockClick}
+          onBlockChange={this.onChange}
         />
       </div>
     )

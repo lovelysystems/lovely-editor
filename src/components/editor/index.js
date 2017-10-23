@@ -2,7 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
-import { map, find } from 'lodash'
+import { map, find, filter } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Editor Components
@@ -13,7 +13,7 @@ const classes = new BemHelper('editor')
 
 export class Editor extends React.Component {
 
-  // event listeners
+  // event listeners and handlers
   onChange(change, id) {
     const { editorState } = this.props
 
@@ -28,11 +28,21 @@ export class Editor extends React.Component {
 
     this.props.onChange(editorChange)
   }
-  onMenuClick(event) {
-    this.props.onMenuClick(event)
-  }
-  onBlockClick(event) {
-    this.props.onBlockClick(event)
+  onBlockDelete(event) {
+    const { editorState } = this.props
+
+    // find the block we just changed and remove it
+    const block = find(editorState, ['id', event.id])
+    const newState = filter(editorState, function(blockObj) {
+      return blockObj.id !== event.id
+    })
+
+    const editorChange = {
+      editorState: newState,
+      block
+    }
+
+    this.props.onChange(editorChange)
   }
 
   // render helpers
@@ -48,7 +58,7 @@ export class Editor extends React.Component {
               <EditorBlock
                 key={block.id}
                 block={block}
-                onClick={(event) => this.onBlockClick(event)}
+                onBlockDelete={(event) => this.onBlockDelete(event)}
               >
                 <Component
                   block={block}
@@ -87,11 +97,11 @@ Editor.propTypes = {
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlockClick: PropTypes.func.isRequired
+  onChange: PropTypes.func,
+  onBlockDelete: PropTypes.func
 }
 
 Editor.defaultProps = {
   onChange: () => { console.log('... onChange triggered') }, //eslint-disable-line
-  onBlockClick: () => { console.log('... onBlockClick triggered') } //eslint-disable-line
+  onBlockDelete: () => { console.log('... onBlockClick triggered') } //eslint-disable-line
 }

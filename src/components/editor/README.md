@@ -56,7 +56,7 @@ const blocksConfig = [
   editorState={editorState}
   blocksConfig={blocksConfig}
   onChange={(change) => console.log(change)}
-  onBlockClick={(event) => console.log(event)}
+  onBlockChange={(change) => console.log(change)}
 />
 
 ```

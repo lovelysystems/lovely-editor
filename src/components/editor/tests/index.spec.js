@@ -11,6 +11,7 @@ describe('<Editor />', () => {
         editorState={[]}
         blocksConfig={[]}
         onChange={() => {}}
+        onBlockChange={() => {}}
       />
     )
     expect(wrapper.exists()).to.equal(true)

@@ -10,9 +10,9 @@ const classes = new BemHelper('editor-block')
 
 export function EditorBlock(props) {
 
-  function onClick(action, id) {
+  function onBlockDelete(action, id) {
     const event = { action, id }
-    props.onClick(event)
+    props.onBlockDelete(event)
   }
 
   const { block } = props
@@ -24,7 +24,7 @@ export function EditorBlock(props) {
         {title}
       </div>
       <div {...classes('menu')}>
-        <button onClick={() => onClick('remove', block.id)} >
+        <button onClick={() => onBlockDelete('remove', block.id)} >
           Löschen
         </button>
       </div>
@@ -40,9 +40,11 @@ EditorBlock.propTypes = {
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   children: PropTypes.element.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onBlockDelete: PropTypes.func
 }
 
 EditorBlock.defaultProps = {
-  onClick: () => { console.log('... onClick triggered') } //eslint-disable-line
+  onClick: () => { console.log('... onClick triggered') }, //eslint-disable-line
+  onBlockDelete: () => { console.log('... onBlockDelete triggered') } //eslint-disable-line
 }
