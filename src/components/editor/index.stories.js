@@ -4,7 +4,6 @@ import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
 // Helpers
-import { filter } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Component imports
@@ -128,7 +127,6 @@ class Wrapper extends React.Component {
           editorState={editorState}
           blocksConfig={blocksConfig}
           onChange={this.onChange}
-          onBlockChange={this.onChange}
         />
       </div>
     )

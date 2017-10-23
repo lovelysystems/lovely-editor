@@ -14,7 +14,7 @@ const classes = new BemHelper('editor')
 export class Editor extends React.Component {
 
   // event listeners and handlers
-  onChange(change, id) {
+  onContentChange(change, id) {
     const { editorState } = this.props
 
     // find the block we just changed and update it's data
@@ -28,14 +28,22 @@ export class Editor extends React.Component {
 
     this.props.onChange(editorChange)
   }
-  onBlockDelete(event) {
+  onBlockClick(event) {
     const { editorState } = this.props
+    let newState = null
+    let block = null
 
-    // find the block we just changed and remove it
-    const block = find(editorState, ['id', event.id])
-    const newState = filter(editorState, function(blockObj) {
-      return blockObj.id !== event.id
-    })
+    switch (event.action) {
+    case 'remove':
+      // find the block we just changed and remove it
+      block = find(editorState, ['id', event.id])
+      newState = filter(editorState, function(blockObj) {
+        return blockObj.id !== event.id
+      })
+      break
+    default:
+      break
+    }
 
     const editorChange = {
       editorState: newState,
@@ -58,11 +66,11 @@ export class Editor extends React.Component {
               <EditorBlock
                 key={block.id}
                 block={block}
-                onBlockDelete={(event) => this.onBlockDelete(event)}
+                onClick={(event) => this.onBlockClick(event)}
               >
                 <Component
                   block={block}
-                  onChange={(change) => this.onChange(change, block.id)}
+                  onChange={(change) => this.onContentChange(change, block.id)}
                 />
               </EditorBlock>
             )
@@ -97,11 +105,9 @@ Editor.propTypes = {
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
-  onChange: PropTypes.func,
-  onBlockDelete: PropTypes.func
+  onChange: PropTypes.func
 }
 
 Editor.defaultProps = {
   onChange: () => { console.log('... onChange triggered') }, //eslint-disable-line
-  onBlockDelete: () => { console.log('... onBlockClick triggered') } //eslint-disable-line
 }
