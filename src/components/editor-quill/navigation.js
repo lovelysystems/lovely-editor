@@ -1,4 +1,5 @@
 import * as React from 'react'
+import PropTypes from 'prop-types'
 
 // Example Toolbar
 // - http://quilljs.com/standalone/full/
@@ -34,4 +35,8 @@ export const CustomToolbar = function(props) {
       </select>
     </div>
   )
+}
+
+CustomToolbar.propTypes = {
+  id: PropTypes.number.isRequired,
 }
