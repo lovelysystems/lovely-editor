@@ -48,5 +48,5 @@ EditorBlock.propTypes = {
 }
 
 EditorBlock.defaultProps = {
-  onAction: () => { console.log('... onAction triggered') }, //eslint-disable-line
+  onAction: (event) => { console.log('... onAction triggered', event) }, //eslint-disable-line
 }

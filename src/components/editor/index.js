@@ -17,7 +17,7 @@ export class Editor extends React.Component {
   onContentChange(change, id) {
     const { editorState } = this.props
 
-    // find the block we just changed and update it's data
+    // find the block we just changed and update its data
     const block = find(editorState, ['id', id])
     block.data = change.data
 
@@ -105,9 +105,5 @@ Editor.propTypes = {
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
-  onChange: PropTypes.func
-}
-
-Editor.defaultProps = {
-  onChange: () => { console.log('... onChange triggered') }, //eslint-disable-line
+  onChange: PropTypes.func.isRequired
 }

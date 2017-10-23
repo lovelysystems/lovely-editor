@@ -4,10 +4,9 @@ The main component of this package. It renderes all the blocks and manages them.
 
 ## Properties
 
-* `editorState`:
-* `blocksConfig`:
-* `onChange`:
-* `onBlockClick`:
+* `editorState`: represents the current state of the Editor
+* `blocksConfig`: maps `type` to a component or render function
+* `onChange`: emits changes of the editor
 
 ## Example
 
@@ -37,7 +36,7 @@ const editorState = [
 ]
 
 renderImage = (props) => {
-  return <ExampleImage {...props} />
+  return <ExampleImage {...props} filter='grayscale'/>
 }
 
 // renders a specific component for the given block type
