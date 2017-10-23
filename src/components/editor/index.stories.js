@@ -14,6 +14,38 @@ import componentReadme from './README.md'
 // Styling
 const classes = new BemHelper('editor')
 
+// Story Setup
+const menuState = {
+  meta: {
+    title: 'Example-Menu'
+  }
+}
+const blocksConfig = [
+  {
+    type: 'text',
+    component: ExampleInput
+  },
+  {
+    type: 'image',
+    component: ExampleImage
+  },
+  {
+    type: 'richtext',
+    component: EditorQuill
+  }
+]
+const basicEditorState = [{
+  id: 7,
+  type: 'richtext',
+  data: {
+    value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
+  },
+  meta: {
+    title: 'Quill Block'
+  }
+}]
+
+
 class Wrapper extends React.Component {
 
   constructor(props, context) {
@@ -108,54 +140,17 @@ class Wrapper extends React.Component {
 storiesOf('App/Editor', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => {
-    // custom Renderer
-    function renderImage(props) {
-      return <ExampleImage {...props} />
-    }
-    function renderQuill(props) {
-      return <EditorQuill {...props} />
-    }
-
-    const menuState = {
-      meta: {
-        title: 'Example-Menu'
-      }
-    }
-    const blocksConfig = [
-      {
-        type: 'text',
-        component: ExampleInput
-      },
-      {
-        type: 'image',
-        component: renderImage
-      },
-      {
-        type: 'richtext',
-        component: renderQuill
-      }
-    ]
-    const currentEditorState = [{
-      id: 7,
-      type: 'richtext',
-      data: {
-        value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
-      },
-      meta: {
-        title: 'Quill Block'
-      }
-    }]
-
     return (
       <Wrapper
-        editorState={currentEditorState}
+        editorState={basicEditorState}
         blocksConfig={blocksConfig}
         menuState={menuState}
       />
     )
   })
   .add('with multiple Example Blocks', () => {
-    const currentEditorState = [
+    const additionalContent = [
+      ...basicEditorState,
       {
         id: 5,
         type: 'text',
@@ -174,40 +169,12 @@ storiesOf('App/Editor', module)
         meta: {
           title: 'Image Block'
         }
-      }, {
-        id: 7,
-        type: 'richtext',
-        data: {
-          value: ''
-        },
-        meta: {
-          title: 'Quill Block'
-        }
-      }
-    ]
-    const menuState = {
-      meta: {
-        title: 'Example-Menu'
-      }
-    }
-    const blocksConfig = [
-      {
-        type: 'text',
-        component: ExampleInput
-      },
-      {
-        type: 'image',
-        component: ExampleImage
-      },
-      {
-        type: 'richtext',
-        component: EditorQuill
       }
     ]
 
     return (
       <Wrapper
-        editorState={currentEditorState}
+        editorState={additionalContent}
         blocksConfig={blocksConfig}
         menuState={menuState}
       />
