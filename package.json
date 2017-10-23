@@ -17,7 +17,7 @@
   "scripts": {
     "build": "babel src --out-dir dist --ignore *.spec.js,test,*.stories.js --source-maps",
     "build:storybook": "build-storybook -o dist/storybook",
-    "lint": "eslint src/**/*.js --fix",
+    "lint": "eslint 'src/**/*.js' --fix",
     "test": "_mocha --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:coverage": "./node_modules/.bin/istanbul cover _mocha -- --require babel-core/register --require src/tests/helpers/test-setup.js --require ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:node": "./node_modules/check-node-version/bin.js --node '>='$(cat .nvmrc) --npm '>= 5.3.0'",
