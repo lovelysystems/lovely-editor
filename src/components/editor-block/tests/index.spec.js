@@ -1,5 +1,5 @@
 import React from 'react'
-import { expect } from 'chai'
+import { expect } from 'code'
 import { shallow } from 'enzyme'
 import { EditorBlock } from '../'
 
@@ -35,6 +35,6 @@ describe('<EditorBlock />', () => {
         <div id='child' />
       </EditorBlock>
     )
-    expect(wrapper.find('#child').exists()).to.equal(true, '#child not found')
+    expect(wrapper.find('#child').exists()).to.equal(true)
   })
 })
