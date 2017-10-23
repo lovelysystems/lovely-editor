@@ -8,7 +8,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
 // Component imports
-import { Editor, ExampleMenu, ExampleInput, ExampleImage } from '../..'
+import { Editor, EditorQuill, ExampleMenu, ExampleInput, ExampleImage } from '../..'
 import componentReadme from './README.md'
 
 // Styling
@@ -33,6 +33,15 @@ const currentEditorState = [
     },
     meta: {
       title: 'Image Block'
+    }
+  }, {
+    id: 7,
+    type: 'richtext',
+    data: {
+      value: 'Hello World'
+    },
+    meta: {
+      title: 'Quill Block'
     }
   }
 ]
@@ -99,6 +108,10 @@ class Wrapper extends React.Component {
     return <ExampleImage {...props} />
   }
 
+  renderQuill = (props) => {
+    return <EditorQuill {...props} />
+  }
+
   render() {
     const { editorState } = this.state
     const menuState = {
@@ -114,6 +127,10 @@ class Wrapper extends React.Component {
       {
         type: 'image',
         component: this.renderImage
+      },
+      {
+        type: 'richtext',
+        component: this.renderQuill
       }
     ]
 

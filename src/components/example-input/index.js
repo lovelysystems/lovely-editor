@@ -49,5 +49,5 @@ ExampleInput.propTypes = {
 }
 
 ExampleInput.defaultProps = {
-  onChange: () => { console.log('... on Change triggered') } //eslint-disable-line
+  onChange: (event) => { console.log('... on Change triggered', event) } //eslint-disable-line
 }
