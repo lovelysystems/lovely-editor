@@ -14,45 +14,13 @@ import componentReadme from './README.md'
 // Styling
 const classes = new BemHelper('editor')
 
-// Example Configs
-const currentEditorState = [
-  {
-    id: 5,
-    type: 'text',
-    data: {
-      value: 'This is the current Text.'
-    },
-    meta: {
-      title: 'Input Block'
-    }
-  }, {
-    id: 6,
-    type: 'image',
-    data: {
-      value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
-    },
-    meta: {
-      title: 'Image Block'
-    }
-  }, {
-    id: 7,
-    type: 'richtext',
-    data: {
-      value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
-    },
-    meta: {
-      title: 'Quill Block'
-    }
-  }
-]
-
 class Wrapper extends React.Component {
 
   constructor(props, context) {
     super(props, context)
     this.onChange = this.onChange.bind(this)
     this.state = {
-      editorState: currentEditorState
+      editorState: this.props.editorState // eslint-disable-line
     }
 
     // bindings
@@ -116,35 +84,9 @@ class Wrapper extends React.Component {
     }
   }
 
-  renderImage = (props) => {
-    return <ExampleImage {...props} />
-  }
-
-  renderQuill = (props) => {
-    return <EditorQuill {...props} />
-  }
-
   render() {
     const { editorState } = this.state
-    const menuState = {
-      meta: {
-        title: 'Example-Menu'
-      }
-    }
-    const blocksConfig = [
-      {
-        type: 'text',
-        component: ExampleInput
-      },
-      {
-        type: 'image',
-        component: this.renderImage
-      },
-      {
-        type: 'richtext',
-        component: this.renderQuill
-      }
-    ]
+    const { menuState, blocksConfig } = this.props // eslint-disable-line
 
     return (
       <div {...classes('container')}>
@@ -163,8 +105,111 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editor/Editor', module)
+storiesOf('App/Editor', module)
   .addDecorator(withReadme(componentReadme))
-  .add('default', () => (
-    <Wrapper />
-  ))
+  .add('default', () => {
+    // custom Renderer
+    function renderImage(props) {
+      return <ExampleImage {...props} />
+    }
+    function renderQuill(props) {
+      return <EditorQuill {...props} />
+    }
+
+    const menuState = {
+      meta: {
+        title: 'Example-Menu'
+      }
+    }
+    const blocksConfig = [
+      {
+        type: 'text',
+        component: ExampleInput
+      },
+      {
+        type: 'image',
+        component: renderImage
+      },
+      {
+        type: 'richtext',
+        component: renderQuill
+      }
+    ]
+    const currentEditorState = [{
+      id: 7,
+      type: 'richtext',
+      data: {
+        value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
+      },
+      meta: {
+        title: 'Quill Block'
+      }
+    }]
+
+    return (
+      <Wrapper
+        editorState={currentEditorState}
+        blocksConfig={blocksConfig}
+        menuState={menuState}
+      />
+    )
+  })
+  .add('with multiple Example Blocks', () => {
+    const currentEditorState = [
+      {
+        id: 5,
+        type: 'text',
+        data: {
+          value: 'This is the current Text.'
+        },
+        meta: {
+          title: 'Input Block'
+        }
+      }, {
+        id: 6,
+        type: 'image',
+        data: {
+          value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+        },
+        meta: {
+          title: 'Image Block'
+        }
+      }, {
+        id: 7,
+        type: 'richtext',
+        data: {
+          value: ''
+        },
+        meta: {
+          title: 'Quill Block'
+        }
+      }
+    ]
+    const menuState = {
+      meta: {
+        title: 'Example-Menu'
+      }
+    }
+    const blocksConfig = [
+      {
+        type: 'text',
+        component: ExampleInput
+      },
+      {
+        type: 'image',
+        component: ExampleImage
+      },
+      {
+        type: 'richtext',
+        component: EditorQuill
+      }
+    ]
+
+    return (
+      <Wrapper
+        editorState={currentEditorState}
+        blocksConfig={blocksConfig}
+        menuState={menuState}
+      />
+    )
+  })

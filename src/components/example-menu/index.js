@@ -15,9 +15,6 @@ export function ExampleMenu(props) {
     props.onClick(event)
   }
 
-  // TODO
-  // - add menuButtons dynamically from the storiesConfig
-
   const { menuState } = props
   const title = get(menuState, 'meta.title', 'Editor-Menu')
 
@@ -30,8 +27,8 @@ export function ExampleMenu(props) {
         <button onClick={() => onClick('add', 'text')}>
           Add Text-Block
         </button>
-        <button onClick={() => onClick('add', 'text')}>
-          Add Text-Block
+        <button onClick={() => onClick('add', 'image')}>
+          Add Image-Block
         </button>
         <button onClick={() => onClick('add', 'richtext')}>
           Add Richmedia-Block

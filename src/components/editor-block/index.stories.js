@@ -3,6 +3,9 @@ import { storiesOf } from '@storybook/react' //eslint-disable-line
 import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
+// Helpers
+import { clone } from 'lodash'
+
 // Component imports
 import { EditorBlock, ExampleInput } from '../..'
 import componentReadme from './README.md'
@@ -29,7 +32,8 @@ class Wrapper extends React.Component {
   }
 
   onChange(change) {
-    exampleBlock.data = change.data
+    const newState = clone(this.state.block)
+    newState.data = change.data
     action('onChange')(change)
     this.setState({ block: exampleBlock })
   }
@@ -39,6 +43,7 @@ class Wrapper extends React.Component {
     return (
       <EditorBlock
         block={block}
+        onAction={this.onChange}
       >
         <ExampleInput
           block={block}
@@ -50,7 +55,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editor/Editor-Block', module)
+storiesOf('Editor Components/Editor-Block', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
     <Wrapper />

@@ -12,6 +12,7 @@ function loadStories() {
 
 setOptions({
   name: 'Oyez Editor',
+  sortStoriesByKind: true,
   url: '#',
 });
 
