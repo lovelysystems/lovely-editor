@@ -12,11 +12,15 @@ The Navigation Bar is handled by the Component itself and currently not be modif
 
 The Editor Quill uses the `Snow` Theme (see more [here](http://quilljs.com/docs/themes/#snow)).
 
-## Data Handling
+## Data Handling and Performance
+
+### Performance
+
+The Component emits changes to the Editor with the Help of Lodash's [`debounce`](https://lodash.com/docs/4.17.4#debounce) feature. Lodash creates a debounced function that delays invoking `onChange` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked. Currently this is set to 300ms. We wait for max 1000ms before the delayed `onChange` is invoked.
 
 ### Data Imports
 
-The Quill component can import html content (eg. `<p><b>Hello World</b></p>`).
+The Quill component can import html content (eg. `<p><b>Hello World</b></p>`). Quill is able to import a [delta](https://github.com/zenoamaro/react-quill#using-deltas), html or plain text.
 
 ### Nested Lists
 

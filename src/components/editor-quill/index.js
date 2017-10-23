@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
 
 // Helpers
-import { get } from 'lodash'
+import { get, debounce } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { CustomToolbar } from './navigation'
 
@@ -17,7 +17,7 @@ export class EditorQuill extends React.Component {
 
     // one can import text, html or the raw delta. Related:
     // - https://github.com/quilljs/quill/issues/1088
-    this.onChange = this.onChange.bind(this)
+    this.onChange = debounce(this.onChange.bind(this), 300, { maxWait: 1000 })
 
     this.quillRef = null      // Quill instance
     this.reactQuillRef = null // ReactQuill component
