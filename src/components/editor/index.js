@@ -2,8 +2,9 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
-import { map, find, filter } from 'lodash'
+import { map } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
+import { EditorState } from '../../model/editor-state'
 
 // Editor Components
 import { EditorBlock } from '../editor-block'
@@ -18,11 +19,10 @@ export class Editor extends React.Component {
     const { editorState } = this.props
 
     // find the block we just changed and update its data
-    const block = find(editorState, ['id', id])
-    block.data = change.data
-
+    const block = EditorState.findBlock(editorState, id)
+    const newEditorState = EditorState.updateBlockData(editorState, id, change.data)
     const editorChange = {
-      editorState,
+      editorState: newEditorState,
       block
     }
 
@@ -36,10 +36,8 @@ export class Editor extends React.Component {
     switch (event.action) {
     case 'remove':
       // find the block we just changed and remove it
-      block = find(editorState, ['id', event.id])
-      newState = filter(editorState, function(blockObj) {
-        return blockObj.id !== event.id
-      })
+      block = EditorState.findBlock(editorState, event.id)
+      newState = EditorState.removeBlock(editorState, event.id)
       break
     default:
       break
@@ -86,7 +84,7 @@ export class Editor extends React.Component {
     return (
       <div {...classes('container')}>
         <div {...classes('blocks')}>
-          { this.renderEditorBlocks() }
+          {this.renderEditorBlocks()}
         </div>
       </div>
     )
