@@ -7,3 +7,6 @@ dist
 webpack.config.js
 postcss.config.js
 .stylelintrc.js
+
+# Polyfills
+src/components/editor-quill/tests/polyfills

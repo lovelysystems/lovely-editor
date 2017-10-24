@@ -25,7 +25,7 @@ This package uses [Storybook](https://storybook.js.org) to showcase the componen
 * `npm run test`: runs the tests (test files path and pattern: `src/**/*.spec.js`)
 * `npm run test:node`: verifies the installed and used node version
 
-### Pre-commit Hooks
+### Pre-commit and Pre-push Hooks
 
 When attempting to commit files in this repository, some taks will automatically run to ensure a consistently high level of code quality:
 
@@ -34,4 +34,4 @@ When attempting to commit files in this repository, some taks will automatically
   * runs `prettier` and auto-formats your code ([see what it does here](https://github.com/prettier/prettier))
   * runs all unit tests concerning the committed files with `mocha`
 
-If any of the tasks fail (which means your code does not lint or unit tests are failing), your commit will be aborted.
+If any of the tasks fail (which means your code does not lint or unit tests are failing), your commit or push will be aborted.
