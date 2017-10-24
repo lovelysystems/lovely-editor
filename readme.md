@@ -19,10 +19,10 @@ This package uses [Storybook](https://storybook.js.org) to showcase the componen
 
 * `npm run build`: builds the package to ./dist
 * `npm run build:storybook`: build static production version of component library to ./build/storybook
+* `npm run coverage`: runs the tests and reports the coverage with [nyc](https://github.com/istanbuljs/nyc)
 * `npm run lint`: lints JS code
 * `npm run storybook`: run local server with component library and [Storybook](https://storybook.js.org)
 * `npm run test`: runs the tests (test files path and pattern: `src/**/*.spec.js`)
-* `npm run test:coverage`: runs the tests and reports the coverage with [Istanbul](https://www.npmjs.com/package/istanbul)
 * `npm run test:node`: verifies the installed and used node version
 
 ### Pre-commit Hooks

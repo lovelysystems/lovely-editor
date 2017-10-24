@@ -3,6 +3,7 @@ node_modules
 
 ## Development && Coverage Reports
 coverage
+.nyc_output
 
 ## Examples
 example/css
