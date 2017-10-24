@@ -6,7 +6,7 @@ Renders the Quill Editor and returns its content on change.
 
 ### Toolbar
 
-The Toolbar (see [Custom Toolbar Docu](https://github.com/zenoamaro/react-quill#custom-toolbar)) is handled by the Component itself and currently not be modified from the User (via props). Additionally, if the Editor looses focus (`onBlur`) we hide the Toolbar currently (see `onMouseDown` in the `QuillToolbar` Component). This works on iOS, Android and IE 11 right now.
+The Toolbar (see [Custom Toolbar Docu](https://github.com/zenoamaro/react-quill#custom-toolbar)) is handled by the Component itself and currently not be modified from the User (via props).
 
 ### Styling
 

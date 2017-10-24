@@ -15,15 +15,9 @@ export class EditorQuill extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    // the component itself is stateless, but for the Navigation handling we need it
-    this.state = {
-      hasToolbar: false
-    }
-
     // one can import text, html or the raw delta. Related:
     // - https://github.com/quilljs/quill/issues/1088
     this.onChange = debounce(this.onChange.bind(this), 300, { maxWait: 1000 })
-    this.onVisibleHandler = this.onVisibleHandler.bind(this)
 
     // allows us to handle/access the Quill APIs
     this.quillRef = null      // Quill instance
@@ -53,11 +47,6 @@ export class EditorQuill extends React.Component {
       this.props.onChange(change)
     }
   }
-  onVisibleHandler(action) {
-    const hasToolbar = (action === 'onFocus')
-    this.setState({hasToolbar})
-  }
-
   // format for eg. db
   getContent = (value) => {
     const delta = this.quillRef.getContents()
@@ -84,21 +73,17 @@ export class EditorQuill extends React.Component {
 
   render() {
     const { block } = this.props
-    const { hasToolbar } = this.state
-    const hideToolbar = (!hasToolbar) ? 'hidden': ''
     const currentValue = get(block, 'data.value', '')
 
     return (
       <div {...classes('container')}>
-        <div {...classes('toolbar', hideToolbar)} >
+        <div {...classes('toolbar')} >
           <QuillToolbar id={block.id} />
         </div>
         <div {...classes('editor')} >
           <ReactQuill
             modules={this.modules()}
             onChange={this.onChange}
-            onFocus={() => this.onVisibleHandler('onFocus')}
-            onBlur={() => this.onVisibleHandler('onBlur')}
             placeholder='Write a text...'
             ref={(el) => { this.reactQuillRef = el }}
             theme="snow"
