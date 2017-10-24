@@ -29,13 +29,23 @@ In order to display only numbers on each list-level of the order list, one has t
 
 ## Data Handling and Performance
 
-### Performance
-
-The Component emits changes to the Editor with the Help of Lodash's [`debounce`](https://lodash.com/docs/4.17.4#debounce) feature. Lodash creates a debounced function that delays invoking `onChange` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked. Currently this is set to 300ms. We wait for max 1000ms before the delayed `onChange` is invoked.
-
 ### Data Imports
 
 The Quill component can import html content (eg. `<p><b>Hello World</b></p>`). Quill is able to import a [delta](https://github.com/zenoamaro/react-quill#using-deltas), html or plain text.
+
+### Copy & Paste
+
+- **Word**
+  - (Basic) Copy & Paste Support
+  - not all Word-Styles can be imported and processed by Quill
+- **Pages**
+  - (Basic) Copy & Paste Support
+  - Some Headings-Formates (like Title, Headings) are not processed as such. They are imported as bold text.
+- **PDF**
+  - (Basic) Copy & Paste Support
+  - Some Headings-Formates (like Title, Headings) are not processed as such. They are imported as bold text.
+
+Images are not supported by now and stripped away by not allowing the `images` format. Read more [here](https://github.com/quilljs/quill/issues/1108).
 
 ### Nested Lists
 
@@ -65,6 +75,10 @@ Quill will import and handle it further on like this:
   <li>Milk </li>
 </ul>
 ```
+
+### Performance
+
+The Component emits changes to the Editor with the Help of Lodash's [`debounce`](https://lodash.com/docs/4.17.4#debounce) feature. Lodash creates a debounced function that delays invoking `onChange` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked. Currently this is set to 300ms. We wait for max 1000ms before the delayed `onChange` is invoked.
 
 ## Example
 

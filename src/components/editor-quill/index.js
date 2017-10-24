@@ -61,6 +61,15 @@ export class EditorQuill extends React.Component {
     this.quillRef = this.reactQuillRef.getEditor()
   }
 
+  // Quill Settings
+  formats() {
+    // Allowed Formats. Docu: https://quilljs.com/docs/formats/
+    return [
+      'header',
+      'bold', 'italic', 'underline',
+      'list', 'indent'
+    ]
+  }
   modules() {
     // Docu: https://quilljs.com/docs/modules/toolbar/
     const { block } = this.props
@@ -82,6 +91,7 @@ export class EditorQuill extends React.Component {
         </div>
         <div {...classes('editor')} >
           <ReactQuill
+            formats={this.formats()}
             modules={this.modules()}
             onChange={this.onChange}
             placeholder='Write a text...'
