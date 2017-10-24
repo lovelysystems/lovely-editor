@@ -60,7 +60,7 @@ storiesOf('Editors/Editor-Quill', module)
     const exampleBlock = {
       id: 5,
       data: {
-        value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
+        value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
       },
       meta: {
         title: 'Input Box'
@@ -84,6 +84,27 @@ storiesOf('Editors/Editor-Quill', module)
                   </li>
                   <li>Milk</li>
                 </ul>`
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+    return(
+      <Wrapper block={exampleBlock}  />
+    )
+  })
+  .add('with all available formats', () => {
+    const exampleBlock = {
+      id: 5,
+      data: {
+        value: `
+          <h1>H1</h1><h3>H2</h3><h3>H3</h3><p>Normal</p>
+          <br>
+          <p><strong>Bold</strong></p><p><em>Italic</em></p><p><u>Underlined</u></p>
+          <br>
+          <ul><li>List #1</li><li class="ql-indent-1">Listitem 1</li><li>List #2</li><li class="ql-indent-1">Listitem 1</li></ul>
+          <br>
+          <ol><li>List #1</li><li class="ql-indent-1">Listitem 2</li><li>List #2</li><li class="ql-indent-1">Listitem 1</li></ol>`
       },
       meta: {
         title: 'Input Box'

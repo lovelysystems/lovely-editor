@@ -41,18 +41,18 @@ export class EditorQuill extends React.Component {
       const storedContent = this.getContent(html)
       const change = {
         data: {
-          value: storedContent.html
+          value: storedContent.html,
+          delta: storedContent.delta
         }
       }
       this.props.onChange(change)
     }
   }
   // format for eg. db
-  getContent = (value) => {
-    const delta = this.quillRef.getContents()
+  getContent = (html) => {
     return {
-      delta,
-      html: value
+      delta: this.quillRef.getContents(),
+      html
     }
   }
 

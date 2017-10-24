@@ -38,7 +38,7 @@ const basicEditorState = [{
   id: 7,
   type: 'richtext',
   data: {
-    value: 'Nested List<br /><ul><li>List1</li><li><ul><li>Nested List</li></ul></li></ul><br /><p>Hello World. <b>This is bold.</b></p>'
+    value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
   },
   meta: {
     title: 'Quill Block'
