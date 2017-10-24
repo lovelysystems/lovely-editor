@@ -11,6 +11,7 @@ The main component of this package. It renderes all the blocks and manages them.
 ## Example
 
 ```js
+import { Editor } from './'
 
 // the current content, can also be an empty array
 const editorState = [

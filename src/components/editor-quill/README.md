@@ -1,16 +1,31 @@
 # Editor Quill
 
-Renders a Quill Editor and returns its content on change.
+Renders the Quill Editor and returns its content on change.
 
 ## UI
 
-### Navigation
+### Toolbar
 
-The Navigation Bar is handled by the Component itself and currently not be modified from the User (via props).
+The Toolbar (see [Custom Toolbar Docu](https://github.com/zenoamaro/react-quill#custom-toolbar)) is handled by the Component itself and currently not be modified from the User (via props). Additionally, if the Editor looses focus (`onBlur`) we hide the Toolbar currently (see `onMouseDown` in the `QuillToolbar` Component). This works on iOS, Android and IE 11 right now.
 
 ### Styling
 
 The Editor Quill uses the `Snow` Theme (see more [here](http://quilljs.com/docs/themes/#snow)).
+
+#### Nested Ordered Lists
+In order to display only numbers on each list-level of the order list, one has to add the following code to the `styles.scss`:
+
+```scss
+.ql-editor ol {
+  @for $i from 1 through 8 {
+    li.ql-indent-#{$i} {
+      &:before {
+        content: counter(list-#{$i}, decimal) '.' // eg. 1. instead of a.
+      }
+    }
+  }
+}
+```
 
 ## Data Handling and Performance
 
@@ -54,7 +69,6 @@ Quill will import and handle it further on like this:
 ## Example
 
 ```js
-
 import { EditorQuill } from './'
 
 const exampleBlock = {

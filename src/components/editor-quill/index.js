@@ -5,7 +5,7 @@ import ReactQuill from 'react-quill'
 // Helpers
 import { get, debounce } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
-import { CustomToolbar } from './navigation'
+import { QuillToolbar } from './toolbar'
 
 // Styling
 const classes = new BemHelper('editor-quill')
@@ -15,10 +15,17 @@ export class EditorQuill extends React.Component {
   constructor(props, context) {
     super(props, context)
 
+    // the component itself is stateless, but for the Navigation handling we need it
+    this.state = {
+      hasToolbar: false
+    }
+
     // one can import text, html or the raw delta. Related:
     // - https://github.com/quilljs/quill/issues/1088
     this.onChange = debounce(this.onChange.bind(this), 300, { maxWait: 1000 })
+    this.onVisibleHandler = this.onVisibleHandler.bind(this)
 
+    // allows us to handle/access the Quill APIs
     this.quillRef = null      // Quill instance
     this.reactQuillRef = null // ReactQuill component
   }
@@ -34,7 +41,7 @@ export class EditorQuill extends React.Component {
     this.attachQuillRefs()
   }
 
-  // on change
+  // Event Listeners
   onChange(html) {
     if (!!this.quillRef) {
       const storedContent = this.getContent(html)
@@ -45,6 +52,10 @@ export class EditorQuill extends React.Component {
       }
       this.props.onChange(change)
     }
+  }
+  onVisibleHandler(action) {
+    const hasToolbar = (action === 'onFocus')
+    this.setState({hasToolbar})
   }
 
   // format for eg. db
@@ -61,8 +72,8 @@ export class EditorQuill extends React.Component {
     this.quillRef = this.reactQuillRef.getEditor()
   }
 
-  // Docu: https://quilljs.com/docs/modules/toolbar/
   modules() {
+    // Docu: https://quilljs.com/docs/modules/toolbar/
     const { block } = this.props
     return {
       toolbar: {
@@ -71,21 +82,29 @@ export class EditorQuill extends React.Component {
     }
   }
 
-  // render
   render() {
     const { block } = this.props
+    const { hasToolbar } = this.state
+    const hideToolbar = (!hasToolbar) ? 'hidden': ''
     const currentValue = get(block, 'data.value', '')
+
     return (
       <div {...classes('container')}>
-        <CustomToolbar id={block.id} />
-        <ReactQuill
-          theme="snow"
-          value={currentValue}
-          onChange={this.onChange}
-          placeholder='Write a text...'
-          modules={this.modules()}
-          ref={(el) => { this.reactQuillRef = el }}
-        />
+        <div {...classes('toolbar', hideToolbar)} >
+          <QuillToolbar id={block.id} />
+        </div>
+        <div {...classes('editor')} >
+          <ReactQuill
+            modules={this.modules()}
+            onChange={this.onChange}
+            onFocus={() => this.onVisibleHandler('onFocus')}
+            onBlur={() => this.onVisibleHandler('onBlur')}
+            placeholder='Write a text...'
+            ref={(el) => { this.reactQuillRef = el }}
+            theme="snow"
+            value={currentValue}
+          />
+        </div>
       </div>
     )
   }

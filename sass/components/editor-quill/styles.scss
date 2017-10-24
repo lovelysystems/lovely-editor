@@ -8,4 +8,22 @@
     border: 1px solid #000;
   }
 
+  &__toolbar {
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &__editor {
+    // Customizing the Quill Snow Theme (eg. ol-li number styles)
+    .ql-editor ol {
+      @for $i from 1 through 8 {
+        li.ql-indent-#{$i} {
+          &:before {
+            content: counter(list-#{$i}, decimal) '.' // eg. 1. instead of a.
+          }
+        }
+      }
+    }
+  }
 }

@@ -3,10 +3,19 @@ import PropTypes from 'prop-types'
 
 // Example Toolbar
 // - http://quilljs.com/standalone/full/
-export const CustomToolbar = function(props) {
+//
+// NOTE
+// - we prevent onMouseDown to enable the "hide Toolbar onBlur" feature
+//   - see https://github.com/quilljs/quill/issues/1290
+export const QuillToolbar = function(props) {
   const { id } = props
   return (
-    <div id={`toolbar-${id}`}>
+    <div
+      onMouseDown={(e) => e.preventDefault()}
+      className="ql-toolbar"
+      id={`toolbar-${id}`}
+      role='toolbar'
+    >
       <select className="ql-header" defaultValue="">
         <option value="1" />
         <option value="2" />
@@ -26,6 +35,6 @@ export const CustomToolbar = function(props) {
   )
 }
 
-CustomToolbar.propTypes = {
+QuillToolbar.propTypes = {
   id: PropTypes.number.isRequired,
 }
