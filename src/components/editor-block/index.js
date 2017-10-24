@@ -28,7 +28,7 @@ export function EditorBlock(props) {
         {title}
       </div>
       <div {...classes('menu')}>
-        <button {...classes(null, null, 'btn')} onClick={() => onClick('remove')} >
+        <button className='btn' onClick={() => onClick('remove')} >
           Delete
         </button>
       </div>

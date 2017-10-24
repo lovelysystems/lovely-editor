@@ -18,47 +18,16 @@ export class EditorQuill extends React.Component {
     // one can import text, html or the raw delta. Related:
     // - https://github.com/quilljs/quill/issues/1088
     this.onChange = debounce(this.onChange.bind(this), 300, { maxWait: 1000 })
-
-    // allows us to handle/access the Quill APIs
-    this.quillRef = null      // Quill instance
-    this.reactQuillRef = null // ReactQuill component
-  }
-
-  // Mounting and attaching
-  componentDidMount() {
-    this.attachQuillRefs()
-    if (!!this.quillRef) {
-      this.quillRef.focus()
-    }
-  }
-  componentDidUpdate() {
-    this.attachQuillRefs()
   }
 
   // Event Listeners
   onChange(html) {
-    if (!!this.quillRef) {
-      const storedContent = this.getContent(html)
-      const change = {
-        data: {
-          value: storedContent.html,
-          delta: storedContent.delta
-        }
+    const change = {
+      data: {
+        value: html,
       }
-      this.props.onChange(change)
     }
-  }
-  // format for eg. db
-  getContent = (html) => {
-    return {
-      delta: this.quillRef.getContents(),
-      html
-    }
-  }
-
-  attachQuillRefs = () => {
-    if (!this.reactQuillRef || typeof this.reactQuillRef.getEditor !== 'function') return
-    this.quillRef = this.reactQuillRef.getEditor()
+    this.props.onChange(change)
   }
 
   // Quill Settings
@@ -95,7 +64,6 @@ export class EditorQuill extends React.Component {
             modules={this.modules()}
             onChange={this.onChange}
             placeholder='Write a text...'
-            ref={(el) => { this.reactQuillRef = el }}
             theme="snow"
             value={currentValue}
           />

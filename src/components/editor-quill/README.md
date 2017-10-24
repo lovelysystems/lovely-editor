@@ -86,7 +86,7 @@ The Component emits changes to the Editor with the Help of Lodash's [`debounce`]
   - Issue Reports
     - [React-Quill](https://github.com/zenoamaro/react-quill/issues/282)
 
-## Example
+## Example Code
 
 ```js
 import { EditorQuill } from './'
@@ -107,3 +107,7 @@ const exampleBlock = {
 />
 
 ```
+
+## Example Screenshot
+
+![Example Screenshot](./screenshot.png "Example Screenshot")
