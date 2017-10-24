@@ -80,6 +80,12 @@ Quill will import and handle it further on like this:
 
 The Component emits changes to the Editor with the Help of Lodash's [`debounce`](https://lodash.com/docs/4.17.4#debounce) feature. Lodash creates a debounced function that delays invoking `onChange` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked. Currently this is set to 300ms. We wait for max 1000ms before the delayed `onChange` is invoked.
 
+## Known Issues
+
+- React-Quill (1.1.0) and Android: One cannot add new empty lines to an Editor with existing content, when the last chars have `strong` styling. Additionally, the cursor jumps to a new line, when there is more content after `<strong>`-paragraph.
+  - Issue Reports
+    - [React-Quill](https://github.com/zenoamaro/react-quill/issues/282)
+
 ## Example
 
 ```js
