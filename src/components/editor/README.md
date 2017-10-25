@@ -29,7 +29,8 @@ const editorState = [{
 
 #### blocksConfig
 
-The `blocksConfig` is an array that must look like this, and contain a type-definition for each block in the `editorState`:
+The `blocksConfig` is an array that must look like this, and contain a
+type-definition for each block in the `editorState`:
 
 ```js
 const blocksConfig = [ {
@@ -40,7 +41,8 @@ const blocksConfig = [ {
 
 #### onChange
 
-The `onChange` property emits every change that happens inside the Editor. It can look like this:
+The `onChange` property emits every change that happens inside the Editor. It
+can look like this:
 
 ```js
 onChange(change) {

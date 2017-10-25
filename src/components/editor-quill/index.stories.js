@@ -52,7 +52,7 @@ storiesOf('Editors/Editor-Quill', module)
         title: 'Input Box'
       }
     }
-    return(
+    return (
       <Wrapper block={exampleBlock}  />
     )
   })
@@ -66,7 +66,7 @@ storiesOf('Editors/Editor-Quill', module)
         title: 'Input Box'
       }
     }
-    return(
+    return (
       <Wrapper block={exampleBlock}  />
     )
   })
@@ -89,7 +89,7 @@ storiesOf('Editors/Editor-Quill', module)
         title: 'Input Box'
       }
     }
-    return(
+    return (
       <Wrapper block={exampleBlock}  />
     )
   })
@@ -110,7 +110,7 @@ storiesOf('Editors/Editor-Quill', module)
         title: 'Input Box'
       }
     }
-    return(
+    return (
       <Wrapper block={exampleBlock}  />
     )
   })

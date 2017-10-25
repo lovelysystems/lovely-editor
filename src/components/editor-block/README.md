@@ -1,6 +1,7 @@
 # Editor Block
 
-Renders an Editor-Block containing specific meta data (eg. `title`) and the requested Editor Component (eg. Quill or another Editor Component).
+Renders an Editor-Block containing specific meta data (eg. `title`) and the
+requested Editor Component (eg. Quill or another Editor Component).
 
 ## Example
 

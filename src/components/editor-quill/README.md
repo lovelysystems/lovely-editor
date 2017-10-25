@@ -6,14 +6,16 @@ Renders the Quill Editor and returns its content on change.
 
 ### Toolbar
 
-The Toolbar (see [Custom Toolbar Docu](https://github.com/zenoamaro/react-quill#custom-toolbar)) is handled by the Component itself and currently not be modified from the User (via props).
+The Toolbar (see [Custom Toolbar Docu][1] is handled by the Component itself and
+  currently not be modified from the User (via props).
 
 ### Styling
 
-The Editor Quill uses the `Snow` Theme (see more [here](http://quilljs.com/docs/themes/#snow)).
+The Editor Quill uses the `Snow` Theme (see more [here][2]).
 
 #### Nested Ordered Lists
-In order to display only numbers on each list-level of the order list, one has to add the following code to the `styles.scss`:
+In order to display only numbers on each list-level of the order list, one has
+to add the following code to the `styles.scss`:
 
 ```scss
 .ql-editor ol {
@@ -31,7 +33,8 @@ In order to display only numbers on each list-level of the order list, one has t
 
 ### Data Imports
 
-The Quill component can import html content (eg. `<p><b>Hello World</b></p>`). Quill is able to import a [delta](https://github.com/zenoamaro/react-quill#using-deltas), html or plain text.
+The Quill component can import html content (eg. `<p><b>Hello World</b></p>`).
+Quill is able to import a [delta][3], html or plain text.
 
 ### Copy & Paste
 
@@ -40,12 +43,15 @@ The Quill component can import html content (eg. `<p><b>Hello World</b></p>`). Q
   - not all Word-Styles can be imported and processed by Quill
 - **Pages**
   - (Basic) Copy & Paste Support
-  - Some Headings-Formates (like Title, Headings) are not processed as such. They are imported as bold text.
+  - Some Headings-Formates (like Title, Headings) are not processed as such.
+  They are imported as bold text.
 - **PDF**
   - (Basic) Copy & Paste Support
-  - Some Headings-Formates (like Title, Headings) are not processed as such. They are imported as bold text.
+  - Some Headings-Formates (like Title, Headings) are not processed as such.
+  They are imported as bold text.
 
-Images are not supported by now and stripped away by not allowing the `images` format. Read more [here](https://github.com/quilljs/quill/issues/1108).
+Images are not supported by now and stripped away by not allowing the `images`
+format. Read more [here][4].
 
 ### Nested Lists
 
@@ -78,13 +84,19 @@ Quill will import and handle it further on like this:
 
 ### Performance
 
-The Component emits changes to the Editor with the Help of Lodash's [`debounce`](https://lodash.com/docs/4.17.4#debounce) feature. Lodash creates a debounced function that delays invoking `onChange` until after `wait` milliseconds have elapsed since the last time the debounced function was invoked. Currently this is set to 300ms. We wait for max 1000ms before the delayed `onChange` is invoked.
+The Component emits changes to the Editor with the Help of Lodash's
+[`debounce`][5] feature. Lodash creates a debounced function that delays
+invoking `onChange` until after `wait` milliseconds have elapsed since the last
+time the debounced function was invoked. Currently this is set to 300ms. We wait
+for max 1000ms before the delayed `onChange` is invoked.
 
 ## Known Issues
 
-- React-Quill (1.1.0) and Android: One cannot add new empty lines to an Editor with existing content, when the last chars have `strong` styling. Additionally, the cursor jumps to a new line, when there is more content after `<strong>`-paragraph.
-  - Issue Reports
-    - [React-Quill](https://github.com/zenoamaro/react-quill/issues/282)
+- React-Quill (1.1.0) and Android: One cannot add new empty lines to an Editor
+with existing content, when the last chars have `strong` styling. Additionally,
+the cursor jumps to a new line, when there is more content after
+`<strong>`-paragraph.
+  - Issue Reports: [React-Quill][6]
 
 ## Example Code
 
@@ -111,3 +123,10 @@ const exampleBlock = {
 ## Example Screenshot
 
 ![Example Screenshot](./screenshot.png "Example Screenshot")
+
+[1]: https://github.com/zenoamaro/react-quill#custom-toolbar
+[2]: http://quilljs.com/docs/themes/#snow
+[3]: https://github.com/zenoamaro/react-quill#using-deltas
+[4]: https://github.com/quilljs/quill/issues/1108
+[5]: https://lodash.com/docs/4.17.4#debounce
+[6]: https://github.com/zenoamaro/react-quill/issues/282
