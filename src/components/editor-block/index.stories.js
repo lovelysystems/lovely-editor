@@ -43,7 +43,7 @@ class Wrapper extends React.Component {
     return (
       <EditorBlock
         block={block}
-        onAction={this.onChange}
+        onAction={action('onAction')}
       >
         <ExampleInput
           block={block}
