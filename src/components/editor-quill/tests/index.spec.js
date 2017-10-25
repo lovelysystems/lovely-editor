@@ -107,12 +107,7 @@ describe('<EditorQuill />', () => {
       const insertHtml = '<p>Hello, world!</p>'
 
       const clock = sinon.useFakeTimers()
-      const onChangeSpy = sinon.spy()
-      const onChange = (change) => {
-        const { data } = change
-        expect(data.value).to.equal(insertHtml)
-        onChangeSpy()
-      }
+      const onChange = sinon.spy()
 
       const { wrapper } = getRenderedEditor(inHtml, onChange)
       setReactQuillContentsFromHTML(wrapper, insertHtml)
@@ -120,7 +115,8 @@ describe('<EditorQuill />', () => {
       expect(html).to.equal(insertHtml)
 
       clock.tick(1000) // because of the debounce
-      expect(onChangeSpy.called).to.equal(true)
+      expect(onChange.callCount).to.equal(1)
+      expect(onChange.lastCall.args[0].data.value).to.equal(insertHtml)
       clock.restore()
     })
 
@@ -132,9 +128,9 @@ describe('<EditorQuill />', () => {
       const { wrapper } = getRenderedEditor('', onChange)
       setReactQuillContentsFromHTML(wrapper, insertHtml)
 
-      expect(onChange.called).to.equal(false)
+      expect(onChange.callCount).to.equal(0)
       clock.tick(1000) // because of the debounce
-      expect(onChange.called).to.equal(true)
+      expect(onChange.callCount).to.equal(1)
       clock.restore()
     })
   })

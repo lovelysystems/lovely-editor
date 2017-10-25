@@ -41,6 +41,7 @@ export class Editor extends React.Component {
       newState = EditorState.removeBlock(editorState, event.id)
       break
     default:
+      newState = editorState
       break
     }
 

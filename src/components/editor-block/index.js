@@ -10,7 +10,7 @@ const classes = new BemHelper('editor-block')
 
 export class EditorBlock extends React.Component {
 
-  onRemove = (action, id) => {
+  onRemove = (action) => {
     const blockId = get(this.props, 'block.id')
     this.props.onAction({
       action: 'remove',
@@ -44,9 +44,5 @@ EditorBlock.propTypes = {
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   children: PropTypes.element.isRequired,
-  onAction: PropTypes.func,
-}
-
-EditorBlock.defaultProps = {
-  onAction: (event) => { console.log('... onAction triggered', event) }, //eslint-disable-line
+  onAction: PropTypes.func.isRequired,
 }
