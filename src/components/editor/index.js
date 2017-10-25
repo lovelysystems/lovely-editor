@@ -15,12 +15,12 @@ const classes = new BemHelper('editor')
 export class Editor extends React.Component {
 
   // event listeners and handlers
-  onContentChange(change, id) {
+  onContentChange(change, blockId) {
     const { editorState } = this.props
 
     // find the block we just changed and update its data
-    const block = EditorState.findBlock(editorState, id)
-    const newEditorState = EditorState.updateBlockData(editorState, id, change.data)
+    const block = EditorState.findBlock(editorState, blockId)
+    const newEditorState = EditorState.updateBlockData(editorState, blockId, change.data)
     const editorChange = {
       editorState: newEditorState,
       block
@@ -28,6 +28,7 @@ export class Editor extends React.Component {
 
     this.props.onChange(editorChange)
   }
+
   onBlockAction(event) {
     const { editorState } = this.props
     let newState = null
@@ -40,6 +41,7 @@ export class Editor extends React.Component {
       newState = EditorState.removeBlock(editorState, event.id)
       break
     default:
+      newState = editorState
       break
     }
 
@@ -98,7 +100,7 @@ Editor.propTypes = {
     component: PropTypes.func.isRequired,
   })).isRequired,
   editorState: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOf(PropTypes.number, PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,

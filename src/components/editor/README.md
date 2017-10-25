@@ -4,13 +4,66 @@ The main component of this package. It renderes all the blocks and manages them.
 
 ## Properties
 
-* `editorState`: represents the current state of the Editor
-* `blocksConfig`: maps `type` to a component or render function
-* `onChange`: emits changes of the editor
+* `editorState` (array): represents the current state of the Editor
+* `blocksConfig` (array): maps `type` to a component or render function
+* `onChange` (func): emits changes of the editor
+
+### Property Structures
+
+#### editorState
+
+The `editorState` is an array that must look like this (when not empty):
+
+```js
+const editorState = [{
+  id: 5, // id of the block
+  type: 'text', // type of the block, for each type there must be a matching blocksConfig
+  data: { // data for the component. Can have additionaly properties, depends on the used component
+    value: 'This is the current Text.' // the content of a component (eg. of the Quill-Editor), recommended name
+  },
+  meta: { // meta information for the Block-Wrapper
+    title: 'Input Block'
+  }
+}]
+```
+
+#### blocksConfig
+
+The `blocksConfig` is an array that must look like this, and contain a
+type-definition for each block in the `editorState`:
+
+```js
+const blocksConfig = [ {
+  type: 'text', // block-type, for each type in the editorState there must be a definition here
+  component: ExampleInput // eg. React Component or render function
+}]
+```
+
+#### onChange
+
+The `onChange` property emits every change that happens inside the Editor. It
+can look like this:
+
+```js
+onChange(change) {
+  console.log('onChange triggered:', change)
+}
+```
+
+The `change` parameter will have a structure like this:
+
+```js
+change = {
+  editorState: [] // the new editorState with the changes
+  block: {} // the updated block with the changed data
+}
+```
+
 
 ## Example
 
 ```js
+import { Editor } from './'
 
 // the current content, can also be an empty array
 const editorState = [
@@ -39,7 +92,7 @@ renderImage = (props) => {
   return <ExampleImage {...props} filter='grayscale'/>
 }
 
-// renders a specific component for the given block type
+// renders a specific component for the requested block type
 const blocksConfig = [
   {
     type: 'text',

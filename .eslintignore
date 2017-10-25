@@ -1,9 +1,10 @@
 # `node_modules` ignored by default.
 # Compiled src.
-example
 dist
 
 # configs etc.
 webpack.config.js
-postcss.config.js
 .stylelintrc.js
+
+# Polyfills
+src/components/editor-quill/tests/polyfills

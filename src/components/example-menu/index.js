@@ -24,11 +24,14 @@ export function ExampleMenu(props) {
         {title}
       </div>
       <div {...classes('content')}>
-        <button onClick={() => onClick('add', 'text')}>
-          Text-Block hinzufügen
+        <button className='btn' onClick={() => onClick('add', 'text')}>
+          Add Text
         </button>
-        <button onClick={() => onClick('add', 'image')}>
-          Bild-Block hinzufügen
+        <button className='btn' onClick={() => onClick('add', 'image')}>
+          Add Image
+        </button>
+        <button className='btn' onClick={() => onClick('add', 'richtext')}>
+          Add RichText
         </button>
       </div>
     </div>

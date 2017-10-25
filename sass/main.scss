@@ -1,13 +1,47 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 14px;
+}
+
+$button-bg-color: #0074d9;
+
+.btn {
+  font: inherit;
+  font-size: 12px;
+  padding: 8px 12px;
+  margin-right: 8px;
+  background-color: $button-bg-color;
+  border: none;
+  color: #fff;
+  outline: none;
+
+  &:focus {
+    background-color: lighten($button-bg-color, 5%);
+  }
+
+  &:hover {
+    background-color: lighten($button-bg-color, 10%);
+  }
+}
+
 .oy-example-app {
 
   &__container {
     margin: 10px;
   }
 
+  &__menu {
+    font-size: 16px;
+    background-color: #bebebe;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #000;
+  }
 }
 
 @import 'components/editor/styles';
 @import 'components/editor-block/styles';
+@import 'components/editor-quill/styles';
 @import 'components/example-menu/styles';
 @import 'components/example-input/styles';
 @import 'components/example-image/styles';

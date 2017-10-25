@@ -1,10 +1,13 @@
 # Editor Block
 
-Renders an Editor-Block containing specific meta data (eg. `title`) and the requested Editor Component (eg. Quill or another Editor Component).
+Renders an Editor-Block containing specific meta data (eg. `title`) and the
+requested Editor Component (eg. Quill or another Editor Component).
 
 ## Example
 
 ```js
+import { EditorBlock } from './'
+import { EditorQuill } from './' // an example child component
 
 // the content of the Editor-Block
 const block = {
@@ -21,12 +24,12 @@ const block = {
 <EditorBlock
   key={block.id}
   block={block}
-  onClick={(event) => console.log(event)}
+  onClick={(event) => console.log('...on Click triggered', event)}
 >
-  <Component
-    block={block}
-    onChange={(change) => console.log(change)} // change contains the updated component data
-  /> // the actual editor (eg. Quill)
+  <EditorQuill
+    block={exampleBlock}
+    onChange={(event) => console.log('...on onChange triggered', event)} // change contains the updated component data
+  />
 </EditorBlock>
 
 ```

@@ -1,0 +1,22 @@
+@import '~react-quill/dist/quill.snow.css';
+
+.oy-editor-quill {
+
+  &__container {
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+  }
+
+  &__editor {
+    // Customizing the Quill Snow Theme (eg. ol-li number styles)
+    .ql-editor ol {
+      @for $i from 1 through 8 {
+        li.ql-indent-#{$i} {
+          &:before {
+            content: counter(list-#{$i}, decimal) '.' // eg. 1. instead of a.
+          }
+        }
+      }
+    }
+  }
+}

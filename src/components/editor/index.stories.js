@@ -8,34 +8,43 @@ import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
 // Component imports
-import { Editor, ExampleMenu, ExampleInput, ExampleImage } from '../..'
+import { Editor, EditorQuill, ExampleMenu, ExampleInput, ExampleImage } from '../..'
 import componentReadme from './README.md'
 
 // Styling
-const classes = new BemHelper('editor')
+const classes = new BemHelper('example-app')
 
-// Example Configs
-const currentEditorState = [
+// Story Setup
+const menuState = {
+  meta: {
+    title: 'Example-Menu'
+  }
+}
+const blocksConfig = [
   {
-    id: 5,
     type: 'text',
-    data: {
-      value: 'This is the current Text.'
-    },
-    meta: {
-      title: 'Input Block'
-    }
-  }, {
-    id: 6,
+    component: ExampleInput
+  },
+  {
     type: 'image',
-    data: {
-      value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
-    },
-    meta: {
-      title: 'Image Block'
-    }
+    component: ExampleImage
+  },
+  {
+    type: 'richtext',
+    component: EditorQuill
   }
 ]
+const basicEditorState = [{
+  id: 7,
+  type: 'richtext',
+  data: {
+    value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
+  },
+  meta: {
+    title: 'Quill Block'
+  }
+}]
+
 
 class Wrapper extends React.Component {
 
@@ -43,7 +52,7 @@ class Wrapper extends React.Component {
     super(props, context)
     this.onChange = this.onChange.bind(this)
     this.state = {
-      editorState: currentEditorState
+      editorState: this.props.editorState // eslint-disable-line
     }
 
     // bindings
@@ -86,6 +95,18 @@ class Wrapper extends React.Component {
         }
       }
       break
+    case 'richtext':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'richtext',
+        data: {
+          value: ''
+        },
+        meta: {
+          title: 'Quill Block'
+        }
+      }
+      break
     default:
       break
     }
@@ -95,47 +116,71 @@ class Wrapper extends React.Component {
     }
   }
 
-  renderImage = (props) => {
-    return <ExampleImage {...props} />
-  }
-
   render() {
     const { editorState } = this.state
-    const menuState = {
-      meta: {
-        title: 'Example-Menu'
-      }
-    }
-    const blocksConfig = [
-      {
-        type: 'text',
-        component: ExampleInput
-      },
-      {
-        type: 'image',
-        component: this.renderImage
-      }
-    ]
+    const { menuState, blocksConfig } = this.props // eslint-disable-line
 
     return (
       <div {...classes('container')}>
-        <ExampleMenu
-          menuState={menuState}
-          onClick={(event) => this.onMenuClick(event)}
-        />
-        <Editor
-          editorState={editorState}
-          blocksConfig={blocksConfig}
-          onChange={this.onChange}
-        />
+        <div {...classes('menu')}>
+          <ExampleMenu
+            menuState={menuState}
+            onClick={(event) => this.onMenuClick(event)}
+          />
+        </div>
+        <div {...classes('editor')}>
+          <Editor
+            editorState={editorState}
+            blocksConfig={blocksConfig}
+            onChange={this.onChange}
+          />
+        </div>
       </div>
     )
   }
 
 }
 
-storiesOf('Editor/Editor', module)
+storiesOf('App/Editor', module)
   .addDecorator(withReadme(componentReadme))
-  .add('default', () => (
-    <Wrapper />
-  ))
+  .add('default', () => {
+    return (
+      <Wrapper
+        editorState={basicEditorState}
+        blocksConfig={blocksConfig}
+        menuState={menuState}
+      />
+    )
+  })
+  .add('with multiple Example Blocks', () => {
+    const additionalContent = [
+      ...basicEditorState,
+      {
+        id: 5,
+        type: 'text',
+        data: {
+          value: 'This is the current Text.'
+        },
+        meta: {
+          title: 'Input Block'
+        }
+      }, {
+        id: 6,
+        type: 'image',
+        data: {
+          value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+        },
+        meta: {
+          title: 'Image Block'
+        }
+      }
+    ]
+
+    return (
+      <Wrapper
+        editorState={additionalContent}
+        blocksConfig={blocksConfig}
+        menuState={menuState}
+      />
+    )
+  })
