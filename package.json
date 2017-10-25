@@ -15,7 +15,7 @@
     "url": "https://github.com/lovelysystems/oyez-editor.git"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --ignore *.spec.js,test,*.stories.js --source-maps",
+    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js --source-maps",
     "build:storybook": "build-storybook -o dist/storybook",
     "coverage": "NODE_ENV=test nyc --reporter=html --reporter=text -- mocha -r babel-core/register -r src/tests/helpers/test-setup.js -r ignore-styles --colors --exit \"./src/**/*.spec.js\" && nyc report",
     "lint": "eslint 'src/**/*.js' --fix",

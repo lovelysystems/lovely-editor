@@ -6,51 +6,33 @@ import sinon from 'sinon'
 // Components
 import { EditorQuill } from '../'
 
-// Utils
+// Utils and Setup
+import './setup'
 import {
   Quill,
+  sampleData,
   mountReactQuill,
-  mountEditorQuill,
+  getRenderedEditor,
   getQuillInstance,
-  getQuillContentsAsHTML
+  getQuillContentsAsHTML,
+  setReactQuillContentsFromHTML
 } from './utils'
-
-// Polyfills
-// - Docu: https://github.com/zenoamaro/react-quill/blob/92beccc417cf0bec16c902c5b307b6a6971344ea/test/setup.js)
-require('jsdom-global')()
-require('./polyfills/MutationObserver.js')(global)
-require('./polyfills/getSelection.js')(global)
-
-const runHtmlTest = ((blockData, expectedHtml) => {
-  const wrapper = mountEditorQuill({block: blockData, onChange: () => {}})
-  const editorHtml = getQuillContentsAsHTML(wrapper)
-  expect(editorHtml).to.equal(expectedHtml)
-})
 
 describe('<EditorQuill />', () => {
 
-  // Default Test-Data
-  const block = {
-    id: 5,
-    data: {
-      value: ''
-    },
-    meta: {
-      title: 'Input Box'
-    }
-  }
+  describe('Render Tests', () => {
 
-  // Class tests
-  it('component renders with Toolbar', () => {
-    const wrapper = render(<EditorQuill block={block} onChange={()=>{}} />)
-    expect(wrapper.find('.quill')).to.have.length(1)
-    expect(wrapper.find('#toolbar-5')).to.have.length(1)
-  })
+    it('component renders with Toolbar', () => {
+      const wrapper = render(<EditorQuill block={sampleData} onChange={()=>{}} />)
+      expect(wrapper.find('.quill')).to.have.length(1)
+      expect(wrapper.find('#toolbar-5')).to.have.length(1)
+    })
 
-  it('attaches a Quill instance to the component', () => {
-    const wrapper = mountReactQuill()
-    const quill = getQuillInstance(wrapper)
-    expect(quill instanceof Quill).to.equal(true)
+    it('attaches a Quill instance to the component', () => {
+      const wrapper = mountReactQuill()
+      const quill = getQuillInstance(wrapper)
+      expect(quill instanceof Quill).to.equal(true)
+    })
   })
 
   describe('Data Handling Tests', () => {
@@ -69,25 +51,91 @@ describe('<EditorQuill />', () => {
       EditorQuill.prototype.modules.restore()
     })
 
+    it('ReactQuill has required properties', () => {
+      const expectedHtml = '<p><strong>Hello World.</strong></p>'
+      const expectedFormats = [
+        'header',
+        'bold', 'italic', 'underline',
+        'list', 'indent'
+      ]
+      const editor = getRenderedEditor(expectedHtml)
+      const { ReactQuill } = editor
+
+      expect(ReactQuill.props().theme).to.equal('snow')
+      expect(ReactQuill.props().formats).to.equal(expectedFormats)
+      expect(ReactQuill.props().value).to.equal(expectedHtml)
+    })
+
     it('component can import html', () => {
       const expectedHtml = '<p><strong>Hello World.</strong></p>'
-      const blockData = Object.assign(block, { data: { value: expectedHtml } })
-      runHtmlTest(blockData, expectedHtml)
+      const { html } = getRenderedEditor(expectedHtml)
+      expect(html).to.equal(expectedHtml)
     })
 
     it('component can import lists (1 level)', () => {
       const expectedHtml = '<ul><li>Hello World.</li></ul>'
-      const blockData = Object.assign(block, { data: { value: expectedHtml } })
-      runHtmlTest(blockData, expectedHtml)
+      const { html } = getRenderedEditor(expectedHtml)
+      expect(html).to.equal(expectedHtml)
     })
 
     it('component can import nested lists (2 levels)', () => {
       const inputHtml = '<ul><li>Hello World.</li><li><ul><li>How are you?</li></ul></li></ul>'
       const expectedHtml = '<ul><li>Hello World.</li></ul><ul><li class="ql-indent-1">How are you?</li></ul>'
-      const blockData = Object.assign(block, { data: { value: inputHtml } })
-      runHtmlTest(blockData, expectedHtml)
+      const { html } = getRenderedEditor(inputHtml)
+      expect(html).to.equal(expectedHtml)
+    })
+  })
+
+  describe('Events Tests', () => {
+
+    beforeEach(() => {
+      // we need to disable the Toolbar, otherwhise the test fails
+      // due to some render issues. But the toolbar is not tested here anyways
+      sinon.stub(EditorQuill.prototype, 'modules').callsFake(() => {
+        return {
+          toolbar: false
+        }
+      })
     })
 
-    it('component sends onChange events to Wrapper')
+    afterEach(() => {
+      EditorQuill.prototype.modules.restore()
+    })
+
+    it('ReactQuill calls onChange with the new value when EditorQuill inserts html', () => {
+      const inHtml = ''
+      const insertHtml = '<p>Hello, world!</p>'
+
+      const clock = sinon.useFakeTimers()
+      const onChangeSpy = sinon.spy()
+      const onChange = (change) => {
+        const { data } = change
+        expect(data.value).to.equal(insertHtml)
+        onChangeSpy()
+      }
+
+      const { wrapper } = getRenderedEditor(inHtml, onChange)
+      setReactQuillContentsFromHTML(wrapper, insertHtml)
+      const html = getQuillContentsAsHTML(wrapper)
+      expect(html).to.equal(insertHtml)
+
+      clock.tick(1000) // because of the debounce
+      expect(onChangeSpy.called).to.equal(true)
+      clock.restore()
+    })
+
+    it('component debounces changes', () => {
+      const insertHtml = '<p>Hello, world!</p>'
+      const clock = sinon.useFakeTimers()
+      const onChange = sinon.spy()
+
+      const { wrapper } = getRenderedEditor('', onChange)
+      setReactQuillContentsFromHTML(wrapper, insertHtml)
+
+      expect(onChange.called).to.equal(false)
+      clock.tick(1000) // because of the debounce
+      expect(onChange.called).to.equal(true)
+      clock.restore()
+    })
   })
 })
