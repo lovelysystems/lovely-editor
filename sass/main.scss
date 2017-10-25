@@ -3,14 +3,25 @@ body {
   font-size: 14px;
 }
 
+$button-bg-color: #0074d9;
+
 .btn {
   font: inherit;
   font-size: 12px;
   padding: 8px 12px;
   margin-right: 8px;
-  background-color: #0074d9;
+  background-color: $button-bg-color;
   border: none;
   color: #fff;
+  outline: none;
+
+  &:focus {
+    background-color: lighten($button-bg-color, 5%);
+  }
+
+  &:hover {
+    background-color: lighten($button-bg-color, 10%);
+  }
 }
 
 .oy-example-app {
