@@ -8,7 +8,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
 // Component imports
-import { Editor, EditorQuill, ExampleMenu, ExampleInput, ExampleImage } from '../..'
+import { Editor, EditorQuill, ExampleMenu, ExampleInput } from '../..'
 import componentReadme from './README.md'
 
 // Styling
@@ -24,10 +24,6 @@ const blocksConfig = [
   {
     type: 'text',
     component: ExampleInput
-  },
-  {
-    type: 'image',
-    component: ExampleImage
   },
   {
     type: 'richtext',
@@ -165,13 +161,13 @@ storiesOf('App/Editor', module)
           title: 'Input Block'
         }
       }, {
-        id: 6,
-        type: 'image',
+        id: 4711,
+        type: 'text',
         data: {
-          value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+          value: 'This is the the second block'
         },
         meta: {
-          title: 'Image Block'
+          title: 'Second Block'
         }
       }
     ]

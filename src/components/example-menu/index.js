@@ -27,9 +27,6 @@ export function ExampleMenu(props) {
         <button className='btn' onClick={() => onClick('add', 'text')}>
           Add Text
         </button>
-        <button className='btn' onClick={() => onClick('add', 'image')}>
-          Add Image
-        </button>
         <button className='btn' onClick={() => onClick('add', 'richtext')}>
           Add RichText
         </button>
