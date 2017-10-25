@@ -99,7 +99,7 @@ Editor.propTypes = {
     component: PropTypes.func.isRequired,
   })).isRequired,
   editorState: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.oneOf(PropTypes.number, PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
