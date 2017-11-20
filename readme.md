@@ -17,6 +17,8 @@ install all the dependencies, required to develop.
 This package uses [Storybook](https://storybook.js.org) to showcase the
 components. Just enter `npm run storybook` to start it.
 
+The storybook is also available at [https://oyez-editor.netlify.com](https://oyez-editor.netlify.com). Currently only Florian is able to deploy it there.
+
 ## How to develop
 
 * `npm run build`: builds the package to ./dist
