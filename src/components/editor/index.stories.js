@@ -88,8 +88,10 @@ class Wrapper extends React.Component {
         id: Math.floor((Math.random() * 1000) + 1),
         type: 'image',
         data: {
-          src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif',
-          caption: 'Hello Kevin'
+          alignment: 'center',
+          caption: 'Hello Kevin.',
+          size: 'medium',
+          src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
         },
         meta: {
           title: 'Image Block'
