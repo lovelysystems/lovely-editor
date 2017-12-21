@@ -9,6 +9,7 @@ import { EditorBlock } from '../../editor-block'
 
 const Text = () => null
 const Image = () => null
+const CustomBlockWrapper = () => null
 
 describe('<Editor />', () => {
 
@@ -23,6 +24,22 @@ describe('<Editor />', () => {
         />
       )
       expect(wrapper.exists()).to.equal(true)
+    })
+
+    it('component renders a custom blockComponent if the prop blockComponent is set', () => {
+      const wrapper = shallow(
+        <Editor
+          editorState={[
+            { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
+          ]}
+          blocksConfig={[
+            { type: 'text', component: Text },
+          ]}
+          blockComponent={CustomBlockWrapper}
+          onChange={() => {}}
+        />
+      )
+      expect(wrapper.find(CustomBlockWrapper).length).to.equal(1)
     })
 
     it('component renders imported editorState', () => {

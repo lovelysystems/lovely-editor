@@ -45,7 +45,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editor Components/Image', module)
+storiesOf('Editors/Editor Image', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
     <Wrapper />
