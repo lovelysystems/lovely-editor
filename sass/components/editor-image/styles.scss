@@ -1,0 +1,40 @@
+.oy-editor-image {
+
+  &__toolbar {
+    button {
+      &.current {
+        background: red;
+      }
+
+      &:disabled {
+        background: #c7c7c7;
+        color: #000000;
+      }
+    }
+  }
+
+  &__image-container {
+    &--left {
+      text-align: left;
+    }
+    &--center {
+      text-align: center;
+    }
+    &--right {
+      text-align: right;
+    }
+  }
+
+  &__image {
+    &--small {
+      width: 240px;
+    }
+    &--medium {
+      width: 480px;
+    }
+    &--full-width {
+      width: 100%;
+    }
+  }
+
+}

@@ -8,7 +8,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
 // Component imports
-import { Editor, EditorQuill, ExampleMenu, ExampleInput } from '../..'
+import { Editor, EditorQuill, ExampleMenu, ExampleInput, EditorImage } from '../..'
 import componentReadme from './README.md'
 
 // Styling
@@ -28,6 +28,10 @@ const blocksConfig = [
   {
     type: 'richtext',
     component: EditorQuill
+  },
+  {
+    type: 'image',
+    component: EditorImage
   }
 ]
 const basicEditorState = [{
@@ -84,7 +88,10 @@ class Wrapper extends React.Component {
         id: Math.floor((Math.random() * 1000) + 1),
         type: 'image',
         data: {
-          value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+          alignment: 'center',
+          caption: 'Hello Kevin.',
+          size: 'medium',
+          src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
         },
         meta: {
           title: 'Image Block'

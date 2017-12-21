@@ -1,0 +1,13 @@
+{
+  "id": 5,
+  "type": "text",
+  "data": {
+    "alignment": "left",
+    "caption": "Hello World.",
+    "size": "medium",
+    "src": "https://picsum.photos/480/240"
+  },
+  "meta": {
+    "title": "Image Block"
+  }
+}

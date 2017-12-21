@@ -30,6 +30,9 @@ export function ExampleMenu(props) {
         <button className='btn' onClick={() => onClick('add', 'richtext')}>
           Add RichText
         </button>
+        <button className='btn' onClick={() => onClick('add', 'image')}>
+          Add Image
+        </button>
       </div>
     </div>
   )
