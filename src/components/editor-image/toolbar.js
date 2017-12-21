@@ -2,16 +2,31 @@ import * as React from 'react'
 import { map } from 'lodash'
 import PropTypes from 'prop-types'
 
-const ToolbarButton = ({ onClick, isDisabled, isCurrent, value, text }) => (
-  <button key={value} className={`btn ${isCurrent ? 'current' : ''}`} onClick={onClick} disabled={isDisabled} value={value}>{text}</button>
+export const ToolbarButton = ({ onClick, isDisabled, isCurrent, value, text }) => (
+  <button
+    key={value}
+    className={`btn ${isCurrent ? 'current' : ''}`}
+    onClick={onClick}
+    disabled={isDisabled}
+    value={value}
+  >
+    {text}
+  </button>
 )
 
 ToolbarButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  isCurrent: PropTypes.string.isRequired,
-  isDisabled: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  onClick: PropTypes.func,
+  isCurrent: PropTypes.bool,
+  isDisabled: PropTypes.bool,
+  value: PropTypes.string,
+  text: PropTypes.string
+}
+ToolbarButton.defaultProps = {
+  onClick: () => { console.log('... onClick triggered') }, //eslint-disable-line
+  isCurrent: false,
+  isDisabled: false,
+  value: null,
+  text: 'Button',
 }
 
 export const Toolbar = ({ currentValue, onSizeChange, onAlignmentChange }) => {
@@ -70,7 +85,13 @@ export const Toolbar = ({ currentValue, onSizeChange, onAlignmentChange }) => {
 }
 
 Toolbar.propTypes = {
-  currentValue: PropTypes.objectOf(PropTypes.string).isRequired,
-  onSizeChange: PropTypes.func.isRequired,
-  onAlignmentChange: PropTypes.func.isRequired
+  currentValue: PropTypes.objectOf(PropTypes.string),
+  onSizeChange: PropTypes.func,
+  onAlignmentChange: PropTypes.func
+}
+
+Toolbar.defaultProps = {
+  currentValue: {},
+  onSizeChange: () => { console.log('... onSizeChange triggered') }, //eslint-disable-line
+  onAlignmentChange: () => { console.log('... onSizeChange triggered') } //eslint-disable-line
 }

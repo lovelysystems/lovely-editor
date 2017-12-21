@@ -52,3 +52,15 @@ describe('<EditorImage />', () => {
   })
 
 })
+
+describe('<Toolbar />', () => {
+
+  describe('renders', () => {
+    it('a component with six buttons', () => {
+      const wrapper = shallow(<Toolbar />)
+      expect(wrapper.exists()).to.equal(true)
+      expect(wrapper.find('button')).to.have.length(6)
+    })
+  })
+
+})
