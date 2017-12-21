@@ -71,5 +71,16 @@
       "import/no-extraneous-dependencies": "off",
       "react/no-find-dom-node": 0
     }
-  }]
+  },
+  {
+    "files": [ "src/**/*.stories.js"],
+    "rules": {
+      "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
+      "no-undef": "off",
+      "no-underscore-dangle": ["warning"],
+      "import/no-extraneous-dependencies": "off",
+      "react/prop-types": "off"
+    }
+  }
+  ]
 }

@@ -35,7 +35,7 @@ type-definition for each block in the `editorState`:
 ```js
 const blocksConfig = [ {
   type: 'text', // block-type, for each type in the editorState there must be a definition here
-  component: ExampleInput // eg. React Component or render function
+  component: RichText // eg. React Component or render function
 }]
 ```
 
@@ -96,7 +96,7 @@ renderImage = (props) => {
 const blocksConfig = [
   {
     type: 'text',
-    component: ExampleInput // eg. React Component
+    component: RichText // eg. React Component
   },
   {
     type: 'image',

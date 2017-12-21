@@ -20,7 +20,6 @@ export function ExampleMenu(props) {
   const title = get(menuState, 'meta.title', 'Editor-Menu')
 
   const buttons = [
-    { text: 'Add Text', onClickFunc: () => {onClick('add', 'text')}},
     { text: 'Add Richtext', onClickFunc: () => { onClick('add', 'richtext') }},
     { text: 'Add Image', onClickFunc: () => {onClick('add', 'image')}},
   ]

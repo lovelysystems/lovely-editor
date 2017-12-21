@@ -7,14 +7,17 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import { clone } from 'lodash'
 
 // Component imports
-import { EditorBlock, ExampleInput } from '../..'
+import { EditorBlock, EditorImage } from '../..'
 import componentReadme from './README.md'
 
 // Example Config
 const exampleBlock = {
   id: 5,
   data: {
-    value: 'Hello World.'
+    alignment: 'left',
+    caption: 'Hello World.',
+    size: 'medium',
+    src: 'https://picsum.photos/480/240'
   },
   meta: {
     title: 'Input Box'
@@ -45,7 +48,7 @@ class Wrapper extends React.Component {
         block={block}
         onAction={action('onAction')}
       >
-        <ExampleInput
+        <EditorImage
           block={block}
           onChange={this.onChange}
         />

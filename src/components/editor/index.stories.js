@@ -11,7 +11,8 @@ import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
 // Component imports
-import { Editor, EditorQuill, ExampleMenu, ExampleInput, EditorImage } from '../..'
+import { ExampleMenu } from '../example-menu'
+import { Editor, EditorQuill, EditorImage } from '../..'
 import componentReadme from './README.md'
 
 // Styling
@@ -24,10 +25,6 @@ const menuState = {
   }
 }
 const blocksConfig = [
-  {
-    type: 'text',
-    component: ExampleInput
-  },
   {
     type: 'richtext',
     component: EditorQuill
@@ -189,7 +186,7 @@ class Wrapper extends React.Component {
 
 storiesOf('App/Editor', module)
   .addDecorator(withReadme(componentReadme))
-  .add('default', () => {
+  .add('default Editor', () => {
     return (
       <Wrapper
         editorState={basicEditorState}
@@ -198,26 +195,29 @@ storiesOf('App/Editor', module)
       />
     )
   })
-  .add('with multiple Example Blocks', () => {
+  .add('Editor with multiple Example Blocks', () => {
     const additionalContent = [
       ...basicEditorState,
       {
         id: 5,
-        type: 'text',
+        type: 'image',
         data: {
-          value: 'This is the current Text.'
+          alignment: 'left',
+          caption: 'Hello World.',
+          size: 'medium',
+          src: 'https://picsum.photos/480/240'
         },
         meta: {
           title: 'Input Block'
         }
       }, {
         id: 4711,
-        type: 'text',
+        type: 'richtext',
         data: {
           value: 'This is the the second block'
         },
         meta: {
-          title: 'Second Block'
+          title: 'Second Richtext'
         }
       }
     ]
