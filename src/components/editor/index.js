@@ -2,6 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
+import { Draggable } from 'react-beautiful-dnd'
 import { map } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
@@ -63,16 +64,30 @@ export class Editor extends React.Component {
           if (!!element.component) {
             const Component = element.component
             return (
-              <EditorBlock
-                key={block.id}
-                block={block}
-                onAction={(event) => this.onBlockAction(event)}
-              >
-                <Component
-                  block={block}
-                  onChange={(change) => this.onContentChange(change, block.id)}
-                />
-              </EditorBlock>
+              <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`}>
+                {(provided, dragSnapshot) => (
+                  <div>
+                    <div
+                      {...classes('menu')}
+                      ref={provided.innerRef}
+                      style={provided.draggableStyle}
+                      {...provided.dragHandleProps}
+                    >
+                      <EditorBlock
+                        key={block.id}
+                        block={block}
+                        onAction={(event) => this.onBlockAction(event)}
+                      >
+                        <Component
+                          block={block}
+                          onChange={(change) => this.onContentChange(change, block.id)}
+                        />
+                      </EditorBlock>
+                    </div>
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Draggable>
             )
           }
         }

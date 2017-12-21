@@ -53,6 +53,7 @@
     "lodash": "4.17.4",
     "prop-types": "15.6.0",
     "react": "16.0.0",
+    "react-beautiful-dnd": "3.0.0",
     "react-bem-helper": "1.4.1",
     "react-quill": "1.1.0"
   },

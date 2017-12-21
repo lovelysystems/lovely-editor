@@ -2,7 +2,8 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
-import { get } from 'lodash'
+import { Draggable } from 'react-beautiful-dnd'
+import { get, map } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Styling
@@ -18,21 +19,34 @@ export function ExampleMenu(props) {
   const { menuState } = props
   const title = get(menuState, 'meta.title', 'Editor-Menu')
 
+  const buttons = [
+    { text: 'Add Text', onClickFunc: () => {onClick('add', 'text')}},
+    { text: 'Add Richtext', onClickFunc: () => { onClick('add', 'richtext') }},
+    { text: 'Add Image', onClickFunc: () => {onClick('add', 'image')}},
+  ]
+
   return (
     <div {...classes('container')} >
       <div {...classes('title')}>
         {title}
       </div>
       <div {...classes('content')}>
-        <button className='btn' onClick={() => onClick('add', 'text')}>
-          Add Text
-        </button>
-        <button className='btn' onClick={() => onClick('add', 'richtext')}>
-          Add RichText
-        </button>
-        <button className='btn' onClick={() => onClick('add', 'image')}>
-          Add Image
-        </button>
+        {map(buttons, ({onClickFunc ,text}, idx) => (
+          <Draggable key={`menu-${idx}`} draggableId={`menu-${idx}`} disableInteractiveElementBlocking>
+            {(provided, dragSnapshot) => (
+              <div>
+                <div
+                  ref={provided.innerRef}
+                  style={provided.draggableStyle}
+                  {...provided.dragHandleProps}
+                >
+                  <button key={idx} className='btn' onClick={onClickFunc}>{text}</button>
+                </div>
+                {provided.placeholder}
+              </div>
+            )}
+          </Draggable>
+        ))}
       </div>
     </div>
   )
