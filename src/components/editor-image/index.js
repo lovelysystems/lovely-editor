@@ -65,8 +65,15 @@ export class EditorImage extends React.Component {
               alt={currentValue.caption || ''}
             />
           )}
+          { !currentValue.src && (
+            <span>No image.</span>
+          )}
         </div>
-        <input onChange={this.onCaptionChange} value={currentValue.caption} />
+        { currentValue.caption && (
+          <div {...classes('caption-container')}>
+            <input onChange={this.onCaptionChange} value={currentValue.caption} />
+          </div>
+        )}
       </div>
     )
   }

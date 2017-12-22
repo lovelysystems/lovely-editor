@@ -1,5 +1,5 @@
 import React from 'react'
-import { get } from 'lodash'
+import { get, find } from 'lodash'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import withReadme from 'storybook-readme/with-readme'
@@ -28,10 +28,25 @@ const defaultMenuState = {
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Richtext (Template)', type: 'richtext', templateId: 1 },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+    { action: 'add', text: 'Add Image (Template)', type: 'image', templateId: 2 },
   ]
 }
 
 const defaultDocument = {
+  template: [{
+    id: 1,
+    data: {
+      value: '<p>Hello richtext template</p>'
+    }
+  }, {
+    id: 2,
+    data: {
+      alignment: 'center',
+      caption: 'Hello Kevin.',
+      size: 'medium',
+      src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+    }
+  }],
   editorState: [{
     id: 7,
     type: 'richtext',
@@ -113,38 +128,34 @@ class Wrapper extends React.Component {
 
   /**
    * When the user clicks on one of the Menu-Items, the Menu fires an event,
-   * which will contain the block type the user wants to add (event.type)
-   * and also the action (event.action, eg. 'add' or 'remove')
+   * which will contain the block type the user wants to add (event.type),
+   * the action (event.action, eg. 'add' or 'remove') and templateId
    * @param  {object}   event contains the event, passed from the ExampleMenu to the Wrapper
    */
   onMenuClick(event) {
     const { editorState } = this.state
+    const { document: dc } = this.props
     action('onMenuClick')(event)
 
     let newBlock = null
     if (event.action === 'add') {
+
+      // let's check if the event.template has a valid template.id in the document
+      // and if so let's use the template when adding the type below
+      let template = null
+      let templateData = null
+      if (event.template) {
+        template = find(dc.template, tm => (tm && tm.id === event.template))
+        templateData = get(template, 'data', {})
+      }
+
       switch (event.type) {
-      case 'text':
-        newBlock = {
-          id: Math.floor((Math.random() * 1000) + 1),
-          type: 'text',
-          data: {
-            value: 'This is the current Text.'
-          },
-          meta: {
-            title: 'Input Block'
-          }
-        }
-        break
       case 'image':
         newBlock = {
           id: Math.floor((Math.random() * 1000) + 1),
           type: 'image',
           data: {
-            alignment: 'center',
-            caption: 'Hello Kevin.',
-            size: 'medium',
-            src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+            ...templateData
           },
           meta: {
             title: 'Image Block'
@@ -156,7 +167,7 @@ class Wrapper extends React.Component {
           id: Math.floor((Math.random() * 1000) + 1),
           type: 'richtext',
           data: {
-            value: ''
+            value: get(templateData, 'value', '')
           },
           meta: {
             title: 'Quill Block'
@@ -268,9 +279,13 @@ storiesOf('App/Editor', module)
     )
   })
   .add('empty Editor with a Placeholder', () => {
+    const newDocument = {
+      ...defaultDocument,
+      editorState: []
+    }
     return (
       <Wrapper
-        document={{}}
+        document={newDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
         placeholder={Placeholder}

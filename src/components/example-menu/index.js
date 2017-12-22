@@ -11,8 +11,8 @@ const classes = new BemHelper('example-menu')
 
 export function ExampleMenu({menuState, onClick}) {
 
-  function onClickHandler(action, type) {
-    const event = { action, type }
+  function onClickHandler(action, type, templateId ) {
+    const event = { action, type, template: templateId }
     onClick(event)
   }
 
@@ -26,7 +26,7 @@ export function ExampleMenu({menuState, onClick}) {
       </div>
       <div {...classes('content')}>
         {map(buttons, ({ action, text, templateId, type }, idx) => (
-          <Draggable key={`menu-${idx}`} draggableId={`${type}:${templateId}:${idx}`} disableInteractiveElementBlocking>
+          <Draggable key={`menu-${idx}`} draggableId={`${type}:${templateId || 'default' }:${idx}`} disableInteractiveElementBlocking>
             {(provided, dragSnapshot) => (
               <div>
                 <div
@@ -34,7 +34,7 @@ export function ExampleMenu({menuState, onClick}) {
                   style={provided.draggableStyle}
                   {...provided.dragHandleProps}
                 >
-                  <button key={idx} className='btn' onClick={() => { onClickHandler(action, type) }}>{text}</button>
+                  <button key={idx} className='btn' onClick={() => { onClickHandler(action, type, templateId) }}>{text}</button>
                 </div>
                 {provided.placeholder}
               </div>
