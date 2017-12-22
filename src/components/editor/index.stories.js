@@ -1,7 +1,8 @@
 import React from 'react'
+import { get } from 'lodash'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions' //eslint-disable-line
-import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
+import { action } from '@storybook/addon-actions'
+import withReadme from 'storybook-readme/with-readme'
 
 // DND Example: https://github.com/alexreardon/react-beautiful-dnd-flow-example/blob/master/src/App.js
 import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
@@ -18,12 +19,32 @@ import componentReadme from './README.md'
 // Styling
 const classes = new BemHelper('example-app')
 
-// Story Setup
+// WRAPPER SETUP
 const defaultMenuState = {
   meta: {
     title: 'Example-Menu'
-  }
+  },
+  buttons: [
+    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Richtext (Template)', type: 'richtext', templateId: 1 },
+    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+  ]
 }
+
+const defaultDocument = {
+  editorState: [{
+    id: 7,
+    type: 'richtext',
+    data: {
+      value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
+    },
+    meta: {
+      title: 'Quill Block'
+    }
+  }]
+}
+
+// EDITOR SETUP
 const defaultBlocksConfig = [
   {
     type: 'richtext',
@@ -34,16 +55,6 @@ const defaultBlocksConfig = [
     component: EditorImage
   }
 ]
-const basicEditorState = [{
-  id: 7,
-  type: 'richtext',
-  data: {
-    value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
-  },
-  meta: {
-    title: 'Quill Block'
-  }
-}]
 
 const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to start.</div>)
 
@@ -82,7 +93,7 @@ class Wrapper extends React.Component {
     super(props, context)
     this.onChange = this.onChange.bind(this)
     this.state = {
-      editorState: this.props.editorState
+      editorState: get(this.props, 'document.editorState', [])
     }
 
     // bindings
@@ -167,6 +178,7 @@ class Wrapper extends React.Component {
    * @param  {object}   result see https://github.com/atlassian/react-beautiful-dnd#result-dropresult
    */
   onDragEnd = (result) => {
+    console.log('result', result); //eslint-disable-line
     // dropped outside the list
     if (!result.destination) {
       return
@@ -249,7 +261,7 @@ storiesOf('App/Editor', module)
   .add('default Editor', () => {
     return (
       <Wrapper
-        editorState={basicEditorState}
+        document={defaultDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
       />
@@ -258,7 +270,7 @@ storiesOf('App/Editor', module)
   .add('empty Editor with a Placeholder', () => {
     return (
       <Wrapper
-        editorState={[]}
+        document={{}}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
         placeholder={Placeholder}
@@ -266,34 +278,37 @@ storiesOf('App/Editor', module)
     )
   })
   .add('Editor with multiple Example Blocks', () => {
-    const additionalContent = [
-      ...basicEditorState,
-      {
-        id: 5,
-        type: 'image',
-        data: {
-          alignment: 'left',
-          caption: 'Hello World.',
-          size: 'medium',
-          src: 'https://picsum.photos/480/240'
-        },
-        meta: {
-          title: 'Input Block'
+    const newDocument = {
+      ...defaultDocument,
+      editorState: [
+        ...defaultDocument.editorState,
+        {
+          id: 5,
+          type: 'image',
+          data: {
+            alignment: 'left',
+            caption: 'Hello World.',
+            size: 'medium',
+            src: 'https://picsum.photos/480/240'
+          },
+          meta: {
+            title: 'Input Block'
+          }
+        }, {
+          id: 4711,
+          type: 'richtext',
+          data: {
+            value: 'This is the the second block'
+          },
+          meta: {
+            title: 'Second Richtext'
+          }
         }
-      }, {
-        id: 4711,
-        type: 'richtext',
-        data: {
-          value: 'This is the the second block'
-        },
-        meta: {
-          title: 'Second Richtext'
-        }
-      }
-    ]
+      ]
+    }
     return (
       <Wrapper
-        editorState={additionalContent}
+        document={newDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
       />
@@ -302,7 +317,7 @@ storiesOf('App/Editor', module)
   .add('Editor with Drag and Drop', () => {
     return (
       <Wrapper
-        editorState={basicEditorState}
+        document={defaultDocument}
         blocksConfig={defaultBlocksConfig}
         blockComponent={ExampleBlockWrapper}
         menuState={defaultMenuState}

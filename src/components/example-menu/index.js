@@ -9,20 +9,15 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('example-menu')
 
-export function ExampleMenu(props) {
+export function ExampleMenu({menuState, onClick}) {
 
-  function onClick(action, type) {
+  function onClickHandler(action, type) {
     const event = { action, type }
-    props.onClick(event)
+    onClick(event)
   }
 
-  const { menuState } = props
   const title = get(menuState, 'meta.title', 'Editor-Menu')
-
-  const buttons = [
-    { text: 'Add Richtext', onClickFunc: () => { onClick('add', 'richtext') }},
-    { text: 'Add Image', onClickFunc: () => { onClick('add', 'image') }},
-  ]
+  const buttons = get(menuState, 'buttons', [])
 
   return (
     <div {...classes('container')} >
@@ -30,8 +25,8 @@ export function ExampleMenu(props) {
         {title}
       </div>
       <div {...classes('content')}>
-        {map(buttons, ({onClickFunc ,text}, idx) => (
-          <Draggable key={`menu-${idx}`} draggableId={`menu-${idx}`} disableInteractiveElementBlocking>
+        {map(buttons, ({ action, text, templateId, type }, idx) => (
+          <Draggable key={`menu-${idx}`} draggableId={`${type}:${templateId}:${idx}`} disableInteractiveElementBlocking>
             {(provided, dragSnapshot) => (
               <div>
                 <div
@@ -39,7 +34,7 @@ export function ExampleMenu(props) {
                   style={provided.draggableStyle}
                   {...provided.dragHandleProps}
                 >
-                  <button key={idx} className='btn' onClick={onClickFunc}>{text}</button>
+                  <button key={idx} className='btn' onClick={() => { onClickHandler(action, type) }}>{text}</button>
                 </div>
                 {provided.placeholder}
               </div>
@@ -55,6 +50,7 @@ ExampleMenu.propTypes = {
   menuState: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
+  buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired
 }
 
