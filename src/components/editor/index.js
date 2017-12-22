@@ -12,6 +12,14 @@ import { EditorBlock } from '../editor-block'
 // Styling
 const classes = new BemHelper('editor')
 
+/**
+ * Editor component
+ *
+ * is responsible for
+ * - rendering the blocks (see renderEditorBlocks)
+ * - telling the <Wrapper /> when the content of a block changes (see onContentChange)
+ *   or a block triggers an action (see onBlockAction)
+ */
 export class Editor extends React.Component {
 
   // event listeners and handlers
@@ -55,26 +63,33 @@ export class Editor extends React.Component {
 
   // render helpers
   renderEditorBlocks() {
-    const { editorState, blocksConfig } = this.props
+    const { blocksConfig, blockComponent: BlockWrapperComponent, editorState, placeholder  } = this.props
+
+    // let's return the placeholder if the editorState is empty
+    if (editorState.length === 0) {
+      return React.createElement(placeholder)
+    }
+
+    // then we iterate over the editorState, get each block and map the block.types
+    // with the element.type. Once they match we return a wrapped block with the
+    // editor component
     const editorBlocksArray = map(editorState, (block) => {
 
       return map(blocksConfig, (element) => { //eslint-disable-line
-        if (block.type === element.type) {
-          if (!!element.component) {
-            const Component = element.component
-            return (
-              <EditorBlock
-                key={block.id}
+        if (block.type === element.type && typeof element.component === 'function') {
+          const Component = element.component
+          return (
+            <BlockWrapperComponent
+              key={block.id}
+              block={block}
+              onAction={(event) => this.onBlockAction(event)}
+            >
+              <Component
                 block={block}
-                onAction={(event) => this.onBlockAction(event)}
-              >
-                <Component
-                  block={block}
-                  onChange={(change) => this.onContentChange(change, block.id)}
-                />
-              </EditorBlock>
-            )
-          }
+                onChange={(change) => this.onContentChange(change, block.id)}
+              />
+            </BlockWrapperComponent>
+          )
         }
       })
     })
@@ -95,6 +110,7 @@ export class Editor extends React.Component {
 }
 
 Editor.propTypes = {
+  blockComponent: PropTypes.func,
   blocksConfig: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     component: PropTypes.func.isRequired,
@@ -105,5 +121,11 @@ Editor.propTypes = {
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.oneOf(PropTypes.func)
+}
+
+Editor.defaultProps = {
+  blockComponent: EditorBlock,
+  placeholder: () => {}
 }

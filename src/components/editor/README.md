@@ -5,7 +5,9 @@ The main component of this package. It renderes all the blocks and manages them.
 ## Properties
 
 * `editorState` (array): represents the current state of the Editor
+* `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
 * `blocksConfig` (array): maps `type` to a component or render function
+* `placeholder` (component): renders a placeholder component when the `editorState` is empty
 * `onChange` (func): emits changes of the editor
 
 ### Property Structures
@@ -27,6 +29,36 @@ const editorState = [{
 }]
 ```
 
+#### blockComponent
+
+The `blockComponent` property is optional and must be a React Component. It will be
+used to wrap the `<EditorBlock/>` component in a custom component. This can be very
+useful if a DragAndDrop feature is planned. An example use case can be found in
+the storybook (look for 'Editor with Drag and Drop').
+
+```js
+import { EditorBlock } from '../editor-block'
+
+// Example Implementation, which renders the default Component with no additional feature
+const customBlockWrapper = ({block, children, onAction}) => (
+  <EditorBlock
+    key={block.id}
+    block={block}
+    onAction={onAction}
+  >
+    { children }
+  </EditorBlock>
+)
+
+// then pass customBlockWrapper as blockComponent to the Editor
+<Editor
+  editorState={...}
+  blockComponent={customBlockWrapper}
+  blocksConfig={...}
+  onChange={...}
+/>
+```
+
 #### blocksConfig
 
 The `blocksConfig` is an array that must look like this, and contain a
@@ -35,7 +67,7 @@ type-definition for each block in the `editorState`:
 ```js
 const blocksConfig = [ {
   type: 'text', // block-type, for each type in the editorState there must be a definition here
-  component: ExampleInput // eg. React Component or render function
+  component: RichText // eg. React Component or render function
 }]
 ```
 
@@ -96,7 +128,7 @@ renderImage = (props) => {
 const blocksConfig = [
   {
     type: 'text',
-    component: ExampleInput // eg. React Component
+    component: RichText // eg. React Component
   },
   {
     type: 'image',

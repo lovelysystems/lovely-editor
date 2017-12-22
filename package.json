@@ -15,14 +15,15 @@
     "url": "https://github.com/lovelysystems/oyez-editor.git"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js --source-maps",
+    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps",
     "build:storybook": "build-storybook -o dist/storybook",
     "coverage": "NODE_ENV=test nyc --reporter=html --reporter=text -- mocha -r babel-core/register -r src/tests/helpers/test-setup.js --colors --exit \"./src/**/*.spec.js\" && nyc report",
     "lint": "eslint 'src/**/*.js' --fix",
     "test": "mocha -r babel-core/register -r src/tests/helpers/test-setup.js --colors \"./src/**/*.spec.js\"",
     "test:node": "check-node-version --node '>='$(cat .nvmrc)",
     "prebuild": "rimraf dist",
-    "pretest": "npm run test:node && npm run lint",
+    "pretest": "npm run test:node",
+    "posttest": "npm run lint",
     "postinstall": "npm run build",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
@@ -53,6 +54,7 @@
     "lodash": "4.17.4",
     "prop-types": "15.6.0",
     "react": "16.0.0",
+    "react-beautiful-dnd": "3.0.0",
     "react-bem-helper": "1.4.1",
     "react-quill": "1.1.0"
   },

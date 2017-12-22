@@ -9,6 +9,8 @@ import { EditorBlock } from '../../editor-block'
 
 const Text = () => null
 const Image = () => null
+const CustomBlockWrapper = () => null
+const Placeholder = () => null
 
 describe('<Editor />', () => {
 
@@ -25,7 +27,35 @@ describe('<Editor />', () => {
       expect(wrapper.exists()).to.equal(true)
     })
 
-    it('component renders imported editorState', () => {
+    it('component renders a custom blockComponent if the prop blockComponent is set', () => {
+      const wrapper = shallow(
+        <Editor
+          editorState={[
+            { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
+          ]}
+          blocksConfig={[
+            { type: 'text', component: Text },
+          ]}
+          blockComponent={CustomBlockWrapper}
+          onChange={() => {}}
+        />
+      )
+      expect(wrapper.find(CustomBlockWrapper).length).to.equal(1)
+    })
+
+    it('component renders a placeholder if the editorState is empty', () => {
+      const wrapper = shallow(
+        <Editor
+          editorState={[]}
+          blocksConfig={[]}
+          placeholder={Placeholder}
+          onChange={() => {}}
+        />
+      )
+      expect(wrapper.find(Placeholder).length).to.equal(1)
+    })
+
+    it('component renders imported editorState an does not render placeholder', () => {
       const wrapper = shallow(
         <Editor
           editorState={[
@@ -40,6 +70,7 @@ describe('<Editor />', () => {
           onChange={() => {}}
         />
       )
+      expect(wrapper.find(Placeholder).length).to.equal(0)
       expect(wrapper.find(Text).length).to.equal(2)
       expect(wrapper.find(Image).length).to.equal(1)
     })
