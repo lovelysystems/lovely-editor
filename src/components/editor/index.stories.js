@@ -134,53 +134,16 @@ class Wrapper extends React.Component {
    */
   onMenuClick(event) {
     const { editorState } = this.state
-    const { document: dc } = this.props
     action('onMenuClick')(event)
 
     let newBlock = null
     if (event.action === 'add') {
-
-      // let's check if the event.template has a valid template.id in the document
-      // and if so let's use the template when adding the type below
-      let template = null
-      let templateData = null
-      if (event.template) {
-        template = find(dc.template, tm => (tm && tm.id === event.template))
-        templateData = get(template, 'data', {})
+      newBlock = this.getBlockTemplate(event)
+      if (!!newBlock) {
+        this.setState({
+          editorState: EditorState.appendBlock(editorState, newBlock)
+        })
       }
-
-      switch (event.type) {
-      case 'image':
-        newBlock = {
-          id: Math.floor((Math.random() * 1000) + 1),
-          type: 'image',
-          data: {
-            ...templateData
-          },
-          meta: {
-            title: 'Image Block'
-          }
-        }
-        break
-      case 'richtext':
-        newBlock = {
-          id: Math.floor((Math.random() * 1000) + 1),
-          type: 'richtext',
-          data: {
-            value: get(templateData, 'value', '')
-          },
-          meta: {
-            title: 'Quill Block'
-          }
-        }
-        break
-      default:
-        break
-      }
-    }
-
-    if (!!newBlock) {
-      this.setState({ editorState: EditorState.appendBlock(editorState, newBlock) })
     }
   }
 
@@ -189,11 +152,11 @@ class Wrapper extends React.Component {
    * @param  {object}   result see https://github.com/atlassian/react-beautiful-dnd#result-dropresult
    */
   onDragEnd = (result) => {
-    console.log('result', result); //eslint-disable-line
     // dropped outside the list
     if (!result.destination) {
       return
     }
+    action('onDragEnd')(result)
 
     let newEditorState = this.state.editorState
     if (!result.source.droppableId.includes('droppable-menu')) {
@@ -203,11 +166,72 @@ class Wrapper extends React.Component {
         result.source.index,
         result.destination.index
       )
+      this.setState({ editorState: newEditorState })
+    } else {
+      // or add a new block at the new index to the state
+      const { draggableId } = result
+      const identifier = draggableId.split(':')
+      const event = {
+        type: identifier[0],
+        template: identifier[1],
+        action: identifier[2],
+      }
+      const newBlock = this.getBlockTemplate(event)
+      const newIndex = result.destination.index
+      const newEditor = EditorState.appendBlockAtIndex(newEditorState, newBlock, newIndex)
+      this.setState({
+        editorState: [...newEditor]
+      })
+    }
+  }
+
+  /**
+   * Will return a new block, either a template or a default (empty) one
+   * @param  {object}   event the event that just triggered the request to get a new block
+   * @return {object}         the new block with all its properties
+   */
+  getBlockTemplate = (event) => {
+    const { document: dc } = this.props
+    let newBlock = null
+    let template = null
+    let templateData = null
+
+    // let's check if the event.template has a valid template.id in the document
+    // and if so let's use the template when adding the type below
+    if (event.template) {
+      template = find(dc.template, tm => (tm && tm.id === parseInt(event.template, 10)))
+      templateData = get(template, 'data', {})
     }
 
-    this.setState({
-      editorState: newEditorState
-    })
+    switch (event.type) {
+    case 'image':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'image',
+        data: {
+          ...templateData
+        },
+        meta: {
+          title: 'Image Block'
+        }
+      }
+      break
+    case 'richtext':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'richtext',
+        data: {
+          value: get(templateData, 'value', '')
+        },
+        meta: {
+          title: 'Quill Block'
+        }
+      }
+      break
+    default:
+      break
+    }
+    return newBlock
   }
 
   /**

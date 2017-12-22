@@ -26,7 +26,7 @@ export function ExampleMenu({menuState, onClick}) {
       </div>
       <div {...classes('content')}>
         {map(buttons, ({ action, text, templateId, type }, idx) => (
-          <Draggable key={`menu-${idx}`} draggableId={`${type}:${templateId || 'default' }:${idx}`} disableInteractiveElementBlocking>
+          <Draggable key={`menu-${idx}`} draggableId={`${type}:${templateId || 'default' }:${action}:${idx}`} disableInteractiveElementBlocking>
             {(provided, dragSnapshot) => (
               <div>
                 <div
