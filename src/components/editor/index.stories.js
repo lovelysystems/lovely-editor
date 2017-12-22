@@ -12,7 +12,7 @@ import { EditorState } from '../../model/editor-state'
 
 // Component imports
 import { ExampleMenu } from '../example-menu'
-import { Editor, EditorQuill, EditorImage } from '../..'
+import { Editor, EditorBlock, EditorQuill, EditorImage } from '../..'
 import componentReadme from './README.md'
 
 // Styling
@@ -45,15 +45,13 @@ const basicEditorState = [{
   }
 }]
 
+const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to start.</div>)
+
 /**
- * exampleBlockWrapper a custom wrapper for the <EditorBlock /> which adds Drag&Drop
+ * ExampleBlockWrapper a custom wrapper for the <EditorBlock /> which adds Drag&Drop
  * capabilities
  */
-const exampleBlockWrapper = ({block, children, component, onAction}) => {
-  if (!component) {
-    return null
-  }
-  const BlockComponent = component
+const ExampleBlockWrapper = ({block, children, onAction}) => {
   return (
     <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`}>
       {(provided, dragSnapshot) => (
@@ -63,13 +61,13 @@ const exampleBlockWrapper = ({block, children, component, onAction}) => {
             style={provided.draggableStyle}
             {...provided.dragHandleProps}
           >
-            <BlockComponent
+            <EditorBlock
               key={block.id}
               block={block}
               onAction={onAction}
             >
               { children }
-            </BlockComponent>
+            </EditorBlock>
           </div>
           {provided.placeholder}
         </div>
@@ -104,8 +102,8 @@ class Wrapper extends React.Component {
 
   /**
    * When the user clicks on one of the Menu-Items, the Menu fires an event,
-   * which will contain not the block type the user wants to add (event.type)
-   * and also the action (event.action)
+   * which will contain the block type the user wants to add (event.type)
+   * and also the action (event.action, eg. 'add' or 'remove')
    * @param  {object}   event contains the event, passed from the ExampleMenu to the Wrapper
    */
   onMenuClick(event) {
@@ -113,7 +111,7 @@ class Wrapper extends React.Component {
     action('onMenuClick')(event)
 
     let newBlock = null
-    if(event.action === 'add') {
+    if (event.action === 'add') {
       switch (event.type) {
       case 'text':
         newBlock = {
@@ -206,7 +204,7 @@ class Wrapper extends React.Component {
 
   render() {
     const { editorState } = this.state
-    const { menuState, blocksConfig, blockComponent } = this.props
+    const { menuState, blocksConfig, blockComponent, placeholder } = this.props
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -230,6 +228,7 @@ class Wrapper extends React.Component {
                     blockComponent={blockComponent || undefined}
                     blocksConfig={blocksConfig}
                     onChange={this.onChange}
+                    placeholder={placeholder || undefined}
                   />
                 </div>
               )}
@@ -253,6 +252,16 @@ storiesOf('App/Editor', module)
         editorState={basicEditorState}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
+      />
+    )
+  })
+  .add('empty Editor with a Placeholder', () => {
+    return (
+      <Wrapper
+        editorState={[]}
+        blocksConfig={defaultBlocksConfig}
+        menuState={defaultMenuState}
+        placeholder={Placeholder}
       />
     )
   })
@@ -295,7 +304,7 @@ storiesOf('App/Editor', module)
       <Wrapper
         editorState={basicEditorState}
         blocksConfig={defaultBlocksConfig}
-        blockComponent={exampleBlockWrapper}
+        blockComponent={ExampleBlockWrapper}
         menuState={defaultMenuState}
       />
     )

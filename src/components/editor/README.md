@@ -7,6 +7,7 @@ The main component of this package. It renderes all the blocks and manages them.
 * `editorState` (array): represents the current state of the Editor
 * `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
 * `blocksConfig` (array): maps `type` to a component or render function
+* `placeholder` (component): renders a placeholder component when the `editorState` is empty
 * `onChange` (func): emits changes of the editor
 
 ### Property Structures
@@ -36,21 +37,20 @@ useful if a DragAndDrop feature is planned. An example use case can be found in
 the storybook (look for 'Editor with Drag and Drop').
 
 ```js
-// Example Implementation, which renders the default Component with no additional feature
-const customBlockWrapper = ({block, children, component, onAction}) => {
-  const BlockComponent = component // will be the default EditorBlock from oyez-editor
-  return (
-    <BlockComponent
-      key={block.id}
-      block={block}
-      onAction={onAction}
-    >
-      { children }
-    </BlockComponent>
-  )
-}
+import { EditorBlock } from '../editor-block'
 
-// then pass customBlock as customBlockWrapper to the Editor
+// Example Implementation, which renders the default Component with no additional feature
+const customBlockWrapper = ({block, children, onAction}) => (
+  <EditorBlock
+    key={block.id}
+    block={block}
+    onAction={onAction}
+  >
+    { children }
+  </EditorBlock>
+)
+
+// then pass customBlockWrapper as blockComponent to the Editor
 <Editor
   editorState={...}
   blockComponent={customBlockWrapper}

@@ -21,7 +21,7 @@ export function ExampleMenu(props) {
 
   const buttons = [
     { text: 'Add Richtext', onClickFunc: () => { onClick('add', 'richtext') }},
-    { text: 'Add Image', onClickFunc: () => {onClick('add', 'image')}},
+    { text: 'Add Image', onClickFunc: () => { onClick('add', 'image') }},
   ]
 
   return (
