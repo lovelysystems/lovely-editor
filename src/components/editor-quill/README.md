@@ -120,10 +120,6 @@ const exampleBlock = {
 
 ```
 
-## Example Screenshot
-
-![Example Screenshot](./screenshot.png "Example Screenshot")
-
 [1]: https://github.com/zenoamaro/react-quill#custom-toolbar
 [2]: http://quilljs.com/docs/themes/#snow
 [3]: https://github.com/zenoamaro/react-quill#using-deltas
