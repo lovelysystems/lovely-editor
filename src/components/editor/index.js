@@ -99,7 +99,7 @@ export class Editor extends React.Component {
 
   render() {
     return (
-      <div {...classes('container')}>
+      <div {...classes('container')} style={this.props.style}>
         <div {...classes('blocks')}>
           {this.renderEditorBlocks()}
         </div>
@@ -122,10 +122,12 @@ Editor.propTypes = {
     meta: PropTypes.shape.isRequired,
   })).isRequired,
   onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.oneOf(PropTypes.func)
+  placeholder: PropTypes.oneOf(PropTypes.func),
+  style: PropTypes.object
 }
 
 Editor.defaultProps = {
   blockComponent: EditorBlock,
-  placeholder: () => null
+  placeholder: () => null,
+  style: {}
 }

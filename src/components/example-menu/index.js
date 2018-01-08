@@ -62,6 +62,11 @@ export function ExampleMenu({menuState, onClick}) {
                     key={idx}
                     className='btn'
                     onClick={() => { onClickHandler(action, type, templateId) }}
+                    style={{
+                      transform: dragSnapshot.isDragging ? 'rotate(-10deg)' : null,
+                      backgroundColor: dragSnapshot.isDragging ? '#0d8eff' : null,
+                      border: dragSnapshot.isDragging ? '2px solid #ffffff' : null
+                    }}
                   >
                     {text}
                   </button>

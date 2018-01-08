@@ -9,6 +9,7 @@ The main component of this package. It renderes all the blocks and manages them.
 * `blocksConfig` (array): maps `type` to a component or render function
 * `placeholder` (component): renders a placeholder component when the `editorState` is empty
 * `onChange` (func): emits changes of the editor
+* `style` (object): custom styles for the component
 
 ### Property Structures
 

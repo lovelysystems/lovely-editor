@@ -19,11 +19,11 @@ export class EditorBlock extends React.Component {
   }
 
   render() {
-    const { block, children } = this.props
+    const { block, children, style } = this.props
     const title = get(block, 'meta.title', 'Untitled')
 
     return (
-      <div {...classes('container')}>
+      <div {...classes('container')} style={style}>
         <div {...classes('header')}>
           <div {...classes('title')}>{title}</div>
           <div {...classes('actions')}>
@@ -45,4 +45,9 @@ EditorBlock.propTypes = {
   }).isRequired,
   children: PropTypes.element.isRequired,
   onAction: PropTypes.func.isRequired,
+  style: PropTypes.object
+}
+
+EditorBlock.defaultProps = {
+  style: {}
 }
