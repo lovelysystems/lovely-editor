@@ -71,7 +71,9 @@ const defaultBlocksConfig = [
   }
 ]
 
+// Editor Placeholder examples
 const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to start.</div>)
+const dragDropPlaceholder = () => (<div>Drop the Editor here to start.</div>)
 
 /**
  * ExampleBlockWrapper a custom wrapper for the <EditorBlock /> which adds Drag&Drop
@@ -91,6 +93,11 @@ const ExampleBlockWrapper = ({block, children, onAction}) => {
               key={block.id}
               block={block}
               onAction={onAction}
+              style={{
+                backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
+                border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
+                opacity: dragSnapshot.isDragging ? '0.6' : null
+              }}
             >
               { children }
             </EditorBlock>
@@ -106,7 +113,6 @@ class Wrapper extends React.Component {
 
   constructor(props, context) {
     super(props, context)
-    this.onChange = this.onChange.bind(this)
     this.state = {
       editorState: get(this.props, 'document.editorState', [])
     }
@@ -254,7 +260,11 @@ class Wrapper extends React.Component {
         <div {...classes('container')} >
           <Droppable droppableId='droppable-menu' isDropDisabled direction='horizontal'>
             {(dropProvided, snapshot) => (
-              <div {...classes('menu')} ref={dropProvided.innerRef} data-dragging={snapshot.isDraggingOver}>
+              <div
+                {...classes('menu')}
+                ref={dropProvided.innerRef}
+                data-dragging={snapshot.isDraggingOver}
+              >
                 <ExampleMenu
                   menuState={menuState}
                   onClick={(event) => this.onMenuClick(event)}
@@ -265,14 +275,24 @@ class Wrapper extends React.Component {
           <div {...classes('editor')} >
             <Droppable droppableId='droppable-editor'>
               {(dropProvided, snapshot) => (
-                <div ref={dropProvided.innerRef} data-dragging={snapshot.isDraggingOver}>
+                <div
+                  ref={dropProvided.innerRef}
+                  data-dragging={snapshot.isDraggingOver}
+                >
                   <Editor
                     editorState={editorState}
                     blockComponent={blockComponent || undefined}
                     blocksConfig={blocksConfig}
                     onChange={this.onChange}
-                    placeholder={placeholder || undefined}
+                    placeholder={!snapshot.isDraggingOver
+                      ? (placeholder || undefined)
+                      : (dragDropPlaceholder || undefined)
+                    }
+                    style={{
+                      backgroundColor: snapshot.isDraggingOver ? '#989898' : null
+                    }}
                   />
+                  {dropProvided.placeholder}
                 </div>
               )}
             </Droppable>

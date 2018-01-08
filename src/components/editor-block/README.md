@@ -21,10 +21,15 @@ const block = {
   }
 }
 
+const style = {
+  border: '1px solid #000000'
+}
+
 <EditorBlock
   key={block.id}
   block={block}
   onClick={(event) => console.log('...on Click triggered', event)}
+  style={style}
 >
   <EditorQuill
     block={exampleBlock}

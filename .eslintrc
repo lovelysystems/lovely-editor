@@ -55,6 +55,7 @@
     "quotes": ["error", "single"],
     "padded-blocks": ["error", { "classes": "always" }],
     "prefer-arrow-callback": [0, { "allowNamedFunctions": true }],
+    "react/forbid-prop-types": 0,
     "react/jsx-filename-extension": 0, // we don't require all files containing JSX code to end with ,jsx, e.g. test files and stories
     "semi": ["error", "never"],
     "space-before-blocks": [0],
