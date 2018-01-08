@@ -170,12 +170,8 @@ class Wrapper extends React.Component {
     } else {
       // or add a new block at the new index to the state
       const { draggableId } = result
-      const identifier = draggableId.split(':')
-      const event = {
-        type: identifier[0],
-        template: identifier[1],
-        action: identifier[2],
-      }
+      const [type, template, dndAction] = draggableId.split(':')
+      const event = { type, template, action: dndAction }
       const newBlock = this.getBlockTemplate(event)
       const newIndex = result.destination.index
       const newEditor = EditorState.appendBlockAtIndex(newEditorState, newBlock, newIndex)
@@ -236,7 +232,7 @@ class Wrapper extends React.Component {
 
   /**
    * will reorder the editorState according to the startIndex and endIndex
-   * @param  {object}   editorState
+   * @param  {object} editorState
    * @param  {int}   startIndex
    * @param  {int}   endIndex
    * @return {object}

@@ -71,6 +71,7 @@ const appendBlock = (editorState, block) =>
 
 /**
  * Inserts the block at a given index in the new EditorState
+ * inspired by https://stackoverflow.com/a/38181008/1238150
  *
  * @param {EditorState} editorState
  * @param {ContentBlock} block
@@ -80,7 +81,7 @@ const appendBlock = (editorState, block) =>
  */
 const appendBlockAtIndex = (editorState, block, idx = 0) =>
   [
-  // part of the array before the specified index
+    // part of the array before the specified index
     ...editorState.slice(0, idx),
     // inserted item
     block,
