@@ -46,7 +46,8 @@ export class EditorImage extends React.Component {
 
   render() {
     const { block } = this.props
-    const currentValue = get(block, 'data', '')
+    const currentValue = get(block, 'data', {})
+    const hasImage = currentValue.src && currentValue.src !== ''
     return (
       <div {...classes('container')}>
         <div {...classes('toolbar')}>
@@ -57,7 +58,7 @@ export class EditorImage extends React.Component {
           />
         </div>
         <div {...classes('image-container', currentValue.alignment)}>
-          { currentValue.src && (
+          { hasImage && (
             <img
               {...classes('image', currentValue.size)}
               src={currentValue.src}
@@ -65,8 +66,15 @@ export class EditorImage extends React.Component {
               alt={currentValue.caption || ''}
             />
           )}
+          { !currentValue.src && (
+            <span>No image.</span>
+          )}
         </div>
-        <input onChange={this.onCaptionChange} value={currentValue.caption} />
+        { hasImage && (
+          <div {...classes('caption-container')}>
+            <input onChange={this.onCaptionChange} value={currentValue.caption} />
+          </div>
+        )}
       </div>
     )
   }

@@ -69,9 +69,30 @@ const updateBlockData = (editorState, blockId, data) =>
 const appendBlock = (editorState, block) =>
   [...editorState, block]
 
+/**
+ * Inserts the block at a given index in the new EditorState
+ * inspired by https://stackoverflow.com/a/38181008/1238150
+ *
+ * @param {EditorState} editorState
+ * @param {ContentBlock} block
+ * @param {number} idx
+ *
+ * @returns {EditorState}
+ */
+const appendBlockAtIndex = (editorState, block, idx = 0) =>
+  [
+    // part of the array before the specified index
+    ...editorState.slice(0, idx),
+    // inserted item
+    block,
+    // part of the array after the specified index
+    ...editorState.slice(idx)
+  ]
+
 export const EditorState = {
   findBlock,
   removeBlock,
   updateBlockData,
   appendBlock,
+  appendBlockAtIndex
 }

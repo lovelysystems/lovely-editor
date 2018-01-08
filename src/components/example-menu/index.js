@@ -9,29 +9,48 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('example-menu')
 
-export function ExampleMenu(props) {
+export function ExampleMenu({menuState, onClick}) {
 
-  function onClick(action, type) {
-    const event = { action, type }
-    props.onClick(event)
+  function onClickHandler(action, type, templateId ) {
+    const event = { action, type, template: templateId }
+    onClick(event)
   }
 
-  const { menuState } = props
   const title = get(menuState, 'meta.title', 'Editor-Menu')
+  const buttons = get(menuState, 'buttons', [])
 
-  const buttons = [
-    { text: 'Add Richtext', onClickFunc: () => { onClick('add', 'richtext') }},
-    { text: 'Add Image', onClickFunc: () => { onClick('add', 'image') }},
-  ]
-
+  // Documentation `draggableId`
+  // - the `draggableId` is used to help the Wrapper component of the Editor to
+  //   determine which action should be triggered for a block type. The templateId
+  //   is used to match the action with a block template.
+  // - structure: `type:templateId:action:idx`
+  //
+  // Example
+  // - Editor Wrapper with a `document` property like
+  // {
+  //  template: [{
+  //   id: 2,
+  //   data: {
+  //     alignment: 'center',
+  //     caption: 'Hello Kevin.',
+  //     size: 'medium',
+  //     src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+  //   }
+  //  }]
+  // },
+  // - `image:2:add:1` => an image block with values of the template id 2 should be added
   return (
     <div {...classes('container')} >
       <div {...classes('title')}>
         {title}
       </div>
       <div {...classes('content')}>
-        {map(buttons, ({onClickFunc ,text}, idx) => (
-          <Draggable key={`menu-${idx}`} draggableId={`menu-${idx}`} disableInteractiveElementBlocking>
+        {map(buttons, ({ action, text, templateId, type }, idx) => (
+          <Draggable
+            key={`menu-${idx}`}
+            draggableId={`${type}:${templateId || 'default' }:${action}:${idx}`}
+            disableInteractiveElementBlocking
+          >
             {(provided, dragSnapshot) => (
               <div>
                 <div
@@ -39,7 +58,13 @@ export function ExampleMenu(props) {
                   style={provided.draggableStyle}
                   {...provided.dragHandleProps}
                 >
-                  <button key={idx} className='btn' onClick={onClickFunc}>{text}</button>
+                  <button
+                    key={idx}
+                    className='btn'
+                    onClick={() => { onClickHandler(action, type, templateId) }}
+                  >
+                    {text}
+                  </button>
                 </div>
                 {provided.placeholder}
               </div>
@@ -55,6 +80,7 @@ ExampleMenu.propTypes = {
   menuState: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
+  buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired
 }
 

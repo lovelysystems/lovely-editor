@@ -1,6 +1,8 @@
 .oy-editor-image {
 
   &__toolbar {
+    margin-bottom: 20px;
+
     button {
       &.current {
         background: red;
@@ -11,6 +13,10 @@
         color: #000000;
       }
     }
+  }
+
+  &__caption-container {
+    margin-top: 20px;
   }
 
   &__image-container {

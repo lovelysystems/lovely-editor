@@ -1,7 +1,8 @@
 import React from 'react'
+import { get, find } from 'lodash'
 import { storiesOf } from '@storybook/react'
-import { action } from '@storybook/addon-actions' //eslint-disable-line
-import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
+import { action } from '@storybook/addon-actions'
+import withReadme from 'storybook-readme/with-readme'
 
 // DND Example: https://github.com/alexreardon/react-beautiful-dnd-flow-example/blob/master/src/App.js
 import { Draggable, DragDropContext, Droppable } from 'react-beautiful-dnd'
@@ -18,12 +19,47 @@ import componentReadme from './README.md'
 // Styling
 const classes = new BemHelper('example-app')
 
-// Story Setup
+// WRAPPER SETUP
 const defaultMenuState = {
   meta: {
     title: 'Example-Menu'
-  }
+  },
+  buttons: [
+    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Richtext (Template)', type: 'richtext', templateId: 1 },
+    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+    { action: 'add', text: 'Add Image (Template)', type: 'image', templateId: 2 },
+  ]
 }
+
+const defaultDocument = {
+  template: [{
+    id: 1,
+    data: {
+      value: '<p>Hello richtext template</p>'
+    }
+  }, {
+    id: 2,
+    data: {
+      alignment: 'center',
+      caption: 'Hello Kevin.',
+      size: 'medium',
+      src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
+    }
+  }],
+  editorState: [{
+    id: 7,
+    type: 'richtext',
+    data: {
+      value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
+    },
+    meta: {
+      title: 'Quill Block'
+    }
+  }]
+}
+
+// EDITOR SETUP
 const defaultBlocksConfig = [
   {
     type: 'richtext',
@@ -34,16 +70,6 @@ const defaultBlocksConfig = [
     component: EditorImage
   }
 ]
-const basicEditorState = [{
-  id: 7,
-  type: 'richtext',
-  data: {
-    value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
-  },
-  meta: {
-    title: 'Quill Block'
-  }
-}]
 
 const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to start.</div>)
 
@@ -82,7 +108,7 @@ class Wrapper extends React.Component {
     super(props, context)
     this.onChange = this.onChange.bind(this)
     this.state = {
-      editorState: this.props.editorState
+      editorState: get(this.props, 'document.editorState', [])
     }
 
     // bindings
@@ -102,8 +128,8 @@ class Wrapper extends React.Component {
 
   /**
    * When the user clicks on one of the Menu-Items, the Menu fires an event,
-   * which will contain the block type the user wants to add (event.type)
-   * and also the action (event.action, eg. 'add' or 'remove')
+   * which will contain the block type the user wants to add (event.type),
+   * the action (event.action, eg. 'add' or 'remove') and templateId
    * @param  {object}   event contains the event, passed from the ExampleMenu to the Wrapper
    */
   onMenuClick(event) {
@@ -112,53 +138,12 @@ class Wrapper extends React.Component {
 
     let newBlock = null
     if (event.action === 'add') {
-      switch (event.type) {
-      case 'text':
-        newBlock = {
-          id: Math.floor((Math.random() * 1000) + 1),
-          type: 'text',
-          data: {
-            value: 'This is the current Text.'
-          },
-          meta: {
-            title: 'Input Block'
-          }
-        }
-        break
-      case 'image':
-        newBlock = {
-          id: Math.floor((Math.random() * 1000) + 1),
-          type: 'image',
-          data: {
-            alignment: 'center',
-            caption: 'Hello Kevin.',
-            size: 'medium',
-            src: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
-          },
-          meta: {
-            title: 'Image Block'
-          }
-        }
-        break
-      case 'richtext':
-        newBlock = {
-          id: Math.floor((Math.random() * 1000) + 1),
-          type: 'richtext',
-          data: {
-            value: ''
-          },
-          meta: {
-            title: 'Quill Block'
-          }
-        }
-        break
-      default:
-        break
+      newBlock = this.getBlockTemplate(event)
+      if (!!newBlock) {
+        this.setState({
+          editorState: EditorState.appendBlock(editorState, newBlock)
+        })
       }
-    }
-
-    if (!!newBlock) {
-      this.setState({ editorState: EditorState.appendBlock(editorState, newBlock) })
     }
   }
 
@@ -171,6 +156,7 @@ class Wrapper extends React.Component {
     if (!result.destination) {
       return
     }
+    action('onDragEnd')(result)
 
     let newEditorState = this.state.editorState
     if (!result.source.droppableId.includes('droppable-menu')) {
@@ -180,16 +166,73 @@ class Wrapper extends React.Component {
         result.source.index,
         result.destination.index
       )
+      this.setState({ editorState: newEditorState })
+    } else {
+      // or add a new block at the new index to the state
+      const { draggableId } = result
+      const [type, template, dndAction] = draggableId.split(':')
+      const event = { type, template, action: dndAction }
+      const newBlock = this.getBlockTemplate(event)
+      const newIndex = result.destination.index
+      const newEditor = EditorState.appendBlockAtIndex(newEditorState, newBlock, newIndex)
+      this.setState({
+        editorState: [...newEditor]
+      })
+    }
+  }
+
+  /**
+   * Will return a new block, either a template or a default (empty) one
+   * @param  {object}   event the event that just triggered the request to get a new block
+   * @return {object}         the new block with all its properties
+   */
+  getBlockTemplate = (event) => {
+    const { document: dc } = this.props
+    let newBlock = null
+    let template = null
+    let templateData = null
+
+    // let's check if the event.template has a valid template.id in the document
+    // and if so let's use the template when adding the type below
+    if (event.template) {
+      template = find(dc.template, tm => (tm && tm.id === parseInt(event.template, 10)))
+      templateData = get(template, 'data', {})
     }
 
-    this.setState({
-      editorState: newEditorState
-    })
+    switch (event.type) {
+    case 'image':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'image',
+        data: {
+          ...templateData
+        },
+        meta: {
+          title: 'Image Block'
+        }
+      }
+      break
+    case 'richtext':
+      newBlock = {
+        id: Math.floor((Math.random() * 1000) + 1),
+        type: 'richtext',
+        data: {
+          value: get(templateData, 'value', '')
+        },
+        meta: {
+          title: 'Quill Block'
+        }
+      }
+      break
+    default:
+      break
+    }
+    return newBlock
   }
 
   /**
    * will reorder the editorState according to the startIndex and endIndex
-   * @param  {object}   editorState
+   * @param  {object} editorState
    * @param  {int}   startIndex
    * @param  {int}   endIndex
    * @return {object}
@@ -249,16 +292,20 @@ storiesOf('App/Editor', module)
   .add('default Editor', () => {
     return (
       <Wrapper
-        editorState={basicEditorState}
+        document={defaultDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
       />
     )
   })
   .add('empty Editor with a Placeholder', () => {
+    const newDocument = {
+      ...defaultDocument,
+      editorState: []
+    }
     return (
       <Wrapper
-        editorState={[]}
+        document={newDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
         placeholder={Placeholder}
@@ -266,34 +313,37 @@ storiesOf('App/Editor', module)
     )
   })
   .add('Editor with multiple Example Blocks', () => {
-    const additionalContent = [
-      ...basicEditorState,
-      {
-        id: 5,
-        type: 'image',
-        data: {
-          alignment: 'left',
-          caption: 'Hello World.',
-          size: 'medium',
-          src: 'https://picsum.photos/480/240'
-        },
-        meta: {
-          title: 'Input Block'
+    const newDocument = {
+      ...defaultDocument,
+      editorState: [
+        ...defaultDocument.editorState,
+        {
+          id: 5,
+          type: 'image',
+          data: {
+            alignment: 'left',
+            caption: 'Hello World.',
+            size: 'medium',
+            src: 'https://picsum.photos/480/240'
+          },
+          meta: {
+            title: 'Input Block'
+          }
+        }, {
+          id: 4711,
+          type: 'richtext',
+          data: {
+            value: 'This is the the second block'
+          },
+          meta: {
+            title: 'Second Richtext'
+          }
         }
-      }, {
-        id: 4711,
-        type: 'richtext',
-        data: {
-          value: 'This is the the second block'
-        },
-        meta: {
-          title: 'Second Richtext'
-        }
-      }
-    ]
+      ]
+    }
     return (
       <Wrapper
-        editorState={additionalContent}
+        document={newDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}
       />
@@ -302,7 +352,7 @@ storiesOf('App/Editor', module)
   .add('Editor with Drag and Drop', () => {
     return (
       <Wrapper
-        editorState={basicEditorState}
+        document={defaultDocument}
         blocksConfig={defaultBlocksConfig}
         blockComponent={ExampleBlockWrapper}
         menuState={defaultMenuState}

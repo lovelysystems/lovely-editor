@@ -66,7 +66,7 @@ export class Editor extends React.Component {
     const { blocksConfig, blockComponent: BlockWrapperComponent, editorState, placeholder  } = this.props
 
     // let's return the placeholder if the editorState is empty
-    if (editorState.length === 0) {
+    if (!editorState || editorState && editorState.length === 0) {
       return React.createElement(placeholder)
     }
 
@@ -127,5 +127,5 @@ Editor.propTypes = {
 
 Editor.defaultProps = {
   blockComponent: EditorBlock,
-  placeholder: () => {}
+  placeholder: () => null
 }
