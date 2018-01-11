@@ -36,7 +36,7 @@ const defaultDocument = {
   template: [{
     id: 1,
     data: {
-      value: '<p>Hello richtext template</p>'
+      value: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>'
     }
   }, {
     id: 2,
@@ -51,7 +51,7 @@ const defaultDocument = {
     id: 7,
     type: 'richtext',
     data: {
-      value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
+      value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
       title: 'Quill Block'
