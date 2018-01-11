@@ -14,6 +14,9 @@ export class EditorQuill extends React.Component {
 
   constructor(props, context) {
     super(props, context)
+    this.state = {
+      showToolbar: false
+    }
 
     // one can import text, html or the raw delta. Related:
     // - https://github.com/quilljs/quill/issues/1088
@@ -51,18 +54,28 @@ export class EditorQuill extends React.Component {
 
   render() {
     const { block } = this.props
+    const { showToolbar } = this.state
     const currentValue = get(block, 'data.value', '')
 
     return (
       <div {...classes('container')}>
-        <div {...classes('toolbar')} >
-          <QuillToolbar id={block.id} />
+        <div
+          {...classes('toolbar')}
+          style={{
+            display: showToolbar ? 'inherit': 'none'
+          }}
+        >
+          <QuillToolbar
+            id={block.id}
+          />
         </div>
         <div {...classes('editor')} >
           <ReactQuill
             formats={this.formats()}
             modules={this.modules()}
             onChange={this.onChange}
+            onBlur={() => { this.setState({ showToolbar: false }) }}
+            onFocus={() => { this.setState({ showToolbar: true }) }}
             placeholder='Write a text...'
             theme="snow"
             value={currentValue}

@@ -1,11 +1,34 @@
 .oy-editor-image {
 
+  &__container {
+    background-color: #FFFFFF;
+    border: 1px solid #000;
+  }
+
   &__toolbar {
+    border-bottom: 1px solid gray;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 8px;
     margin-bottom: 20px;
 
     button {
+      cursor: pointer;
+      height: 100%;
+      color: #000000;
+      padding: 0 12px;
+      background-color: transparent;
+      font-size: 14px;
+      font-weight: 500;
+
       &.current {
-        background: red;
+        color: #fff;
+        background: $button-bg-color;
+      }
+
+      &:hover {
+        color: #fff;
       }
 
       &:disabled {
@@ -16,10 +39,12 @@
   }
 
   &__caption-container {
-    margin-top: 20px;
+    padding: 12px 15px;
   }
 
   &__image-container {
+    padding: 12px 15px;
+
     &--left {
       text-align: left;
     }
