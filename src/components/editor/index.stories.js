@@ -79,14 +79,14 @@ const dragDropPlaceholder = () => (<div>Drop the Editor here to start.</div>)
  * ExampleBlockWrapper a custom wrapper for the <EditorBlock /> which adds Drag&Drop
  * capabilities
  */
-const ExampleBlockWrapper = ({block, children, onAction}) => {
+const ExampleBlockWrapper = ({block, blockIndex, children, onAction}) => {
   return (
-    <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`}>
+    <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`} index={blockIndex}>
       {(provided, dragSnapshot) => (
         <div>
           <div
             ref={provided.innerRef}
-            style={provided.draggableStyle}
+            {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
             <EditorBlock

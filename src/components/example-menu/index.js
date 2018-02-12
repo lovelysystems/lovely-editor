@@ -50,12 +50,13 @@ export function ExampleMenu({menuState, onClick}) {
             key={`menu-${idx}`}
             draggableId={`${type}:${templateId || 'default' }:${action}:${idx}`}
             disableInteractiveElementBlocking
+            index={idx}
           >
             {(provided, dragSnapshot) => (
               <div>
                 <div
                   ref={provided.innerRef}
-                  style={provided.draggableStyle}
+                  {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
                   <button
