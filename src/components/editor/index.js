@@ -73,7 +73,7 @@ export class Editor extends React.Component {
     // then we iterate over the editorState, get each block and map the block.types
     // with the element.type. Once they match we return a wrapped block with the
     // editor component
-    const editorBlocksArray = map(editorState, (block) => {
+    const editorBlocksArray = map(editorState, (block, index) => {
 
       return map(blocksConfig, (element) => { //eslint-disable-line
         if (block.type === element.type && typeof element.component === 'function') {
@@ -81,6 +81,7 @@ export class Editor extends React.Component {
           return (
             <BlockWrapperComponent
               key={block.id}
+              blockIndex={index} // react-beautiful-dnd is optional, still it is needed when react-beautiful-dnd > 4.0.x is used
               block={block}
               onAction={(event) => this.onBlockAction(event)}
             >

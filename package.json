@@ -54,7 +54,7 @@
     "lodash": "4.17.5",
     "prop-types": "15.6.0",
     "react": "16.2.0",
-    "react-beautiful-dnd": "3.0.0",
+    "react-beautiful-dnd": "4.0.1",
     "react-bem-helper": "1.4.1",
     "react-quill": "1.2.3"
   },
