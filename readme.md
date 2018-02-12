@@ -17,9 +17,10 @@ install all the dependencies, required to develop.
 This package uses [Storybook](https://storybook.js.org) to showcase the
 components. Just enter `npm run storybook` to start it.
 
-The storybook is also available at [https://oyez-editor.netlify.com](https://oyez-editor.netlify.com). This is possible manually with Lovely System's Netlify account (credentials are in 1Password).
+The storybook is also available at [https://oyez-editor.netlify.com](https://oyez-editor.netlify.com).
+This is possible manually with Lovely System's Netlify account (credentials are in 1Password).
 
-## How to develop
+## How to develop (Developmen)
 
 * `npm run build`: builds the package to ./dist
 * `npm run build:storybook`: build static production version of component
@@ -32,6 +33,28 @@ The storybook is also available at [https://oyez-editor.netlify.com](https://oye
 * `npm run test`: runs the tests (test files path and pattern:
   `src/**/*.spec.js`)
 * `npm run test:node`: verifies the installed and used node version
+
+## How to create a release (Deployment)
+
+1. Update [CHANGES](CHANGES.md)
+
+2. Commit it as "prepare release x.y.z"
+
+3. Create a git tag:
+
+```
+npm version major | minor | patch
+```
+
+This will update the version in packages.json and create a git tag.
+
+4. Push the git tag
+
+```
+git push --tags
+```
+
+5. Merge release in release branch (eg. `release/x.y`)
 
 ### Pre-commit and Pre-push Hooks
 
