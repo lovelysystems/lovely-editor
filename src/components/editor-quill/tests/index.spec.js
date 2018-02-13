@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'enzyme'
+import { shallow, render } from 'enzyme'
 import { expect } from 'code'
 import sinon from 'sinon'
 
@@ -20,12 +20,40 @@ import {
 
 describe('<EditorQuill />', () => {
 
+  const customQuillToolbar = ({onToolbarClick}) => { //eslint-disable-line
+    const onClick = () => {
+      onToolbarClick('Toolbar clicked')
+    }
+
+    return (
+      <div className="ql-toolbar" id="customToolbar" >
+        <button onClick={onClick}>Click Me</button>
+      </div>
+    )
+  }
+  const customization = {
+    toolbar: customQuillToolbar,
+    toolbarSelector: '#customToolbar',
+  }
+
   describe('Render Tests', () => {
 
     it('component renders with Toolbar', () => {
       const wrapper = render(<EditorQuill block={sampleData} onChange={()=>{}} />)
       expect(wrapper.find('.quill')).to.have.length(1)
       expect(wrapper.find('#toolbar-5')).to.have.length(1)
+    })
+
+    it('component renders with customToolbar', () => {
+      const wrapper = render(
+        <EditorQuill
+          block={sampleData}
+          onChange={()=>{}}
+          customization={customization}
+        />
+      )
+      expect(wrapper.find('.quill')).to.have.length(1)
+      expect(wrapper.find('#customToolbar')).to.have.length(1)
     })
 
     it('attaches a Quill instance to the component', () => {
@@ -132,6 +160,28 @@ describe('<EditorQuill />', () => {
       clock.tick(1000) // because of the debounce
       expect(onChange.callCount).to.equal(1)
       clock.restore()
+    })
+  })
+
+  describe('Custom Toolbar Events', () => {
+    it('component with a customToolbar can handle toolbarCallback invokes', () => {
+      // when the customToolbar wants to transport data (eg. onClick) to the EditorWrapper
+      // it can do it with toolbarCallback
+      const customizationOps = {
+        ...customization,
+        toolbarCallback: sinon.spy()
+      }
+      const wrapper = shallow(
+        <EditorQuill
+          block={sampleData}
+          onChange={()=>{}}
+          customization={customizationOps}
+        />
+      )
+      expect(wrapper.find(customQuillToolbar)).to.have.length(1)
+      wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
+      expect(customizationOps.toolbarCallback.calledOnce).to.equal(true)
+      expect(customizationOps.toolbarCallback.calledWith('Toolbar clicked')).to.equal(true)
     })
   })
 })

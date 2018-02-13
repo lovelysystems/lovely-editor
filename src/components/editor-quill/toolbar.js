@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 
 // Example Toolbar
 // - http://quilljs.com/standalone/full/
-export const QuillToolbar = function(props) {
-  const { id } = props
+export const QuillToolbar = function({id}) {
   return (
     <div className="ql-toolbar" id={`toolbar-${id}`} >
       <select className="ql-header" defaultValue="">

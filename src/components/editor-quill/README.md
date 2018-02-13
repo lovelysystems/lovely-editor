@@ -6,8 +6,8 @@ Renders the Quill Editor and returns its content on change.
 
 ### Toolbar
 
-The Toolbar (see [Custom Toolbar Docu][1] is handled by the Component itself and
-  currently not be modified from the User (via props).
+The Toolbar (see [Custom Toolbar Docu][1]) is handled by the Component itself but
+  can be replaced by the User (see [Customization](#customize-toolbar)).
 
 ### Styling
 
@@ -27,6 +27,109 @@ to add the following code to the `styles.scss`:
     }
   }
 }
+```
+
+## Customization
+
+One can customize the `toolbar` component and other behavioural aspects of the
+`EditorQuill` component. All that is needed is a new property called `customization`
+with one/all of the following properties:
+
+- `toolbar`: custom Toolbar component
+- `toolbarCallback`: this callback allows the developer to use a callback to get data from the
+   custom Toolbar to the EditorWrapper (eg. onClick on a custom button in the custom
+     Toolbar)
+- `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
+- `hideToolbarOnBlur`: hide the toolbar, once the Editor looses focus (onBlur)
+
+### Basic Customization Example Code
+
+```js
+import { EditorQuill } from './'
+
+const exampleBlock = {
+  id: 5,
+  data: {
+    value: '<p>Hello World. <b>This is bold.</b></p>'
+  },
+  meta: {
+    title: 'Input Box'
+  }
+}
+
+const customization = {
+  hideToolbarOnBlur: true
+}
+
+<EditorQuill
+  block={exampleBlock}
+  onChange={this.onChange}
+  customization={customization}
+/>
+
+```
+
+### Customize Toolbar
+
+Usually the Toolbar is handled by the Component itself, but the User can decide
+to overwrite it and render a custom one instead.
+
+Attention: One needs to take care of applying the [correct classNames (eg. ql-bold)][7]
+for buttons, selects and other action items in the custom Toolbar. Only then will
+Quill recognize them  as such.
+
+The current implementation level of the customization allows only to replace
+the UI basically, but no deep integration in custom Toolbar actions are available (eg.
+  custom formatting). One can add additional buttons (eg. Close-Button for the Block)
+  which are not related to the Editor per se.
+
+#### Toolbar Example Code
+
+```js
+import { EditorQuill } from './'
+
+const customQuillToolbar = (props) => {
+  const onClick = () => {
+    props.onToolbarClick('customQuillToolbar >> Toolbar clicked')
+  }
+
+  return (
+    <div className="ql-toolbar" id="customToolbar" >
+      <select className="ql-header" defaultValue="">
+        <option value="1" />
+        <option value="2" />
+        <option value="3" />
+        <option value="" />
+      </select>
+      <button onClick={onClick}>Click Me</button>
+    </div>
+  )
+}
+
+class Wrapper extends React.Component {
+
+  onToolbarAction(toolbarAction) {
+    // do something...
+  }
+
+  render() {
+    const { block } = this.state
+    const customization = {
+      toolbar: customQuillToolbar,
+      toolbarCallback: this.onToolbarAction,
+      toolbarSelector: '#customToolbar'
+    }
+
+    return (
+      <EditorQuill
+        block={block}
+        onChange={this.onChange}
+        customization={customization}
+      />
+    )
+  }  
+}
+
 ```
 
 ## Data Handling and Performance
@@ -126,3 +229,4 @@ const exampleBlock = {
 [4]: https://github.com/quilljs/quill/issues/1108
 [5]: https://lodash.com/docs/4.17.4#debounce
 [6]: https://github.com/zenoamaro/react-quill/issues/282
+[7]: http://quilljs.com/standalone/full/

@@ -14,7 +14,7 @@ setOptions({
   name: 'Oyez Editor',
   sortStoriesByKind: true,
   url: '#',
-  showDownPanel: true
+  showAddonPanel: true
 });
 
 configure(loadStories, module);

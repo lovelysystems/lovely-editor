@@ -10,6 +10,36 @@ import { clone } from 'lodash'
 import { EditorQuill } from '../..'
 import componentReadme from './README.md'
 
+const customQuillToolbar = (props) => {
+
+  const onClick = () => {
+    if (typeof props.onToolbarClick === 'function') {
+      props.onToolbarClick('customQuillToolbar >> Toolbar clicked')
+    }
+  }
+
+  return (
+    <div className="ql-toolbar" id="customToolbar" >
+      <select className="ql-header" defaultValue="">
+        <option value="1" />
+        <option value="2" />
+        <option value="3" />
+        <option value="" />
+      </select>
+      <button
+        onClick={onClick}
+        style={{
+          color: '#fff',
+          width: 'auto',
+          backgroundColor: '#0065cc'
+        }}
+      >
+        Click Me
+      </button>
+    </div>
+  )
+}
+
 class Wrapper extends React.Component {
 
   constructor(props) {
@@ -19,6 +49,11 @@ class Wrapper extends React.Component {
       block: this.props.block //eslint-disable-line
     }
     this.onChange = this.onChange.bind(this)
+    this.onToolbarAction = this.onToolbarAction.bind(this)
+  }
+
+  onToolbarAction(toolbarAction) {
+    action('onToolbarAction')(toolbarAction)
   }
 
   onChange(change) {
@@ -29,11 +64,14 @@ class Wrapper extends React.Component {
   }
 
   render() {
+    const { customization } = this.props
     const { block } = this.state
     return (
       <EditorQuill
         block={block}
         onChange={this.onChange}
+        onToolbarClick={this.onToolbarClick}
+        customization={{...customization, toolbarCallback: this.onToolbarAction}}
       />
     )
   }
@@ -53,7 +91,42 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock}  />
+      <Wrapper block={exampleBlock} />
+    )
+  })
+  .add('default w/ hideToolbarOnBlur', () => {
+    const exampleBlock = {
+      id: 5,
+      data: {
+        value: ''
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+    const customization = {
+      hideToolbarOnBlur: true
+    }
+    return (
+      <Wrapper block={exampleBlock} customization={customization} />
+    )
+  })
+  .add('default w/ custom Toolbar', () => {
+    const exampleBlock = {
+      id: 5,
+      data: {
+        value: ''
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+    const customization = {
+      toolbar: customQuillToolbar,
+      toolbarSelector: '#customToolbar'
+    }
+    return (
+      <Wrapper block={exampleBlock} customization={customization} />
     )
   })
   .add('with imported data', () => {
@@ -67,7 +140,7 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock}  />
+      <Wrapper block={exampleBlock} />
     )
   })
   .add('with imported nested list', () => {
@@ -90,7 +163,7 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock}  />
+      <Wrapper block={exampleBlock} />
     )
   })
   .add('with all available formats', () => {
@@ -111,6 +184,6 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock}  />
+      <Wrapper block={exampleBlock} />
     )
   })

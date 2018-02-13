@@ -117,13 +117,13 @@ Editor.propTypes = {
     component: PropTypes.func.isRequired,
   })).isRequired,
   editorState: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOf(PropTypes.number, PropTypes.string).isRequired,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     type: PropTypes.string.isRequired,
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
   onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.oneOf(PropTypes.func),
+  placeholder: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   style: PropTypes.object
 }
 

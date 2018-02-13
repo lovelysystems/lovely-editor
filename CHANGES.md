@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ## [Unreleased][1]
 
+### Added
+
+- EditorQuill supports customization
+  - if the Toolbar should fade out when the editor lost focus or not
+  - of the editor's Toolbar (one can replace it with a custom one now)
+
 ## 2018/02/12 [0.1.0][2]
 
 ### Added
