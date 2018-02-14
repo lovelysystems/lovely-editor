@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 
 // Helpers
-import { clone } from 'lodash'
+import { clone, merge } from 'lodash'
 
 // Component imports
 import { EditorQuill } from '../..'
@@ -64,14 +64,21 @@ class Wrapper extends React.Component {
   }
 
   render() {
-    const { customization } = this.props
+    const { additionalProps } = this.props
     const { block } = this.state
+
+    // must be an array per definition of the additionalProps EditorQuill expects
+    const mergedProps = [merge({}, additionalProps, {
+      data: {
+        toolbarCallback: this.onToolbarAction
+      }
+    })]
+
     return (
       <EditorQuill
         block={block}
         onChange={this.onChange}
-        onToolbarClick={this.onToolbarClick}
-        customization={{...customization, toolbarCallback: this.onToolbarAction}}
+        additionalProps={mergedProps}
       />
     )
   }
@@ -102,13 +109,17 @@ storiesOf('Editors/Editor-Quill', module)
       },
       meta: {
         title: 'Input Box'
+      },
+      type: 'richtext'
+    }
+    const additionalProps = {
+      type: 'richtext',
+      data: {
+        hideToolbarOnBlur: true
       }
     }
-    const customization = {
-      hideToolbarOnBlur: true
-    }
     return (
-      <Wrapper block={exampleBlock} customization={customization} />
+      <Wrapper block={exampleBlock} additionalProps={additionalProps} />
     )
   })
   .add('default w/ custom Toolbar', () => {
@@ -119,14 +130,18 @@ storiesOf('Editors/Editor-Quill', module)
       },
       meta: {
         title: 'Input Box'
+      },
+      type: 'richtext'
+    }
+    const additionalProps = {
+      type: 'richtext',
+      data: {
+        toolbar: customQuillToolbar,
+        toolbarSelector: '#customToolbar'
       }
     }
-    const customization = {
-      toolbar: customQuillToolbar,
-      toolbarSelector: '#customToolbar'
-    }
     return (
-      <Wrapper block={exampleBlock} customization={customization} />
+      <Wrapper block={exampleBlock} additionalProps={additionalProps} />
     )
   })
   .add('with imported data', () => {

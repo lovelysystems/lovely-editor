@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactQuill from 'react-quill'
 
 // Helpers
-import { get, debounce } from 'lodash'
+import { find, get, debounce } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { QuillToolbar } from './toolbar'
 
@@ -15,13 +15,36 @@ export class EditorQuill extends React.Component {
   constructor(props, context) {
     super(props, context)
 
+    // this component accepts certain customizations (eg. custom Toolbar). To enable
+    // them it expects to get an `additionalProps` property array with an object with
+    // the corresponding type of the EditorQuill's block.
+    //
+    // Note: it is an array, because of the fact, that `additionalProps` is passed
+    // to the main <Editor /> component, which passes it to each <EditorBlock />,
+    // which will also pass it to each individual editor, like <EditorQuill />
+    //
+    // Example:
+    // props.additionalProps = [{
+    //    type: 'richtext'
+    //    data: { ... }
+    // }]
+    //
+    // props.block = {
+    //    ...
+    //    type: 'richtext'
+    // }
+    //
+    // Would mean we will get the data from above and provide it to the component as
+    // `this.additionalData`.
+    const type = get(props, 'block.type')
+    const additionalProps = find(get(props, 'additionalProps', {}), ['type', type]) || {}
+    const { data = {} } = additionalProps
+    this.additionalData = data
+
     // when the user wants to hide the toolbar onBlur, we have to update the
     // initial state. hideToolbarOnBlur is one of some customization properties
-    const { customization } = props
-    const { hideToolbarOnBlur } = customization
-
     this.state = {
-      showToolbar: !hideToolbarOnBlur
+      showToolbar: !this.additionalData.hideToolbarOnBlur
     }
 
     // one can import text, html or the raw delta. Related:
@@ -50,8 +73,8 @@ export class EditorQuill extends React.Component {
   }
   modules() {
     // Docu: https://quilljs.com/docs/modules/toolbar/
-    const { block, customization } = this.props
-    const { toolbarSelector } = customization
+    const { block, } = this.props
+    const { toolbarSelector } = this.additionalData
     return {
       toolbar: {
         container: toolbarSelector || `#toolbar-${block.id}`
@@ -61,8 +84,9 @@ export class EditorQuill extends React.Component {
 
   render() {
     const { showToolbar } = this.state
-    const { block, customization } = this.props
-    const { toolbar, toolbarCallback, hideToolbarOnBlur } = customization
+    const { block, } = this.props
+
+    const { toolbar, toolbarCallback, hideToolbarOnBlur } = this.additionalData
     const currentValue = get(block, 'data.value', '')
 
     // customization: the user can decide to overwrite the existing default toolbar
@@ -110,12 +134,7 @@ export class EditorQuill extends React.Component {
 }
 
 EditorQuill.propTypes = {
-  customization: PropTypes.shape({
-    toolbar: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-    toolbarCallback: PropTypes.func,
-    toolbarSelector: PropTypes.string,
-    hideToolbarOnBlur: PropTypes.bool
-  }),
+  additionalProps: PropTypes.array,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.string).isRequired,
@@ -124,10 +143,5 @@ EditorQuill.propTypes = {
 }
 
 EditorQuill.defaultProps = {
-  customization: {
-    toolbar: null,
-    toolbarCallback: () => {},
-    toolbarSelector: null,
-    hideToolbarOnBlur: false
-  },
+  additionalProps: [],
 }

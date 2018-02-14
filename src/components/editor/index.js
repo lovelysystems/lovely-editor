@@ -63,7 +63,7 @@ export class Editor extends React.Component {
 
   // render helpers
   renderEditorBlocks() {
-    const { blocksConfig, blockComponent: BlockWrapperComponent, editorState, placeholder  } = this.props
+    const { additionalProps, blocksConfig, blockComponent: BlockWrapperComponent, editorState, placeholder  } = this.props
 
     // let's return the placeholder if the editorState is empty
     if (!editorState || editorState && editorState.length === 0) {
@@ -80,12 +80,14 @@ export class Editor extends React.Component {
           const Component = element.component
           return (
             <BlockWrapperComponent
+              additionalProps={additionalProps}
               key={block.id}
               blockIndex={index} // react-beautiful-dnd is optional, still it is needed when react-beautiful-dnd > 4.0.x is used
               block={block}
               onAction={(event) => this.onBlockAction(event)}
             >
               <Component
+                additionalProps={additionalProps}
                 block={block}
                 onChange={(change) => this.onContentChange(change, block.id)}
               />
@@ -111,6 +113,7 @@ export class Editor extends React.Component {
 }
 
 Editor.propTypes = {
+  additionalProps: PropTypes.array,
   blockComponent: PropTypes.func,
   blocksConfig: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
@@ -128,6 +131,7 @@ Editor.propTypes = {
 }
 
 Editor.defaultProps = {
+  additionalProps: [],
   blockComponent: EditorBlock,
   placeholder: () => null,
   style: {}

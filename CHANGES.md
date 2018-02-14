@@ -8,9 +8,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Added
 
-- EditorQuill supports customization
-  - if the Toolbar should fade out when the editor lost focus or not
-  - of the editor's Toolbar (one can replace it with a custom one now)
+- All <Editor> components (eg. <EditorQuill />) get the `additionalProps` property
+  if it is passed to the <Editor />. This property can include customizations for
+  certain block types.
+  - Example customization for the <EditorQuill />
+    - whether or not the Toolbar should fade out when the editor lost focus or not
+    - replace the editor's Toolbar with a custom one
 
 ## 2018/02/12 [0.1.0][2]
 

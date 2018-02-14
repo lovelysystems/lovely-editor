@@ -253,7 +253,7 @@ class Wrapper extends React.Component {
 
   render() {
     const { editorState } = this.state
-    const { menuState, blocksConfig, blockComponent, placeholder } = this.props
+    const { additionalProps, menuState, blocksConfig, blockComponent, placeholder } = this.props
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -280,6 +280,7 @@ class Wrapper extends React.Component {
                   data-dragging={snapshot.isDraggingOver}
                 >
                   <Editor
+                    additionalProps={additionalProps}
                     editorState={editorState}
                     blockComponent={blockComponent || undefined}
                     blocksConfig={blocksConfig}
@@ -312,6 +313,23 @@ storiesOf('App/Editor', module)
   .add('default Editor', () => {
     return (
       <Wrapper
+        document={defaultDocument}
+        blocksConfig={defaultBlocksConfig}
+        menuState={defaultMenuState}
+      />
+    )
+  })
+  .add('default Editor with additionalProps for the EditorQuill (eg. hideToolbarOnBlur)', () => {
+    return (
+      <Wrapper
+        additionalProps={[
+          {
+            type: 'richtext',
+            data: {
+              'hideToolbarOnBlur': true
+            }
+          }
+        ]}
         document={defaultDocument}
         blocksConfig={defaultBlocksConfig}
         menuState={defaultMenuState}

@@ -16,7 +16,8 @@ const sampleData = {
   },
   meta: {
     title: 'Input Box'
-  }
+  },
+  type: 'richtext'
 }
 
 function ReactQuillNode(props, children) {

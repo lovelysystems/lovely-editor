@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow, render } from 'enzyme'
 import { expect } from 'code'
+import { merge } from 'lodash'
 import sinon from 'sinon'
 
 // Components
@@ -31,10 +32,15 @@ describe('<EditorQuill />', () => {
       </div>
     )
   }
-  const customization = {
-    toolbar: customQuillToolbar,
-    toolbarSelector: '#customToolbar',
+
+  const editorProps = {
+    type: 'richtext',
+    data: {
+      toolbar: customQuillToolbar,
+      toolbarSelector: '#customToolbar'
+    }
   }
+  const additionalProps = [editorProps]
 
   describe('Render Tests', () => {
 
@@ -49,7 +55,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           onChange={()=>{}}
-          customization={customization}
+          additionalProps={additionalProps}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -167,21 +173,24 @@ describe('<EditorQuill />', () => {
     it('component with a customToolbar can handle toolbarCallback invokes', () => {
       // when the customToolbar wants to transport data (eg. onClick) to the EditorWrapper
       // it can do it with toolbarCallback
-      const customizationOps = {
-        ...customization,
-        toolbarCallback: sinon.spy()
-      }
+      const customAdditionalProps = [
+        merge({}, editorProps, {
+          data: {
+            toolbarCallback: sinon.spy()
+          }
+        })
+      ]
       const wrapper = shallow(
         <EditorQuill
           block={sampleData}
           onChange={()=>{}}
-          customization={customizationOps}
+          additionalProps={customAdditionalProps}
         />
       )
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
       wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
-      expect(customizationOps.toolbarCallback.calledOnce).to.equal(true)
-      expect(customizationOps.toolbarCallback.calledWith('Toolbar clicked')).to.equal(true)
+      expect(customAdditionalProps[0].data.toolbarCallback.calledOnce).to.equal(true)
+      expect(customAdditionalProps[0].data.toolbarCallback.calledWith('Toolbar clicked')).to.equal(true)
     })
   })
 })

@@ -32,8 +32,25 @@ to add the following code to the `styles.scss`:
 ## Customization
 
 One can customize the `toolbar` component and other behavioural aspects of the
-`EditorQuill` component. All that is needed is a new property called `customization`
-with one/all of the following properties:
+`EditorQuill` component. All that is needed is a new property called `additionalProps`.
+Due to the setup of the <Editor /> component and logic this property has to be an array
+and has to include an object that looks like:
+
+```js
+props.additionalProps = [{
+  type: 'richtext' // << must be the same as the props.block.type
+  data: {
+    ... // see list of data properties below
+  }
+}]
+
+props.block = {
+  ...,
+  type: 'richtext' // << must match with the type above
+}
+```
+
+The following data propertiers are allowed and can be used:
 
 - `toolbar`: custom Toolbar component
 - `toolbarCallback`: this callback allows the developer to use a callback to get data from the
@@ -54,17 +71,21 @@ const exampleBlock = {
   },
   meta: {
     title: 'Input Box'
-  }
+  },
+  type: 'richtext'
 }
 
-const customization = {
-  hideToolbarOnBlur: true
-}
+const additionalProps = [{
+  type: 'richtext',
+  data: {
+    hideToolbarOnBlur: true
+  }
+}]
 
 <EditorQuill
+  additionalProps={additionalProps}
   block={exampleBlock}
   onChange={this.onChange}
-  customization={customization}
 />
 
 ```
@@ -113,18 +134,30 @@ class Wrapper extends React.Component {
   }
 
   render() {
-    const { block } = this.state
-    const customization = {
-      toolbar: customQuillToolbar,
-      toolbarCallback: this.onToolbarAction,
-      toolbarSelector: '#customToolbar'
+    const const exampleBlock = {
+      id: 5,
+      data: {
+        value: '<p>Hello World. <b>This is bold.</b></p>'
+      },
+      meta: {
+        title: 'Input Box'
+      },
+      type: 'richtext'
     }
+    const additionalProps = [{
+      type: 'richtext',
+      data: {
+        toolbar: customQuillToolbar,
+        toolbarCallback: this.onToolbarAction,
+        toolbarSelector: '#customToolbar'
+      }
+    }]
 
     return (
       <EditorQuill
-        block={block}
+        additionalProps={additionalProps}
+        block={exampleBlock}
         onChange={this.onChange}
-        customization={customization}
       />
     )
   }  
@@ -213,7 +246,8 @@ const exampleBlock = {
   },
   meta: {
     title: 'Input Box'
-  }
+  },
+  type: 'richtext'
 }
 
 <EditorQuill

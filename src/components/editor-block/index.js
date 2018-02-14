@@ -40,6 +40,7 @@ export class EditorBlock extends React.Component {
 }
 
 EditorBlock.propTypes = {
+  additionalProps: PropTypes.array,
   block: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
@@ -49,5 +50,6 @@ EditorBlock.propTypes = {
 }
 
 EditorBlock.defaultProps = {
+  additionalProps: [],
   style: {}
 }

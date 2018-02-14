@@ -83,9 +83,14 @@ export class EditorImage extends React.Component {
 
 EditorImage.displayName = 'EditorImage'
 EditorImage.propTypes = {
+  additionalProps: PropTypes.array,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   onChange: PropTypes.func.isRequired
+}
+
+EditorImage.defaultProps = {
+  additionalProps: [],
 }
