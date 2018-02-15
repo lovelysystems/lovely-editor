@@ -124,6 +124,21 @@ describe('<EditorQuill />', () => {
       expect(ReactQuill.props().value).to.equal(expectedHtml)
     })
 
+    it('ReactQuill has required properties and customized ones', () => {
+      const customAdditionalProps = [{
+        type: 'richtext',
+        data: {
+          theme: 'core',
+          placeholderText: 'custom placeholder'
+        }
+      }]
+      const editor = getRenderedEditor('', undefined, customAdditionalProps)
+      const { ReactQuill } = editor
+
+      expect(ReactQuill.props().theme).to.equal(null)
+      expect(ReactQuill.props().placeholder).to.equal('custom placeholder')
+    })
+
     it('component can import html', () => {
       const expectedHtml = '<p><strong>Hello World.</strong></p>'
       const { html } = getRenderedEditor(expectedHtml)

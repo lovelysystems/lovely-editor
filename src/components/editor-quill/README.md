@@ -52,6 +52,7 @@ props.block = {
 
 The following data propertiers are allowed and can be used:
 
+- `placeholderText`: will overwrite the placeholder text when the editor is empty
 - `toolbar`: custom Toolbar component
 - `toolbarCallback`: this callback allows the developer to use a callback to get data from the
    custom Toolbar to the EditorWrapper (eg. onClick on a custom button in the custom

@@ -4,14 +4,35 @@ The main component of this package. It renderes all the blocks and manages them.
 
 ## Properties
 
-* `editorState` (array): represents the current state of the Editor
+* `additionalProps` (array): contains additional data which is passed to each level
+  (eg. Editor -> EditorBlock -> EditorQuill). It can contain customization data
+  (read more in the EditorQuill readme) for the editors or for custom Blocks or
+  other data one wants to pass through.
 * `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
 * `blocksConfig` (array): maps `type` to a component or render function
-* `placeholder` (component): renders a placeholder component when the `editorState` is empty
+* `editorState` (array): represents the current state of the Editor
 * `onChange` (func): emits changes of the editor
+* `placeholder` (component): renders a placeholder component when the `editorState` is empty
 * `style` (object): custom styles for the component
 
 ### Property Structures
+
+#### additionalProps
+
+The `additionalProps` is an array that must look like this (due to the setup and logic of this package):
+
+```js
+const additionalProps = [{
+  type: 'text',
+  data: {
+    someCustomData: 'someCustomValue'
+  }
+}]
+```
+
+Other components of the Editor (eg. EditorQuill) will match their `block.type` with
+(if available) a matching `additionalProps[i].type` and use the found object's `data`
+to customize their behaviour (eg. use a custom toolbar).
 
 #### editorState
 

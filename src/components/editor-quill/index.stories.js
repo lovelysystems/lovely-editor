@@ -15,10 +15,11 @@ export const customThemeToolbar = function({id}) {
   return (
     <div className="ql-toolbar" id={`toolbar-${id}`} >
       <select className="ql-header" defaultValue="">
+        <option selected disabled>Choose here</option>
+        <option value="">Paragraph</option>
         <option value="1">Header 1</option>
         <option value="2">Header 2</option>
         <option value="3">Header 3</option>
-        <option value="">Paragraph</option>
       </select>
       <button className="ql-bold">
         <i className="fa fa-bold" />
@@ -163,10 +164,11 @@ storiesOf('Editors/Editor-Quill', module)
       <Wrapper block={exampleBlock} additionalProps={additionalProps} />
     )
   })
-  .add('default w/ core (custom) theme', () => {
+  .add('default w/ custom theme and placeholderText', () => {
     const additionalProps = {
       type: 'richtext',
       data: {
+        placeholderText: 'Click to write a text...',
         toolbar: customThemeToolbar,
         theme: 'core',
       }

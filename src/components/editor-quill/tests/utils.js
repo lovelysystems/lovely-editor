@@ -69,9 +69,9 @@ function setReactQuillContentsFromHTML(wrapper, html) {
   return editor.clipboard.dangerouslyPasteHTML(html)
 }
 
-function getRenderedEditor(inputHtml = '', onChange = () => {}) {
+function getRenderedEditor(inputHtml = '', onChange = () => {}, additionalProps = []) {
   const blockData = Object.assign(sampleData, { data: { value: inputHtml } })
-  const wrapper = mountEditorQuill({block: blockData, onChange})
+  const wrapper = mountEditorQuill({block: blockData, onChange, additionalProps})
   return {
     wrapper,
     ReactQuill: wrapper.find(ReactQuill),

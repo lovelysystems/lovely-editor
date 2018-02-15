@@ -86,7 +86,7 @@ export class EditorQuill extends React.Component {
     const { showToolbar } = this.state
     const { block, } = this.props
 
-    const { toolbar, toolbarCallback, hideToolbarOnBlur, theme } = this.additionalData
+    const { hideToolbarOnBlur, placeholderText, toolbar, toolbarCallback, theme } = this.additionalData
     const currentValue = get(block, 'data.value', '')
 
     // customization
@@ -126,7 +126,7 @@ export class EditorQuill extends React.Component {
                 this.setState({ showToolbar: true })
               }
             }}
-            placeholder='Write a text...'
+            placeholder={placeholderText || 'Write a text...'}
             theme={selectedTheme}
             value={currentValue}
           />
