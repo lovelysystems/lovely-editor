@@ -74,6 +74,24 @@ describe('<Editor />', () => {
       expect(wrapper.find(Text).length).to.equal(2)
       expect(wrapper.find(Image).length).to.equal(1)
     })
+
+    it('component passes blockConfig to both the Block and the Editor Component', () => {
+      const expectedConfig = { example: 'test' }
+      const wrapper = shallow(
+        <Editor
+          editorState={[
+            { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
+          ]}
+          blocksConfig={[
+            { type: 'text', component: Text, data: expectedConfig },
+          ]}
+          blockComponent={CustomBlockWrapper}
+          onChange={() => {}}
+        />
+      )
+      expect(wrapper.find(CustomBlockWrapper).props().blockConfig).to.equal(expectedConfig)
+      expect(wrapper.find(Text).props().blockConfig).to.equal(expectedConfig)
+    })
   })
 
   describe('Events Tests', () => {

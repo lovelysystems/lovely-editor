@@ -11,7 +11,8 @@ The Toolbar (see [Custom Toolbar Docu][1]) is handled by the Component itself bu
 
 ### Styling
 
-The Editor Quill uses the `Snow` Theme (see more [here][2]).
+The Editor Quill provides a `snow` theme (see more [here][2]) and `core` (enables
+  customization).
 
 #### Nested Ordered Lists
 In order to display only numbers on each list-level of the order list, one has
@@ -32,22 +33,14 @@ to add the following code to the `styles.scss`:
 ## Customization
 
 One can customize the `toolbar` component and other behavioural aspects of the
-`EditorQuill` component. All that is needed is a new property called `additionalProps`.
-Due to the setup of the <Editor /> component and logic this property has to be an array
-and has to include an object that looks like:
+`EditorQuill` component. All that is needed is a property called `blockConfig`.
 
 ```js
-props.additionalProps = [{
-  type: 'richtext' // << must be the same as the props.block.type
+props.blockConfig = [{
   data: {
     ... // see list of data properties below
   }
 }]
-
-props.block = {
-  ...,
-  type: 'richtext' // << must match with the type above
-}
 ```
 
 The following data propertiers are allowed and can be used:
@@ -77,16 +70,13 @@ const exampleBlock = {
   type: 'richtext'
 }
 
-const additionalProps = [{
-  type: 'richtext',
-  data: {
-    hideToolbarOnBlur: true
-  }
-}]
+const blockConfig = {
+  hideToolbarOnBlur: true
+}
 
 <EditorQuill
-  additionalProps={additionalProps}
   block={exampleBlock}
+  blockConfig={blockConfig}
   onChange={this.onChange}
 />
 
@@ -136,7 +126,7 @@ class Wrapper extends React.Component {
   }
 
   render() {
-    const const exampleBlock = {
+    const exampleBlock = {
       id: 5,
       data: {
         value: '<p>Hello World. <b>This is bold.</b></p>'
@@ -146,19 +136,16 @@ class Wrapper extends React.Component {
       },
       type: 'richtext'
     }
-    const additionalProps = [{
-      type: 'richtext',
-      data: {
-        toolbar: customQuillToolbar,
-        toolbarCallback: this.onToolbarAction,
-        toolbarSelector: '#customToolbar'
-      }
-    }]
+    const blockConfig = {
+      toolbar: customQuillToolbar,
+      toolbarCallback: this.onToolbarAction,
+      toolbarSelector: '#customToolbar'
+    }
 
     return (
       <EditorQuill
-        additionalProps={additionalProps}
         block={exampleBlock}
+        blockConfig={blockConfig}
         onChange={this.onChange}
       />
     )

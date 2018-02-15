@@ -1,5 +1,5 @@
 import React from 'react'
-import { get, find } from 'lodash'
+import { get, find, merge } from 'lodash'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import withReadme from 'storybook-readme/with-readme'
@@ -60,15 +60,17 @@ const defaultDocument = {
 }
 
 // EDITOR SETUP
+const editorQuillConfig = {
+  type: 'richtext',
+  component: EditorQuill
+}
+const editorImageConfig = {
+  type: 'image',
+  component: EditorImage
+}
 const defaultBlocksConfig = [
-  {
-    type: 'richtext',
-    component: EditorQuill
-  },
-  {
-    type: 'image',
-    component: EditorImage
-  }
+  editorQuillConfig,
+  editorImageConfig
 ]
 
 // Editor Placeholder examples
@@ -319,19 +321,17 @@ storiesOf('App/Editor', module)
       />
     )
   })
-  .add('default Editor with additionalProps for the EditorQuill (eg. hideToolbarOnBlur)', () => {
+  .add('default Editor with a custom blockConfig for the EditorQuill (eg. hideToolbarOnBlur)', () => {
+    const editorQuillCustomConfig = merge({}, editorQuillConfig, {
+      data: {
+        hideToolbarOnBlur: true
+      }
+    })
+    const blocksConfig = [editorQuillCustomConfig, editorImageConfig]
     return (
       <Wrapper
-        additionalProps={[
-          {
-            type: 'richtext',
-            data: {
-              'hideToolbarOnBlur': true
-            }
-          }
-        ]}
         document={defaultDocument}
-        blocksConfig={defaultBlocksConfig}
+        blocksConfig={blocksConfig}
         menuState={defaultMenuState}
       />
     )

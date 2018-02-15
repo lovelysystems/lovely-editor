@@ -2,15 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and
+this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased][1]
 
 ### Added
 
-- All <Editor> components (eg. <EditorQuill />) get the `additionalProps` property
-  if it is passed to the <Editor />. This property can include customizations for
-  certain block types.
+- All levels of the <Editor> components (eg. blocks and editors like quill)
+  receive the `additionalProps` property, if it is passed to the <Editor />.
+  This property can include additional data for any component.
+- each block in the `blocksConfig` can now contain a `data` property, which contains
+  customizations for the given block.type.
   - Example customization for the <EditorQuill />
     - whether or not the Toolbar should fade out when the editor lost focus or not
     - replace the editor's Toolbar with a custom one

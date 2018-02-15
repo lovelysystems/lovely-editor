@@ -113,21 +113,19 @@ class Wrapper extends React.Component {
   }
 
   render() {
-    const { additionalProps } = this.props
+    const { blockConfig = {} } = this.props
     const { block } = this.state
 
     // must be an array per definition of the additionalProps EditorQuill expects
-    const mergedProps = [merge({}, additionalProps, {
-      data: {
-        toolbarCallback: this.onToolbarAction
-      }
-    })]
+    const finalBlockConfig = merge({}, blockConfig, {
+      toolbarCallback: this.onToolbarAction
+    })
 
     return (
       <EditorQuill
         block={block}
+        blockConfig={finalBlockConfig}
         onChange={this.onChange}
-        additionalProps={mergedProps}
       />
     )
   }
@@ -142,39 +140,30 @@ storiesOf('Editors/Editor-Quill', module)
     )
   })
   .add('default w/ hideToolbarOnBlur', () => {
-    const additionalProps = {
-      type: 'richtext',
-      data: {
-        hideToolbarOnBlur: true
-      }
+    const blockConfig = {
+      hideToolbarOnBlur: true
     }
     return (
-      <Wrapper block={exampleBlock} additionalProps={additionalProps} />
+      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
   .add('default w/ custom Toolbar', () => {
-    const additionalProps = {
-      type: 'richtext',
-      data: {
-        toolbar: customQuillToolbar,
-        toolbarSelector: '#customToolbar'
-      }
+    const blockConfig = {
+      toolbar: customQuillToolbar,
+      toolbarSelector: '#customToolbar'
     }
     return (
-      <Wrapper block={exampleBlock} additionalProps={additionalProps} />
+      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
   .add('default w/ custom theme and placeholderText', () => {
-    const additionalProps = {
-      type: 'richtext',
-      data: {
-        placeholderText: 'Click to write a text...',
-        toolbar: customThemeToolbar,
-        theme: 'core',
-      }
+    const blockConfig = {
+      placeholderText: 'Click to write a text...',
+      toolbar: customThemeToolbar,
+      theme: 'core',
     }
     return (
-      <Wrapper block={exampleBlock} additionalProps={additionalProps} />
+      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
   .add('with imported data', () => {

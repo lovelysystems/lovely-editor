@@ -33,14 +33,10 @@ describe('<EditorQuill />', () => {
     )
   }
 
-  const editorProps = {
-    type: 'richtext',
-    data: {
-      toolbar: customQuillToolbar,
-      toolbarSelector: '#customToolbar'
-    }
+  const exampleBlockConfig = {
+    toolbar: customQuillToolbar,
+    toolbarSelector: '#customToolbar'
   }
-  const additionalProps = [editorProps]
 
   describe('Render Tests', () => {
 
@@ -56,15 +52,12 @@ describe('<EditorQuill />', () => {
     })
 
     it('component renders with custom theme', () => {
-      const customProps = [{
-        type: 'richtext',
-        data: {
-          theme: 'core'
-        }
-      }]
+      const customBlockConfig = {
+        theme: 'core'
+      }
       const wrapper = render(
         <EditorQuill
-          additionalProps={customProps}
+          blockConfig={customBlockConfig}
           block={sampleData}
           onChange={()=>{}}
         />
@@ -78,8 +71,8 @@ describe('<EditorQuill />', () => {
       const wrapper = render(
         <EditorQuill
           block={sampleData}
+          blockConfig={exampleBlockConfig}
           onChange={()=>{}}
-          additionalProps={additionalProps}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -125,14 +118,11 @@ describe('<EditorQuill />', () => {
     })
 
     it('ReactQuill has required properties and customized ones', () => {
-      const customAdditionalProps = [{
-        type: 'richtext',
-        data: {
-          theme: 'core',
-          placeholderText: 'custom placeholder'
-        }
-      }]
-      const editor = getRenderedEditor('', undefined, customAdditionalProps)
+      const customBlockConfig = {
+        theme: 'core',
+        placeholderText: 'custom placeholder'
+      }
+      const editor = getRenderedEditor('', undefined, customBlockConfig)
       const { ReactQuill } = editor
 
       expect(ReactQuill.props().theme).to.equal(null)
@@ -212,24 +202,20 @@ describe('<EditorQuill />', () => {
     it('component with a customToolbar can handle toolbarCallback invokes', () => {
       // when the customToolbar wants to transport data (eg. onClick) to the EditorWrapper
       // it can do it with toolbarCallback
-      const customAdditionalProps = [
-        merge({}, editorProps, {
-          data: {
-            toolbarCallback: sinon.spy()
-          }
-        })
-      ]
+      const customBlockConfig = merge({}, exampleBlockConfig, {
+        toolbarCallback: sinon.spy()
+      })
       const wrapper = shallow(
         <EditorQuill
           block={sampleData}
+          blockConfig={customBlockConfig}
           onChange={()=>{}}
-          additionalProps={customAdditionalProps}
         />
       )
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
       wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
-      expect(customAdditionalProps[0].data.toolbarCallback.calledOnce).to.equal(true)
-      expect(customAdditionalProps[0].data.toolbarCallback.calledWith('Toolbar clicked')).to.equal(true)
+      expect(customBlockConfig.toolbarCallback.calledOnce).to.equal(true)
+      expect(customBlockConfig.toolbarCallback.calledWith('Toolbar clicked')).to.equal(true)
     })
   })
 })
