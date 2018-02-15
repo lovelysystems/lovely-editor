@@ -86,18 +86,22 @@ export class EditorQuill extends React.Component {
     const { showToolbar } = this.state
     const { block, } = this.props
 
-    const { toolbar, toolbarCallback, hideToolbarOnBlur } = this.additionalData
+    const { toolbar, toolbarCallback, hideToolbarOnBlur, theme } = this.additionalData
     const currentValue = get(block, 'data.value', '')
 
-    // customization: the user can decide to overwrite the existing default toolbar
-    // note: the user then has to take care of the correct html structures and css
+    // customization
+    // - the user can decide to overwrite the existing default toolbar
+    // - or the theme of the Editor (to customize it)
+    //
+    // Note: the user then has to take care of the correct html structures and css
     //       classes to enable the correct react quill toolbar button handling
     const EditorToolbar = toolbar || QuillToolbar
+    const selectedTheme = (theme === 'core') ? null : 'snow' // null = will reset theme
 
     return (
-      <div {...classes('container')}>
+      <div {...classes('container', theme)}>
         <div
-          {...classes('toolbar')}
+          {...classes('toolbar', theme)}
           style={{
             display: showToolbar ? 'inherit': 'none'
           }}
@@ -107,7 +111,7 @@ export class EditorQuill extends React.Component {
             onToolbarClick={toolbarCallback}
           />
         </div>
-        <div {...classes('editor')} >
+        <div {...classes('editor', theme)} >
           <ReactQuill
             formats={this.formats()}
             modules={this.modules()}
@@ -123,7 +127,7 @@ export class EditorQuill extends React.Component {
               }
             }}
             placeholder='Write a text...'
-            theme="snow"
+            theme={selectedTheme}
             value={currentValue}
           />
         </div>

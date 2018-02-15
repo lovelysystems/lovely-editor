@@ -1,10 +1,28 @@
 @import '~react-quill/dist/quill.snow.css';
+@import '~react-quill/dist/quill.core.css';
+@import '~font-awesome/css/font-awesome.min.css';
 
 .oy-editor-quill {
 
   &__container {
     background-color: #FFFFFF;
     border: 1px solid #000;
+  }
+
+  &__toolbar {
+    // Example: custom styling of the Editors Toolbar
+    &--core {
+      .ql-toolbar {
+        padding: 5px;
+        border-bottom: 1px solid #000;
+        color: #000;
+
+        .ql-active {
+          background-color: #0065cc;
+          color: #fff;
+        }
+      }
+    }
   }
 
   &__editor {

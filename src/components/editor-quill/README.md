@@ -57,6 +57,7 @@ The following data propertiers are allowed and can be used:
    custom Toolbar to the EditorWrapper (eg. onClick on a custom button in the custom
      Toolbar)
 - `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
+- `theme`: supports either `snow` ([Docs][8]) or `core`. Use `core` to customize the theme of the Editor. An example can be found in the Storybook with Font-Awesome icons.
 - `hideToolbarOnBlur`: hide the toolbar, once the Editor looses focus (onBlur)
 
 ### Basic Customization Example Code
@@ -264,3 +265,4 @@ const exampleBlock = {
 [5]: https://lodash.com/docs/4.17.4#debounce
 [6]: https://github.com/zenoamaro/react-quill/issues/282
 [7]: http://quilljs.com/standalone/full/
+[8]: https://quilljs.com/docs/themes/#snow

@@ -45,8 +45,32 @@ describe('<EditorQuill />', () => {
   describe('Render Tests', () => {
 
     it('component renders with Toolbar', () => {
-      const wrapper = render(<EditorQuill block={sampleData} onChange={()=>{}} />)
+      const wrapper = render(
+        <EditorQuill
+          block={sampleData}
+          onChange={()=>{}}
+        />
+      )
       expect(wrapper.find('.quill')).to.have.length(1)
+      expect(wrapper.find('#toolbar-5')).to.have.length(1)
+    })
+
+    it('component renders with custom theme', () => {
+      const customProps = [{
+        type: 'richtext',
+        data: {
+          theme: 'core'
+        }
+      }]
+      const wrapper = render(
+        <EditorQuill
+          additionalProps={customProps}
+          block={sampleData}
+          onChange={()=>{}}
+        />
+      )
+      expect(wrapper.find('.quill')).to.have.length(1)
+      expect(wrapper.find('.oy-editor-quill__toolbar--core')).to.have.length(1)
       expect(wrapper.find('#toolbar-5')).to.have.length(1)
     })
 

@@ -10,6 +10,43 @@ import { clone, merge } from 'lodash'
 import { EditorQuill } from '../..'
 import componentReadme from './README.md'
 
+// Example Components for the Storybook
+export const customThemeToolbar = function({id}) {
+  return (
+    <div className="ql-toolbar" id={`toolbar-${id}`} >
+      <select className="ql-header" defaultValue="">
+        <option value="1">Header 1</option>
+        <option value="2">Header 2</option>
+        <option value="3">Header 3</option>
+        <option value="">Paragraph</option>
+      </select>
+      <button className="ql-bold">
+        <i className="fa fa-bold" />
+      </button>
+      <button className="ql-italic">
+        <i className="fa fa-italic" />
+      </button>
+      <button className="ql-underline">
+        <i className="fa fa-underline" />
+      </button>
+      <span className="ql-formats">
+        <button className="ql-list" value="ordered">
+          <i className="fa fa-list-ol" />
+        </button>
+        <button className="ql-list" value="bullet">
+          <i className="fa fa-list-ul" />
+        </button>
+        <button className="ql-indent" value="-1">
+          <i className="fa fa-indent fa-rotate-180" style={{paddingTop: 2}} />
+        </button>
+        <button className="ql-indent" value="+1">
+          <i className="fa fa-indent" />
+        </button>
+      </span>
+    </div>
+  )
+}
+
 const customQuillToolbar = (props) => {
 
   const onClick = () => {
@@ -38,6 +75,17 @@ const customQuillToolbar = (props) => {
       </button>
     </div>
   )
+}
+
+const exampleBlock = {
+  id: 5,
+  data: {
+    value: ''
+  },
+  meta: {
+    title: 'Input Box'
+  },
+  type: 'richtext'
 }
 
 class Wrapper extends React.Component {
@@ -88,30 +136,11 @@ class Wrapper extends React.Component {
 storiesOf('Editors/Editor-Quill', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => {
-    const exampleBlock = {
-      id: 5,
-      data: {
-        value: ''
-      },
-      meta: {
-        title: 'Input Box'
-      }
-    }
     return (
       <Wrapper block={exampleBlock} />
     )
   })
   .add('default w/ hideToolbarOnBlur', () => {
-    const exampleBlock = {
-      id: 5,
-      data: {
-        value: ''
-      },
-      meta: {
-        title: 'Input Box'
-      },
-      type: 'richtext'
-    }
     const additionalProps = {
       type: 'richtext',
       data: {
@@ -123,16 +152,6 @@ storiesOf('Editors/Editor-Quill', module)
     )
   })
   .add('default w/ custom Toolbar', () => {
-    const exampleBlock = {
-      id: 5,
-      data: {
-        value: ''
-      },
-      meta: {
-        title: 'Input Box'
-      },
-      type: 'richtext'
-    }
     const additionalProps = {
       type: 'richtext',
       data: {
@@ -144,8 +163,20 @@ storiesOf('Editors/Editor-Quill', module)
       <Wrapper block={exampleBlock} additionalProps={additionalProps} />
     )
   })
+  .add('default w/ core (custom) theme', () => {
+    const additionalProps = {
+      type: 'richtext',
+      data: {
+        toolbar: customThemeToolbar,
+        theme: 'core',
+      }
+    }
+    return (
+      <Wrapper block={exampleBlock} additionalProps={additionalProps} />
+    )
+  })
   .add('with imported data', () => {
-    const exampleBlock = {
+    const contentBock = {
       id: 5,
       data: {
         value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
@@ -155,11 +186,11 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock} />
+      <Wrapper block={contentBock} />
     )
   })
   .add('with imported nested list', () => {
-    const exampleBlock = {
+    const contentBock = {
       id: 5,
       data: {
         value: `<ul>
@@ -178,11 +209,11 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock} />
+      <Wrapper block={contentBock} />
     )
   })
   .add('with all available formats', () => {
-    const exampleBlock = {
+    const contentBock = {
       id: 5,
       data: {
         value: `
@@ -199,6 +230,6 @@ storiesOf('Editors/Editor-Quill', module)
       }
     }
     return (
-      <Wrapper block={exampleBlock} />
+      <Wrapper block={contentBock} />
     )
   })
