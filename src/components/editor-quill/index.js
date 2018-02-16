@@ -15,8 +15,7 @@ export class EditorQuill extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    // this component accepts certain customizations (eg. custom Toolbar). To enable
-    // them it expects to get an `blockConfig` property object
+    // this component can be customized (eg. custom toolbar) through the `blockConfig` prop
     //
     // Example:
     // props.blockConfig = {
@@ -57,7 +56,7 @@ export class EditorQuill extends React.Component {
   }
   modules() {
     // Docu: https://quilljs.com/docs/modules/toolbar/
-    const { block, blockConfig } = this.props
+    const { block, blockConfig = {} } = this.props
     const { toolbarSelector } = blockConfig
     return {
       toolbar: {
@@ -68,7 +67,7 @@ export class EditorQuill extends React.Component {
 
   render() {
     const { showToolbar } = this.state
-    const { block, blockConfig } = this.props
+    const { block, blockConfig = {} } = this.props
     const { hideToolbarOnBlur, placeholderText, toolbar, toolbarCallback, theme } = blockConfig
     const currentValue = get(block, 'data.value', '')
 

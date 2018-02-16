@@ -21,7 +21,7 @@ import {
 
 describe('<EditorQuill />', () => {
 
-  const customQuillToolbar = ({onToolbarClick}) => { //eslint-disable-line
+  const customQuillToolbar = ({onToolbarClick}) => { // eslint-disable-line react/prop-types
     const onClick = () => {
       onToolbarClick('Toolbar clicked')
     }

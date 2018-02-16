@@ -116,7 +116,6 @@ class Wrapper extends React.Component {
     const { blockConfig = {} } = this.props
     const { block } = this.state
 
-    // must be an array per definition of the additionalProps EditorQuill expects
     const finalBlockConfig = merge({}, blockConfig, {
       toolbarCallback: this.onToolbarAction
     })

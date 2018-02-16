@@ -36,14 +36,13 @@ One can customize the `toolbar` component and other behavioural aspects of the
 `EditorQuill` component. All that is needed is a property called `blockConfig`.
 
 ```js
-props.blockConfig = [{
-  data: {
-    ... // see list of data properties below
-  }
-}]
+props.blockConfig = {
+  placeholderText: 'Enter text...',
+  ... // see a list of more available properties below
+}
 ```
 
-The following data propertiers are allowed and can be used:
+The following data properties are allowed and can be used:
 
 - `placeholderText`: will overwrite the placeholder text when the editor is empty
 - `toolbar`: custom Toolbar component
@@ -52,7 +51,7 @@ The following data propertiers are allowed and can be used:
      Toolbar)
 - `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
 - `theme`: supports either `snow` ([Docs][8]) or `core`. Use `core` to customize the theme of the Editor. An example can be found in the Storybook with Font-Awesome icons.
-- `hideToolbarOnBlur`: hide the toolbar, once the Editor looses focus (onBlur)
+- `hideToolbarOnBlur`: hide the toolbar, once the Editor loses focus (onBlur)
 
 ### Basic Customization Example Code
 
@@ -84,8 +83,8 @@ const blockConfig = {
 
 ### Customize Toolbar
 
-Usually the Toolbar is handled by the Component itself, but the User can decide
-to overwrite it and render a custom one instead.
+Usually the toolbar of quill is handled by the <EditorQuill /> itself, but one
+can decide to overwrite it and render a custom toolbar instead.
 
 Attention: One needs to take care of applying the [correct classNames (eg. ql-bold)][7]
 for buttons, selects and other action items in the custom Toolbar. Only then will
