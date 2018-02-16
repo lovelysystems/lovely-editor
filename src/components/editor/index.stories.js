@@ -1,5 +1,5 @@
 import React from 'react'
-import { get, find } from 'lodash'
+import { get, find, merge } from 'lodash'
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import withReadme from 'storybook-readme/with-readme'
@@ -60,15 +60,17 @@ const defaultDocument = {
 }
 
 // EDITOR SETUP
+const editorQuillConfig = {
+  type: 'richtext',
+  component: EditorQuill
+}
+const editorImageConfig = {
+  type: 'image',
+  component: EditorImage
+}
 const defaultBlocksConfig = [
-  {
-    type: 'richtext',
-    component: EditorQuill
-  },
-  {
-    type: 'image',
-    component: EditorImage
-  }
+  editorQuillConfig,
+  editorImageConfig
 ]
 
 // Editor Placeholder examples
@@ -253,7 +255,7 @@ class Wrapper extends React.Component {
 
   render() {
     const { editorState } = this.state
-    const { menuState, blocksConfig, blockComponent, placeholder } = this.props
+    const { additionalProps, menuState, blocksConfig, blockComponent, placeholder } = this.props
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -280,6 +282,7 @@ class Wrapper extends React.Component {
                   data-dragging={snapshot.isDraggingOver}
                 >
                   <Editor
+                    additionalProps={additionalProps}
                     editorState={editorState}
                     blockComponent={blockComponent || undefined}
                     blocksConfig={blocksConfig}
@@ -314,6 +317,21 @@ storiesOf('App/Editor', module)
       <Wrapper
         document={defaultDocument}
         blocksConfig={defaultBlocksConfig}
+        menuState={defaultMenuState}
+      />
+    )
+  })
+  .add('default Editor with a custom blockConfig for the EditorQuill (eg. hideToolbarOnBlur)', () => {
+    const editorQuillCustomConfig = merge({}, editorQuillConfig, {
+      data: {
+        hideToolbarOnBlur: true
+      }
+    })
+    const blocksConfig = [editorQuillCustomConfig, editorImageConfig]
+    return (
+      <Wrapper
+        document={defaultDocument}
+        blocksConfig={blocksConfig}
         menuState={defaultMenuState}
       />
     )

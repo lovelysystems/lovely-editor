@@ -4,11 +4,13 @@ The main component of this package. It renderes all the blocks and manages them.
 
 ## Properties
 
-* `editorState` (array): represents the current state of the Editor
+* `additionalProps` (object): contains additional data which is passed to each level
+  (eg. Editor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally.
 * `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
-* `blocksConfig` (array): maps `type` to a component or render function
-* `placeholder` (component): renders a placeholder component when the `editorState` is empty
+* `blocksConfig` (array): maps a `type` to a component or render function and contains customization `data`
+* `editorState` (array): represents the current state of the Editor
 * `onChange` (func): emits changes of the editor
+* `placeholder` (component): renders a placeholder component when the `editorState` is empty
 * `style` (object): custom styles for the component
 
 ### Property Structures
@@ -69,8 +71,14 @@ type-definition for each block in the `editorState`:
 const blocksConfig = [ {
   type: 'text', // block-type, for each type in the editorState there must be a definition here
   component: RichText // eg. React Component or render function
+  data: { // used and passed as blockConfig to the <EditorBlock /> and editors (eg. <EditorQuill />)
+    someCustomData: 'someCustomValue'
+  }
 }]
 ```
+
+Other components of the Editor (eg. EditorQuill) will use the properties from `data`
+to customize their behaviour (eg. use a custom toolbar).
 
 #### onChange
 

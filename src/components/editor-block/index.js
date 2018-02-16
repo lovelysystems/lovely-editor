@@ -40,14 +40,18 @@ export class EditorBlock extends React.Component {
 }
 
 EditorBlock.propTypes = {
+  additionalProps: PropTypes.object,
   block: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
+  blockConfig: PropTypes.object,
   children: PropTypes.element.isRequired,
   onAction: PropTypes.func.isRequired,
   style: PropTypes.object
 }
 
 EditorBlock.defaultProps = {
+  additionalProps: {},
+  blockConfig: {},
   style: {}
 }

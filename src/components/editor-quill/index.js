@@ -14,8 +14,20 @@ export class EditorQuill extends React.Component {
 
   constructor(props, context) {
     super(props, context)
+
+    // this component can be customized (eg. custom toolbar) through the `blockConfig` prop
+    //
+    // Example:
+    // props.blockConfig = {
+    //    hideToolbarOnBlur: true
+    // }
+    //
+    const { blockConfig } = this.props
+
+    // when the user wants to hide the toolbar onBlur, we have to update the
+    // initial state. hideToolbarOnBlur is one of some customization properties
     this.state = {
-      showToolbar: false
+      showToolbar: !get(blockConfig, 'hideToolbarOnBlur', false)
     }
 
     // one can import text, html or the raw delta. Related:
@@ -44,40 +56,57 @@ export class EditorQuill extends React.Component {
   }
   modules() {
     // Docu: https://quilljs.com/docs/modules/toolbar/
-    const { block } = this.props
+    const { block, blockConfig = {} } = this.props
+    const { toolbarSelector } = blockConfig
     return {
       toolbar: {
-        container: `#toolbar-${block.id}`
+        container: toolbarSelector || `#toolbar-${block.id}`
       }
     }
   }
 
   render() {
-    const { block } = this.props
     const { showToolbar } = this.state
+    const { block, blockConfig = {} } = this.props
+    const { hideToolbarOnBlur, placeholderText, toolbar, toolbarCallback, theme } = blockConfig
     const currentValue = get(block, 'data.value', '')
 
+    // Toolbar Customization Note:
+    // - the user then has to take care of the correct html structures and css
+    //   classes to enable the correct react quill toolbar button handling
+    const EditorToolbar = toolbar || QuillToolbar
+    const selectedTheme = (theme === 'core') ? null : 'snow' // null = will reset theme
+
     return (
-      <div {...classes('container')}>
+      <div {...classes('container', theme)}>
         <div
-          {...classes('toolbar')}
+          {...classes('toolbar', theme)}
           style={{
             display: showToolbar ? 'inherit': 'none'
           }}
         >
-          <QuillToolbar
+          <EditorToolbar
             id={block.id}
+            onToolbarClick={toolbarCallback}
           />
         </div>
-        <div {...classes('editor')} >
+        <div {...classes('editor', theme)} >
           <ReactQuill
             formats={this.formats()}
             modules={this.modules()}
             onChange={this.onChange}
-            onBlur={() => { this.setState({ showToolbar: false }) }}
-            onFocus={() => { this.setState({ showToolbar: true }) }}
-            placeholder='Write a text...'
-            theme="snow"
+            onBlur={() => {
+              if (hideToolbarOnBlur) {
+                this.setState({ showToolbar: false })
+              }
+            }}
+            onFocus={() => {
+              if (hideToolbarOnBlur) {
+                this.setState({ showToolbar: true })
+              }
+            }}
+            placeholder={placeholderText || 'Write a text...'}
+            theme={selectedTheme}
             value={currentValue}
           />
         </div>
@@ -88,9 +117,29 @@ export class EditorQuill extends React.Component {
 }
 
 EditorQuill.propTypes = {
+  additionalProps: PropTypes.object,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
-  onChange: PropTypes.func.isRequired
+  blockConfig: PropTypes.shape({
+    hideToolbarOnBlur: PropTypes.bool,
+    placeholderText: PropTypes.string,
+    toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    toolbarCallback: PropTypes.func,
+    theme: PropTypes.string
+  }),
+  onChange: PropTypes.func.isRequired,
+}
+
+EditorQuill.defaultProps = {
+  additionalProps: {},
+  blockConfig: {
+    hideToolbarOnBlur: false,
+    placeholderText: 'Write a text...',
+    toolbar: QuillToolbar,
+    toolbarCallback: () => {},
+    toolbarSelector: null,
+    theme: 'snow'
+  }
 }

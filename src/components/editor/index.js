@@ -63,7 +63,7 @@ export class Editor extends React.Component {
 
   // render helpers
   renderEditorBlocks() {
-    const { blocksConfig, blockComponent: BlockWrapperComponent, editorState, placeholder  } = this.props
+    const { additionalProps, blocksConfig, blockComponent: BlockWrapperComponent, editorState, placeholder  } = this.props
 
     // let's return the placeholder if the editorState is empty
     if (!editorState || editorState && editorState.length === 0) {
@@ -75,18 +75,24 @@ export class Editor extends React.Component {
     // editor component
     const editorBlocksArray = map(editorState, (block, index) => {
 
-      return map(blocksConfig, (element) => { //eslint-disable-line
-        if (block.type === element.type && typeof element.component === 'function') {
-          const Component = element.component
+      return map(blocksConfig, (config) => { //eslint-disable-line
+        if (block.type === config.type && typeof config.component === 'function') {
+          const Component = config.component
+          const blockConfig = config.data || {}
+
           return (
             <BlockWrapperComponent
+              additionalProps={additionalProps}
               key={block.id}
               blockIndex={index} // react-beautiful-dnd is optional, still it is needed when react-beautiful-dnd > 4.0.x is used
               block={block}
+              blockConfig={blockConfig}
               onAction={(event) => this.onBlockAction(event)}
             >
               <Component
+                additionalProps={additionalProps}
                 block={block}
+                blockConfig={blockConfig}
                 onChange={(change) => this.onContentChange(change, block.id)}
               />
             </BlockWrapperComponent>
@@ -111,23 +117,26 @@ export class Editor extends React.Component {
 }
 
 Editor.propTypes = {
+  additionalProps: PropTypes.object,
   blockComponent: PropTypes.func,
   blocksConfig: PropTypes.arrayOf(PropTypes.shape({
     type: PropTypes.string.isRequired,
     component: PropTypes.func.isRequired,
+    data: PropTypes.object
   })).isRequired,
   editorState: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.oneOf(PropTypes.number, PropTypes.string).isRequired,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     type: PropTypes.string.isRequired,
     data: PropTypes.shape.isRequired,
     meta: PropTypes.shape.isRequired,
   })).isRequired,
   onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.oneOf(PropTypes.func),
+  placeholder: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
   style: PropTypes.object
 }
 
 Editor.defaultProps = {
+  additionalProps: {},
   blockComponent: EditorBlock,
   placeholder: () => null,
   style: {}
