@@ -17,6 +17,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
   - Example customization for the <EditorQuill />
     - whether or not the Toolbar should fade out when the editor lost focus or not
     - replace the editor's Toolbar with a custom one
+  - Example customization for the <EditorImage />
+    - replace the editor's Toolbar with a custom one
 
 ## 2018/02/12 [0.1.0][2]
 

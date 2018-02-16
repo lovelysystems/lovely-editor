@@ -14,6 +14,8 @@ export const ToolbarButton = ({ onClick, isDisabled, isCurrent, value, text }) =
   </button>
 )
 
+ToolbarButton.displayName = 'ToolbarButton'
+
 ToolbarButton.propTypes = {
   onClick: PropTypes.func,
   isCurrent: PropTypes.bool,
@@ -29,7 +31,7 @@ ToolbarButton.defaultProps = {
   text: 'Button',
 }
 
-export const Toolbar = ({ currentValue, onSizeChange, onAlignmentChange }) => {
+export const ImageToolbar = ({ currentValue, onSizeChange, onAlignmentChange }) => {
 
   const sizeButtons = [
     {
@@ -84,13 +86,15 @@ export const Toolbar = ({ currentValue, onSizeChange, onAlignmentChange }) => {
   )
 }
 
-Toolbar.propTypes = {
+ImageToolbar.displayName = 'ImageToolbar'
+
+ImageToolbar.propTypes = {
   currentValue: PropTypes.objectOf(PropTypes.string),
   onSizeChange: PropTypes.func,
   onAlignmentChange: PropTypes.func
 }
 
-Toolbar.defaultProps = {
+ImageToolbar.defaultProps = {
   currentValue: {},
   onSizeChange: () => { console.log('... onSizeChange triggered') }, //eslint-disable-line
   onAlignmentChange: () => { console.log('... onSizeChange triggered') } //eslint-disable-line

@@ -7,8 +7,18 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import { EditorImage } from './'
 import componentReadme from './README.md'
 
+const CustomToolbar = ({onToolbarClick}) => (
+  <span>
+    <button
+      onClick={() => onToolbarClick('Toolbar clicked')}
+    >
+      Click me
+    </button>
+  </span>
+)
+
 // Example Config
-const exampleConfig = {
+const exampleBlock = {
   id: 5,
   data: {
     alignment: 'left',
@@ -23,21 +33,29 @@ class Wrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      block: exampleConfig
+      block: exampleBlock
     }
     this.onChange = this.onChange.bind(this)
   }
 
   onChange(change) {
-    exampleConfig.data = change.data
+    exampleBlock.data = change.data
     action('onChange')(change)
-    this.setState({ block: exampleConfig })
+    this.setState({ block: exampleBlock })
   }
 
   render() {
+    const blockConfig = {
+      toolbar: this.props.toolbar,
+      toolbarCallback: (data) => {
+        action('onToolbarClick')(data)
+      }
+    }
+
     return (
       <EditorImage
         block={this.state.block}
+        blockConfig={blockConfig}
         onChange={this.onChange}
       />
     )
@@ -49,4 +67,7 @@ storiesOf('Editors/Editor Image', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
     <Wrapper />
+  ))
+  .add('with custom Toolbar', () => (
+    <Wrapper toolbar={CustomToolbar} />
   ))
