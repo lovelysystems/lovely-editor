@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // Helpers
 import { get } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
-import { Toolbar } from './toolbar'
+import { ImageToolbar } from './toolbar'
 
 // Styling
 const classes = new BemHelper('editor-image')
@@ -45,14 +45,19 @@ export class EditorImage extends React.Component {
   }
 
   render() {
-    const { block } = this.props
+    const { block, blockConfig } = this.props
+    const { toolbarCallback } = blockConfig
     const currentValue = get(block, 'data', {})
     const hasImage = currentValue.src && currentValue.src !== ''
+
+    // customizations
+    const EditorToolbar = get(blockConfig, 'toolbar') || ImageToolbar
     return (
       <div {...classes('container')}>
         <div {...classes('toolbar')}>
-          <Toolbar
+          <EditorToolbar
             currentValue={currentValue}
+            onToolbarClick={toolbarCallback}
             onSizeChange={this.onSizeChange}
             onAlignmentChange={this.onAlignmentChange}
           />
@@ -88,11 +93,17 @@ EditorImage.propTypes = {
     id: PropTypes.number.isRequired,
     data: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
-  blockConfig: PropTypes.object,
+  blockConfig: PropTypes.shape({
+    toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    toolbarCallback: PropTypes.func
+  }),
   onChange: PropTypes.func.isRequired
 }
 
 EditorImage.defaultProps = {
   additionalProps: {},
-  blockConfig: {}
+  blockConfig: {
+    toolbar: ImageToolbar,
+    toolbarCallback: () => {}
+  }
 }

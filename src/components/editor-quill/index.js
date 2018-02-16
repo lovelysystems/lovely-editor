@@ -68,13 +68,13 @@ export class EditorQuill extends React.Component {
   render() {
     const { showToolbar } = this.state
     const { block, blockConfig = {} } = this.props
-    const { hideToolbarOnBlur, placeholderText, toolbar, toolbarCallback, theme } = blockConfig
+    const { hideToolbarOnBlur, placeholderText, toolbarCallback, theme } = blockConfig
     const currentValue = get(block, 'data.value', '')
 
     // Toolbar Customization Note:
     // - the user then has to take care of the correct html structures and css
     //   classes to enable the correct react quill toolbar button handling
-    const EditorToolbar = toolbar || QuillToolbar
+    const EditorToolbar = get(blockConfig, 'toolbar') || QuillToolbar
     const selectedTheme = (theme === 'core') ? null : 'snow' // null = will reset theme
 
     return (
