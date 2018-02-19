@@ -89,7 +89,7 @@ export const ImageToolbar = ({ currentValue, onSizeChange, onAlignmentChange }) 
 ImageToolbar.displayName = 'ImageToolbar'
 
 ImageToolbar.propTypes = {
-  currentValue: PropTypes.objectOf(PropTypes.string),
+  currentValue: PropTypes.object,
   onSizeChange: PropTypes.func,
   onAlignmentChange: PropTypes.func
 }

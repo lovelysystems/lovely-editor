@@ -91,7 +91,7 @@ EditorImage.propTypes = {
   additionalProps: PropTypes.object,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    data: PropTypes.objectOf(PropTypes.string).isRequired,
+    data: PropTypes.object.isRequired,
   }).isRequired,
   blockConfig: PropTypes.shape({
     toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
