@@ -2,7 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 
 // Helpers
-import { map } from 'lodash'
+import { map, merge } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
@@ -31,7 +31,9 @@ export class Editor extends React.Component {
     const newEditorState = EditorState.updateBlockData(editorState, blockId, change.data)
     const editorChange = {
       editorState: newEditorState,
-      block
+      block: merge({}, block, {
+        data: { ...change.data }
+      })
     }
 
     this.props.onChange(editorChange)
