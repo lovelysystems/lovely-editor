@@ -56,6 +56,7 @@ export class EditorImage extends React.Component {
       <div {...classes('container')}>
         <div {...classes('toolbar')}>
           <EditorToolbar
+            id={block.id}
             currentValue={currentValue}
             onToolbarClick={toolbarCallback}
             onSizeChange={this.onSizeChange}
