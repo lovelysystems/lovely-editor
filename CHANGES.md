@@ -9,6 +9,9 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ### Added
 
+- EditorQuill: can import and register custom icons for the EditorToolbar (with
+  quill's snow theme)
+
 - All levels of the <Editor> components (eg. blocks and editors like quill)
   receive the `additionalProps` property, if it is passed to the <Editor />.
   This property can include additional data for any component.

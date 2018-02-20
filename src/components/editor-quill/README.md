@@ -245,6 +245,23 @@ const exampleBlock = {
 
 ```
 
+## Additional Research
+
+Custom Dropdown Examples (but with snow styling)
+- https://quannt.github.io/programming/javascript/2017/05/11/adding-custom-toolbar-react-quill.html
+- https://alan.fyi/create-custom-style-dropdowns-on-quill/
+
+How to customize the Dropdown (with examples)
+- react-quill: customize dropdown with custom values and styling: https://github.com/zenoamaro/react-quill/issues/182
+  - example: change values dynamically in dropdown: https://codepen.io/anon/pen/dWyzvV
+- register custom toolbar icons: https://github.com/quilljs/quill/issues/1099
+  - example: https://codepen.io/anon/pen/NbWJGb
+
+How to write custom modules
+- https://quilljs.com/guides/how-to-customize-quill/
+- https://quilljs.com/guides/building-a-custom-module/
+- custom toolbar with custom handler: https://jsfiddle.net/natterstefan/p6eqmsx3/
+
 [1]: https://github.com/zenoamaro/react-quill#custom-toolbar
 [2]: http://quilljs.com/docs/themes/#snow
 [3]: https://github.com/zenoamaro/react-quill#using-deltas
