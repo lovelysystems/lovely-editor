@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/02/21 [0.2.0][3]
+
 ### Added
 
 - EditorQuill: can import and register custom icons for the EditorToolbar (with
@@ -34,5 +36,6 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - Editor Image component added (Basic Setup)
 - Drag & Drop Support (added and illustrated in Storybook)
 
-[2]: https://github.com/lovelysystems/oyez-editor/releases/tag/0.1.0
-[1]: https://github.com/lovelysystems/oyez-editor/compare/0.1.0...HEAD
+[3]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.2.0
+[2]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.1.0
+[1]: https://github.com/lovelysystems/oyez-editor/compare/v0.1.0...HEAD
