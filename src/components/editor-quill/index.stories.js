@@ -146,6 +146,26 @@ storiesOf('Editors/Editor-Quill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
+  .add('default w/ custom toolbar icons', () => {
+    const blockConfig = {
+      icons: {
+        bold: '<i class="fa fa-bold" aria-hidden="true"></i>',
+        italic: '<i class="fa fa-italic" aria-hidden="true"></i>',
+        underline: '<i class="fa fa-underline" aria-hidden="true"></i>',
+        list: {
+          bullet: '<i class="fa fa-list-ul"></i>',
+          ordered: '<i class="fa fa-list-ol"></i>',
+        },
+        indent: {
+          '+1': '<i class="fa fa-indent" aria-hidden="true"></i>',
+          '-1': '<i class="fa fa-indent fa-rotate-180" style="padding-top: 2px;" />'
+        }
+      },
+    }
+    return (
+      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
+    )
+  })
   .add('default w/ custom Toolbar', () => {
     const blockConfig = {
       toolbar: customQuillToolbar,

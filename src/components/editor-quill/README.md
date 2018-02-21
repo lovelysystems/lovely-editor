@@ -44,6 +44,8 @@ props.blockConfig = {
 
 The following data properties are allowed and can be used:
 
+- `hideToolbarOnBlur`: hide the toolbar, once the Editor loses focus (onBlur)
+- `icons`: customize the icons quill renders for the format buttons (eg. for `ql-bold`)
 - `placeholderText`: will overwrite the placeholder text when the editor is empty
 - `toolbar`: custom Toolbar component
 - `toolbarCallback`: this callback allows the developer to use a callback to get data from the
@@ -51,7 +53,6 @@ The following data properties are allowed and can be used:
      Toolbar)
 - `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
 - `theme`: supports either `snow` ([Docs][8]) or `core`. Use `core` to customize the theme of the Editor. An example can be found in the Storybook with Font-Awesome icons.
-- `hideToolbarOnBlur`: hide the toolbar, once the Editor loses focus (onBlur)
 
 ### Basic Customization Example Code
 
@@ -71,6 +72,49 @@ const exampleBlock = {
 
 const blockConfig = {
   hideToolbarOnBlur: true
+}
+
+<EditorQuill
+  block={exampleBlock}
+  blockConfig={blockConfig}
+  onChange={this.onChange}
+/>
+
+```
+
+### Customize Icons
+
+The following example illustrates how to replace the button icons with FontAwesome ones.
+There are [more formats available][9], beside the ones illustrated below.
+
+```js
+import { EditorQuill } from './'
+
+const exampleBlock = {
+  id: 5,
+  data: {
+    value: '<p>Hello World. <b>This is bold.</b></p>'
+  },
+  meta: {
+    title: 'Input Box'
+  },
+  type: 'richtext'
+}
+
+const blockConfig = {
+  icons: {
+    bold: '<i class="fa fa-bold" aria-hidden="true"></i>',
+    italic: '<i class="fa fa-italic" aria-hidden="true"></i>',
+    underline: '<i class="fa fa-underline" aria-hidden="true"></i>',
+    list: {
+      bullet: '<i class="fa fa-list-ul"></i>',
+      ordered: '<i class="fa fa-list-ol"></i>',
+    },
+    indent: {
+      '+1': '<i class="fa fa-indent" aria-hidden="true"></i>',
+      '-1': '<i class="fa fa-indent fa-rotate-180" style="padding-top: 2px;" />'
+    }
+  },
 }
 
 <EditorQuill
@@ -245,6 +289,23 @@ const exampleBlock = {
 
 ```
 
+## Additional Research
+
+Custom Dropdown Examples (but with snow styling)
+- https://quannt.github.io/programming/javascript/2017/05/11/adding-custom-toolbar-react-quill.html
+- https://alan.fyi/create-custom-style-dropdowns-on-quill/
+
+How to customize the Dropdown (with examples)
+- react-quill: customize dropdown with custom values and styling: https://github.com/zenoamaro/react-quill/issues/182
+  - example: change values dynamically in dropdown: https://codepen.io/anon/pen/dWyzvV
+- register custom toolbar icons: https://github.com/quilljs/quill/issues/1099
+  - example: https://codepen.io/anon/pen/NbWJGb
+
+How to write custom modules
+- https://quilljs.com/guides/how-to-customize-quill/
+- https://quilljs.com/guides/building-a-custom-module/
+- custom toolbar with custom handler: https://jsfiddle.net/natterstefan/p6eqmsx3/
+
 [1]: https://github.com/zenoamaro/react-quill#custom-toolbar
 [2]: http://quilljs.com/docs/themes/#snow
 [3]: https://github.com/zenoamaro/react-quill#using-deltas
@@ -253,3 +314,4 @@ const exampleBlock = {
 [6]: https://github.com/zenoamaro/react-quill/issues/282
 [7]: http://quilljs.com/standalone/full/
 [8]: https://quilljs.com/docs/themes/#snow
+[9]: https://quilljs.com/docs/formats/

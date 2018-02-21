@@ -1,9 +1,9 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-import ReactQuill from 'react-quill'
+import ReactQuill, { Quill } from 'react-quill'
 
 // Helpers
-import { get, debounce } from 'lodash'
+import { forOwn, get, debounce } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { QuillToolbar } from './toolbar'
 
@@ -35,6 +35,10 @@ export class EditorQuill extends React.Component {
     this.onChange = debounce(this.onChange.bind(this), 300, { maxWait: 1000 })
   }
 
+  componentWillMount() {
+    this.registerIcons()
+  }
+
   // Event Listeners
   onChange(html) {
     const change = {
@@ -62,6 +66,26 @@ export class EditorQuill extends React.Component {
       toolbar: {
         container: toolbarSelector || `#toolbar-${block.id}`
       }
+    }
+  }
+
+  // customization of the quill editor
+  registerIcons() {
+    const { blockConfig } = this.props
+    if (get(blockConfig, 'icons')) {
+      const icons = Quill.import('ui/icons')
+      forOwn(blockConfig.icons, (value, key) => {
+        // these specialIcons have subsettings (eg. list with ordered, bullet)
+        const specialIcons = ['align', 'direction', 'float', 'indent', 'list', 'script']
+        if (specialIcons.includes(key)) {
+          icons[key] = {
+            ...icons[key],
+            ...value
+          }
+        } else {
+          icons[key] = value
+        }
+      })
     }
   }
 
@@ -124,6 +148,7 @@ EditorQuill.propTypes = {
   }).isRequired,
   blockConfig: PropTypes.shape({
     hideToolbarOnBlur: PropTypes.bool,
+    icons: PropTypes.object,
     placeholderText: PropTypes.string,
     toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     toolbarCallback: PropTypes.func,
@@ -136,6 +161,7 @@ EditorQuill.defaultProps = {
   additionalProps: {},
   blockConfig: {
     hideToolbarOnBlur: false,
+    icons: null,
     placeholderText: 'Write a text...',
     toolbar: QuillToolbar,
     toolbarCallback: () => {},
