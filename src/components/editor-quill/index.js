@@ -74,9 +74,18 @@ export class EditorQuill extends React.Component {
     const { blockConfig } = this.props
     if (get(blockConfig, 'icons')) {
       const icons = Quill.import('ui/icons')
-      forOwn(blockConfig.icons, function(value, key) {
-        icons[key] = value
-      } )
+      forOwn(blockConfig.icons, (value, key) => {
+        // these specialIcons have subsettings (eg. list with ordered, bullet)
+        const specialIcons = ['align', 'direction', 'float', 'indent', 'list', 'script']
+        if (specialIcons.indexOf(key) !== -1) {
+          icons[key] = {
+            ...icons[key],
+            ...value
+          }
+        } else {
+          icons[key] = value
+        }
+      })
     }
   }
 
