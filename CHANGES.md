@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+- upgrade all node packages to latest version (eg. react-quill to 1.2.4)
+
 ## 2018/02/21 [0.2.0][3]
 
 ### Added
