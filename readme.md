@@ -20,7 +20,7 @@ components. Just enter `npm run storybook` to start it.
 The storybook is also available at [https://oyez-editor.netlify.com](https://oyez-editor.netlify.com).
 This is possible manually with Lovely System's Netlify account (credentials are in 1Password).
 
-## How to develop (Developmen)
+## How to develop (Development)
 
 * `npm run build`: builds the package to ./dist
 * `npm run build:storybook`: build static production version of component
