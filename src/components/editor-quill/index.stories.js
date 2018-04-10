@@ -146,6 +146,18 @@ storiesOf('Editors/Editor-Quill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
+  .add('default w/ onBlur, onFocus, onKeyPress, onKeyDown and onKeyUp events', () => {
+    const blockConfig = {
+      onBlur: action('onBlur'),
+      onFocus: action('onFocus'),
+      onKeyPress: action('onKeyPress'),
+      onKeyDown: action('onKeyDown'),
+      onKeyUp: action('onKeyUp')
+    }
+    return (
+      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
+    )
+  })
   .add('default w/ custom toolbar icons', () => {
     const blockConfig = {
       icons: {

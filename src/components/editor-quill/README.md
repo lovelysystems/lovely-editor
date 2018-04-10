@@ -46,6 +46,7 @@ The following data properties are allowed and can be used:
 
 - `hideToolbarOnBlur`: hide the toolbar, once the Editor loses focus (onBlur)
 - `icons`: customize the icons quill renders for the format buttons (eg. for `ql-bold`)
+- `onBlur`, `onFocus`, `onKeyPress`, `onKeyDown`, `onKeyUp`: event listeners
 - `placeholderText`: will overwrite the placeholder text when the editor is empty
 - `toolbar`: custom Toolbar component
 - `toolbarCallback`: this callback allows the developer to use a callback to get data from the

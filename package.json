@@ -50,13 +50,17 @@
     "sourceMap": false,
     "instrument": false
   },
+  "peerDependencies": {
+    "react-beautiful-dnd": "4.0.1",
+    "react-quill": "1.2.5"
+  },
   "dependencies": {
     "lodash": "4.17.5",
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-beautiful-dnd": "4.0.1",
     "react-bem-helper": "1.4.1",
-    "react-quill": "1.2.4"
+    "react-quill": "1.2.5"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.3.14",
