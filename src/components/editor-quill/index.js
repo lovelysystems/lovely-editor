@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactQuill, { Quill } from 'react-quill'
 
 // Helpers
-import { forOwn, get, debounce } from 'lodash'
+import { debounce, forOwn, get, invoke } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { QuillToolbar } from './toolbar'
 
@@ -119,16 +119,23 @@ export class EditorQuill extends React.Component {
             formats={this.formats()}
             modules={this.modules()}
             onChange={this.onChange}
-            onBlur={() => {
+            onBlur={(previousRange, source, editor) => {
+              invoke(this.props, 'blockConfig.onBlur', previousRange, source, editor)
+
               if (hideToolbarOnBlur) {
                 this.setState({ showToolbar: false })
               }
             }}
-            onFocus={() => {
+            onFocus={(range, source, editor) => {
+              invoke(this.props, 'blockConfig.onFocus', range, source, editor)
+
               if (hideToolbarOnBlur) {
                 this.setState({ showToolbar: true })
               }
             }}
+            onKeyPress={(event) => invoke(this.props, 'blockConfig.onKeyPress', event)}
+            onKeyDown={(event) => invoke(this.props, 'blockConfig.onKeyDown', event)}
+            onKeyUp={(event) => invoke(this.props, 'blockConfig.onKeyUp', event)}
             placeholder={placeholderText || 'Write a text...'}
             theme={selectedTheme}
             value={currentValue}
@@ -148,6 +155,11 @@ EditorQuill.propTypes = {
   }).isRequired,
   blockConfig: PropTypes.shape({
     hideToolbarOnBlur: PropTypes.bool,
+    onBlur: PropTypes.func,
+    onFocus: PropTypes.func,
+    onKeyPress: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    onKeyUp: PropTypes.func,
     icons: PropTypes.object,
     placeholderText: PropTypes.string,
     toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
@@ -161,6 +173,11 @@ EditorQuill.defaultProps = {
   additionalProps: {},
   blockConfig: {
     hideToolbarOnBlur: false,
+    onBlur: () => {},
+    onFocus: () => {},
+    onKeyPress: () => {},
+    onKeyDown: () => {},
+    onKeyUp: () => {},
     icons: null,
     placeholderText: 'Write a text...',
     toolbar: QuillToolbar,
