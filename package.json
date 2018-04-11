@@ -52,7 +52,7 @@
   },
   "peerDependencies": {
     "react-beautiful-dnd": "4.0.1",
-    "react-quill": "1.2.5"
+    "react-quill": "1.2.7"
   },
   "dependencies": {
     "lodash": "4.17.5",
@@ -60,7 +60,7 @@
     "react": "16.2.0",
     "react-beautiful-dnd": "4.0.1",
     "react-bem-helper": "1.4.1",
-    "react-quill": "1.2.5"
+    "react-quill": "1.2.7"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.3.14",

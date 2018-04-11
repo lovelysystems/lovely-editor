@@ -15,7 +15,7 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 - ReactQuill invokes onBlur, OnFocus and other events to the provided `blockConfig.onBlur`
   etc. functions
-- upgrade all node packages to latest version (eg. react-quill to 1.2.5)
+- upgrade all node packages to latest version (eg. react-quill to 1.2.7)
 
 ## 2018/02/21 [0.2.0][3]
 
