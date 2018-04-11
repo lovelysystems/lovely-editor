@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/04/11 [0.3.0][3]
+
 ### Added
 
 - Added new event listeners to ReactQuill: onKeyPress, onKeyDown, onKeyUp
@@ -46,6 +48,7 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - Editor Image component added (Basic Setup)
 - Drag & Drop Support (added and illustrated in Storybook)
 
-[3]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.2.0
+[1]: https://github.com/lovelysystems/oyez-editor/compare/v0.3.0...HEAD
 [2]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.1.0
-[1]: https://github.com/lovelysystems/oyez-editor/compare/v0.1.0...HEAD
+[3]: https://github.com/lovelysystems/oyez-editor/compare/v0.1.0...v0.2.0
+[4]: https://github.com/lovelysystems/oyez-editor/compare/v0.2.0...v0.3.0
