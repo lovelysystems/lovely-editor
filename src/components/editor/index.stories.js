@@ -266,6 +266,7 @@ class Wrapper extends React.Component {
                 {...classes('menu')}
                 ref={dropProvided.innerRef}
                 data-dragging={snapshot.isDraggingOver}
+                {...dropProvided.droppableProps}
               >
                 <ExampleMenu
                   menuState={menuState}
@@ -280,6 +281,7 @@ class Wrapper extends React.Component {
                 <div
                   ref={dropProvided.innerRef}
                   data-dragging={snapshot.isDraggingOver}
+                  {...dropProvided.droppableProps}
                 >
                   <Editor
                     additionalProps={additionalProps}
