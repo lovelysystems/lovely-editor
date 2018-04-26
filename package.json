@@ -51,14 +51,14 @@
     "instrument": false
   },
   "peerDependencies": {
-    "react-beautiful-dnd": "5.0.0",
+    "react-beautiful-dnd": "6.0.2",
     "react-quill": "1.2.7"
   },
   "dependencies": {
     "lodash": "4.17.5",
     "prop-types": "15.6.0",
     "react": "16.2.0",
-    "react-beautiful-dnd": "5.0.0",
+    "react-beautiful-dnd": "6.0.2",
     "react-bem-helper": "1.4.1",
     "react-quill": "1.2.7"
   },
