@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/04/26 [0.4.0][5]
+
 ### Added
 
 - added `react` with version 16.2.0 as a peerDependency
@@ -61,7 +63,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - Editor Image component added (Basic Setup)
 - Drag & Drop Support (added and illustrated in Storybook)
 
-[1]: https://github.com/lovelysystems/oyez-editor/compare/v0.3.0...HEAD
+[1]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.0...HEAD
 [2]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.1.0
 [3]: https://github.com/lovelysystems/oyez-editor/compare/v0.1.0...v0.2.0
 [4]: https://github.com/lovelysystems/oyez-editor/compare/v0.2.0...v0.3.0
+[4]: https://github.com/lovelysystems/oyez-editor/compare/v0.3.0...v0.4.0
