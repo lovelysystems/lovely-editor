@@ -7,6 +7,19 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+### Added
+
+- added `react` with version 16.2.0 as a peerDependency
+
+### Changed
+
+- Upgraded react-beautiful-dnd [from 4.0.1 to 6.0.2](https://github.com/atlassian/react-beautiful-dnd/releases/tag/v6.0.2)
+
+### Removed
+
+- Removed `react-beautiful-dnd` peerDependency, as it is only required in the Storybook
+  presentation, but not for the core oyez-editor product
+
 ## 2018/04/11 [0.3.0][4]
 
 ### Added

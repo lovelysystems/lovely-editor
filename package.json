@@ -51,7 +51,7 @@
     "instrument": false
   },
   "peerDependencies": {
-    "react-beautiful-dnd": "6.0.2",
+    "react": "16.2.0",
     "react-quill": "1.2.7"
   },
   "dependencies": {
