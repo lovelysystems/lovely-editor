@@ -17,6 +17,8 @@ const CustomToolbar = ({onToolbarClick}) => (
   </span>
 )
 
+const CustomEditor = props => <span>custom editor</span>
+
 // Example Config
 const exampleBlock = {
   id: 5,
@@ -46,6 +48,7 @@ class Wrapper extends React.Component {
 
   render() {
     const blockConfig = {
+      editor: this.props.editor,
       toolbar: this.props.toolbar,
       toolbarCallback: (data) => {
         action('onToolbarClick')(data)
@@ -70,4 +73,7 @@ storiesOf('Editors/Editor Image', module)
   ))
   .add('with custom Toolbar', () => (
     <Wrapper toolbar={CustomToolbar} />
+  ))
+  .add('with custom Editor', () => (
+    <Wrapper editor={CustomEditor} />
   ))

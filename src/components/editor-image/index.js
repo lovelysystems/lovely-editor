@@ -5,11 +5,17 @@ import PropTypes from 'prop-types'
 import { get } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { ImageToolbar } from './toolbar'
+import { ImageEditor } from './editor'
 
 // Styling
 const classes = new BemHelper('editor-image')
 
 export class EditorImage extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.onChange = this.onChange.bind(this)
+  }
 
   onChange(diff) {
     const change = {
@@ -19,13 +25,6 @@ export class EditorImage extends React.Component {
       }
     }
     this.props.onChange(change)
-  }
-
-  onCaptionChange = (event) => {
-    const value = get(event, 'target.value', '')
-    this.onChange({
-      caption: value
-    })
   }
 
   onSizeChange = (event) => {
@@ -48,10 +47,11 @@ export class EditorImage extends React.Component {
     const { block, blockConfig } = this.props
     const { toolbarCallback } = blockConfig
     const currentValue = get(block, 'data', {})
-    const hasImage = currentValue.src && currentValue.src !== ''
 
     // customizations
     const EditorToolbar = get(blockConfig, 'toolbar') || ImageToolbar
+    const EditorComponent = get(blockConfig, 'editor') || ImageEditor
+
     return (
       <div {...classes('container')}>
         <div {...classes('toolbar')}>
@@ -63,24 +63,9 @@ export class EditorImage extends React.Component {
             onAlignmentChange={this.onAlignmentChange}
           />
         </div>
-        <div {...classes('image-container', currentValue.alignment)}>
-          { hasImage && (
-            <img
-              {...classes('image', currentValue.size)}
-              src={currentValue.src}
-              title={currentValue.caption || ''}
-              alt={currentValue.caption || ''}
-            />
-          )}
-          { !currentValue.src && (
-            <span>No image.</span>
-          )}
+        <div {...classes('editor')}>
+          <EditorComponent block={block} onChange={this.onChange} />
         </div>
-        { hasImage && (
-          <div {...classes('caption-container')}>
-            <input onChange={this.onCaptionChange} value={currentValue.caption} />
-          </div>
-        )}
       </div>
     )
   }
@@ -95,6 +80,7 @@ EditorImage.propTypes = {
     data: PropTypes.object.isRequired,
   }).isRequired,
   blockConfig: PropTypes.shape({
+    editor: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     toolbarCallback: PropTypes.func
   }),
@@ -104,6 +90,7 @@ EditorImage.propTypes = {
 EditorImage.defaultProps = {
   additionalProps: {},
   blockConfig: {
+    editor: ImageEditor,
     toolbar: ImageToolbar,
     toolbarCallback: () => {}
   }

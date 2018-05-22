@@ -26,6 +26,7 @@ All that is needed is a property called `blockConfig`.
 
 ```js
 props.blockConfig = {
+  editor: CustomEditor // custom Editor component
   toolbar: CustomToolbar // custom Toolbar component
   toolbarCallback: () => {} // callback can be used to pass data from the CustomToolbar to the Wrapper
 }
@@ -46,6 +47,8 @@ const CustomToolbar = ({onToolbarClick}) => (
   </span>
 )
 
+const CustomEditor = props => <span>custom editor</span>
+
 const exampleBlock = {
   id: 5,
   data: {
@@ -58,6 +61,7 @@ const exampleBlock = {
 }
 
 const blockConfig = {
+  editor: CustomEditor,
   toolbar: CustomToolbar,
   toolbarCallback: (props) => {
     // do something
