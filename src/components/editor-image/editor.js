@@ -7,13 +7,13 @@ import { BemHelper } from '../../helpers/bem-helper'
 const classes = new BemHelper('editor-image')
 
 /**
- * ImageEditor is a example component (with no upload or edit features). It just
+ * ImageEditor is an example component (with no upload or edit features). It just
  * helps to visualise a default editor in the Storybook. One should always replace
  * this editor with a custom one.
  */
 export const ImageEditor = ({ block, onChange }) => {
   const currentValue = get(block, 'data', {})
-  const hasImage = currentValue.src && currentValue.src !== ''
+  const hasImage = currentValue.src !== ''
 
   const onCaptionChange = event => {
     const value = get(event, 'target.value', '')
