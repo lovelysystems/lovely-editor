@@ -7,6 +7,12 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/05/23 [0.4.2][7]
+
+### Changed
+
+* EditorImage: custom Toolbar receives `onChange` property
+
 ## 2018/05/22 [0.4.1][6]
 
 ### Added
@@ -75,3 +81,4 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 [4]: https://github.com/lovelysystems/oyez-editor/compare/v0.2.0...v0.3.0
 [5]: https://github.com/lovelysystems/oyez-editor/compare/v0.3.0...v0.4.0
 [6]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.0...v0.4.1
+[7]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.1...v0.4.2
