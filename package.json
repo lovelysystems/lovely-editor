@@ -1,6 +1,6 @@
 {
   "name": "oyez-editor",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Oyez Editor",
   "private": true,
   "main": "dist/index.js",
