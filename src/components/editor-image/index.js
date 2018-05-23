@@ -27,7 +27,7 @@ export class EditorImage extends React.Component {
     this.props.onChange(change)
   }
 
-  onSizeChange = (event) => {
+  onSizeChange = event => {
     const value = get(event, 'target.value', '')
     const currentAlignment = get(this.props, 'block.data.alignment', 'left')
     this.onChange({
@@ -36,7 +36,7 @@ export class EditorImage extends React.Component {
     })
   }
 
-  onAlignmentChange = (event) => {
+  onAlignmentChange = event => {
     const value = get(event, 'target.value', '')
     this.onChange({
       alignment: value
@@ -59,6 +59,7 @@ export class EditorImage extends React.Component {
             id={block.id}
             currentValue={currentValue}
             onToolbarClick={toolbarCallback}
+            onChange={this.onChange}
             onSizeChange={this.onSizeChange}
             onAlignmentChange={this.onAlignmentChange}
           />
@@ -77,7 +78,7 @@ EditorImage.propTypes = {
   additionalProps: PropTypes.object,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired
   }).isRequired,
   blockConfig: PropTypes.shape({
     editor: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
