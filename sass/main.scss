@@ -30,6 +30,20 @@ $button-bg-color: #0065cc;
     margin: 10px;
   }
 
+  &__editor-preview {
+    width: 55%;
+    float: left;
+    display: inline-block;
+  }
+
+  &__preview {
+    margin: 10px;
+    width: 42%;
+    float: right;
+    display: inline-block;
+    word-wrap: break-word;
+  }
+
   &__menu {
     font-size: 16px;
     background-color: #bebebe;

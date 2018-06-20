@@ -131,7 +131,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editors/Editor-Quill', module)
+storiesOf('Editors/EditorQuill', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => {
     return (

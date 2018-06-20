@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // Helpers
 import { Draggable } from 'react-beautiful-dnd'
 import { get, map } from 'lodash'
-import { BemHelper } from '../../helpers/bem-helper'
+import { BemHelper } from '../../src/helpers/bem-helper'
 
 // Styling
 const classes = new BemHelper('example-menu')

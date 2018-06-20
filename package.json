@@ -55,12 +55,16 @@
     "react-quill": "1.2.7"
   },
   "dependencies": {
+    "codemirror": "5.38.0",
+    "highlight.js": "9.12.0",
     "lodash": "4.17.5",
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-beautiful-dnd": "6.0.2",
     "react-bem-helper": "1.4.1",
-    "react-quill": "1.2.7"
+    "react-codemirror2": "5.0.4",
+    "react-quill": "1.2.7",
+    "tui-editor": "1.2.2"
   },
   "devDependencies": {
     "@storybook/addon-actions": "3.3.14",
