@@ -7,15 +7,13 @@ import componentReadme from './README.md'
 
 import { EditorCodeMirror } from './index'
 
-const block =
-{
-  id: 7,
-  type: 'cm',
+const blocksConfig = {
+  lineNumbers: false // lineNumbers ==> needs to be false, otherwise storybook cannot handle mounting/rendering it correctly (but works in other envs)
+}
+
+const block = {
   data: {
-    value: '<h1>MEIN TEXT</h1>'
-  },
-  meta: {
-    title: 'CodeMirror-Editor'
+    value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
   }
 }
 
@@ -25,6 +23,7 @@ class Wrapper extends React.Component {
     super(props)
     this.state = {
       block,
+      blocksConfig
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -40,6 +39,7 @@ class Wrapper extends React.Component {
     return (
       <EditorCodeMirror
         block={this.state.block}
+        blocksConfig={this.state.blocksConfig}
         onChange={(change) => this.onChange(change)}
       />
     )

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-import { debounce } from 'lodash'
+import { debounce, get } from 'lodash'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
 
 import { BemHelper } from '../../helpers/bem-helper'
@@ -35,12 +35,9 @@ export class EditorCodeMirror extends React.Component {
   }
 
   render() {
-    const { block } = this.props
+    const { block, blocksConfig } = this.props
     const options = {
-      // TODO:
-      // add 'lineNumbers' as a property and set it to 'false' in story with the following note:
-      // ==> needs to be false, otherwise storybook cannot handle mounting/rendering it correctly (but works in other envs)
-      lineNumbers: false,
+      lineNumbers: get(blocksConfig, 'lineNumbers', false),
       mode: {
         name: 'javascript',
         json: true,
@@ -65,9 +62,13 @@ export class EditorCodeMirror extends React.Component {
 EditorCodeMirror.displayName = 'EditorCodeMirror'
 EditorCodeMirror.propTypes = {
   block: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     data: PropTypes.object.isRequired
   }).isRequired,
+  blocksConfig: PropTypes.shape({
+    lineNumbers: PropTypes.bool
+  }),
   onChange: PropTypes.func.isRequired
-  // TODO: add blocksConfig
+}
+EditorCodeMirror.defaultProps = {
+  blocksConfig: {}
 }

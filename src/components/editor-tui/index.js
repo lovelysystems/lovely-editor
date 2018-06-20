@@ -20,17 +20,17 @@ export class EditorTui extends React.Component {
   // the editor-div must be rendered before the TUI-Editor is initialised, that
   // is why we init it in componentDidMount
   componentDidMount() {
-    const { block } = this.props
+    const { block, blocksConfig } = this.props
     this.editor = new Editor({
       el: document.querySelector('#oyez-editor-tui'),
-      initialValue: get(block, 'data.value', ''),
-      initialEditType: 'markdown', // TODO: blocksconfig property, markdown | wysiwyg
-      previewStyle: 'vertical', // TODO: blocksConfig property
-      height: '180px', // TODO blocksConfig property
+      initialValue: get(block, 'data.value', false),
+      initialEditType: 'markdown',
+      previewStyle: 'vertical',
+      height: '180px',
       events: {
         change: this.onChange
       },
-      ...this.props.blocksConfig,
+      ...blocksConfig,
     })
   }
 
@@ -60,7 +60,6 @@ export class EditorTui extends React.Component {
 EditorTui.displayName = 'EditorTui'
 EditorTui.propTypes = {
   block: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     data: PropTypes.shape({
       html: PropTypes.string, // available onChange, not possible as an input for the Editor
       value: PropTypes.string,
@@ -68,7 +67,9 @@ EditorTui.propTypes = {
   }).isRequired,
   onChange: PropTypes.func.isRequired,
   blocksConfig: PropTypes.shape({
-    initialEditType: PropTypes.string, // TODO: add other config properties here
+    initialEditType: PropTypes.string,
+    previewStyle: PropTypes.string,
+    height: PropTypes.string,
   })
 }
 

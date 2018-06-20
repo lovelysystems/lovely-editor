@@ -7,6 +7,12 @@ import componentReadme from './README.md'
 
 import { EditorTui } from './'
 
+const blocksConfig = {
+  initialEditType: 'markdown', // possible: "markdown" | "wysiwyg"
+  previewStyle: 'vertical', // possible: "tab" | "vertical"
+  height: '400px'
+}
+
 const block =
   {
     id: 6,
@@ -24,7 +30,8 @@ class Wrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      block
+      block,
+      blocksConfig
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -40,6 +47,7 @@ class Wrapper extends React.Component {
     return (
       <EditorTui
         block={this.state.block}
+        blocksConfig={this.state.blocksConfig}
         onChange={(change) => this.onChange(change)}
       />
     )
