@@ -4,6 +4,9 @@
   "description": "Oyez Editor",
   "private": true,
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "author": "Lovely Systems GmbH <office@lovelysystems.com>",
   "license": "MIT",
   "engines": {
@@ -15,7 +18,7 @@
     "url": "https://github.com/lovelysystems/oyez-editor.git"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps",
+    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps && cp node_modules/quill/dist/quill.core.css dist && cp node_modules/quill/dist/quill.snow.css dist",
     "build:storybook": "build-storybook -o dist/storybook",
     "coverage": "NODE_ENV=test nyc --reporter=html --reporter=text -- mocha -r babel-core/register -r src/tests/helpers/test-setup.js --colors --exit \"./src/**/*.spec.js\" && nyc report",
     "lint": "eslint 'src/**/*.js' --fix",
