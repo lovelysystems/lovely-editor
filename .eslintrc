@@ -75,7 +75,7 @@
       }
     },
     {
-      "files": [ "src/**/*.stories.js"],
+      "files": [ "src/**/*.stories.js", "example/**/*.js"],
       "rules": {
         "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
         "no-undef": "off",

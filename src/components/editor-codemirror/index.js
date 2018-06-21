@@ -29,7 +29,7 @@ export class EditorCodeMirror extends React.Component {
       }
     }
 
-    // gives the changed value back to the EditorWrapper
+    // gives the changed value back to the OyezEditor
     this.props.onChange(change)
 
   }

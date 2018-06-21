@@ -23,8 +23,6 @@ result and therefore can be used on its own.
 - largely customisable
 - easy way to create and add your own editor
 - design it as you please
-- just pass the values you need to the `<Editor />` and use them outside
-  the `<Editor />` just the way you need them
 - use every EditorComponent (eg. EditorQuill) independently without need to
   look out you for the others
 - creates loads of fun
@@ -56,25 +54,25 @@ npm install oyez-editor
 and import it in your App with:
 
 ```
-import { Editor } from 'oyez-editor'
+import { OyezEditor } from 'oyez-editor'
 ```
 
 ## Component Structure
 
-The oyez-editor basically consists out of three main components:
+The OyezEditor basically consists out of three main components:
 
-1. Editor
-2. Editor-Block
+1. OyezEditor
+2. EditorBlock
 3. Editors (EditorQuill, EditorImage)
 
 The oyez-editor structure looks like this:
 
 ```js
-<Editor>
+<OyezEditor>
   <EditorBlock>
     // a EditorComponent, eg. <EditorQuill />
   </EditorBlock>
-</Editor>
+</OyezEditor>
 ```
 
 The main entry point in your app is the `Editor`. Its properties have to
@@ -126,7 +124,7 @@ const editorImageConfig = {
   component: EditorImage
 }
 
-//sets which editor-configs are given to the Editor and should therefore be rendered
+// sets which editor-configs are given to the Editor and should therefore be rendered
 const blocksConfig = [
   editorQuillConfig,
   editorImageConfig
@@ -147,14 +145,11 @@ class YourApp extends React.Component {
 
   render() {
     return (
-      <div>
-        <Editor
-          blocksConfig={blocksConfig}
-          editorState={this.state.editorState}
-          onChange={this.onChange}
-        />
-        <p>{this.state.editorState.map(block => block.data.value)}</p>
-      </div>
+      <OyezEditor
+        blocksConfig={blocksConfig}
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+      />
     )
   }
 }
@@ -167,12 +162,13 @@ It is responsible for telling the component which `Editor` gets what kind of
 data (eg. current content for the richtext editor).
 
 The function of the `editorState` is, as the name says, to represent the current
-state of the `<Editor />`. That means if you e.g. type in a new text into
+state of the `<OyezEditor />`. That means if you e.g. type in a new text into
 a `<EditorQuill />` the `editorState` will change. Your app can access the
-current `editorState` by subscribing to the `onChange` event of the `<Editor />`.
+current `editorState` by subscribing to the `onChange` property of the `<OyezEditor />`.
 
-Through this any changes to a `<Editor />` lead to a re-rendering of the
-`<Editor />` and lets you use the change for your own purposes.
+Through this any changes to an Editor (eg. EditorQuill) lead to an onChange event
+of the `<OyezEditor />` and lets you use the change for your own purposes
+(eg. validate changes or show "unsaved" messages).
 
 A `editorState` can look similar to:
 
@@ -198,7 +194,7 @@ const editorState = [
       src: 'https://picsum.photos/480/240'
     },
     meta: {
-      title: 'Input Block'
+      title: 'Image Block'
     }
   }
 ]
@@ -248,7 +244,7 @@ For example we specified one editor with the "richtext"-type and 1 with the
 
 As a final step we define our App component where we first set the `editorState`
 as `this.state` and create an `onChange`-method to sync the changes in the
-`<Editor />` with the `editorState` of the App and set it as the new
+`<Oyez-Editor />` with the `editorState` of the App and set it as the new
 state (or do even more if we want to).
 
 ```js
@@ -263,11 +259,11 @@ class YourApp extends React.Component {
   }
 
   onChange(change) {
+    // get the change from the OyezEditor and sync the YourApp's state
     this.setState({editorState: change.editorState});
   }
 
-...
-
+  //...
 }
 ```
 
@@ -279,18 +275,16 @@ our `Editor` with its 3 necessary properties (`blocksConfig`, `editorState`
 ```js
 render() {
   return (
-    <div>
-      <Editor
-        blocksConfig={blocksConfig}
-        editorState={this.state.editorState}
-        onChange={(change) => this.onChange(change)}
-      />
-    </div>
+    <OyezEditor
+      blocksConfig={blocksConfig}
+      editorState={this.state.editorState}
+      onChange={this.onChange}
+    />
   )
 }
 ```
 
-The entire example can be found in the [Quickstart](#quickstart) section.
+The entire code of the example can be found in the [Quickstart](#quickstart) section.
 
 ## How to use the styling in our Showcases
 
@@ -344,10 +338,10 @@ npm version major | minor | patch
 
 This will update the version in packages.json and create a git tag.
 
-4. Push the git tag
+4. Push the git tag and changes
 
 ```
-git push --tags
+git push && git push --tags
 ```
 
 5. Merge release in release branch (eg. `release/x.y`)

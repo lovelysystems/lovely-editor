@@ -20,7 +20,7 @@ export class EditorTui extends React.Component {
   // the editor-div must be rendered before the TUI-Editor is initialised, that
   // is why we init it in componentDidMount
   componentDidMount() {
-    const { block, blocksConfig } = this.props
+    const { block, blockConfig } = this.props
     this.editor = new Editor({
       el: document.querySelector('#oyez-editor-tui'),
       initialValue: get(block, 'data.value', false),
@@ -30,7 +30,7 @@ export class EditorTui extends React.Component {
       events: {
         change: this.onChange
       },
-      ...blocksConfig,
+      ...blockConfig,
     })
   }
 
@@ -42,7 +42,7 @@ export class EditorTui extends React.Component {
       }
     }
 
-    // gives the changed value back to the EditorWrapper
+    // gives the changed value back to the OyezEditor
     this.props.onChange(change)
   }
 
@@ -66,7 +66,7 @@ EditorTui.propTypes = {
     })
   }).isRequired,
   onChange: PropTypes.func.isRequired,
-  blocksConfig: PropTypes.shape({
+  blockConfig: PropTypes.shape({
     initialEditType: PropTypes.string,
     previewStyle: PropTypes.string,
     height: PropTypes.string,
@@ -74,5 +74,5 @@ EditorTui.propTypes = {
 }
 
 EditorTui.defaultProps = {
-  blocksConfig: {}
+  blockConfig: {}
 }

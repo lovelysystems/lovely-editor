@@ -3,10 +3,10 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import withReadme from 'storybook-readme/with-readme'
 
-import { Editor, EditorQuill } from '../..'
+import { OyezEditor, EditorQuill } from '../..'
 import componentReadme from './README.md'
 
-// default content of the <Editor />
+// default content of the <OyezEditor />
 const editorState = [{
   id: 7,
   type: 'richtext',
@@ -26,18 +26,49 @@ const blocksConfig = [
   },
 ]
 
-storiesOf('Editor Components/Editor', module)
+class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      editorState
+    }
+  }
+
+  onChange = (change) => {
+    action('onChange')(change)
+    this.setState({editorState: change.editorState})
+  }
+
+  render() {
+    return (
+      <OyezEditor
+        blocksConfig={blocksConfig}
+        editorState={this.state.editorState}
+        onChange={this.onChange}
+      />
+    )
+  }
+
+}
+
+storiesOf('Components/OyezEditor', module)
   .addDecorator(withReadme(componentReadme))
-  .add('default Editor', () => {
+  .add('default (uncontrolled)', () => {
     const onChange = (change) => {
       action('onChange')(change)
     }
 
     return (
-      <Editor
+      <OyezEditor
         blocksConfig={blocksConfig}
         editorState={editorState}
         onChange={onChange}
       />
+    )
+  })
+  .add('default (controlled)', () => {
+    return (
+      <App />
     )
   })

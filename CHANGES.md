@@ -7,6 +7,37 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+### Changed
+
+*BREAKING*
+
+- new name for the Editor: `<Editor />` becomes `<OyezEditor />`
+- new blockConfig structure:
+
+previous:
+
+```
+const blockConfig = {
+  type: 'richtext',
+  component: EditorQui,
+  data: {
+    // blockconfig for the EditorQuill
+  }
+}
+```
+
+now:
+
+```
+const blockConfig = {
+  type: 'richtext',
+  component: EditorQui,
+  blockConfig: {
+    // blockconfig for the EditorQuill
+  }
+}
+```
+
 ## 2018/05/23 [0.4.2][7]
 
 ### Changed

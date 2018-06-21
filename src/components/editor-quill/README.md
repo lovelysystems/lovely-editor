@@ -50,7 +50,7 @@ The following data properties are allowed and can be used:
 - `placeholderText`: will overwrite the placeholder text when the editor is empty
 - `toolbar`: custom Toolbar component
 - `toolbarCallback`: this callback allows the developer to use a callback to get data from the
-   custom Toolbar to the EditorWrapper (eg. onClick on a custom button in the custom
+   custom Toolbar to the OyezEditor (eg. onClick on a custom button in the custom
      Toolbar)
 - `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
 - `theme`: supports either `snow` ([Docs][8]) or `core`. Use `core` to customize the theme of the Editor. An example can be found in the Storybook with Font-Awesome icons.

@@ -1,7 +1,7 @@
-# Editor Block
+# EditorBlock
 
-Renders an Editor-Block containing specific meta data (eg. `title`) and the
-requested Editor Component (eg. Quill or another Editor Component).
+Renders an EditorBlock containing specific meta data (eg. `title`) and the
+requested Editor Component (eg. EditorQuill or another Editor Component).
 
 ## Example
 
@@ -9,7 +9,7 @@ requested Editor Component (eg. Quill or another Editor Component).
 import { EditorBlock } from './'
 import { EditorQuill } from './' // an example child component
 
-// the content of the Editor-Block
+// the content of the EditorBlock
 const block = {
   id: 5,
   type: 'text',
@@ -17,7 +17,7 @@ const block = {
     value: 'Hello World.'
   },
   meta: {
-    title: 'Editor-Block'
+    title: 'EditorBlock'
   }
 }
 

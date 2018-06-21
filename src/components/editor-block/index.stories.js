@@ -58,7 +58,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editor Components/Editor-Block', module)
+storiesOf('Components/EditorBlock', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
     <Wrapper />

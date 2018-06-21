@@ -1,4 +1,4 @@
-import {EditorQuill, EditorImage, EditorCodeMirror } from '../../src'
+import {EditorQuill, EditorImage, EditorTui } from '../../src'
 
 // App Config
 export const defaultMenuState = {
@@ -37,15 +37,6 @@ export const defaultDocument = {
     meta: {
       title: 'Quill Block'
     }
-  }, {
-    id: 4,
-    type: 'codemirror',
-    data: {
-      value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
-    },
-    meta: {
-      title: 'CodeMirror-Editor'
-    }
   }]
 }
 
@@ -58,13 +49,16 @@ export const editorImageConfig = {
   type: 'image',
   component: EditorImage
 }
-export const editorCodeMirrorConfig = {
-  type: 'codemirror',
-  component: EditorCodeMirror
+export const editorTuiConfig = {
+  type: 'tui',
+  component: EditorTui,
+  blockConfig: {
+    height: '300px'
+  }
 }
 
 export const defaultBlocksConfig = [
   editorQuillConfig,
   editorImageConfig,
-  editorCodeMirrorConfig
+  editorTuiConfig
 ]

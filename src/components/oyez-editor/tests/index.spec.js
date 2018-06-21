@@ -4,7 +4,7 @@ import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
 // Tested Component
-import { Editor } from '../'
+import { OyezEditor } from '../'
 import { EditorBlock } from '../../editor-block'
 
 const Text = () => null
@@ -12,13 +12,13 @@ const Image = () => null
 const CustomBlockWrapper = () => null
 const Placeholder = () => null
 
-describe('<Editor />', () => {
+describe('OyezEditor', () => {
 
   describe('Render Tests', () => {
 
     it('component renders', () => {
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={[]}
           blocksConfig={[]}
           onChange={() => {}}
@@ -29,7 +29,7 @@ describe('<Editor />', () => {
 
     it('component renders a custom blockComponent if the prop blockComponent is set', () => {
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
           ]}
@@ -45,7 +45,7 @@ describe('<Editor />', () => {
 
     it('component renders a placeholder if the editorState is empty', () => {
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={[]}
           blocksConfig={[]}
           placeholder={Placeholder}
@@ -57,7 +57,7 @@ describe('<Editor />', () => {
 
     it('component renders imported editorState an does not render placeholder', () => {
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
             { type: 'image', id: 'image-1', meta: {}, data: { value: 'two' } },
@@ -75,15 +75,15 @@ describe('<Editor />', () => {
       expect(wrapper.find(Image).length).to.equal(1)
     })
 
-    it('component passes blockConfig to both the Block and the Editor Component', () => {
+    it('component passes blockConfig to both the Block and the OyezEditor Component', () => {
       const expectedConfig = { example: 'test' }
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
           ]}
           blocksConfig={[
-            { type: 'text', component: Text, data: expectedConfig },
+            { type: 'text', component: Text, blockConfig: expectedConfig },
           ]}
           blockComponent={CustomBlockWrapper}
           onChange={() => {}}
@@ -106,7 +106,7 @@ describe('<Editor />', () => {
 
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={defaultEditorState}
           blocksConfig={[
             { type: 'text', component: Text },
@@ -124,7 +124,7 @@ describe('<Editor />', () => {
     it('component calls onChange when block was removed is triggered', () => {
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={defaultEditorState}
           blocksConfig={[
             { type: 'text', component: Text },
@@ -143,7 +143,7 @@ describe('<Editor />', () => {
     it('component does not change editorState when onBlockAction triggers unknown action', () => {
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <Editor
+        <OyezEditor
           editorState={defaultEditorState}
           blocksConfig={[
             { type: 'text', component: Text },

@@ -9,14 +9,12 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { BemHelper } from '../../src/helpers/bem-helper'
 import { EditorState } from '../../src/model/editor-state'
 
-
-
 // Components
-import { Editor } from '../../src'
+import { OyezEditor } from '../../src'
 import { ExampleMenu } from '../example-menu'
 import HTMLPreview from './html-preview'
 
-const dragDropPlaceholder = () => (<div>Drop the Editor here to start.</div>)
+const dragDropPlaceholder = () => (<div>Drop the OyezEditor here to start.</div>)
 
 // Styling
 const classes = new BemHelper('example-app')
@@ -35,7 +33,7 @@ export default class App extends React.Component {
   }
 
   /**
-   * any change by the Editor will be passed to this function. The wrapper can then
+   * any change by the OyezEditor will be passed to this function. The wrapper can then
    * decide what to do with it. Currently we just get it and update the state.
    * @param  {object}   change contains the new editorState and the block that was changed
    */
@@ -194,7 +192,7 @@ export default class App extends React.Component {
                     data-dragging={snapshot.isDraggingOver}
                     {...dropProvided.droppableProps}
                   >
-                    <Editor
+                    <OyezEditor
                       additionalProps={additionalProps}
                       editorState={editorState}
                       blockComponent={blockComponent || undefined}

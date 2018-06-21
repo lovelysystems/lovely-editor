@@ -59,14 +59,15 @@ storiesOf('App Example', module)
           meta: {
             title: 'Input Block'
           }
-        }, {
-          id: 4711,
-          type: 'richtext',
+        },
+        {
+          id : 9999,
+          type: 'tui',
           data: {
-            value: 'This is the the second block'
+            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
           },
           meta: {
-            title: 'Second Richtext'
+            title: 'TUI-Editor'
           }
         }
       ]
@@ -120,7 +121,7 @@ storiesOf('App Example/Special', module)
   .addDecorator(withReadme(componentReadme))
   .add('Menu and Quill Block Editor with a custom Block-Configuration for the EditorQuill (hidden Toolbar)', () => {
     const editorQuillCustomConfig = merge({}, editorQuillConfig, {
-      data: {
+      blockConfig: {
         hideToolbarOnBlur: true
       }
     })
