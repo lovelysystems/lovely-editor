@@ -11,8 +11,8 @@ The Toolbar (see [Custom Toolbar Docu][1]) is handled by the Component itself bu
 
 ### Styling
 
-The Editor Quill provides a `snow` theme (see more [here][2]) and `core` (enables
-  customization).
+The Editor Quill provides a `snow` (see more [here][2]) and `core` theme
+(enables customization).
 
 #### Nested Ordered Lists
 In order to display only numbers on each list-level of the order list, one has
@@ -53,7 +53,9 @@ The following data properties are allowed and can be used:
    custom Toolbar to the OyezEditor (eg. onClick on a custom button in the custom
      Toolbar)
 - `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
-- `theme`: supports either `snow` ([Docs][8]) or `core`. Use `core` to customize the theme of the Editor. An example can be found in the Storybook with Font-Awesome icons.
+- `theme`: supports either `snow` or `core` ([Docs][2]). Use `core` to
+  customize the theme of the Editor. An example can be found in the Storybook with
+  Font-Awesome icons.
 
 ### Basic Customization Example Code
 
@@ -86,7 +88,7 @@ const blockConfig = {
 ### Customize Icons
 
 The following example illustrates how to replace the button icons with FontAwesome ones.
-There are [more formats available][9], beside the ones illustrated below.
+There are [more formats available][8], beside the ones illustrated below.
 
 ```js
 import { EditorQuill } from './'
@@ -308,11 +310,10 @@ How to write custom modules
 - custom toolbar with custom handler: https://jsfiddle.net/natterstefan/p6eqmsx3/
 
 [1]: https://github.com/zenoamaro/react-quill#custom-toolbar
-[2]: http://quilljs.com/docs/themes/#snow
+[2]: https://quilljs.com/docs/themes/
 [3]: https://github.com/zenoamaro/react-quill#using-deltas
 [4]: https://github.com/quilljs/quill/issues/1108
 [5]: https://lodash.com/docs/4.17.4#debounce
 [6]: https://github.com/zenoamaro/react-quill/issues/282
 [7]: http://quilljs.com/standalone/full/
-[8]: https://quilljs.com/docs/themes/#snow
-[9]: https://quilljs.com/docs/formats/
+[8]: https://quilljs.com/docs/formats/

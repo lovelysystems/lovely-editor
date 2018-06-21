@@ -187,7 +187,7 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ custom theme and placeholderText', () => {
+  .add('default w/ core theme and placeholderText', () => {
     const blockConfig = {
       placeholderText: 'Click to write a text...',
       toolbar: customThemeToolbar,

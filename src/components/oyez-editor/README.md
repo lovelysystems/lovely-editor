@@ -21,7 +21,7 @@ The `editorState` is an array that must look like this (when not empty):
 
 ```js
 const editorState = [{
-  id: 5, // id of the block
+  id: 1, // UNIQUE id of the block
   type: 'text', // type of the block, for each type there must be a matching blocksConfig
   data: { // data for the component. Can have additionaly properties, depends on the used component
     value: 'This is the current Text.' // the content of a component (eg. of the EditorQuill), recommended name
@@ -31,6 +31,10 @@ const editorState = [{
   }
 }]
 ```
+
+**Attention**: the block.id must be unique! Make sure each block has it's own
+individual (it can be random though) id. The id is used to identify each block
+with the Oyez-Editor.
 
 #### blockComponent
 
@@ -109,7 +113,7 @@ import { OyezEditor } from './'
 // the current content, can also be an empty array
 const editorState = [
   {
-    id: 5,
+    id: 1,
     type: 'text',
     data: {
       value: 'This is the current Text.'
@@ -118,7 +122,7 @@ const editorState = [
       title: 'Input Block'
     }
   }, {
-    id: 6,
+    id: 2,
     type: 'image',
     data: {
       value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'

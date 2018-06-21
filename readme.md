@@ -1,4 +1,4 @@
-# Oyez Editor
+id: 2,# Oyez Editor
 
 Oyez-Editor is a React component to provide a variety of editors to add to your
 app. It also gives you the opportunity to create your own editor and add it to
@@ -90,7 +90,7 @@ import { Editor } from 'oyez-editor'
 // current state of the editor
 const editorState = [
   {
-    id: 7,
+    id: 2,
     type: 'richtext',
     data: {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
@@ -175,7 +175,7 @@ A `editorState` can look similar to:
 ```js
 const editorState = [
   {
-    id: 7,
+    id: 1, // block.id
     type: 'richtext',
     data: {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
@@ -185,7 +185,7 @@ const editorState = [
     }
   },
   {
-    id: 5,
+    id: 2,
     type: 'image',
     data: {
       alignment: 'left',
@@ -199,6 +199,10 @@ const editorState = [
   }
 ]
 ```
+
+**Attention**: the block.id must be unique! Make sure each block has it's own
+individual (it can be random though) id. The id is used to identify each block
+with the Oyez-Editor.
 
 Note, that each block type (eg. "richtext") in the `editorState` must have a
 matching type configuration in the `blocksConfig` to be rendered.

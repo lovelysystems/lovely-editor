@@ -25,6 +25,7 @@
     "pretest": "npm run test:node",
     "posttest": "npm run lint",
     "postinstall": "npm run build",
+    "start": "npm run storybook",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "pre-commit": [
