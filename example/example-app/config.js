@@ -1,9 +1,19 @@
-import {EditorQuill, EditorImage, EditorTui } from '../../src'
+import { EditorQuill, EditorImage, EditorTui } from '../../src'
 
-// App Config
+// EXAMPLE MENU SETUP
 export const defaultMenuState = {
   meta: {
-    title: 'Example-Menu'
+    title: 'ExampleMenu'
+  },
+  buttons: [
+    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+  ]
+}
+
+export const templateMenu = {
+  meta: {
+    title: 'ExampleMenu with Templates'
   },
   buttons: [
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
@@ -13,6 +23,11 @@ export const defaultMenuState = {
   ]
 }
 
+// EDITORSTATE & TEMPLATE SETUP
+// - your app could also add default values to the Editors when the user adds new ones.
+// - in our example the ExampleMenu has template buttons. The ExampleApp selects then
+//   the corresponding template in the list of templates below and adds it as the
+//   default value to the new Editor.
 export const defaultDocument = {
   template: [{
     id: 1,
@@ -40,7 +55,7 @@ export const defaultDocument = {
   }]
 }
 
-// EDITOR SETUP
+// EDITORBLOCK SETUP
 export const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill

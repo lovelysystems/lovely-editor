@@ -5,7 +5,8 @@ The main component of this package. It renderes all the blocks and manages them.
 ## Properties
 
 * `additionalProps` (object): contains additional data which is passed to each level
-  (eg. OyezEditor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally.
+  (eg. OyezEditor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally
+  (eg. your customized EditorBlock).
 * `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
 * `blocksConfig` (array): maps a `type` to a component or render function and contains customization `data`
 * `editorState` (array): represents the current state of the Editor
@@ -34,7 +35,7 @@ const editorState = [{
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
-with the Oyez-Editor.
+with the OyezEditor.
 
 #### blockComponent
 

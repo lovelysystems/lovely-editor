@@ -20,13 +20,13 @@ export function ExampleMenu({menuState, onClick}) {
   const buttons = get(menuState, 'buttons', [])
 
   // Documentation `draggableId`
-  // - the `draggableId` is used to help the Wrapper component of the Editor to
+  // - the `draggableId` is used to help the App to
   //   determine which action should be triggered for a block type. The templateId
   //   is used to match the action with a block template.
   // - structure: `type:templateId:action:idx`
   //
   // Example
-  // - Editor Wrapper with a `document` property like
+  // - App with a `document` property like
   // {
   //  template: [{
   //   id: 2,
@@ -41,9 +41,9 @@ export function ExampleMenu({menuState, onClick}) {
   // - `image:2:add:1` => an image block with values of the template id 2 should be added
   return (
     <div {...classes('container')} >
-      <div {...classes('title')}>
+      <h2 {...classes('title')}>
         {title}
-      </div>
+      </h2>
       <div {...classes('content')}>
         {map(buttons, ({ action, text, templateId, type }, idx) => (
           <Draggable

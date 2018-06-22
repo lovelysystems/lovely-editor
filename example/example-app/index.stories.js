@@ -9,7 +9,14 @@ import ExampleBlockWrapper from './block-wrapper'
 import componentReadme from './README.md'
 
 // Configuration of the App (eg. default editorState)
-import { defaultMenuState, defaultDocument, defaultBlocksConfig, editorQuillConfig, editorImageConfig } from './config'
+import {
+  defaultMenuState,
+  templateMenu,
+  defaultDocument,
+  defaultBlocksConfig,
+  editorQuillConfig,
+  editorImageConfig
+} from './config'
 
 // Editor Placeholder examples
 const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to start.</div>)
@@ -19,7 +26,7 @@ const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to st
  */
 storiesOf('App Example', module)
   .addDecorator(withReadme(componentReadme))
-  .add('Menu and Quill Block Editor', () => {
+  .add('with an example Menu and EditorQuill Block', () => {
     return (
       <App
         document={defaultDocument}
@@ -28,7 +35,7 @@ storiesOf('App Example', module)
       />
     )
   })
-  .add('Menu and empty EditorBlock as a Placeholder', () => {
+  .add('with an example Menu and an empty Oyez-Editor', () => {
     const newDocument = {
       ...defaultDocument,
       editorState: []
@@ -42,7 +49,7 @@ storiesOf('App Example', module)
       />
     )
   })
-  .add('Menu and ExampleBlockWrapper with multiple EditorBlocks', () => {
+  .add('with an example Menu and multiple Editors', () => {
     const newDocument = {
       ...defaultDocument,
       editorState: [
@@ -80,7 +87,10 @@ storiesOf('App Example', module)
       />
     )
   })
-  .add('Menu and ExampleBlockWrapper including EditorBlocks with Drag&Drop', () => {
+
+storiesOf('App Example/Customization', module)
+  .addDecorator(withReadme(componentReadme))
+  .add('with a customized example EditorBlock with Drag&Drop Support', () => {
     const newDocument = {
       ...defaultDocument,
       editorState: [
@@ -106,20 +116,7 @@ storiesOf('App Example', module)
       />
     )
   })
-  .add('Menu and EditorBlock with HTML preview', () => {
-    return (
-      <App
-        document={defaultDocument}
-        blocksConfig={defaultBlocksConfig}
-        menuState={defaultMenuState}
-        showPreview
-      />
-    )
-  })
-
-storiesOf('App Example/Special', module)
-  .addDecorator(withReadme(componentReadme))
-  .add('Menu and Quill Block Editor with a custom Block-Configuration for the EditorQuill (hidden Toolbar)', () => {
+  .add('with a custom blockConfig for the EditorQuill (eg. hidden Toolbar)', () => {
     const editorQuillCustomConfig = merge({}, editorQuillConfig, {
       blockConfig: {
         hideToolbarOnBlur: true
@@ -131,6 +128,31 @@ storiesOf('App Example/Special', module)
         document={defaultDocument}
         blocksConfig={blocksConfig}
         menuState={defaultMenuState}
+      />
+    )
+  })
+
+storiesOf('App Example/Content', module)
+  .addDecorator(withReadme(componentReadme))
+  .add('with HTML Preview of the content of all Editors', () => {
+    return (
+      <App
+        document={defaultDocument}
+        blocksConfig={defaultBlocksConfig}
+        menuState={defaultMenuState}
+        showPreview
+      />
+    )
+  })
+
+storiesOf('App Example/Templates', module)
+  .addDecorator(withReadme(componentReadme))
+  .add('with an ExampleMenu with Template Buttons', () => {
+    return (
+      <App
+        document={defaultDocument}
+        blocksConfig={defaultBlocksConfig}
+        menuState={templateMenu}
       />
     )
   })

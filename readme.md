@@ -1,13 +1,13 @@
-id: 2,# Oyez Editor
+# Oyez Editor
 
-Oyez-Editor is a React component to provide a variety of editors to add to your
+OyezEditor is a React component to provide a variety of editors to add to your
 app. It also gives you the opportunity to create your own editor and add it to
 the component. As a result the edited content will come in the shape of
 HTML-code to be added to your page. Each editor will create an independent
 result and therefore can be used on its own.
 
 ## Index
-1. What is the Oyez-Editor?
+1. What is the OyezEditor?
 2. Examples
 3. Requirements
 4. Setup
@@ -85,9 +85,9 @@ Follow the [Installation](#installation) first before taking a look at the
 following comprehensive example:
 
 ```js
-import { Editor } from 'oyez-editor'
+import { OyezEditor } from 'oyez-editor'
 
-// current state of the editor
+// current state of OyezEditor
 const editorState = [
   {
     id: 2,
@@ -114,7 +114,8 @@ const editorState = [
   }
 ]
 
-// renders a specific component for the requested block type
+// renders a specific component for the requested block.type
+// in this case EditorQuill would be rendered for all blocks of type "richtext"
 const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
@@ -124,7 +125,7 @@ const editorImageConfig = {
   component: EditorImage
 }
 
-// sets which editor-configs are given to the Editor and should therefore be rendered
+// sets which editor component should be rendered for which block.type
 const blocksConfig = [
   editorQuillConfig,
   editorImageConfig
@@ -202,7 +203,7 @@ const editorState = [
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
-with the Oyez-Editor.
+with the OyezEditor.
 
 Note, that each block type (eg. "richtext") in the `editorState` must have a
 matching type configuration in the `blocksConfig` to be rendered.
@@ -244,11 +245,11 @@ For example we specified one editor with the "richtext"-type and 1 with the
 - If we put in both (as in the examples above) first the "richtext"-type Editors
   and then the "image"-type `EditorComponent` (eg. `<EditorImage />`) is rendered.
 
-### Oyez-Editor Integration in your App
+### OyezEditor Integration in your App
 
 As a final step we define our App component where we first set the `editorState`
 as `this.state` and create an `onChange`-method to sync the changes in the
-`<Oyez-Editor />` with the `editorState` of the App and set it as the new
+`<OyezEditor />` with the `editorState` of the App and set it as the new
 state (or do even more if we want to).
 
 ```js

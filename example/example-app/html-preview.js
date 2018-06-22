@@ -1,15 +1,18 @@
 import React from 'react'
+import { get } from 'lodash'
 
-export default ({editorState}) => {
-  return (
-    <div>{editorState.map(block => {
-      if(block.type === 'richtext')
+export default ({editorState}) => (
+  <React.Fragment>
+    <h1>HTML Preview</h1>
+    {editorState.map(block => {
+      if (block.type === 'richtext') {
         return block.data.value
-      else if(block.type === 'image') {
-        const html = `<img src="${block.data.src}" class="img-size-${block.data.size} img-alignment-${block.data.alignment}" title="${block.data.caption}"/>`
-        return html
+      } else if (block.type === 'image') {
+        return get(block, 'data.src')
+          ? `<img src="${get(block, 'data.src')}" class="img-size-${get(block, 'data.size')} img-alignment-${get(block, 'data.alignment')}" title="${get(block, 'data.caption')}"/>`
+          : null
       }
-      return ''
+      return null
     })}
-    </div>)
-}
+  </React.Fragment>
+)

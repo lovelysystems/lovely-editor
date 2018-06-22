@@ -14,7 +14,7 @@ import { OyezEditor } from '../../src'
 import { ExampleMenu } from '../example-menu'
 import HTMLPreview from './html-preview'
 
-const dragDropPlaceholder = () => (<div>Drop the OyezEditor here to start.</div>)
+const dragDropPlaceholder = () => (<div>Add an Editor from the Menu here to start.</div>)
 
 // Styling
 const classes = new BemHelper('example-app')
@@ -183,7 +183,7 @@ export default class App extends React.Component {
               </div>
             )}
           </Droppable>
-          <div>
+          <div {...classes('content')}>
             <div {...classes(this.props.showPreview ? 'editor-preview' : 'editor')}>
               <Droppable droppableId='droppable-editor'>
                 {(dropProvided, snapshot) => (
