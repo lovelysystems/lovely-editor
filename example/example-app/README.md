@@ -12,10 +12,10 @@ Each story contains an `ExampleApp`, `ExampleMenu` (part of your app) and the
 The `ExampleMenu` would be part of your application and allows users to add new
 Editors to `OyezEditor` in our examples. And the `ExampleApp` is responsible for
 handling the `editorState` (contains all blocks and their content of the
-  OyezEditor). Handling means it must subscribe to the `OyezEditor`'s `onChange`,
-  get the change, update the old `editorState` (usually part of the state of
-    ExampleApp) and give it back to the `OyezEditor` as a property. A simple
-    example would look like this:
+OyezEditor). Handling means it must subscribe to the `OyezEditor`'s `onChange`,
+get the change, update the old `editorState` (usually part of the state of
+ExampleApp) and give it back to the `OyezEditor` as a property. A simple
+example would look like this:
 
 ```js
 import { OyezEditor } from 'oyez-editor'
@@ -76,9 +76,9 @@ how you can customize OyezEditor and eg. add Drag and Drop Support.
 
 To get or generate HTML from the content of all Editors one has to iterate over
 the block.data objects. Some Editors already provide HTML (eg. EditorQuill or
-  EditorTui) and others don't (eg. our EditorImage example). Then you need to take
-  care of generating the HTML tag yourself. Check out our example `html-preview.js`
-  to see it in action.
+EditorTui) and others don't (eg. our EditorImage example). Then you need to take
+care of generating the HTML tag yourself. Check out our example `html-preview.js`
+to see it in action.
 
 ### Customization
 
