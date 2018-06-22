@@ -5,7 +5,7 @@ Includes the CodeMirror-Editor from https://github.com/scniro/react-codemirror2
 NOTE: This implementation of the CodeMirror-Editor is just a showcase and not a
 full implementation with all features and customisation possibilities. We only
 implemented a simple version with a couple of basic features. It only supports
-the features included in the example down below.
+the features included in the example shown below.
 
 ## Data Structure
 
@@ -22,7 +22,7 @@ import { EditorCodeMirror } from './'
 
 const block = {
   data: {
-    value: '<h1>MEIN TEXT</h1>'
+    value: 'console.log(\'hello\')' // currently only javascript is supported
   },
 }
 

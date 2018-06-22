@@ -2,6 +2,15 @@
 
 Renders the Quill Editor and returns its content on change.
 
+## Data Structure
+
+```js
+  id: 5, // unique ID for each block (and so also for each EditorQuill)
+  data: {
+    value: '<p>Hello World. <b>This is bold.</b></p>' // can be html or plain text
+  }
+```
+
 ## UI
 
 ### Toolbar
@@ -67,10 +76,6 @@ const exampleBlock = {
   data: {
     value: '<p>Hello World. <b>This is bold.</b></p>'
   },
-  meta: {
-    title: 'Input Box'
-  },
-  type: 'richtext'
 }
 
 const blockConfig = {
@@ -98,10 +103,6 @@ const exampleBlock = {
   data: {
     value: '<p>Hello World. <b>This is bold.</b></p>'
   },
-  meta: {
-    title: 'Input Box'
-  },
-  type: 'richtext'
 }
 
 const blockConfig = {
@@ -177,10 +178,6 @@ class Wrapper extends React.Component {
       data: {
         value: '<p>Hello World. <b>This is bold.</b></p>'
       },
-      meta: {
-        title: 'Input Box'
-      },
-      type: 'richtext'
     }
     const blockConfig = {
       toolbar: customQuillToolbar,
@@ -279,10 +276,6 @@ const exampleBlock = {
   data: {
     value: '<p>Hello World. <b>This is bold.</b></p>'
   },
-  meta: {
-    title: 'Input Box'
-  },
-  type: 'richtext'
 }
 
 <EditorQuill

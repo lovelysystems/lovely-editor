@@ -183,7 +183,7 @@ export default class App extends React.Component {
               </div>
             )}
           </Droppable>
-          <div {...classes('content')}>
+          <div {...classes(this.props.showPreview ? 'content-preview' : 'content')}>
             <div {...classes(this.props.showPreview ? 'editor-preview' : 'editor')}>
               <Droppable droppableId='droppable-editor'>
                 {(dropProvided, snapshot) => (

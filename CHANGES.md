@@ -7,7 +7,15 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+### Added
+
+- new example editors added: [CodeMirror](https://github.com/scniro/react-codemirror2)
+  and [ToastUI Editor])(https://github.com/nhnent/tui.editor)
+
 ### Changed
+
+- example-app and related components moved to /example folder
+- EditorQuill comes with two themes: quill.snow and quill.core
 
 *BREAKING*
 

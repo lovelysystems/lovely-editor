@@ -7,13 +7,11 @@ import { BemHelper } from '../../helpers/bem-helper'
 
 // Styling
 const classes = new BemHelper('editor-codemirror')
+require('codemirror/lib/codemirror.css')
+require('codemirror/theme/material.css')
 
 // NOTE: currently only javascript is supported!
 require('codemirror/mode/javascript/javascript')
-
-// styling
-require('codemirror/lib/codemirror.css')
-require('codemirror/theme/material.css')
 
 export class EditorCodeMirror extends React.Component {
 
@@ -35,9 +33,9 @@ export class EditorCodeMirror extends React.Component {
   }
 
   render() {
-    const { block, blocksConfig } = this.props
+    const { block, blockConfig } = this.props
     const options = {
-      lineNumbers: get(blocksConfig, 'lineNumbers', false),
+      lineNumbers: get(blockConfig, 'lineNumbers', false),
       mode: {
         name: 'javascript',
         json: true,
@@ -64,11 +62,11 @@ EditorCodeMirror.propTypes = {
   block: PropTypes.shape({
     data: PropTypes.object.isRequired
   }).isRequired,
-  blocksConfig: PropTypes.shape({
+  blockConfig: PropTypes.shape({
     lineNumbers: PropTypes.bool
   }),
   onChange: PropTypes.func.isRequired
 }
 EditorCodeMirror.defaultProps = {
-  blocksConfig: {}
+  blockConfig: {}
 }

@@ -7,7 +7,7 @@ Provides the possibility to convert text Markdown-Language to HTML.
 NOTE: This implementation of the TUI-Editor is just a showcase and not a full
 implementation with all features and customisation possibilities. We only
 implemented a simple version with a couple of basic features. It only supports
-the features included in the example down below.
+the features included in the example shown below.
 
 ## Data Structure
 
@@ -20,6 +20,18 @@ the features included in the example down below.
 
 Note: `data.html` is only used as an output by the TUI editor himself. It cannot
 be used as an input. But one gets the html output of the markdown input here.
+
+## Customization
+
+One can customize the `EditorTui` component. All that is needed is a property called `blockConfig`.
+
+```js
+props.blockConfig = {
+  initialEditType: 'markdown', // possible: "markdown" | "wysiwyg"
+  previewStyle: 'vertical', // possible: "tab" | "vertical"
+  height: '400px'
+}
+```
 
 ## Example code
 

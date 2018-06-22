@@ -41,8 +41,8 @@ there is an example-menu included to quickly add different editor-types (eg.
 ## Requirements
 
 ```
- node 8.6.x
- npm 5.3.x // for development
+node 8.6.x
+npm 5.3.x
 ```
 
 ## Installation
@@ -291,13 +291,13 @@ render() {
 
 The entire code of the example can be found in the [Quickstart](#quickstart) section.
 
-## How to use the styling in our Showcases
+## How to use the styling from our Showcases
 
-If you want to use our basic styling, you have to include the CSS from oyez-editor
-in your own application.
+If you want to use the same styling like the basic styling in our Storybook,
+you have to include the CSS from oyez-editor in your own application.
 
 ```CSS
-@import "~oyez-editor/sass/main";
+@import "~oyez-editor/sass/oyez-editor";
 ```
 
 ## How to contribute and develop

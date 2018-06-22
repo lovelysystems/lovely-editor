@@ -1,14 +1,16 @@
 import React from 'react'
 import { clone } from 'lodash'
-import { storiesOf } from '@storybook/react' //eslint-disable-line
-import { action } from '@storybook/addon-actions' //eslint-disable-line
-import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
+import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
+import withReadme from 'storybook-readme/with-readme'
 import componentReadme from './README.md'
 
 import { EditorCodeMirror } from './index'
 
 const blocksConfig = {
-  lineNumbers: false // lineNumbers ==> needs to be false, otherwise storybook cannot handle mounting/rendering it correctly (but works in other envs)
+  // lineNumbers ==> needs to be false, otherwise storybook cannot handle
+  // mounting/rendering it correctly (but works in other envs)
+  lineNumbers: false
 }
 
 const block = {
