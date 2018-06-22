@@ -12,6 +12,7 @@ import componentReadme from './README.md'
 import {
   defaultMenuState,
   templateMenu,
+  menuWithAllEditors,
   defaultDocument,
   defaultBlocksConfig,
   editorQuillConfig,
@@ -49,32 +50,43 @@ storiesOf('App Example', module)
       />
     )
   })
-  .add('with an example Menu and multiple Editors', () => {
+  .add('with all available Editors', () => {
+    const randomId = () => Math.floor((Math.random() * 1000) + 1)
     const newDocument = {
       ...defaultDocument,
       editorState: [
         ...defaultDocument.editorState,
         {
-          id: 5,
+          id: randomId(),
           type: 'image',
           data: {
             alignment: 'left',
             caption: 'Hello World.',
             size: 'medium',
-            src: 'https://picsum.photos/480/240'
+            src: 'https://picsum.photos/1000/500'
           },
           meta: {
             title: 'Input Block'
           }
         },
         {
-          id : 9999,
+          id: randomId(),
           type: 'tui',
           data: {
             value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
           },
           meta: {
             title: 'TUI-Editor'
+          }
+        },
+        {
+          id: randomId(),
+          type: 'codemirror',
+          data: {
+            value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
+          },
+          meta: {
+            title: 'CodeMirror-Editor'
           }
         }
       ]
@@ -83,7 +95,7 @@ storiesOf('App Example', module)
       <App
         document={newDocument}
         blocksConfig={defaultBlocksConfig}
-        menuState={defaultMenuState}
+        menuState={menuWithAllEditors}
       />
     )
   })

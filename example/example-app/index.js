@@ -115,10 +115,12 @@ export default class App extends React.Component {
       templateData = get(template, 'data', {})
     }
 
+    const randomId = () => Math.floor((Math.random() * 1000) + 1)
+
     switch (event.type) {
     case 'image':
       newBlock = {
-        id: Math.floor((Math.random() * 1000) + 1),
+        id: randomId(),
         type: 'image',
         data: {
           ...templateData
@@ -130,7 +132,7 @@ export default class App extends React.Component {
       break
     case 'richtext':
       newBlock = {
-        id: Math.floor((Math.random() * 1000) + 1),
+        id: randomId(),
         type: 'richtext',
         data: {
           value: get(templateData, 'value', '')
@@ -141,6 +143,16 @@ export default class App extends React.Component {
       }
       break
     default:
+      newBlock = {
+        id: randomId(),
+        type: event.type,
+        data: {
+          value: ''
+        },
+        meta: {
+          title: 'Editor'
+        }
+      }
       break
     }
     return newBlock

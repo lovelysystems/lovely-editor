@@ -11,6 +11,7 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 - new example editors added: [CodeMirror](https://github.com/scniro/react-codemirror2)
   and [ToastUI Editor])(https://github.com/nhnent/tui.editor)
+- new storybook examples added
 
 ### Changed
 

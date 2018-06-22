@@ -26,7 +26,7 @@ const exampleBlock = {
     alignment: 'left',
     caption: 'Hello World.',
     size: 'medium',
-    src: 'https://picsum.photos/480/240'
+    src: 'https://picsum.photos/1000/500'
   }
 }
 

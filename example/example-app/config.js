@@ -1,4 +1,6 @@
-import { EditorQuill, EditorImage, EditorTui } from '../../src'
+import { EditorQuill, EditorImage, EditorTui, EditorCodeMirror } from '../../src'
+
+const randomId = () => Math.floor((Math.random() * 1000) + 1)
 
 // EXAMPLE MENU SETUP
 export const defaultMenuState = {
@@ -8,6 +10,18 @@ export const defaultMenuState = {
   buttons: [
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+  ]
+}
+
+export const menuWithAllEditors = {
+  meta: {
+    title: 'ExampleMenu with all Editors'
+  },
+  buttons: [
+    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+    { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
+    { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
   ]
 }
 
@@ -30,12 +44,12 @@ export const templateMenu = {
 //   default value to the new Editor.
 export const defaultDocument = {
   template: [{
-    id: 1,
+    id: randomId(),
     data: {
       value: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>'
     }
   }, {
-    id: 2,
+    id: randomId(),
     data: {
       alignment: 'center',
       caption: 'Hello Kevin.',
@@ -44,7 +58,7 @@ export const defaultDocument = {
     }
   }],
   editorState: [{
-    id: 3,
+    id: randomId(),
     type: 'richtext',
     data: {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
@@ -71,9 +85,14 @@ export const editorTuiConfig = {
     height: '300px'
   }
 }
+export const editorCodemirrorConfig = {
+  type: 'codemirror',
+  component: EditorCodeMirror,
+}
 
 export const defaultBlocksConfig = [
   editorQuillConfig,
   editorImageConfig,
-  editorTuiConfig
+  editorTuiConfig,
+  editorCodemirrorConfig
 ]

@@ -106,7 +106,7 @@ const editorState = [
       alignment: 'left',
       caption: 'Hello World.',
       size: 'medium',
-      src: 'https://picsum.photos/480/240'
+      src: 'https://picsum.photos/1000/500'
     },
     meta: {
       title: 'Input Block'
@@ -192,7 +192,7 @@ const editorState = [
       alignment: 'left',
       caption: 'Hello World.',
       size: 'medium',
-      src: 'https://picsum.photos/480/240'
+      src: 'https://picsum.photos/1000/500'
     },
     meta: {
       title: 'Image Block'
