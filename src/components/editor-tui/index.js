@@ -47,11 +47,7 @@ export class EditorTui extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <div id="oyez-editor-tui" />
-      </div>
-    )
+    return <div id="oyez-editor-tui" />
   }
 
 }
