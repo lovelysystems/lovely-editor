@@ -17,6 +17,7 @@ Enzyme.configure({ adapter: new Adapter() })
 // Tui-Editor Mock
 const mock = require('mock-require')
 
+// keep in mind to reset the spy after using it. eg. `window.tuiSpy.resetHistory();` in the test teardown
 window.tuiSpy = sinon.spy()
 
 mock('tui-editor', (opts) => {

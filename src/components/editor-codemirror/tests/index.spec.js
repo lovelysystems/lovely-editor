@@ -24,7 +24,7 @@ describe('<EditorCodeMirror />', () => {
       expect(wrapper.find(CodeMirror).length).to.equal(1)
     })
 
-    it('a CM component with the correct properties', () => {
+    it('a CodeMirror component with the correct properties', () => {
       const wrapper = shallow(
         <EditorCodeMirror
           block={validConfig}
@@ -49,7 +49,7 @@ describe('<EditorCodeMirror />', () => {
       })
     })
 
-    it('a CM component with the correct properties + overwritten', () => {
+    it('a CodeMirror component with correct default and overwritten properties', () => {
       const wrapper = shallow(
         <EditorCodeMirror
           block={validConfig}
@@ -80,7 +80,7 @@ describe('Behaviour test', () => {
     clock.restore()
   })
 
-  it('changes trigger this.props.onChange', () => {
+  it('changes trigger this.props.onChange by calling onChangeHandle directly', () => {
     const onChange = sinon.spy()
     const wrapper = shallow(
       <EditorCodeMirror
@@ -100,9 +100,10 @@ describe('Behaviour test', () => {
     })
   })
 
-  it('changes trigger this.props.onChange with simulate', () => {
+  it('changes trigger this.props.onChange', () => {
     const expected = {
-      data: { value: 'newinput'
+      data: {
+        value: 'newinput'
       }
     }
     const onChange = sinon.spy()

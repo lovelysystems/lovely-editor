@@ -1,5 +1,5 @@
 import React from 'react'
-import { get, find } from 'lodash'
+import { get, find, clone } from 'lodash'
 import { action } from '@storybook/addon-actions'
 
 // DND Example: https://github.com/alexreardon/react-beautiful-dnd-flow-example/blob/master/src/App.js
@@ -8,6 +8,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 // Helpers
 import { BemHelper } from '../../src/helpers/bem-helper'
 import { EditorState } from '../../src/model/editor-state'
+
 
 // Components
 import { OyezEditor } from '../../src'
@@ -74,7 +75,7 @@ export default class App extends React.Component {
     }
     action('onDragEnd')(result)
 
-    let newEditorState = this.state.editorState
+    let newEditorState = clone(this.state.editorState)
     if (!result.source.droppableId.includes('droppable-menu')) {
       // only reorder elements when the element was not added from the menu
       newEditorState = this.reorderBlocks(

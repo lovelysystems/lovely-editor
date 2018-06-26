@@ -87,6 +87,8 @@ describe('<EditorTui />', () => {
       instance.onChangeHandler()
 
       expect(onChange.callCount).to.equal(1)
+
+      // tui-editor is mocked in tests/helpers/test-setup.js including the dummy values here
       expect(onChange.lastCall.args[0]).to.include({
         data: {
           value: 'whatever',
