@@ -1,7 +1,7 @@
 import React from 'react'
 import { get } from 'lodash'
 
-export default ({editorState={}}) => (
+export default ({editorState=[]}) => (
   <React.Fragment>
     <h1>HTML Preview</h1>
     {editorState.map(block => {
