@@ -23,13 +23,12 @@ export class EditorCodeMirror extends React.Component {
   onChangeHandler(editor, data, value) {
     const change = {
       data: {
-        'value': value
+        value
       }
     }
 
     // gives the changed value back to the OyezEditor
     this.props.onChange(change)
-
   }
 
   render() {
