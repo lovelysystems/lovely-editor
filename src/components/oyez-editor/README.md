@@ -1,11 +1,12 @@
-# Editor Component
+# OyezEditor Component
 
 The main component of this package. It renderes all the blocks and manages them.
 
 ## Properties
 
 * `additionalProps` (object): contains additional data which is passed to each level
-  (eg. Editor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally.
+  (eg. OyezEditor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally
+  (eg. your customized EditorBlock).
 * `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
 * `blocksConfig` (array): maps a `type` to a component or render function and contains customization `data`
 * `editorState` (array): represents the current state of the Editor
@@ -21,10 +22,10 @@ The `editorState` is an array that must look like this (when not empty):
 
 ```js
 const editorState = [{
-  id: 5, // id of the block
+  id: 1, // UNIQUE id of the block
   type: 'text', // type of the block, for each type there must be a matching blocksConfig
   data: { // data for the component. Can have additionaly properties, depends on the used component
-    value: 'This is the current Text.' // the content of a component (eg. of the Quill-Editor), recommended name
+    value: 'This is the current Text.' // the content of a component (eg. of the EditorQuill), recommended name
   },
   meta: { // meta information for the Block-Wrapper
     title: 'Input Block'
@@ -32,12 +33,16 @@ const editorState = [{
 }]
 ```
 
+**Attention**: the block.id must be unique! Make sure each block has it's own
+individual (it can be random though) id. The id is used to identify each block
+with the OyezEditor.
+
 #### blockComponent
 
 The `blockComponent` property is optional and must be a React Component. It will be
 used to wrap the `<EditorBlock/>` component in a custom component. This can be very
 useful if a DragAndDrop feature is planned. An example use case can be found in
-the storybook (look for 'Editor with Drag and Drop').
+the storybook (look for the example with Drag and Drop).
 
 ```js
 import { EditorBlock } from '../editor-block'
@@ -53,8 +58,8 @@ const customBlockWrapper = ({block, children, onAction}) => (
   </EditorBlock>
 )
 
-// then pass customBlockWrapper as blockComponent to the Editor
-<Editor
+// then pass customBlockWrapper as blockComponent to the OyezEditor
+<OyezEditor
   editorState={...}
   blockComponent={customBlockWrapper}
   blocksConfig={...}
@@ -68,21 +73,21 @@ The `blocksConfig` is an array that must look like this, and contain a
 type-definition for each block in the `editorState`:
 
 ```js
-const blocksConfig = [ {
+const blocksConfig = [{
   type: 'text', // block-type, for each type in the editorState there must be a definition here
-  component: RichText // eg. React Component or render function
-  data: { // used and passed as blockConfig to the <EditorBlock /> and editors (eg. <EditorQuill />)
+  component: EditorQuill // eg. React Component or render function
+  blockConfig: { // used and passed as blockConfig to the <EditorBlock /> and editors (eg. <EditorQuill />)
     someCustomData: 'someCustomValue'
   }
 }]
 ```
 
-Other components of the Editor (eg. EditorQuill) will use the properties from `data`
+Other components of the OyezEditor (eg. EditorQuill) will use the properties from `blockConfig`
 to customize their behaviour (eg. use a custom toolbar).
 
 #### onChange
 
-The `onChange` property emits every change that happens inside the Editor. It
+The `onChange` property emits every change that happens inside the OyezEditor. It
 can look like this:
 
 ```js
@@ -104,12 +109,12 @@ change = {
 ## Example
 
 ```js
-import { Editor } from './'
+import { OyezEditor } from './'
 
 // the current content, can also be an empty array
 const editorState = [
   {
-    id: 5,
+    id: 1,
     type: 'text',
     data: {
       value: 'This is the current Text.'
@@ -118,7 +123,7 @@ const editorState = [
       title: 'Input Block'
     }
   }, {
-    id: 6,
+    id: 2,
     type: 'image',
     data: {
       value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
@@ -145,7 +150,7 @@ const blocksConfig = [
   }
 ]
 
-<Editor
+<OyezEditor
   editorState={editorState}
   blocksConfig={blocksConfig}
   onChange={(change) => console.log(change)}

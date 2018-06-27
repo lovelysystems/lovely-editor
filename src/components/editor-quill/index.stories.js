@@ -131,7 +131,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editors/Editor-Quill', module)
+storiesOf('Editors/EditorQuill', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => {
     return (
@@ -187,7 +187,7 @@ storiesOf('Editors/Editor-Quill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ custom theme and placeholderText', () => {
+  .add('default w/ core theme and placeholderText', () => {
     const blockConfig = {
       placeholderText: 'Click to write a text...',
       toolbar: customThemeToolbar,

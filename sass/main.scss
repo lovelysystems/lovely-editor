@@ -4,6 +4,7 @@ body {
 }
 
 $button-bg-color: #0065cc;
+$bg-color: #bebebe;
 
 .btn {
   font: inherit;
@@ -26,21 +27,41 @@ $button-bg-color: #0065cc;
 
 .oy-example-app {
 
+  h1, h2 {
+    margin: 5px 0 10px;
+  }
+
   &__container {
     margin: 10px;
   }
 
+  &__content-preview {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__editor-preview {
+    min-width: 70%;
+    display: inline-block;
+  }
+
+  &__preview {
+    background-color: $bg-color;
+    border: 1px solid #000;
+    display: inline-block;
+    padding: 5px 15px 20px;
+    word-wrap: break-word;
+    margin-left: 20px;
+    width: 100%;
+  }
+
   &__menu {
     font-size: 16px;
-    background-color: #bebebe;
+    background-color: $bg-color;
     padding: 10px 20px;
     margin-bottom: 20px;
     border: 1px solid #000;
   }
 }
 
-@import 'components/editor/styles';
-@import 'components/editor-block/styles';
-@import 'components/editor-quill/styles';
-@import 'components/editor-image/styles';
-@import 'components/example-menu/styles';
+@import './oyez-editor';

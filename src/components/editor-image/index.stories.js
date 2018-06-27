@@ -26,7 +26,7 @@ const exampleBlock = {
     alignment: 'left',
     caption: 'Hello World.',
     size: 'medium',
-    src: 'https://picsum.photos/480/240'
+    src: 'https://picsum.photos/1000/500'
   }
 }
 
@@ -66,7 +66,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editors/Editor Image', module)
+storiesOf('Editors/EditorImage', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
     <Wrapper />

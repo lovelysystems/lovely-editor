@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import { EditorBlock } from '../'
 
 const block = {
-  id: 'text-1',
+  id: 1,
   meta: {
     title: 'Example Block',
   },
@@ -52,7 +52,7 @@ describe('<EditorBlock />', () => {
         </EditorBlock>
       )
 
-      const action = { action: 'remove', id: 'text-1' }
+      const action = { action: 'remove', id: 1 }
       wrapper.find('.oy-editor-block__action-remove').simulate('click')
       expect(onAction.callCount).to.equal(1)
       expect(onAction.lastCall.args[0]).to.equal(action)

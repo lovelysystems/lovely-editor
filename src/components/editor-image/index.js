@@ -56,7 +56,6 @@ export class EditorImage extends React.Component {
       <div {...classes('container')}>
         <div {...classes('toolbar')}>
           <EditorToolbar
-            id={block.id}
             currentValue={currentValue}
             onToolbarClick={toolbarCallback}
             onChange={this.onChange}
@@ -77,7 +76,6 @@ EditorImage.displayName = 'EditorImage'
 EditorImage.propTypes = {
   additionalProps: PropTypes.object,
   block: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     data: PropTypes.object.isRequired
   }).isRequired,
   blockConfig: PropTypes.shape({

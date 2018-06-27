@@ -17,7 +17,7 @@ const exampleBlock = {
     alignment: 'left',
     caption: 'Hello World.',
     size: 'medium',
-    src: 'https://picsum.photos/480/240'
+    src: 'https://picsum.photos/1000/500'
   },
   meta: {
     title: 'Input Box'
@@ -58,7 +58,7 @@ class Wrapper extends React.Component {
 
 }
 
-storiesOf('Editor Components/Editor-Block', module)
+storiesOf('Components/EditorBlock', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => (
     <Wrapper />

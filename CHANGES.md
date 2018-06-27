@@ -7,6 +7,47 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+### Added
+
+- new example editors added: [CodeMirror](https://github.com/scniro/react-codemirror2)
+  and [ToastUI Editor])(https://github.com/nhnent/tui.editor)
+- new storybook examples added
+
+### Changed
+
+- example-app and related components moved to /example folder
+- EditorQuill comes with two themes: quill.snow and quill.core
+
+*BREAKING*
+
+- new name for the Editor: `<Editor />` becomes `<OyezEditor />`
+- new blockConfig structure, pass additional customizations via new `blockConfig`
+  property to an Editor. See an example with EditorQuill below:
+
+previous:
+
+```
+const blockConfig = {
+  type: 'richtext',
+  component: EditorQuill,
+  data: {
+    // blockconfig for the EditorQuill
+  }
+}
+```
+
+now:
+
+```
+const blockConfig = {
+  type: 'richtext',
+  component: EditorQuill,
+  blockConfig: {
+    // blockconfig for the EditorQuill
+  }
+}
+```
+
 ## 2018/05/23 [0.4.2][7]
 
 ### Changed

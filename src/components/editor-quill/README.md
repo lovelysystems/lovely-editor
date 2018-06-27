@@ -2,6 +2,15 @@
 
 Renders the Quill Editor and returns its content on change.
 
+## Data Structure
+
+```js
+  id: 5, // unique ID for each block (and so also for each EditorQuill)
+  data: {
+    value: '<p>Hello World. <b>This is bold.</b></p>' // can be html or plain text
+  }
+```
+
 ## UI
 
 ### Toolbar
@@ -11,8 +20,8 @@ The Toolbar (see [Custom Toolbar Docu][1]) is handled by the Component itself bu
 
 ### Styling
 
-The Editor Quill provides a `snow` theme (see more [here][2]) and `core` (enables
-  customization).
+The Editor Quill provides a `snow` (see more [here][2]) and `core` theme
+(enables customization).
 
 #### Nested Ordered Lists
 In order to display only numbers on each list-level of the order list, one has
@@ -50,10 +59,12 @@ The following data properties are allowed and can be used:
 - `placeholderText`: will overwrite the placeholder text when the editor is empty
 - `toolbar`: custom Toolbar component
 - `toolbarCallback`: this callback allows the developer to use a callback to get data from the
-   custom Toolbar to the EditorWrapper (eg. onClick on a custom button in the custom
+   custom Toolbar to the OyezEditor (eg. onClick on a custom button in the custom
      Toolbar)
 - `toolbarSelector`: css selector of the new Toolbar component (tells Quill to use it)
-- `theme`: supports either `snow` ([Docs][8]) or `core`. Use `core` to customize the theme of the Editor. An example can be found in the Storybook with Font-Awesome icons.
+- `theme`: supports either `snow` or `core` ([Docs][2]). Use `core` to
+  customize the theme of the Editor. An example can be found in the Storybook with
+  Font-Awesome icons.
 
 ### Basic Customization Example Code
 
@@ -65,10 +76,6 @@ const exampleBlock = {
   data: {
     value: '<p>Hello World. <b>This is bold.</b></p>'
   },
-  meta: {
-    title: 'Input Box'
-  },
-  type: 'richtext'
 }
 
 const blockConfig = {
@@ -86,7 +93,7 @@ const blockConfig = {
 ### Customize Icons
 
 The following example illustrates how to replace the button icons with FontAwesome ones.
-There are [more formats available][9], beside the ones illustrated below.
+There are [more formats available][8], beside the ones illustrated below.
 
 ```js
 import { EditorQuill } from './'
@@ -96,10 +103,6 @@ const exampleBlock = {
   data: {
     value: '<p>Hello World. <b>This is bold.</b></p>'
   },
-  meta: {
-    title: 'Input Box'
-  },
-  type: 'richtext'
 }
 
 const blockConfig = {
@@ -175,10 +178,6 @@ class Wrapper extends React.Component {
       data: {
         value: '<p>Hello World. <b>This is bold.</b></p>'
       },
-      meta: {
-        title: 'Input Box'
-      },
-      type: 'richtext'
     }
     const blockConfig = {
       toolbar: customQuillToolbar,
@@ -277,10 +276,6 @@ const exampleBlock = {
   data: {
     value: '<p>Hello World. <b>This is bold.</b></p>'
   },
-  meta: {
-    title: 'Input Box'
-  },
-  type: 'richtext'
 }
 
 <EditorQuill
@@ -308,11 +303,10 @@ How to write custom modules
 - custom toolbar with custom handler: https://jsfiddle.net/natterstefan/p6eqmsx3/
 
 [1]: https://github.com/zenoamaro/react-quill#custom-toolbar
-[2]: http://quilljs.com/docs/themes/#snow
+[2]: https://quilljs.com/docs/themes/
 [3]: https://github.com/zenoamaro/react-quill#using-deltas
 [4]: https://github.com/quilljs/quill/issues/1108
 [5]: https://lodash.com/docs/4.17.4#debounce
 [6]: https://github.com/zenoamaro/react-quill/issues/282
 [7]: http://quilljs.com/standalone/full/
-[8]: https://quilljs.com/docs/themes/#snow
-[9]: https://quilljs.com/docs/formats/
+[8]: https://quilljs.com/docs/formats/

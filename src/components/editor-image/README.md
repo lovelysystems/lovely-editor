@@ -13,7 +13,7 @@ Renders an Image block, which is capable of
     alignment: 'left',
     caption: 'Hello World.',
     size: 'medium',
-    src: 'https://picsum.photos/480/240'
+    src: 'https://picsum.photos/1000/500'
   }
 ```
 
@@ -55,7 +55,7 @@ const exampleBlock = {
     alignment: 'left',
     caption: 'Hello World.',
     size: 'medium',
-    src: 'https://picsum.photos/480/240'
+    src: 'https://picsum.photos/1000/500'
   },
   type: 'image'
 }
@@ -86,7 +86,7 @@ const exampleImage = {
     alignment: 'left',
     caption: 'Hello World.',
     size: 'medium',
-    src: 'https://picsum.photos/480/240'
+    src: 'https://picsum.photos/1000/500'
   }
 }
 

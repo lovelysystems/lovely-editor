@@ -6,21 +6,21 @@ import { map, merge } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
-// Editor Components
+// OyezEditor Components
 import { EditorBlock } from '../editor-block'
 
 // Styling
 const classes = new BemHelper('editor')
 
 /**
- * Editor component
+ * OyezEditor component
  *
  * is responsible for
  * - rendering the blocks (see renderEditorBlocks)
  * - telling the <Wrapper /> when the content of a block changes (see onContentChange)
  *   or a block triggers an action (see onBlockAction)
  */
-export class Editor extends React.Component {
+export class OyezEditor extends React.Component {
 
   // event listeners and handlers
   onContentChange(change, blockId) {
@@ -80,7 +80,7 @@ export class Editor extends React.Component {
       return map(blocksConfig, (config) => { //eslint-disable-line
         if (block.type === config.type && typeof config.component === 'function') {
           const Component = config.component
-          const blockConfig = config.data || {}
+          const blockConfig = config.blockConfig || {}
 
           return (
             <BlockWrapperComponent
@@ -118,7 +118,7 @@ export class Editor extends React.Component {
 
 }
 
-Editor.propTypes = {
+OyezEditor.propTypes = {
   additionalProps: PropTypes.object,
   blockComponent: PropTypes.func,
   blocksConfig: PropTypes.arrayOf(PropTypes.shape({
@@ -137,7 +137,7 @@ Editor.propTypes = {
   style: PropTypes.object
 }
 
-Editor.defaultProps = {
+OyezEditor.defaultProps = {
   additionalProps: {},
   blockComponent: EditorBlock,
   placeholder: () => null,
