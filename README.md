@@ -33,7 +33,7 @@ result and therefore can be used on its own.
 The following link will provide you with certain examples on how the component
 may be used (https://oyez-editor.netlify.com). By selecting one of the options
 within "App Example" you will see a variety of possibilities on what you are
-able to use the component for. For example within "Menu and Quill Block Editor"
+able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
   Richtext, Images, etc.) to the application. It is also possible to use the
   same editor-type several times.
@@ -75,8 +75,8 @@ The oyez-editor structure looks like this:
 </OyezEditor>
 ```
 
-The main entry point in your app is the `Editor`. Its properties have to
-be specified and all necessary `Editor-Blocks` and EditorComponents are rendered
+The main entry point in your app is the `Editor`. Its properties have to
+be specified and all necessary `Editor-Blocks` and EditorComponents are rendered
 automatically.
 
 ## Quickstart
@@ -162,13 +162,13 @@ To tell the editor it's current state we need to specify the `editorState`.
 It is responsible for telling the component which `Editor` gets what kind of
 data (eg. current content for the richtext editor).
 
-The function of the `editorState` is, as the name says, to represent the current
-state of the `<OyezEditor />`. That means if you e.g. type in a new text into
-a `<EditorQuill />` the `editorState` will change. Your app can access the
+The function of the `editorState` is, as the name says, to represent the current
+state of the `<OyezEditor />`. That means if you e.g. type in a new text into
+a `<EditorQuill />` the `editorState` will change. Your app can access the
 current `editorState` by subscribing to the `onChange` property of the `<OyezEditor />`.
 
 Through this any changes to an Editor (eg. EditorQuill) lead to an onChange event
-of the `<OyezEditor />` and lets you use the change for your own purposes
+of the `<OyezEditor />` and lets you use the change for your own purposes
 (eg. validate changes or show "unsaved" messages).
 
 A `editorState` can look similar to:
@@ -211,11 +211,11 @@ matching type configuration in the `blocksConfig` to be rendered.
 ### Editor Config
 
 Then you have to provide a `blocksConfig` configurations. This means telling
-the `<Editor />` which `EditorComponent` to use for which specified type (e.g.
-  `<EditorImage />` for type "image").
+the `<Editor />` which `EditorComponent` to use for which specified type (e.g.
+  `<EditorImage />` for type "image").
 
 But the order and number of currently rendered Editors are specified through
-the `editorState` (see [Editor State](#editor-state)).
+the `editorState` (see [Editor State](#editor-state)).
 
 An example config could look like:
 
@@ -238,18 +238,18 @@ const blocksConfig = [
 For example we specified one editor with the "richtext"-type and 1 with the
 "image"-type in this order in the example editorState above.
 
-- If we would just put in the "richtext" configuration into the `blocksConfig`
+- If we would just put in the "richtext" configuration into the `blocksConfig`
   then only the richtext Editor would be rendered.
-- If we would just put in the "image" into the `blocksConfig` then the single
+- If we would just put in the "image" into the `blocksConfig` then the single
   "image"-type Editor would be rendered.
 - If we put in both (as in the examples above) first the "richtext"-type Editors
   and then the "image"-type `EditorComponent` (eg. `<EditorImage />`) is rendered.
 
 ### OyezEditor Integration in your App
 
-As a final step we define our App component where we first set the `editorState`
-as `this.state` and create an `onChange`-method to sync the changes in the
-`<OyezEditor />` with the `editorState` of the App and set it as the new
+As a final step we define our App component where we first set the `editorState`
+as `this.state` and create an `onChange`-method to sync the changes in the
+`<OyezEditor />` with the `editorState` of the App and set it as the new
 state (or do even more if we want to).
 
 ```js
@@ -272,10 +272,10 @@ class YourApp extends React.Component {
 }
 ```
 
-The final step is the `render()`-method for our App component. Here we put in
-our `Editor` with its 3 necessary properties (`blocksConfig`, `editorState`
-  and `onChange`). As we have defined the requirements for those properties we
-  only have to assign them to the `Editor`.
+The final step is the `render()`-method for our App component. Here we put in
+our `Editor` with its 3 necessary properties (`blocksConfig`, `editorState`
+  and `onChange`). As we have defined the requirements for those properties we
+  only have to assign them to the `Editor`.
 
 ```js
 render() {
