@@ -63,11 +63,11 @@ import { OyezEditor } from 'oyez-editor'
 
 The OyezEditor basically consists out of three main components:
 
-1. OyezEditor
-2. EditorBlock
-3. Editors (EditorQuill, EditorImage)
+1. [OyezEditor](src/components/oyez-editor)
+2. [EditorBlock](src/components/editor-block)
+3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
-The oyez-editor structure looks like this:
+The `OyezEditor` rendered components tree looks like this:
 
 ```js
 <OyezEditor>
@@ -77,9 +77,10 @@ The oyez-editor structure looks like this:
 </OyezEditor>
 ```
 
-The main entry point in your app is the `Editor`. Its properties have to
-be specified and all necessary `Editor-Blocks` and EditorComponents are rendered
-automatically.
+The main entry point in your app is the `OyezEditor`. Its properties have to
+be specified and all necessary `EditorBlock` and `EditorComponent`s are rendered
+automatically, based on the [editorState](#editor-state) and
+[blocksConfig](#editor-config).
 
 ## Quickstart
 
