@@ -79,7 +79,7 @@ export default class App extends React.Component {
     if (!result.source.droppableId.includes('droppable-menu')) {
       // only reorder elements when the element was not added from the menu
       newEditorState = this.reorderBlocks(
-        this.state.editorState,
+        newEditorState,
         result.source.index,
         result.destination.index
       )
@@ -105,7 +105,6 @@ export default class App extends React.Component {
    */
   getBlockTemplate = (event) => {
     const { document: dc } = this.props
-    let newBlock = null
     let template = null
     let templateData = null
 
@@ -120,7 +119,7 @@ export default class App extends React.Component {
 
     switch (event.type) {
     case 'image':
-      newBlock = {
+      return {
         id: randomId(),
         type: 'image',
         data: {
@@ -130,9 +129,8 @@ export default class App extends React.Component {
           title: 'Image Block'
         }
       }
-      break
     case 'richtext':
-      newBlock = {
+      return {
         id: randomId(),
         type: 'richtext',
         data: {
@@ -142,9 +140,8 @@ export default class App extends React.Component {
           title: 'Quill Block'
         }
       }
-      break
     default:
-      newBlock = {
+      return {
         id: randomId(),
         type: event.type,
         data: {
@@ -154,9 +151,7 @@ export default class App extends React.Component {
           title: 'Editor'
         }
       }
-      break
     }
-    return newBlock
   }
 
   /**
@@ -176,7 +171,7 @@ export default class App extends React.Component {
 
   render() {
     const { editorState } = this.state
-    const { additionalProps, menuState, blocksConfig, blockComponent, placeholder } = this.props
+    const { additionalProps, menuState, blocksConfig, blockComponent, placeholder, showPreview } = this.props
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -196,8 +191,8 @@ export default class App extends React.Component {
               </div>
             )}
           </Droppable>
-          <div {...classes(this.props.showPreview ? 'content-preview' : 'content')}>
-            <div {...classes(this.props.showPreview ? 'editor-preview' : 'editor')}>
+          <div {...classes(showPreview ? 'content-preview' : 'content')}>
+            <div {...classes(showPreview ? 'editor-preview' : 'editor')}>
               <Droppable droppableId='droppable-editor'>
                 {(dropProvided, snapshot) => (
                   <div
@@ -224,7 +219,7 @@ export default class App extends React.Component {
                 )}
               </Droppable>
             </div>
-            {this.props.showPreview && (
+            {showPreview && (
               <div {...classes('preview')} >
                 <HTMLPreview editorState={editorState} />
               </div>

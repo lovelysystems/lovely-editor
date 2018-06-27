@@ -23,7 +23,7 @@ window.tuiSpy = sinon.spy()
 mock('tui-editor', (opts) => {
   window.tuiSpy(opts)
   return {
-    getValue: () => 'whatever',
-    getHtml: () => '<p>whatever</p>'
+    getValue: () => 'some text',
+    getHtml: () => '<p>some text</p>'
   }
 })

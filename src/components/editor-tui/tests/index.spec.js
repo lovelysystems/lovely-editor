@@ -29,7 +29,7 @@ describe('<EditorTui />', () => {
         />
       )
 
-      expect(wrapper.find('#oyez-editor-tui')).to.have.length(1)
+      expect(wrapper.find('#oyez-editor-tui-1')).to.have.length(1)
     })
 
     it('a ToastUI component with the correct properties', () => {
@@ -91,8 +91,8 @@ describe('<EditorTui />', () => {
       // tui-editor is mocked in tests/helpers/test-setup.js including the dummy values here
       expect(onChange.lastCall.args[0]).to.include({
         data: {
-          value: 'whatever',
-          html: '<p>whatever</p>'
+          value: 'some text',
+          html: '<p>some text</p>'
         }
       })
     })

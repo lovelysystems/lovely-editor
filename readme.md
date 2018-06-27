@@ -319,6 +319,7 @@ The package comes with the following npm scripts:
 * `npm run lint`: lints JS code
 * `npm run storybook`: run local server with component library and
   [Storybook](https://storybook.js.org)
+* `npm start`: similar to `npm run storybook`
 * `npm run test`: runs the tests (test files path and pattern:
   `src/**/*.spec.js`)
 * `npm run test:node`: verifies the installed and used node version

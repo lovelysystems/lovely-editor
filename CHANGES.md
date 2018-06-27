@@ -21,14 +21,15 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 *BREAKING*
 
 - new name for the Editor: `<Editor />` becomes `<OyezEditor />`
-- new blockConfig structure:
+- new blockConfig structure, pass additional customizations via new `blockConfig`
+  property to an Editor. See an example with EditorQuill below:
 
 previous:
 
 ```
 const blockConfig = {
   type: 'richtext',
-  component: EditorQui,
+  component: EditorQuill,
   data: {
     // blockconfig for the EditorQuill
   }
@@ -40,7 +41,7 @@ now:
 ```
 const blockConfig = {
   type: 'richtext',
-  component: EditorQui,
+  component: EditorQuill,
   blockConfig: {
     // blockconfig for the EditorQuill
   }

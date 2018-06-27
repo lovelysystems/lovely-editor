@@ -66,57 +66,57 @@ describe('<EditorCodeMirror />', () => {
       })
     })
   })
-})
 
-describe('Behaviour test', () => {
+  describe('Behaviour test', () => {
 
-  let clock = null
+    let clock = null
 
-  beforeEach(() => {
-    clock = sinon.useFakeTimers()
-  })
-
-  afterEach(() => {
-    clock.restore()
-  })
-
-  it('changes trigger this.props.onChange by calling onChangeHandle directly', () => {
-    const onChange = sinon.spy()
-    const wrapper = shallow(
-      <EditorCodeMirror
-        block={validConfig}
-        onChange={onChange}
-      />
-    )
-
-    const instance = wrapper.instance()
-    instance.onChangeHandler(null, null, 'mytest')
-
-    expect(onChange.callCount).to.equal(1)
-    expect(onChange.lastCall.args[0]).to.include({
-      data: {
-        value: 'mytest'
-      }
+    beforeEach(() => {
+      clock = sinon.useFakeTimers()
     })
-  })
 
-  it('changes trigger this.props.onChange', () => {
-    const expected = {
-      data: {
-        value: 'newinput'
+    afterEach(() => {
+      clock.restore()
+    })
+
+    it('changes trigger this.props.onChange by calling onChangeHandle directly', () => {
+      const onChange = sinon.spy()
+      const wrapper = shallow(
+        <EditorCodeMirror
+          block={validConfig}
+          onChange={onChange}
+        />
+      )
+
+      const instance = wrapper.instance()
+      instance.onChangeHandler(null, null, 'mytest')
+
+      expect(onChange.callCount).to.equal(1)
+      expect(onChange.lastCall.args[0]).to.include({
+        data: {
+          value: 'mytest'
+        }
+      })
+    })
+
+    it('changes trigger this.props.onChange', () => {
+      const expected = {
+        data: {
+          value: 'newinput'
+        }
       }
-    }
-    const onChange = sinon.spy()
-    const wrapper = shallow(
-      <EditorCodeMirror
-        block={validConfig}
-        onChange={onChange}
-      />
-    )
+      const onChange = sinon.spy()
+      const wrapper = shallow(
+        <EditorCodeMirror
+          block={validConfig}
+          onChange={onChange}
+        />
+      )
 
-    wrapper.find(CodeMirror).props().onChange(null, null, expected.data.value)
-    clock.tick(500)
-    expect(onChange.callCount).to.equal(1)
-    expect(onChange.lastCall.args[0]).to.equal(expected)
+      wrapper.find(CodeMirror).props().onChange(null, null, expected.data.value)
+      clock.tick(500)
+      expect(onChange.callCount).to.equal(1)
+      expect(onChange.lastCall.args[0]).to.equal(expected)
+    })
   })
 })
