@@ -1,4 +1,4 @@
-# Oyez Editor
+# OyezEditor
 
 OyezEditor is a React component to provide a variety of editors to add to your
 app. It also gives you the opportunity to create your own editor and add it to
@@ -6,27 +6,29 @@ the component. As a result the edited content will come in the shape of
 HTML-code to be added to your page. Each editor will create an independent
 result and therefore can be used on its own.
 
-## Index
-1. What is the OyezEditor?
-2. Examples
-3. Requirements
-4. Setup
-5. Storybook
-6. Quickstart
-7. How to develop (Development)
-8. How to create a release (Deployment)
-9. Pre-commit and Pre-push Hooks
+## Table of Contents
+
+* [Features](#features)
+* [Examples](#examples)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [OyezEditor components](#oyezeditor-components)
+* [Quickstart](#quickstart)
+  * [Example App](#example-app)
+  * [Editor State](#editor-state)
+  * [Editor Config](#editor-config)
+  * [OyezEditor Integration in your App](#oyezeditor-integration-in-your-app)
+  * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
+* [How to contribute and develop](#how-to-contribute-and-develop)
+* [How to create a release](#how-to-create-a-release)
 
 ## Features
 
-- Provides a variety of pre-designed editors
-- largely customisable
-- easy way to create and add your own editor
-- design it as you please
-- use every EditorComponent (eg. EditorQuill) independently without need to
+* Provides a variety of pre-designed editors: eg. EditorQuill
+* design and features are largely customisable: make it your own!
+* easy way to create and add your own custom editor or extend existing ones
+* use every EditorComponent (eg. EditorQuill) independently without need to
   look out you for the others
-- creates loads of fun
-- and (hopefully not) headaches
 
 ## Examples
 
@@ -35,8 +37,8 @@ may be used (https://oyez-editor.netlify.com). By selecting one of the options
 within "App Example" you will see a variety of possibilities on what you are
 able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
-  Richtext, Images, etc.) to the application. It is also possible to use the
-  same editor-type several times.
+Richtext, Images, etc.) to the application. It is also possible to use the
+same editor-type several times.
 
 ## Requirements
 
@@ -53,11 +55,11 @@ npm install oyez-editor
 
 and import it in your App with:
 
-```
+```js
 import { OyezEditor } from 'oyez-editor'
 ```
 
-## Component Structure
+## OyezEditor components
 
 The OyezEditor basically consists out of three main components:
 
@@ -83,6 +85,16 @@ automatically.
 
 Follow the [Installation](#installation) first before taking a look at the
 following comprehensive example:
+
+### Example App
+
+The following app showcases the usage of the `OyezEditor` with two configured
+Editors (in this case `EditorQuill` and `EditorImage`) and a current `editorState`.
+The app itself controls the `OyezEditor` by not only subscribing to the `OyezEditor`'s
+`onChange` but also by providing it's `editorState` as a property. The changes are
+received and the `YourApp`'s `state` updated. This leads to a re-rendering of
+the `OyezEditor` with a new valid editorState. You can find a similar example also
+[in our Storybook](https://oyez-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
 import { OyezEditor } from 'oyez-editor'
@@ -126,10 +138,7 @@ const editorImageConfig = {
 }
 
 // sets which editor component should be rendered for which block.type
-const blocksConfig = [
-  editorQuillConfig,
-  editorImageConfig
-]
+const blocksConfig = [editorQuillConfig, editorImageConfig]
 
 class YourApp extends React.Component {
   constructor(props) {
@@ -141,7 +150,7 @@ class YourApp extends React.Component {
   }
 
   onChange(change) {
-    this.setState({editorState: change.editorState});
+    this.setState({ editorState: change.editorState })
   }
 
   render() {
@@ -158,8 +167,8 @@ class YourApp extends React.Component {
 
 ### Editor State
 
-To tell the editor it's current state we need to specify the `editorState`.
-It is responsible for telling the component which `Editor` gets what kind of
+To tell the editor it's current state we need to specify the `editorState`.
+It is responsible for telling the component which `Editor` gets what kind of
 data (eg. current content for the richtext editor).
 
 The function of the `editorState` is, as the name says, to represent the current
@@ -212,7 +221,7 @@ matching type configuration in the `blocksConfig` to be rendered.
 
 Then you have to provide a `blocksConfig` configurations. This means telling
 the `<Editor />` which `EditorComponent` to use for which specified type (e.g.
-  `<EditorImage />` for type "image").
+`<EditorImage />` for type "image").
 
 But the order and number of currently rendered Editors are specified through
 the `editorState` (see [Editor State](#editor-state)).
@@ -229,20 +238,17 @@ const editorImageConfig = {
   component: EditorImage
 }
 
-const blocksConfig = [
-  editorQuillConfig,
-  editorImageConfig
-]
+const blocksConfig = [editorQuillConfig, editorImageConfig]
 ```
 
 For example we specified one editor with the "richtext"-type and 1 with the
 "image"-type in this order in the example editorState above.
 
-- If we would just put in the "richtext" configuration into the `blocksConfig`
+* If we would just put in the "richtext" configuration into the `blocksConfig`
   then only the richtext Editor would be rendered.
-- If we would just put in the "image" into the `blocksConfig` then the single
+* If we would just put in the "image" into the `blocksConfig` then the single
   "image"-type Editor would be rendered.
-- If we put in both (as in the examples above) first the "richtext"-type Editors
+* If we put in both (as in the examples above) first the "richtext"-type Editors
   and then the "image"-type `EditorComponent` (eg. `<EditorImage />`) is rendered.
 
 ### OyezEditor Integration in your App
@@ -254,7 +260,6 @@ state (or do even more if we want to).
 
 ```js
 class YourApp extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -265,7 +270,7 @@ class YourApp extends React.Component {
 
   onChange(change) {
     // get the change from the OyezEditor and sync the YourApp's state
-    this.setState({editorState: change.editorState});
+    this.setState({ editorState: change.editorState })
   }
 
   //...
@@ -274,8 +279,8 @@ class YourApp extends React.Component {
 
 The final step is the `render()`-method for our App component. Here we put in
 our `Editor` with its 3 necessary properties (`blocksConfig`, `editorState`
-  and `onChange`). As we have defined the requirements for those properties we
-  only have to assign them to the `Editor`.
+and `onChange`). As we have defined the requirements for those properties we
+only have to assign them to the `Editor`.
 
 ```js
 render() {
@@ -330,6 +335,21 @@ This package uses [Storybook](https://storybook.js.org) to showcase the
 components. Just enter `npm run storybook` to start it on your local machine or
 visit [https://oyez-editor.netlify.com](https://oyez-editor.netlify.com).
 
+### Pre-commit and Pre-push Hooks
+
+When attempting to commit files in this repository, some taks will
+automatically run to ensure a consistently high level of code quality:
+
+* **JavaScript files (.js):**
+  * runs `eslint` and automatically fixes auto-fixable issues
+    ([see related JS guidelines here](https://github.com/airbnb/javascript))
+  * runs `prettier` and auto-formats your code
+    ([see what it does here](https://github.com/prettier/prettier))
+  * runs all unit tests concerning the committed files with `mocha`
+
+If any of the tasks fail (which means your code does not lint or unit tests are
+failing), your commit or push will be aborted.
+
 ### How to create a release (Deployment)
 
 1. Update [CHANGES](CHANGES.md)
@@ -351,18 +371,3 @@ git push && git push --tags
 ```
 
 5. Merge release in release branch (eg. `release/x.y`)
-
-#### Pre-commit and Pre-push Hooks
-
-When attempting to commit files in this repository, some taks will
-automatically run to ensure a consistently high level of code quality:
-
-* __JavaScript files (.js):__
-  * runs `eslint` and automatically fixes auto-fixable issues
-    ([see related JS guidelines here](https://github.com/airbnb/javascript))
-  * runs `prettier` and auto-formats your code
-    ([see what it does here](https://github.com/prettier/prettier))
-  * runs all unit tests concerning the committed files with `mocha`
-
-If any of the tasks fail (which means your code does not lint or unit tests are
-  failing), your commit or push will be aborted.
