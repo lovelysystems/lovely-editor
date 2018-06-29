@@ -2,7 +2,6 @@ import React from 'react'
 import { merge } from 'lodash'
 import { storiesOf } from '@storybook/react'
 import withReadme from 'storybook-readme/with-readme'
-import CssBaseline from '@material-ui/core/CssBaseline'
 
 // Components
 import App from './'
@@ -31,7 +30,6 @@ storiesOf('App Example', module)
   .add('with an example Menu and EditorQuill Block', () => {
     return (
       <div>
-        <CssBaseline />
         <App
           document={defaultDocument}
           blocksConfig={defaultBlocksConfig}

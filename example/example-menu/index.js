@@ -78,7 +78,6 @@ export function ExampleMenu({menuState, onClick}) {
                     }}
                   >
                     {text}
-                    {/* </button> */}
                   </Button>
                 </div>
                 {provided.placeholder}
