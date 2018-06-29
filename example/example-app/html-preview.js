@@ -1,9 +1,14 @@
 import React from 'react'
 import { get } from 'lodash'
 
+// Material-UI
+import Typography from '@material-ui/core/Typography'
+
 export default ({editorState=[]}) => (
   <React.Fragment>
-    <h1>HTML Preview</h1>
+    <Typography variant="title" gutterBottom>
+      HTML Preview
+    </Typography>
     {editorState.map(block => {
       if (block.type === 'richtext') {
         return block.data.value

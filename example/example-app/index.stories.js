@@ -2,6 +2,7 @@ import React from 'react'
 import { merge } from 'lodash'
 import { storiesOf } from '@storybook/react'
 import withReadme from 'storybook-readme/with-readme'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 // Components
 import App from './'
@@ -29,11 +30,14 @@ storiesOf('App Example', module)
   .addDecorator(withReadme(componentReadme))
   .add('with an example Menu and EditorQuill Block', () => {
     return (
-      <App
-        document={defaultDocument}
-        blocksConfig={defaultBlocksConfig}
-        menuState={defaultMenuState}
-      />
+      <div>
+        <CssBaseline />
+        <App
+          document={defaultDocument}
+          blocksConfig={defaultBlocksConfig}
+          menuState={defaultMenuState}
+        />
+      </div>
     )
   })
   .add('with an example Menu and an empty Oyez-Editor', () => {

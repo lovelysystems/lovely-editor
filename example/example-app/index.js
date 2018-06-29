@@ -5,6 +5,11 @@ import { action } from '@storybook/addon-actions'
 // DND Example: https://github.com/alexreardon/react-beautiful-dnd-flow-example/blob/master/src/App.js
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
+// Material-UI
+import Card from '@material-ui/core/Card'
+// import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+
 // Helpers
 import { BemHelper } from '../../src/helpers/bem-helper'
 import { EditorState } from '../../src/model/editor-state'
@@ -178,17 +183,20 @@ export default class App extends React.Component {
         <div {...classes('container')} >
           <Droppable droppableId='droppable-menu' isDropDisabled direction='horizontal'>
             {(dropProvided, snapshot) => (
-              <div
-                {...classes('menu')}
-                ref={dropProvided.innerRef}
-                data-dragging={snapshot.isDraggingOver}
-                {...dropProvided.droppableProps}
+              <Card
+                className={classes.card}
+                style={{
+                  backgroundColor: '#eeeeee',
+                  margin: '0px 0px 10px 0px'
+                }}
               >
-                <ExampleMenu
-                  menuState={menuState}
-                  onClick={(event) => this.onMenuClick(event)}
-                />
-              </div>
+                <CardContent>
+                  <ExampleMenu
+                    menuState={menuState}
+                    onClick={(event) => this.onMenuClick(event)}
+                  />
+                </CardContent>
+              </Card>
             )}
           </Droppable>
           <div {...classes(showPreview ? 'content-preview' : 'content')}>
@@ -220,9 +228,17 @@ export default class App extends React.Component {
               </Droppable>
             </div>
             {showPreview && (
-              <div {...classes('preview')} >
-                <HTMLPreview editorState={editorState} />
-              </div>
+              <Card
+                {...classes('preview')}
+                style={{
+                  backgroundColor: '#eeeeee',
+                  margin: '0px 0px 0px 10px'
+                }}
+              >
+                <CardContent>
+                  <HTMLPreview editorState={editorState} />
+                </CardContent>
+              </Card>
             )}
           </div>
         </div>

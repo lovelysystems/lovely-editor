@@ -1,6 +1,13 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 
+// Material-UI
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Card from '@material-ui/core/Card'
+// import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+
 // Helpers
 import { get } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
@@ -19,21 +26,38 @@ export class EditorBlock extends React.Component {
   }
 
   render() {
-    const { block, children, style } = this.props
+    const { block, children } = this.props
     const title = get(block, 'meta.title', 'Untitled')
 
     return (
-      <div {...classes('container')} style={style}>
-        <div {...classes('header')}>
-          <div {...classes('title')}>{title}</div>
-          <div {...classes('actions')}>
-            <button {...classes('action-remove')} onClick={this.onRemove}>Delete</button>
+      <Card
+        className={classes.card}
+        style={{
+          margin: '0px 0px 10px 0px'
+        }}
+      >
+        <CardContent>
+          <div {...classes('header')}>
+            <Typography variant="title" gutterBottom>
+              {title}
+            </Typography>
+            <div {...classes('actions')}>
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                className={classes.button}
+                onClick={this.onRemove}
+              >
+                  Delete
+              </Button>
+            </div>
           </div>
-        </div>
-        <div {...classes('content')}>
-          {children}
-        </div>
-      </div>
+          <div {...classes('content')}>
+            {children}
+          </div>
+        </CardContent>
+      </Card>
     )
   }
 

@@ -4,7 +4,7 @@ body {
 }
 
 $button-bg-color: #0065cc;
-$bg-color: #bebebe;
+$bg-color: #eeeeee;
 
 .btn {
   font: inherit;
@@ -47,7 +47,6 @@ $bg-color: #bebebe;
 
   &__preview {
     background-color: $bg-color;
-    border: 1px solid #000;
     display: inline-block;
     padding: 5px 15px 20px;
     word-wrap: break-word;
