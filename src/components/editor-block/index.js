@@ -38,7 +38,7 @@ export class EditorBlock extends React.Component {
       >
         <CardContent>
           <div {...classes('header')}>
-            <Typography variant="title" gutterBottom>
+            <Typography {...classes('title')} variant="title" gutterBottom>
               {title}
             </Typography>
             <div {...classes('actions')}>
@@ -46,7 +46,7 @@ export class EditorBlock extends React.Component {
                 variant="contained"
                 size="small"
                 color="secondary"
-                className={classes.button}
+                {...classes('action-remove')}
                 onClick={this.onRemove}
               >
                   Delete
