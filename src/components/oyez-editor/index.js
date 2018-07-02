@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // Material-UI
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-import { withStyles } from '@material-ui/core/styles'
+
 
 // Helpers
 import { map, merge } from 'lodash'
@@ -17,12 +17,6 @@ import { EditorBlock } from '../editor-block'
 // Styling
 const classes = new BemHelper('editor')
 
-const styles = {
-  root: {
-    backgroundColor: '#eeeeee'
-  },
-}
-
 /**
  * OyezEditor component
  *
@@ -31,7 +25,7 @@ const styles = {
  * - telling the <Wrapper /> when the content of a block changes (see onContentChange)
  *   or a block triggers an action (see onBlockAction)
  */
-class OyezEditorComponent extends React.Component {
+export class OyezEditor extends React.Component {
 
   // event listeners and handlers
   onContentChange(change, blockId) {
@@ -120,7 +114,9 @@ class OyezEditorComponent extends React.Component {
   render() {
     return (
       <Card
-        className={this.props.classes.root}
+        style={{
+          backgroundColor: '#eeeeee'
+        }}
       >
         <CardContent>
           <div {...classes('blocks')}>
@@ -133,7 +129,7 @@ class OyezEditorComponent extends React.Component {
 
 }
 
-OyezEditorComponent.propTypes = {
+OyezEditor.propTypes = {
   additionalProps: PropTypes.object,
   blockComponent: PropTypes.func,
   blocksConfig: PropTypes.arrayOf(PropTypes.shape({
@@ -149,20 +145,12 @@ OyezEditorComponent.propTypes = {
   })).isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-  style: PropTypes.object,
-  classes: PropTypes.object
+  style: PropTypes.object
 }
 
-OyezEditorComponent.defaultProps = {
+OyezEditor.defaultProps = {
   additionalProps: {},
   blockComponent: EditorBlock,
   placeholder: () => null,
-  style: {},
-  classes: {}
-}
-
-const OyezEditor = withStyles(styles)(OyezEditorComponent)
-
-export {
-  OyezEditor
+  style: {}
 }
