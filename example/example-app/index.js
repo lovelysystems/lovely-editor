@@ -212,47 +212,47 @@ export default class App extends React.Component {
                     data-dragging={snapshot.isDraggingOver}
                     {...dropProvided.droppableProps}
                   >
-                    {/* <Card
+                    <Card
                       style={{
                         backgroundColor: '#eeeeee',
                         margin: '0px 0px 0px 10px'
                       }}
                     >
-                      <CardContent> */}
-                    <OyezEditor
-                      additionalProps={additionalProps}
-                      editorState={editorState}
-                      blockComponent={blockComponent || undefined}
-                      blocksConfig={blocksConfig}
-                      onChange={this.onChange}
-                      placeholder={!snapshot.isDraggingOver
-                        ? (placeholder || undefined)
-                        : (dragDropPlaceholder || undefined)
-                      }
-                      style={{
-                        backgroundColor: snapshot.isDraggingOver ? '#989898' : null
-                      }}
-                    />
-                    {/* </CardContent>
-                    </Card> */}
+                      <CardContent>
+                        <OyezEditor
+                          additionalProps={additionalProps}
+                          editorState={editorState}
+                          blockComponent={blockComponent || undefined}
+                          blocksConfig={blocksConfig}
+                          onChange={this.onChange}
+                          placeholder={!snapshot.isDraggingOver
+                            ? (placeholder || undefined)
+                            : (dragDropPlaceholder || undefined)
+                          }
+                          style={{
+                            backgroundColor: snapshot.isDraggingOver ? '#989898' : null
+                          }}
+                        />
+                      </CardContent>
+                    </Card>
                     {dropProvided.placeholder}
                   </div>
                 )}
               </Droppable>
             </div>
             {showPreview && (
-              <Card
-                style={{
-                  backgroundColor: '#eeeeee',
-                  margin: '0px 0px 0px 10px'
-                }}
-              >
-                <CardContent>
-                  <div {...classes('preview')} >
+              <div {...classes('preview')} >
+                <Card
+                  style={{
+                    backgroundColor: '#eeeeee',
+                    margin: '0px 0px 0px 10px'
+                  }}
+                >
+                  <CardContent>
                     <HTMLPreview editorState={editorState} />
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             )}
           </div>
         </div>
