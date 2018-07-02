@@ -27,6 +27,9 @@ export class EditorBlock extends React.Component {
       <div {...classes('container')} style={style}>
         <div {...classes('header')}>
           <div {...classes('title')}>{title}</div>
+          <div {...classes('actions')}>
+            <button {...classes('action-remove')} onClick={this.onRemove}>Delete</button>
+          </div>
         </div>
         <div {...classes('content')} >
           {children}
