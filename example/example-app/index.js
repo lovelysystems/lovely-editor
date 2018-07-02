@@ -182,19 +182,25 @@ export default class App extends React.Component {
         <div {...classes('container')} >
           <Droppable droppableId='droppable-menu' isDropDisabled direction='horizontal'>
             {(dropProvided, snapshot) => (
-              <Card
-                style={{
-                  backgroundColor: '#eeeeee',
-                  margin: '0px 0px 10px 0px'
-                }}
+              <div
+                ref={dropProvided.innerRef}
+                data-dragging={snapshot.isDraggingOver}
+                {...dropProvided.droppableProps}
               >
-                <CardContent>
-                  <ExampleMenu
-                    menuState={menuState}
-                    onClick={this.onMenuClick}
-                  />
-                </CardContent>
-              </Card>
+                <Card
+                  style={{
+                    backgroundColor: '#eeeeee',
+                    margin: '0px 0px 10px 0px'
+                  }}
+                >
+                  <CardContent>
+                    <ExampleMenu
+                      menuState={menuState}
+                      onClick={this.onMenuClick}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
             )}
           </Droppable>
           <div {...classes(showPreview ? 'content-preview' : 'content')}>
@@ -206,29 +212,29 @@ export default class App extends React.Component {
                     data-dragging={snapshot.isDraggingOver}
                     {...dropProvided.droppableProps}
                   >
-                    <Card
+                    {/* <Card
                       style={{
                         backgroundColor: '#eeeeee',
                         margin: '0px 0px 0px 10px'
                       }}
                     >
-                      <CardContent>
-                        <OyezEditor
-                          additionalProps={additionalProps}
-                          editorState={editorState}
-                          blockComponent={blockComponent || undefined}
-                          blocksConfig={blocksConfig}
-                          onChange={this.onChange}
-                          placeholder={!snapshot.isDraggingOver
-                            ? (placeholder || undefined)
-                            : (dragDropPlaceholder || undefined)
-                          }
-                          style={{
-                            backgroundColor: snapshot.isDraggingOver ? '#989898' : null
-                          }}
-                        />
-                      </CardContent>
-                    </Card>
+                      <CardContent> */}
+                    <OyezEditor
+                      additionalProps={additionalProps}
+                      editorState={editorState}
+                      blockComponent={blockComponent || undefined}
+                      blocksConfig={blocksConfig}
+                      onChange={this.onChange}
+                      placeholder={!snapshot.isDraggingOver
+                        ? (placeholder || undefined)
+                        : (dragDropPlaceholder || undefined)
+                      }
+                      style={{
+                        backgroundColor: snapshot.isDraggingOver ? '#989898' : null
+                      }}
+                    />
+                    {/* </CardContent>
+                    </Card> */}
                     {dropProvided.placeholder}
                   </div>
                 )}
@@ -242,7 +248,9 @@ export default class App extends React.Component {
                 }}
               >
                 <CardContent>
-                  <HTMLPreview editorState={editorState} />
+                  <div {...classes('preview')} >
+                    <HTMLPreview editorState={editorState} />
+                  </div>
                 </CardContent>
               </Card>
             )}
