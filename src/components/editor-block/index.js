@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
-// import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 
 // Helpers
@@ -53,7 +52,9 @@ export class EditorBlock extends React.Component {
               </Button>
             </div>
           </div>
-          <div {...classes('content')}>
+          <div
+            {...classes('content')}
+          >
             {children}
           </div>
         </CardContent>

@@ -66,9 +66,7 @@ export function ExampleMenu({menuState, onClick}) {
                   <Button
                     variant="contained"
                     color="primary"
-                    className={classes.button}
                     key={idx}
-                    // className='btn'
                     onClick={() => { onClickHandler(action, type, templateId) }}
                     style={{
                       transform: dragSnapshot.isDragging ? 'rotate(-10deg)' : null,

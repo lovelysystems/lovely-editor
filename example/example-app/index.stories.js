@@ -29,13 +29,11 @@ storiesOf('App Example', module)
   .addDecorator(withReadme(componentReadme))
   .add('with an example Menu and EditorQuill Block', () => {
     return (
-      <div>
-        <App
-          document={defaultDocument}
-          blocksConfig={defaultBlocksConfig}
-          menuState={defaultMenuState}
-        />
-      </div>
+      <App
+        document={defaultDocument}
+        blocksConfig={defaultBlocksConfig}
+        menuState={defaultMenuState}
+      />
     )
   })
   .add('with an example Menu and an empty Oyez-Editor', () => {

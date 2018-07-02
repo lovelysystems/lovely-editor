@@ -183,7 +183,6 @@ export default class App extends React.Component {
           <Droppable droppableId='droppable-menu' isDropDisabled direction='horizontal'>
             {(dropProvided, snapshot) => (
               <Card
-                className={classes.card}
                 style={{
                   backgroundColor: '#eeeeee',
                   margin: '0px 0px 10px 0px'
@@ -192,7 +191,7 @@ export default class App extends React.Component {
                 <CardContent>
                   <ExampleMenu
                     menuState={menuState}
-                    onClick={(event) => this.onMenuClick(event)}
+                    onClick={this.onMenuClick}
                   />
                 </CardContent>
               </Card>
@@ -228,7 +227,6 @@ export default class App extends React.Component {
             </div>
             {showPreview && (
               <Card
-                {...classes('preview')}
                 style={{
                   backgroundColor: '#eeeeee',
                   margin: '0px 0px 0px 10px'
