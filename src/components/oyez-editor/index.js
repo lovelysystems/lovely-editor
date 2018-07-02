@@ -1,10 +1,6 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 
-// Material-UI
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-
 
 // Helpers
 import { map, merge } from 'lodash'
@@ -113,17 +109,11 @@ export class OyezEditor extends React.Component {
 
   render() {
     return (
-      <Card
-        style={{
-          backgroundColor: '#eeeeee'
-        }}
-      >
-        <CardContent>
-          <div {...classes('blocks')}>
-            {this.renderEditorBlocks()}
-          </div>
-        </CardContent>
-      </Card>
+      <div {...classes('container')} style={this.props.style}>
+        <div {...classes('blocks')}>
+          {this.renderEditorBlocks()}
+        </div>
+      </div>
     )
   }
 

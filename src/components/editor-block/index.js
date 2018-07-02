@@ -1,11 +1,6 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 
-// Material-UI
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
 
 // Helpers
 import { get } from 'lodash'
@@ -25,40 +20,18 @@ export class EditorBlock extends React.Component {
   }
 
   render() {
-    const { block, children } = this.props
+    const { block, children, style } = this.props
     const title = get(block, 'meta.title', 'Untitled')
 
     return (
-      <Card
-        className={classes.card}
-        style={{
-          margin: '0px 0px 10px 0px'
-        }}
-      >
-        <CardContent>
-          <div {...classes('header')}>
-            <Typography {...classes('title')} variant="title" gutterBottom>
-              {title}
-            </Typography>
-            <div {...classes('actions')}>
-              <Button
-                variant="contained"
-                size="small"
-                color="secondary"
-                {...classes('action-remove')}
-                onClick={this.onRemove}
-              >
-                  Delete
-              </Button>
-            </div>
-          </div>
-          <div
-            {...classes('content')}
-          >
-            {children}
-          </div>
-        </CardContent>
-      </Card>
+      <div {...classes('container')} style={style}>
+        <div {...classes('header')}>
+          <div {...classes('title')}>{title}</div>
+        </div>
+        <div {...classes('content')} >
+          {children}
+        </div>
+      </div>
     )
   }
 
