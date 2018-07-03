@@ -8,35 +8,19 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('editor-block')
 
-export class EditorBlock extends React.Component {
+const EditorBlock = ({additionalProps, block, blockConfig, children, style}) => {
 
-  onRemove = (action) => {
-    const blockId = get(this.props, 'block.id')
-    this.props.onAction({
-      action: 'remove',
-      id: blockId,
-    })
-  }
-
-  render() {
-    const { block, children, style } = this.props
-    const title = get(block, 'meta.title', 'Untitled')
-
-    return (
-      <div {...classes('container')} style={style}>
-        <div {...classes('header')}>
-          <div {...classes('title')}>{title}</div>
-          <div {...classes('actions')}>
-            <button {...classes('action-remove')} onClick={this.onRemove}>Delete</button>
-          </div>
-        </div>
-        <div {...classes('content')} >
-          {children}
-        </div>
+  const title = get(block, 'meta.title', 'Untitled')
+  return (
+    <div {...classes('container')} style={style}>
+      <div {...classes('header')}>
+        <div {...classes('title')}>{title}</div>
       </div>
-    )
-  }
-
+      <div {...classes('content')} >
+        {children}
+      </div>
+    </div>
+  )
 }
 
 EditorBlock.propTypes = {
@@ -47,7 +31,6 @@ EditorBlock.propTypes = {
   }).isRequired,
   blockConfig: PropTypes.object,
   children: PropTypes.element.isRequired,
-  onAction: PropTypes.func.isRequired,
   style: PropTypes.object
 }
 
@@ -55,4 +38,8 @@ EditorBlock.defaultProps = {
   additionalProps: {},
   blockConfig: {},
   style: {}
+}
+
+export {
+  EditorBlock
 }

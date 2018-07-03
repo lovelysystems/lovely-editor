@@ -1,11 +1,12 @@
 import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 
+import { get } from 'lodash'
 
 // Material-UI
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
-
+import Button from '@material-ui/core/Button'
 
 import { EditorBlock } from '../../src'
 
@@ -20,6 +21,15 @@ import { EditorBlock } from '../../src'
  * children: the single editor (eg. EditorQuill)
  */
 const ExampleBlockWrapper = ({block, blockIndex, children, onAction}) => {
+
+  const onDelete = () => {
+    const blockId = get(block, 'id')
+    onAction({
+      action: 'remove',
+      id: blockId,
+    })
+  }
+
   return (
     <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`} index={blockIndex}>
       {(provided, dragSnapshot) => (
@@ -38,10 +48,21 @@ const ExampleBlockWrapper = ({block, blockIndex, children, onAction}) => {
               }}
             >
               <CardContent>
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="secondary"
+                  onClick={onDelete}
+                  style={{
+                    float: 'right'
+                  }}
+                >
+                  Delete
+                </Button>
                 <EditorBlock
                   key={block.id}
                   block={block}
-                  onAction={onAction}
+                  onAction={() => {}}
                   style={{
                     backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
                     border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
