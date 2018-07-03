@@ -1,5 +1,12 @@
 import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
+
+
+// Material-UI
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+
+
 import { EditorBlock } from '../../src'
 
 /**
@@ -22,18 +29,29 @@ const ExampleBlockWrapper = ({block, blockIndex, children, onAction}) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
           >
-            <EditorBlock
-              key={block.id}
-              block={block}
-              onAction={onAction}
+            <Card
               style={{
+                margin: '0px 0px 10px 0px',
                 backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
                 border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
                 opacity: dragSnapshot.isDragging ? '0.6' : null
               }}
             >
-              { children }
-            </EditorBlock>
+              <CardContent>
+                <EditorBlock
+                  key={block.id}
+                  block={block}
+                  onAction={onAction}
+                  style={{
+                    backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
+                    border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
+                    opacity: dragSnapshot.isDragging ? '0.6' : null
+                  }}
+                >
+                  { children }
+                </EditorBlock>
+              </CardContent>
+            </Card>
           </div>
           {provided.placeholder}
         </div>

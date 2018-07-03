@@ -1,6 +1,10 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 
+// Material-UI
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+
 // Helpers
 import { Draggable } from 'react-beautiful-dnd'
 import { get, map } from 'lodash'
@@ -40,10 +44,10 @@ export function ExampleMenu({menuState, onClick}) {
   // },
   // - `image:2:add:1` => an image block with values of the template id 2 should be added
   return (
-    <div {...classes('container')} >
-      <h2 {...classes('title')}>
+    <div>
+      <Typography variant="display1" gutterBottom>
         {title}
-      </h2>
+      </Typography>
       <div {...classes('content')}>
         {map(buttons, ({ action, text, templateId, type }, idx) => (
           <Draggable
@@ -59,18 +63,20 @@ export function ExampleMenu({menuState, onClick}) {
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
-                  <button
+                  <Button
+                    variant="contained"
+                    color="primary"
                     key={idx}
-                    className='btn'
                     onClick={() => { onClickHandler(action, type, templateId) }}
                     style={{
                       transform: dragSnapshot.isDragging ? 'rotate(-10deg)' : null,
                       backgroundColor: dragSnapshot.isDragging ? '#0d8eff' : null,
-                      border: dragSnapshot.isDragging ? '2px solid #ffffff' : null
+                      border: dragSnapshot.isDragging ? '2px solid #ffffff' : null,
+                      margin: '0px 10px 10px 0px'
                     }}
                   >
                     {text}
-                  </button>
+                  </Button>
                 </div>
                 {provided.placeholder}
               </div>

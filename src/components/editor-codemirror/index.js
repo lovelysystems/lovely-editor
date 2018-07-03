@@ -43,7 +43,9 @@ export class EditorCodeMirror extends React.Component {
       theme: 'default'
     }
     return (
-      <div {...classes()}>
+      <div
+        {...classes()}
+      >
         <CodeMirror
           value={block.data.value}
           onChange={this.onChange}

@@ -5,6 +5,11 @@ import { action } from '@storybook/addon-actions'
 // DND Example: https://github.com/alexreardon/react-beautiful-dnd-flow-example/blob/master/src/App.js
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
+// Material-UI
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import { withStyles } from '@material-ui/core/styles'
+
 // Helpers
 import { BemHelper } from '../../src/helpers/bem-helper'
 import { EditorState } from '../../src/model/editor-state'
@@ -20,7 +25,14 @@ const dragDropPlaceholder = () => (<div>Add an Editor from the Menu here to star
 // Styling
 const classes = new BemHelper('example-app')
 
-export default class App extends React.Component {
+const styles = {
+  card: {
+    backgroundColor: '#eeeeee',
+    margin: '0px 0px 10px 0px'
+  }
+}
+
+class ExampleApp extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -179,15 +191,20 @@ export default class App extends React.Component {
           <Droppable droppableId='droppable-menu' isDropDisabled direction='horizontal'>
             {(dropProvided, snapshot) => (
               <div
-                {...classes('menu')}
                 ref={dropProvided.innerRef}
                 data-dragging={snapshot.isDraggingOver}
                 {...dropProvided.droppableProps}
               >
-                <ExampleMenu
-                  menuState={menuState}
-                  onClick={(event) => this.onMenuClick(event)}
-                />
+                <Card
+                  className={this.props.classes.card}
+                >
+                  <CardContent>
+                    <ExampleMenu
+                      menuState={menuState}
+                      onClick={this.onMenuClick}
+                    />
+                  </CardContent>
+                </Card>
               </div>
             )}
           </Droppable>
@@ -200,20 +217,26 @@ export default class App extends React.Component {
                     data-dragging={snapshot.isDraggingOver}
                     {...dropProvided.droppableProps}
                   >
-                    <OyezEditor
-                      additionalProps={additionalProps}
-                      editorState={editorState}
-                      blockComponent={blockComponent || undefined}
-                      blocksConfig={blocksConfig}
-                      onChange={this.onChange}
-                      placeholder={!snapshot.isDraggingOver
-                        ? (placeholder || undefined)
-                        : (dragDropPlaceholder || undefined)
-                      }
-                      style={{
-                        backgroundColor: snapshot.isDraggingOver ? '#989898' : null
-                      }}
-                    />
+                    <Card
+                      className={this.props.classes.card}
+                    >
+                      <CardContent>
+                        <OyezEditor
+                          additionalProps={additionalProps}
+                          editorState={editorState}
+                          blockComponent={blockComponent || undefined}
+                          blocksConfig={blocksConfig}
+                          onChange={this.onChange}
+                          placeholder={!snapshot.isDraggingOver
+                            ? (placeholder || undefined)
+                            : (dragDropPlaceholder || undefined)
+                          }
+                          style={{
+                            backgroundColor: snapshot.isDraggingOver ? '#989898' : null
+                          }}
+                        />
+                      </CardContent>
+                    </Card>
                     {dropProvided.placeholder}
                   </div>
                 )}
@@ -221,7 +244,13 @@ export default class App extends React.Component {
             </div>
             {showPreview && (
               <div {...classes('preview')} >
-                <HTMLPreview editorState={editorState} />
+                <Card
+                  className={this.props.classes.card}
+                >
+                  <CardContent>
+                    <HTMLPreview editorState={editorState} />
+                  </CardContent>
+                </Card>
               </div>
             )}
           </div>
@@ -231,3 +260,7 @@ export default class App extends React.Component {
   }
 
 }
+
+const App = withStyles(styles)(ExampleApp)
+
+export default App

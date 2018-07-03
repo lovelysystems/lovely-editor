@@ -23,6 +23,7 @@ export class EditorTui extends React.Component {
   // is why we init it in componentDidMount
   componentDidMount() {
     const { block, blockConfig } = this.props
+
     this.editor = new Editor({
       el: document.querySelector(`#oyez-editor-tui-${block.id}`),
       initialValue: get(block, 'data.value', false),

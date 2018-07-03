@@ -30,7 +30,7 @@ export class EditorBlock extends React.Component {
             <button {...classes('action-remove')} onClick={this.onRemove}>Delete</button>
           </div>
         </div>
-        <div {...classes('content')}>
+        <div {...classes('content')} >
           {children}
         </div>
       </div>

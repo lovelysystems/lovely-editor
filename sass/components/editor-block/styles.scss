@@ -1,15 +1,9 @@
 .oy-editor-block {
 
-  &__container {
-    background-color: #e6e6e6;
-    border: 1px solid #000;
-    margin: 10px;
-    padding: 20px;
-  }
-
   &__header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
+    margin-top: 10px;
   }
 }
