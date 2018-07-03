@@ -20,11 +20,11 @@ import { EditorBlock } from '../../src'
  *
  * children: the single editor (eg. EditorQuill)
  */
-const ExampleBlockWrapper = ({block, blockIndex, children, onAction}) => {
+const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children}) => {
 
   const onDelete = () => {
     const blockId = get(block, 'id')
-    onAction({
+    additionalProps.onBlockAction({
       action: 'remove',
       id: blockId,
     })
@@ -62,7 +62,6 @@ const ExampleBlockWrapper = ({block, blockIndex, children, onAction}) => {
                 <EditorBlock
                   key={block.id}
                   block={block}
-                  onAction={() => {}}
                   style={{
                     backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
                     border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,

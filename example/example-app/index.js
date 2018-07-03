@@ -43,6 +43,7 @@ class ExampleApp extends React.Component {
     // bindings
     this.onChange = this.onChange.bind(this)
     this.onMenuClick = this.onMenuClick.bind(this)
+    this.onBlockAction = this.onBlockAction.bind(this)
   }
 
   /**
@@ -74,6 +75,29 @@ class ExampleApp extends React.Component {
         })
       }
     }
+  }
+
+  onBlockAction(event) {
+    const { editorState } = this.state
+    let newState = null
+    let block = null
+    switch (event.action) {
+    case 'remove':
+      // find the block we just changed and remove it
+      block = EditorState.findBlock(editorState, event.id)
+      newState = EditorState.removeBlock(editorState, event.id)
+      break
+    default:
+      newState = editorState
+      break
+    }
+
+    const editorChange = {
+      editorState: newState,
+      block
+    }
+
+    this.onChange(editorChange)
   }
 
   /**
@@ -183,7 +207,11 @@ class ExampleApp extends React.Component {
 
   render() {
     const { editorState } = this.state
-    const { additionalProps, menuState, blocksConfig, blockComponent, placeholder, showPreview } = this.props
+    const { menuState, blocksConfig, blockComponent, placeholder, showPreview } = this.props
+
+    const additionalProps= {
+      onBlockAction: this.onBlockAction
+    }
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>

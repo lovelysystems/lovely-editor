@@ -5,7 +5,6 @@ import sinon from 'sinon'
 
 // Tested Component
 import { OyezEditor } from '../'
-import { EditorBlock } from '../../editor-block'
 
 const Text = () => null
 const Image = () => null
@@ -119,44 +118,6 @@ describe('OyezEditor', () => {
       wrapper.find(Text).simulate('change', changedValues)
       expect(onChange.callCount).to.equal(1)
       expect(onChange.lastCall.args[0].editorState).to.equal(expectedState)
-    })
-
-    it('component calls onChange when block was removed is triggered', () => {
-      const onChange = sinon.spy()
-      const wrapper = shallow(
-        <OyezEditor
-          editorState={defaultEditorState}
-          blocksConfig={[
-            { type: 'text', component: Text },
-          ]}
-          onChange={onChange}
-        />
-      )
-
-      // start simulating onChanges
-      const event = { action: 'remove', id: 'text-1' }
-      wrapper.find(EditorBlock).simulate('action', event)
-      expect(onChange.callCount).to.equal(1)
-      expect(onChange.lastCall.args[0].editorState).to.equal([])
-    })
-
-    it('component does not change editorState when onBlockAction triggers unknown action', () => {
-      const onChange = sinon.spy()
-      const wrapper = shallow(
-        <OyezEditor
-          editorState={defaultEditorState}
-          blocksConfig={[
-            { type: 'text', component: Text },
-          ]}
-          onChange={onChange}
-        />
-      )
-
-      // start simulating onChanges
-      const event = { action: null, id: 'text-1' }
-      wrapper.find(EditorBlock).simulate('action', event)
-      expect(onChange.callCount).to.equal(1)
-      expect(onChange.lastCall.args[0].editorState).to.equal(defaultEditorState)
     })
   })
 })
