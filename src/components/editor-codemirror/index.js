@@ -45,9 +45,6 @@ export class EditorCodeMirror extends React.Component {
     return (
       <div
         {...classes()}
-        style={{
-          border: '1px solid #000'
-        }}
       >
         <CodeMirror
           value={block.data.value}

@@ -8,6 +8,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 // Material-UI
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
+import { withStyles } from '@material-ui/core/styles'
 
 // Helpers
 import { BemHelper } from '../../src/helpers/bem-helper'
@@ -24,7 +25,14 @@ const dragDropPlaceholder = () => (<div>Add an Editor from the Menu here to star
 // Styling
 const classes = new BemHelper('example-app')
 
-export default class App extends React.Component {
+const styles = {
+  card: {
+    backgroundColor: '#eeeeee',
+    margin: '0px 0px 10px 0px'
+  }
+}
+
+class ExampleApp extends React.Component {
 
   constructor(props, context) {
     super(props, context)
@@ -188,10 +196,7 @@ export default class App extends React.Component {
                 {...dropProvided.droppableProps}
               >
                 <Card
-                  style={{
-                    backgroundColor: '#eeeeee',
-                    margin: '0px 0px 10px 0px'
-                  }}
+                  className={this.props.classes.card}
                 >
                   <CardContent>
                     <ExampleMenu
@@ -213,10 +218,7 @@ export default class App extends React.Component {
                     {...dropProvided.droppableProps}
                   >
                     <Card
-                      style={{
-                        backgroundColor: '#eeeeee',
-                        margin: '0px 0px 0px 10px'
-                      }}
+                      className={this.props.classes.card}
                     >
                       <CardContent>
                         <OyezEditor
@@ -243,10 +245,7 @@ export default class App extends React.Component {
             {showPreview && (
               <div {...classes('preview')} >
                 <Card
-                  style={{
-                    backgroundColor: '#eeeeee',
-                    margin: '0px 0px 0px 10px'
-                  }}
+                  className={this.props.classes.card}
                 >
                   <CardContent>
                     <HTMLPreview editorState={editorState} />
@@ -261,3 +260,7 @@ export default class App extends React.Component {
   }
 
 }
+
+const App = withStyles(styles)(ExampleApp)
+
+export default App

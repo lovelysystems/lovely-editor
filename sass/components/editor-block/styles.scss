@@ -1,11 +1,9 @@
 .oy-editor-block {
 
-  &__container {
-  }
-
   &__header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
+    margin-top: 10px;
   }
 }
