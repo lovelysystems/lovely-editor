@@ -208,7 +208,7 @@ class ExampleApp extends React.Component {
     const { editorState } = this.state
     const { menuState, blocksConfig, blockComponent, placeholder, showPreview } = this.props
 
-    const additionalProps= {
+    const additionalProps = {
       onBlockAction: this.onBlockAction
     }
 

@@ -24,10 +24,10 @@ const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children}) => 
 
   const onDelete = () => {
     const blockId = get(block, 'id')
-    if(typeof additionalProps.onBlockAction === 'function') {
+    if(additionalProps !== null && additionalProps !== undefined && typeof additionalProps.onBlockAction === 'function') {
       additionalProps.onBlockAction({
         action: 'remove',
-        id: blockId,
+        id: blockId
       })
     }
   }
