@@ -32,33 +32,9 @@ export class OyezEditor extends React.Component {
     const newEditorState = EditorState.updateBlockData(editorState, blockId, change.data)
     const editorChange = {
       editorState: newEditorState,
-      block: merge({}, block, {
+      block: merge({}, block, { 
         data: { ...change.data }
       })
-    }
-
-    this.props.onChange(editorChange)
-  }
-
-  onBlockAction(event) {
-    const { editorState } = this.props
-    let newState = null
-    let block = null
-
-    switch (event.action) {
-    case 'remove':
-      // find the block we just changed and remove it
-      block = EditorState.findBlock(editorState, event.id)
-      newState = EditorState.removeBlock(editorState, event.id)
-      break
-    default:
-      newState = editorState
-      break
-    }
-
-    const editorChange = {
-      editorState: newState,
-      block
     }
 
     this.props.onChange(editorChange)
@@ -83,6 +59,7 @@ export class OyezEditor extends React.Component {
           const Component = config.component
           const blockConfig = config.blockConfig || {}
 
+
           return (
             <BlockWrapperComponent
               additionalProps={additionalProps}
@@ -90,7 +67,6 @@ export class OyezEditor extends React.Component {
               blockIndex={index} // react-beautiful-dnd is optional, still it is needed when react-beautiful-dnd > 4.0.x is used
               block={block}
               blockConfig={blockConfig}
-              onAction={(event) => this.onBlockAction(event)}
             >
               <Component
                 additionalProps={additionalProps}

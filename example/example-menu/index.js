@@ -91,8 +91,8 @@ export function ExampleMenu({menuState, onClick}) {
 ExampleMenu.propTypes = {
   menuState: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
+    buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   onClick: PropTypes.func.isRequired
 }
 
