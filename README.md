@@ -1,6 +1,6 @@
-# OyezEditor
+# LovelyEditor
 
-OyezEditor is a React component to provide a variety of editors to add to your
+LovelyEditor is a React component to provide a variety of editors to add to your
 app. It also gives you the opportunity to create your own editor and add it to
 the component. As a result the edited content will come in the shape of
 HTML-code to be added to your page. Each editor will create an independent
@@ -12,12 +12,12 @@ result and therefore can be used on its own.
 * [Examples](#examples)
 * [Requirements](#requirements)
 * [Installation](#installation)
-* [OyezEditor components](#oyezeditor-components)
+* [LovelyEditor components](#lovelyeditor-components)
 * [Quickstart](#quickstart)
   * [Example App](#example-app)
   * [Editor State](#editor-state)
   * [Editor Config](#editor-config)
-  * [OyezEditor Integration in your App](#oyezeditor-integration-in-your-app)
+  * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
   * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
 * [How to contribute and develop](#how-to-contribute-and-develop)
 * [How to create a release](#how-to-create-a-release)
@@ -56,28 +56,28 @@ npm install oyez-editor
 and import it in your App with:
 
 ```js
-import { OyezEditor } from 'oyez-editor'
+import { LovelyEditor } from 'oyez-editor'
 ```
 
-## OyezEditor components
+## LovelyEditor components
 
-The OyezEditor basically consists out of three main components:
+The LovelyEditor basically consists out of three main components:
 
-1. [OyezEditor](src/components/oyez-editor)
+1. [LovelyEditor](src/components/oyez-editor)
 2. [EditorBlock](src/components/editor-block)
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
-The `OyezEditor` rendered components tree looks like this:
+The `LovelyEditor` rendered components tree looks like this:
 
 ```js
-<OyezEditor>
+<LovelyEditor>
   <EditorBlock>
     // a EditorComponent, eg. <EditorQuill />
   </EditorBlock>
-</OyezEditor>
+</LovelyEditor>
 ```
 
-The main entry point in your app is the `OyezEditor`. Its properties have to
+The main entry point in your app is the `LovelyEditor`. Its properties have to
 be specified and all necessary `EditorBlock` and `EditorComponent`s are rendered
 automatically, based on the [editorState](#editor-state) and
 [blocksConfig](#editor-config).
@@ -89,18 +89,18 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `OyezEditor` with two configured
+The following app showcases the usage of the `LovelyEditor` with two configured
 Editors (in this case `EditorQuill` and `EditorImage`) and a current `editorState`.
-The app itself controls the `OyezEditor` by not only subscribing to the `OyezEditor`'s
+The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
 received and the `YourApp`'s `state` updated. This leads to a re-rendering of
-the `OyezEditor` with a new valid editorState. You can find a similar example also
+the `LovelyEditor` with a new valid editorState. You can find a similar example also
 [in our Storybook](https://oyez-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { OyezEditor } from 'oyez-editor'
+import { LovelyEditor } from 'oyez-editor'
 
-// current state of OyezEditor
+// current state of LovelyEditor
 const editorState = [
   {
     id: 2,
@@ -156,7 +156,7 @@ class YourApp extends React.Component {
 
   render() {
     return (
-      <OyezEditor
+      <LovelyEditor
         blocksConfig={blocksConfig}
         editorState={this.state.editorState}
         onChange={this.onChange}
@@ -173,12 +173,12 @@ It is responsible for telling the component which `Editor` gets what kind of
 data (eg. current content for the richtext editor).
 
 The function of the `editorState` is, as the name says, to represent the current
-state of the `<OyezEditor />`. That means if you e.g. type in a new text into
+state of the `<LovelyEditor />`. That means if you e.g. type in a new text into
 a `<EditorQuill />` the `editorState` will change. Your app can access the
-current `editorState` by subscribing to the `onChange` property of the `<OyezEditor />`.
+current `editorState` by subscribing to the `onChange` property of the `<LovelyEditor />`.
 
 Through this any changes to an Editor (eg. EditorQuill) lead to an onChange event
-of the `<OyezEditor />` and lets you use the change for your own purposes
+of the `<LovelyEditor />` and lets you use the change for your own purposes
 (eg. validate changes or show "unsaved" messages).
 
 A `editorState` can look similar to:
@@ -213,7 +213,7 @@ const editorState = [
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
-with the OyezEditor.
+with the LovelyEditor.
 
 Note, that each block type (eg. "richtext") in the `editorState` must have a
 matching type configuration in the `blocksConfig` to be rendered.
@@ -252,11 +252,11 @@ For example we specified one editor with the "richtext"-type and 1 with the
 * If we put in both (as in the examples above) first the "richtext"-type Editors
   and then the "image"-type `EditorComponent` (eg. `<EditorImage />`) is rendered.
 
-### OyezEditor Integration in your App
+### LovelyEditor Integration in your App
 
 As a final step we define our App component where we first set the `editorState`
 as `this.state` and create an `onChange`-method to sync the changes in the
-`<OyezEditor />` with the `editorState` of the App and set it as the new
+`<LovelyEditor />` with the `editorState` of the App and set it as the new
 state (or do even more if we want to).
 
 ```js
@@ -270,7 +270,7 @@ class YourApp extends React.Component {
   }
 
   onChange(change) {
-    // get the change from the OyezEditor and sync the YourApp's state
+    // get the change from the LovelyEditor and sync the YourApp's state
     this.setState({ editorState: change.editorState })
   }
 
@@ -286,7 +286,7 @@ only have to assign them to the `Editor`.
 ```js
 render() {
   return (
-    <OyezEditor
+    <LovelyEditor
       blocksConfig={blocksConfig}
       editorState={this.state.editorState}
       onChange={this.onChange}

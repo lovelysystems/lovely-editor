@@ -16,7 +16,7 @@ import { EditorState } from '../../src/model/editor-state'
 
 
 // Components
-import { OyezEditor } from '../../src'
+import { LovelyEditor } from '../../src'
 import { ExampleMenu } from '../example-menu'
 import HTMLPreview from './html-preview'
 
@@ -47,7 +47,7 @@ class ExampleApp extends React.Component {
   }
 
   /**
-   * any change by the OyezEditor will be passed to this function. The wrapper can then
+   * any change by the LovelyEditor will be passed to this function. The wrapper can then
    * decide what to do with it. Currently we just get it and update the state.
    * @param  {object}   change contains the new editorState and the block that was changed
    */
@@ -248,7 +248,7 @@ class ExampleApp extends React.Component {
                       className={this.props.classes.card}
                     >
                       <CardContent>
-                        <OyezEditor
+                        <LovelyEditor
                           additionalProps={additionalProps}
                           editorState={editorState}
                           blockComponent={blockComponent || undefined}

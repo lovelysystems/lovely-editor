@@ -45,7 +45,7 @@ export class EditorTui extends React.Component {
       }
     }
 
-    // gives the changed value back to the OyezEditor
+    // gives the changed value back to the LovelyEditor
     this.props.onChange(change)
   }
 

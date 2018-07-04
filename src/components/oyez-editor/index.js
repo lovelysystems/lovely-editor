@@ -7,21 +7,21 @@ import { map, merge } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { EditorState } from '../../model/editor-state'
 
-// OyezEditor Components
+// LovelyEditor Components
 import { EditorBlock } from '../editor-block'
 
 // Styling
 const classes = new BemHelper('editor')
 
 /**
- * OyezEditor component
+ * LovelyEditor component
  *
  * is responsible for
  * - rendering the blocks (see renderEditorBlocks)
  * - telling the <Wrapper /> when the content of a block changes (see onContentChange)
  *   or a block triggers an action (see onBlockAction)
  */
-export class OyezEditor extends React.Component {
+export class LovelyEditor extends React.Component {
 
   // event listeners and handlers
   onContentChange(change, blockId) {
@@ -95,7 +95,7 @@ export class OyezEditor extends React.Component {
 
 }
 
-OyezEditor.propTypes = {
+LovelyEditor.propTypes = {
   additionalProps: PropTypes.object,
   blockComponent: PropTypes.func,
   blocksConfig: PropTypes.arrayOf(PropTypes.shape({
@@ -114,7 +114,7 @@ OyezEditor.propTypes = {
   style: PropTypes.object
 }
 
-OyezEditor.defaultProps = {
+LovelyEditor.defaultProps = {
   additionalProps: {},
   blockComponent: EditorBlock,
   placeholder: () => null,
