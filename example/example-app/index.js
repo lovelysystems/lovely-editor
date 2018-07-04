@@ -89,7 +89,6 @@ class ExampleApp extends React.Component {
       break
     default:
       newState = editorState
-      break
     }
 
     const editorChange = {

@@ -32,7 +32,7 @@ export class OyezEditor extends React.Component {
     const newEditorState = EditorState.updateBlockData(editorState, blockId, change.data)
     const editorChange = {
       editorState: newEditorState,
-      block: merge({}, block, {
+      block: merge({}, block, { 
         data: { ...change.data }
       })
     }

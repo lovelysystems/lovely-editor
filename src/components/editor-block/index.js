@@ -8,7 +8,7 @@ import { BemHelper } from '../../helpers/bem-helper'
 // Styling
 const classes = new BemHelper('editor-block')
 
-const EditorBlock = ({ block, children, style }) => {
+export const EditorBlock = ({ block, children, style }) => {
 
   const title = get(block, 'meta.title', 'Untitled')
   return (
@@ -38,8 +38,4 @@ EditorBlock.defaultProps = {
   additionalProps: {},
   blockConfig: {},
   style: {}
-}
-
-export {
-  EditorBlock
 }
