@@ -200,7 +200,7 @@ describe('<EditorQuill />', () => {
 
   describe('Custom Toolbar Events', () => {
     it('component with a customToolbar can handle toolbarCallback invokes', () => {
-      // when the customToolbar wants to transport data (eg. onClick) to the OyezEditor
+      // when the customToolbar wants to transport data (eg. onClick) to the LovelyEditor
       // it can do it with toolbarCallback
       const customBlockConfig = merge({}, exampleBlockConfig, {
         toolbarCallback: sinon.spy()

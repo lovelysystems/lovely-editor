@@ -1,26 +1,26 @@
 # App Example
 
 These App Example stories will provide some illustrations on how to use and
-include the OyezEditor in your application.
+include the LovelyEditor in your application.
 
 ## App Example Stories Overview
 
 The example app can be found [in our storybook](https://oyez-editor.netlify.com/).
 Each story contains an `ExampleApp`, `ExampleMenu` (part of your app) and the
-`OyezEditor`.
+`LovelyEditor`.
 
 The `ExampleMenu` would be part of your application and allows users to add new
-Editors to `OyezEditor` in our examples. And the `ExampleApp` is responsible for
+Editors to `LovelyEditor` in our examples. And the `ExampleApp` is responsible for
 handling the `editorState` (contains all blocks and their content of the
-OyezEditor). Handling means it must subscribe to the `OyezEditor`'s `onChange`,
+LovelyEditor). Handling means it must subscribe to the `LovelyEditor`'s `onChange`,
 get the change, update the old `editorState` (usually part of the state of
-ExampleApp) and give it back to the `OyezEditor` as a property. A simple
+ExampleApp) and give it back to the `LovelyEditor` as a property. A simple
 example would look like this:
 
 ```js
-import { OyezEditor } from 'oyez-editor'
+import { LovelyEditor } from 'oyez-editor'
 
-// current state of OyezEditor
+// current state of LovelyEditor
 const editorState = [
   {
     id: 1, // must be unique for each block in the state
@@ -56,7 +56,7 @@ class YourApp extends React.Component {
 
   render() {
     return (
-      <OyezEditor
+      <LovelyEditor
         blocksConfig={blocksConfig}
         editorState={this.state.editorState}
         onChange={this.onChange}
@@ -70,7 +70,7 @@ class YourApp extends React.Component {
 
 In the example you will find two additional chapters: Content and Customization.
 They both show in more detail how you get the HTML output of all Editors or
-how you can customize OyezEditor and eg. add Drag and Drop Support.
+how you can customize LovelyEditor and eg. add Drag and Drop Support.
 
 ### Content Story
 
@@ -84,7 +84,7 @@ to see it in action.
 
 What if you do not want to use our default `EditorBlock` but want to add your own?
 What if you need to support DnD, as we do in one of our example stories? The answer
-is: you have to create your own `EditorBlock` component and tell the `OyezEditor`
+is: you have to create your own `EditorBlock` component and tell the `LovelyEditor`
 to use yours instead of the default one by adding it as the `blockComponent`
 property.
 

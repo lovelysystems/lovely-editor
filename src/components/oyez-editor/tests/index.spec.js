@@ -4,20 +4,20 @@ import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
 // Tested Component
-import { OyezEditor } from '../'
+import { LovelyEditor } from '../'
 
 const Text = () => null
 const Image = () => null
 const CustomBlockWrapper = () => null
 const Placeholder = () => null
 
-describe('OyezEditor', () => {
+describe('LovelyEditor', () => {
 
   describe('Render Tests', () => {
 
     it('component renders', () => {
       const wrapper = shallow(
-        <OyezEditor
+        <LovelyEditor
           editorState={[]}
           blocksConfig={[]}
           onChange={() => {}}
@@ -28,7 +28,7 @@ describe('OyezEditor', () => {
 
     it('component renders a custom blockComponent if the prop blockComponent is set', () => {
       const wrapper = shallow(
-        <OyezEditor
+        <LovelyEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
           ]}
@@ -44,7 +44,7 @@ describe('OyezEditor', () => {
 
     it('component renders a placeholder if the editorState is empty', () => {
       const wrapper = shallow(
-        <OyezEditor
+        <LovelyEditor
           editorState={[]}
           blocksConfig={[]}
           placeholder={Placeholder}
@@ -56,7 +56,7 @@ describe('OyezEditor', () => {
 
     it('component renders imported editorState an does not render placeholder', () => {
       const wrapper = shallow(
-        <OyezEditor
+        <LovelyEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
             { type: 'image', id: 'image-1', meta: {}, data: { value: 'two' } },
@@ -74,10 +74,10 @@ describe('OyezEditor', () => {
       expect(wrapper.find(Image).length).to.equal(1)
     })
 
-    it('component passes blockConfig to both the Block and the OyezEditor Component', () => {
+    it('component passes blockConfig to both the Block and the LovelyEditor Component', () => {
       const expectedConfig = { example: 'test' }
       const wrapper = shallow(
-        <OyezEditor
+        <LovelyEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
           ]}
@@ -105,7 +105,7 @@ describe('OyezEditor', () => {
 
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <OyezEditor
+        <LovelyEditor
           editorState={defaultEditorState}
           blocksConfig={[
             { type: 'text', component: Text },

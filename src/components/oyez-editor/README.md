@@ -1,11 +1,11 @@
-# OyezEditor Component
+# LovelyEditor Component
 
 The main component of this package. It renderes all the blocks and manages them.
 
 ## Properties
 
 * `additionalProps` (object): contains additional data which is passed to each level
-  (eg. OyezEditor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally
+  (eg. LovelyEditor -> EditorBlock -> EditorQuill). It can contain any data a component might need additionally
   (eg. your customized EditorBlock).
 * `blockComponent` (component): optional, allows to wrap blocks in a custom wrapper
 * `blocksConfig` (array): maps a `type` to a component or render function and contains customization `data`
@@ -35,7 +35,7 @@ const editorState = [{
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
-with the OyezEditor.
+with the LovelyEditor.
 
 #### blockComponent
 
@@ -58,8 +58,8 @@ const customBlockWrapper = ({block, children, onAction}) => (
   </EditorBlock>
 )
 
-// then pass customBlockWrapper as blockComponent to the OyezEditor
-<OyezEditor
+// then pass customBlockWrapper as blockComponent to the LovelyEditor
+<LovelyEditor
   editorState={...}
   blockComponent={customBlockWrapper}
   blocksConfig={...}
@@ -82,12 +82,12 @@ const blocksConfig = [{
 }]
 ```
 
-Other components of the OyezEditor (eg. EditorQuill) will use the properties from `blockConfig`
+Other components of the LovelyEditor (eg. EditorQuill) will use the properties from `blockConfig`
 to customize their behaviour (eg. use a custom toolbar).
 
 #### onChange
 
-The `onChange` property emits every change that happens inside the OyezEditor. It
+The `onChange` property emits every change that happens inside the LovelyEditor. It
 can look like this:
 
 ```js
@@ -109,7 +109,7 @@ change = {
 ## Example
 
 ```js
-import { OyezEditor } from './'
+import { LovelyEditor } from './'
 
 // the current content, can also be an empty array
 const editorState = [
@@ -150,7 +150,7 @@ const blocksConfig = [
   }
 ]
 
-<OyezEditor
+<LovelyEditor
   editorState={editorState}
   blocksConfig={blocksConfig}
   onChange={(change) => console.log(change)}

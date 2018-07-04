@@ -10,7 +10,9 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ### Changed
 
 - *BREAKING*: relocated Delete-Button from `EditorBlock` to `ExampleBlockWrapper` => `Delete--Button` will not be included in `OyezEditor` itself anymore
-  - therefore `onBlockAction` function` relocated from </OyezEditor /> to <ExampleApp />
+  - therefore `onBlockAction` function relocated from `</OyezEditor />` to `<ExampleApp />`
+
+- new name for the Editor: `<OyezEditor />` becomes `<LovelyEditor />`
 
 ## [Unreleased][1]
 
