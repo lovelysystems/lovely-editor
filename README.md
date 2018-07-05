@@ -6,6 +6,9 @@ the component. As a result the edited content will come in the shape of
 HTML-code to be added to your page. Each editor will create an independent
 result and therefore can be used on its own.
 
+###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
+![alt text](./assets/tuiandcodemirror.png)
+
 ## Table of Contents
 
 * [Features](#features)
@@ -40,6 +43,9 @@ there is an example-menu included to quickly add different editor-types (eg.
 Richtext, Images, etc.) to the application. It is also possible to use the
 same editor-type several times.
 
+###### Example with two Editors and an Example-Menu to add additional Editors
+![alt text](./assets/two with menu.png)
+
 ## Requirements
 
 ```
@@ -66,6 +72,9 @@ The LovelyEditor basically consists out of three main components:
 1. [LovelyEditor](src/components/lovely-editor)
 2. [EditorBlock](src/components/editor-block)
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
+
+###### Single EditorBlock with eg. CodeMirror-Editor
+![alt text](./assets/single.png)
 
 The `LovelyEditor` rendered components tree looks like this:
 
@@ -210,6 +219,9 @@ const editorState = [
   }
 ]
 ```
+
+###### Display of EditorQuill and EditorImage
+![alt text](./assets/quillandimage.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
