@@ -25,6 +25,17 @@ export const menuWithAllEditors = {
   ]
 }
 
+export const menuWithAllEditorsExceptImage = {
+  meta: {
+    title: 'ExampleMenu with all Editors'
+  },
+  buttons: [
+    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
+    { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
+  ]
+}
+
 export const templateMenu = {
   meta: {
     title: 'ExampleMenu with Templates'

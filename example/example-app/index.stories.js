@@ -11,6 +11,7 @@ import componentReadme from './README.md'
 // Configuration of the App (eg. default editorState)
 import {
   defaultMenuState,
+  menuWithAllEditorsExceptImage,
   templateMenu,
   menuWithAllEditors,
   defaultDocument,
@@ -103,18 +104,29 @@ storiesOf('App Example', module)
 storiesOf('App Example/Customization', module)
   .addDecorator(withReadme(componentReadme))
   .add('with a customized example EditorBlock with Drag&Drop Support', () => {
+    const randomId = () => Math.floor((Math.random() * 1000) + 1)
     const newDocument = {
       ...defaultDocument,
       editorState: [
         ...defaultDocument.editorState,
         {
-          id: 4711,
-          type: 'richtext',
+          id: randomId(),
+          type: 'tui',
           data: {
-            value: 'This is the the second block'
+            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
           },
           meta: {
-            title: 'Second Richtext'
+            title: 'TUI-Editor'
+          }
+        },
+        {
+          id: randomId(),
+          type: 'codemirror',
+          data: {
+            value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
+          },
+          meta: {
+            title: 'CodeMirror-Editor'
           }
         }
       ]
@@ -124,7 +136,7 @@ storiesOf('App Example/Customization', module)
         document={newDocument}
         blocksConfig={defaultBlocksConfig}
         blockComponent={ExampleBlockWrapper}
-        menuState={defaultMenuState}
+        menuState={menuWithAllEditorsExceptImage}
       />
     )
   })
