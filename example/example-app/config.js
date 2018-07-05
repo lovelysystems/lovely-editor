@@ -5,7 +5,7 @@ const randomId = () => Math.floor((Math.random() * 1000) + 1)
 // EXAMPLE MENU SETUP
 export const defaultMenuState = {
   meta: {
-    title: 'ExampleMenu'
+    title: 'ExampleApp'
   },
   buttons: [
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
@@ -15,7 +15,7 @@ export const defaultMenuState = {
 
 export const menuWithAllEditors = {
   meta: {
-    title: 'ExampleMenu with all Editors'
+    title: 'ExampleApp with all Editors'
   },
   buttons: [
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
@@ -27,7 +27,7 @@ export const menuWithAllEditors = {
 
 export const menuWithAllEditorsExceptImage = {
   meta: {
-    title: 'ExampleMenu with all Editors'
+    title: 'ExampleApp with MaterialUI'
   },
   buttons: [
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
@@ -38,7 +38,7 @@ export const menuWithAllEditorsExceptImage = {
 
 export const templateMenu = {
   meta: {
-    title: 'ExampleMenu with Templates'
+    title: 'ExampleApp with Templates'
   },
   buttons: [
     { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },

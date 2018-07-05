@@ -59,19 +59,6 @@ storiesOf('App Example', module)
         ...defaultDocument.editorState,
         {
           id: randomId(),
-          type: 'image',
-          data: {
-            alignment: 'left',
-            caption: 'Hello World.',
-            size: 'medium',
-            src: 'https://picsum.photos/1000/500'
-          },
-          meta: {
-            title: 'Input Block'
-          }
-        },
-        {
-          id: randomId(),
           type: 'tui',
           data: {
             value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
@@ -88,6 +75,19 @@ storiesOf('App Example', module)
           },
           meta: {
             title: 'CodeMirror-Editor'
+          }
+        },
+        {
+          id: randomId(),
+          type: 'image',
+          data: {
+            alignment: 'left',
+            caption: 'Hello World.',
+            size: 'medium',
+            src: 'https://picsum.photos/1000/500'
+          },
+          meta: {
+            title: 'Input Block'
           }
         }
       ]
