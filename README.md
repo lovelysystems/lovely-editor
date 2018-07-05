@@ -72,8 +72,8 @@ The LovelyEditor basically consists out of three main components:
 2. [EditorBlock](src/components/editor-block)
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
-###### Single EditorBlock with eg. CodeMirror-Editor
-![Single CodeMirror Editor](./assets/single.png)
+###### Single EditorBlock with eg. EditorQuill
+![Single CodeMirror Editor](./assets/react_quill.png)
 
 The `LovelyEditor` rendered components tree looks like this:
 
