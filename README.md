@@ -6,7 +6,7 @@ the component. As a result the edited content will come in the shape of
 HTML-code to be added to your page. Each editor will create an independent
 result and therefore can be used on its own.
 
-![Example App](./assets/ExampleApp.gif)
+![Example App](./assets/example_app.gif)
 
 ## Table of Contents
 
@@ -220,7 +220,7 @@ const editorState = [
 ```
 
 ###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
-![Two Example-Editors](./assets/tuiandcodemirror.png)
+![Two Example-Editors](./assets/tui_and_codemirror.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
