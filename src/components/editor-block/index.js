@@ -14,7 +14,9 @@ export const EditorBlock = ({ block, children, style }) => {
   return (
     <div {...classes('container')} style={style}>
       <div {...classes('header')}>
-        <div {...classes('title')}>{title}</div>
+        <div {...classes('title')}>
+          <h2>{title}</h2>
+        </div>
       </div>
       <div {...classes('content')} >
         {children}

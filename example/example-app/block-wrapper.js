@@ -35,7 +35,7 @@ const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children}) => 
   return (
     <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`} index={blockIndex}>
       {(provided, dragSnapshot) => (
-        <div>
+        <div className="ls-example-block-wrapper">
           <div
             ref={provided.innerRef}
             {...provided.draggableProps}

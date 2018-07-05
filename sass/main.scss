@@ -61,5 +61,10 @@ $bg-color: #eeeeee;
   }
 }
 
+// overwrite the default editor-block styling in the material-ui example
+.ls-example-block-wrapper .ls-editor-block__container {
+  padding: 0;
+  border: 0;
+}
 @import './components/example-menu/styles';
 @import './lovely-editor';
