@@ -1,4 +1,4 @@
-# Changelog for Oyez Editor
+# Changelog for Lovely Editor
 
 All notable changes to this project will be documented in this file.
 

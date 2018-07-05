@@ -29,7 +29,7 @@ describe('<EditorTui />', () => {
         />
       )
 
-      expect(wrapper.find('#oyez-editor-tui-1')).to.have.length(1)
+      expect(wrapper.find('#lovely-editor-tui-1')).to.have.length(1)
     })
 
     it('a ToastUI component with the correct properties', () => {

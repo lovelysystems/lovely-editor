@@ -25,7 +25,7 @@ export class EditorTui extends React.Component {
     const { block, blockConfig } = this.props
 
     this.editor = new Editor({
-      el: document.querySelector(`#oyez-editor-tui-${block.id}`),
+      el: document.querySelector(`#lovely-editor-tui-${block.id}`),
       initialValue: get(block, 'data.value', false),
       initialEditType: 'markdown',
       previewStyle: 'vertical',
@@ -50,7 +50,7 @@ export class EditorTui extends React.Component {
   }
 
   render() {
-    return <div {...classes()} id={`oyez-editor-tui-${this.props.block.id}`} />
+    return <div {...classes()} id={`lovely-editor-tui-${this.props.block.id}`} />
   }
 
 }

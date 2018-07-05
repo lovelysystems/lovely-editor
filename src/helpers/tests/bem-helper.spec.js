@@ -2,27 +2,27 @@ import { expect } from 'code'
 import { BemHelper } from '../bem-helper'
 
 describe('BemHelper', () => {
-  it('prefixes classes with "oy-" (block)', () => {
+  it('prefixes classes with "ls-" (block)', () => {
     const bem = new BemHelper('block')
     const c = bem()
-    expect(c.className).to.equal('oy-block')
+    expect(c.className).to.equal('ls-block')
   })
 
-  it('prefixes classes with "oy-" (element)', () => {
+  it('prefixes classes with "ls-" (element)', () => {
     const bem = new BemHelper('block')
     const c = bem('element')
-    expect(c.className).to.equal('oy-block__element')
+    expect(c.className).to.equal('ls-block__element')
   })
 
-  it('prefixes classes with "oy-" (block modifier)', () => {
+  it('prefixes classes with "ls-" (block modifier)', () => {
     const bem = new BemHelper('block')
     const c = bem(undefined, 'modifier')
-    expect(c.className).to.equal('oy-block oy-block--modifier')
+    expect(c.className).to.equal('ls-block ls-block--modifier')
   })
 
-  it('prefixes classes with "oy-" (element modifier)', () => {
+  it('prefixes classes with "ls-" (element modifier)', () => {
     const bem = new BemHelper('block')
     const c = bem('element', 'modifier')
-    expect(c.className).to.equal('oy-block__element oy-block__element--modifier')
+    expect(c.className).to.equal('ls-block__element ls-block__element--modifier')
   })
 })

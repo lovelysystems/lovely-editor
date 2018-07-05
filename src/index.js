@@ -1,5 +1,5 @@
-// Main oyez-editor components
-export * from './components/oyez-editor'
+// Main lovely-editor components
+export * from './components/lovely-editor'
 export * from './components/editor-block'
 
 // Data and state management

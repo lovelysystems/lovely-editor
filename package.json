@@ -1,7 +1,7 @@
 {
-  "name": "oyez-editor",
+  "name": "lovely-editor",
   "version": "0.4.2",
-  "description": "Oyez Editor",
+  "description": "Lovely Editor",
   "private": true,
   "main": "dist/index.js",
   "files": [

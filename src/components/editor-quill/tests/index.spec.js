@@ -63,7 +63,7 @@ describe('<EditorQuill />', () => {
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
-      expect(wrapper.find('.oy-editor-quill__toolbar--core')).to.have.length(1)
+      expect(wrapper.find('.ls-editor-quill__toolbar--core')).to.have.length(1)
       expect(wrapper.find('#toolbar-5')).to.have.length(1)
     })
 

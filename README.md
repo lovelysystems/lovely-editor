@@ -33,7 +33,7 @@ result and therefore can be used on its own.
 ## Examples
 
 The following link will provide you with certain examples on how the component
-may be used (https://oyez-editor.netlify.com). By selecting one of the options
+may be used (https://lovely-editor.netlify.com). By selecting one of the options
 within "App Example" you will see a variety of possibilities on what you are
 able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
@@ -50,20 +50,20 @@ npm 5.3.x
 ## Installation
 
 ```
-npm install oyez-editor
+npm install lovely-editor
 ```
 
 and import it in your App with:
 
 ```js
-import { LovelyEditor } from 'oyez-editor'
+import { LovelyEditor } from 'lovely-editor'
 ```
 
 ## LovelyEditor components
 
 The LovelyEditor basically consists out of three main components:
 
-1. [LovelyEditor](src/components/oyez-editor)
+1. [LovelyEditor](src/components/lovely-editor)
 2. [EditorBlock](src/components/editor-block)
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
@@ -95,10 +95,10 @@ The app itself controls the `LovelyEditor` by not only subscribing to the `Lovel
 `onChange` but also by providing it's `editorState` as a property. The changes are
 received and the `YourApp`'s `state` updated. This leads to a re-rendering of
 the `LovelyEditor` with a new valid editorState. You can find a similar example also
-[in our Storybook](https://oyez-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
+[in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { LovelyEditor } from 'oyez-editor'
+import { LovelyEditor } from 'lovely-editor'
 
 // current state of LovelyEditor
 const editorState = [
@@ -300,10 +300,10 @@ The entire code of the example can be found in the [Quickstart](#quickstart) sec
 ## How to use the styling from our Showcases
 
 If you want to use the same styling like the basic styling in our Storybook,
-you have to include the CSS from oyez-editor in your own application.
+you have to include the CSS from lovely-editor in your own application.
 
 ```CSS
-@import "~oyez-editor/sass/oyez-editor";
+@import "~lovely-editor/sass/lovely-editor";
 ```
 
 ## How to contribute and develop
@@ -334,7 +334,7 @@ The package comes with the following npm scripts:
 
 This package uses [Storybook](https://storybook.js.org) to showcase the
 components. Just enter `npm run storybook` to start it on your local machine or
-visit [https://oyez-editor.netlify.com](https://oyez-editor.netlify.com).
+visit [https://lovely-editor.netlify.com](https://lovely-editor.netlify.com).
 
 ### Pre-commit and Pre-push Hooks
 
