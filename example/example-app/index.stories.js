@@ -36,7 +36,7 @@ storiesOf('App Example', module)
       />
     )
   })
-  .add('with an example Menu and an empty Oyez-Editor', () => {
+  .add('with an example Menu and an empty Lovely-Editor', () => {
     const newDocument = {
       ...defaultDocument,
       editorState: []

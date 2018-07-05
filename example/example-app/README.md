@@ -5,7 +5,7 @@ include the LovelyEditor in your application.
 
 ## App Example Stories Overview
 
-The example app can be found [in our storybook](https://oyez-editor.netlify.com/).
+The example app can be found [in our storybook](https://lovely-editor.netlify.com/).
 Each story contains an `ExampleApp`, `ExampleMenu` (part of your app) and the
 `LovelyEditor`.
 
@@ -18,7 +18,7 @@ ExampleApp) and give it back to the `LovelyEditor` as a property. A simple
 example would look like this:
 
 ```js
-import { LovelyEditor } from 'oyez-editor'
+import { LovelyEditor } from 'lovely-editor'
 
 // current state of LovelyEditor
 const editorState = [

@@ -25,7 +25,7 @@ $bg-color: #eeeeee;
   }
 }
 
-.oy-example-app {
+.ls-example-app {
 
   h1, h2 {
     margin: 5px 0 10px;
@@ -61,5 +61,10 @@ $bg-color: #eeeeee;
   }
 }
 
+// overwrite the default editor-block styling in the material-ui example
+.ls-example-block-wrapper .ls-editor-block__container {
+  padding: 0;
+  border: 0;
+}
 @import './components/example-menu/styles';
-@import './oyez-editor';
+@import './lovely-editor';

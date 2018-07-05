@@ -28,7 +28,7 @@ describe('<EditorBlock />', () => {
           <div />
         </EditorBlock>
       )
-      expect(wrapper.find('.oy-editor-block__title').containsMatchingElement(block.meta.title))
+      expect(wrapper.find('.ls-editor-block__title').containsMatchingElement(block.meta.title))
     })
 
     it('renders the child element', () => {

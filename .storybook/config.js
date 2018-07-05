@@ -13,7 +13,7 @@ function loadStories() {
 }
 
 setOptions({
-  name: 'Oyez Editor',
+  name: 'Lovely Editor',
   sortStoriesByKind: true,
   url: '#',
   showAddonPanel: true
