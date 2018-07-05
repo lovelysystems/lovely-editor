@@ -8,6 +8,12 @@ result and therefore can be used on its own.
 
 ![Example App](./assets/example_app.gif)
 
+This Example-App shows what our LovelyEditor can do. As already mentioned it
+features a variety of predefined Editors. In this example we extended the
+LovelyEditor by creating a little menu on top to add the Editors and gave each
+one a Delete-Button to remove it. Also we added a Drag&Drop feature to freely
+move them around.
+
 ## Table of Contents
 
 * [Features](#features)
@@ -35,7 +41,7 @@ result and therefore can be used on its own.
 ## Examples
 
 The following link will provide you with certain examples on how the component
-may be used (https://lovely-editor.netlify.com). By selecting one of the options
+may be used: https://lovely-editor.netlify.com. By selecting one of the options
 within "App Example" you will see a variety of possibilities on what you are
 able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
@@ -220,7 +226,7 @@ const editorState = [
 ```
 
 ###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
-![Two Example-Editors](./assets/tui_and_codemirror.png)
+![Two Example-Editors](./assets/quill_and_tui.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
