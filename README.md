@@ -1,10 +1,10 @@
 # LovelyEditor
 
-LovelyEditor is a React component to provide a variety of editors to add to your
+LovelyEditor is a React component to provide a variety of editors to be added to your
 app. It also gives you the opportunity to create your own editor and add it to
-the component. As a result the edited content will come in the shape of
-HTML-code to be added to your page. Each editor will create an independent
-result and therefore can be used on its own.
+the LovelyEditor-component. As a result the edited content will come in the shape of
+HTML markup to be added to your page. Each editor will create an isolated HTML
+markup of its part.
 
 ![Example App](./assets/example_app.gif)
 
