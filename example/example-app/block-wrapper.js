@@ -43,7 +43,8 @@ const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children}) => 
           >
             <Card
               style={{
-                margin: '0px 0px 10px 0px',
+                overflow: 'visible',
+                margin: '0px 0px 10px',
                 backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
                 border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
                 opacity: dragSnapshot.isDragging ? '0.6' : null
