@@ -26,7 +26,7 @@ Drag & Drop was added to illustrate that our LovelyEditor plays nice with other 
   * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
   * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
 * [How to contribute and develop](#how-to-contribute-and-develop)
-* [How to create a release](#how-to-create-a-release)
+* [How to create a release](#how-to-create-a-release-deployment)
 
 ## Features
 
