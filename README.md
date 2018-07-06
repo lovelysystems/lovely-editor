@@ -8,11 +8,9 @@ result and therefore can be used on its own.
 
 ![Example App](./assets/example_app.gif)
 
-This Example-App shows what our LovelyEditor can do. As already mentioned it
-features a variety of predefined Editors. In this example we extended the
-LovelyEditor by creating a little menu on top to add the Editors and gave each
-one a Delete-Button to remove it. Also we added a Drag&Drop feature to freely
-move them around.
+The Example-App shows what our LovelyEditor can do. The app consists of 2 main parts, a toolbar and our LovelyEditor.
+The toolbar adds additional (pre-defined) Editors to our LovelyEditor. Each Editor block is extended by a Delete button, which removes an editor block from our LovelyEditor.
+Drag & Drop was added to illustrate that our LovelyEditor plays nice with other libraries.
 
 ## Table of Contents
 
@@ -78,8 +76,8 @@ The LovelyEditor basically consists out of three main components:
 2. [EditorBlock](src/components/editor-block)
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
-###### Single EditorBlock with eg. EditorQuill
-![Single CodeMirror Editor](./assets/react_quill.png)
+###### Structure of the LovelyEditor
+![LovelyEditor Structure](./assets/lovely_editor.jpg =250x)
 
 The `LovelyEditor` rendered components tree looks like this:
 
@@ -90,6 +88,9 @@ The `LovelyEditor` rendered components tree looks like this:
   </EditorBlock>
 </LovelyEditor>
 ```
+
+###### Single EditorBlock with eg. EditorQuill
+![Single CodeMirror Editor](./assets/react_quill.png)
 
 The main entry point in your app is the `LovelyEditor`. Its properties have to
 be specified and all necessary `EditorBlock` and `EditorComponent`s are rendered
