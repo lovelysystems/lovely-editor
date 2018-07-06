@@ -8,7 +8,7 @@ export const defaultMenuState = {
     title: 'ExampleApp'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
   ]
 }
@@ -18,7 +18,7 @@ export const menuWithAllEditors = {
     title: 'ExampleApp with all Editors'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
     { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
     { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
@@ -30,7 +30,7 @@ export const menuWithAllEditorsExceptImage = {
     title: 'ExampleApp with MaterialUI'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
     { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
   ]
@@ -41,10 +41,10 @@ export const templateMenu = {
     title: 'ExampleApp with Templates'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
-    { action: 'add', text: 'Add Richtext (Template)', type: 'richtext', templateId: 1 },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill with Template', type: 'richtext', templateId: 1 },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
-    { action: 'add', text: 'Add Image (Template)', type: 'image', templateId: 2 },
+    { action: 'add', text: 'Add Image with Image', type: 'image', templateId: 2 },
   ]
 }
 
@@ -75,7 +75,7 @@ export const defaultDocument = {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
-      title: 'Quill Block'
+      title: 'Quill Editor'
     }
   }]
 }
