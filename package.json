@@ -55,7 +55,11 @@
     "instrument": false
   },
   "peerDependencies": {
+    "codemirror": "5.38.0",
+    "highlight.js": "9.12.0",
     "react": "16.3.0",
+    "react-codemirror2": "5.0.4",
+    "tui-editor": "1.2.2",
     "react-quill": "1.2.7"
   },
   "dependencies": {
