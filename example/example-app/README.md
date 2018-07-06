@@ -29,7 +29,7 @@ const editorState = [
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
-      title: 'Quill Block'
+      title: 'Quill Editor'
     }
   },
 ]

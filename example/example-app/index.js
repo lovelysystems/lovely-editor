@@ -172,7 +172,7 @@ class ExampleApp extends React.Component {
           value: get(templateData, 'value', '')
         },
         meta: {
-          title: 'Quill Block'
+          title: 'Quill Editor'
         }
       }
     default:
