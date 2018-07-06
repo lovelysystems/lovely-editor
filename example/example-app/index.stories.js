@@ -64,7 +64,7 @@ storiesOf('App Example', module)
             value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
           },
           meta: {
-            title: 'TUI-Editor'
+            title: 'ToastUI Editor'
           }
         },
         {
@@ -103,7 +103,7 @@ storiesOf('App Example', module)
 
 storiesOf('App Example/Customization', module)
   .addDecorator(withReadme(componentReadme))
-  .add('with a customized example EditorBlock with Drag&Drop Support', () => {
+  .add('with MaterialUI, custom EditorBlock and with Drag&Drop Support', () => {
     const randomId = () => Math.floor((Math.random() * 1000) + 1)
     const newDocument = {
       ...defaultDocument,
@@ -116,7 +116,7 @@ storiesOf('App Example/Customization', module)
             value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
           },
           meta: {
-            title: 'TUI-Editor'
+            title: 'ToastUI Editor'
           }
         },
         {
