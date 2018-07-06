@@ -77,7 +77,7 @@ The LovelyEditor basically consists out of three main components:
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
 ###### Structure of the LovelyEditor
-![LovelyEditor Structure](./assets/lovely_editor.jpg =250x)
+![LovelyEditor Structure](./assets/lovely_editor.png)
 
 The `LovelyEditor` rendered components tree looks like this:
 
