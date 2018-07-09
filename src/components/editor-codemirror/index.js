@@ -18,6 +18,16 @@ export class EditorCodeMirror extends React.Component {
   constructor(props) {
     super(props)
     this.onChange = debounce(this.onChangeHandler.bind(this), 300, { maxWait: 1000 })
+
+    // create state for cursor to reset it to the correct position after onChange()
+    // otherwise it would always jump to the end
+    // https://github.com/scniro/react-codemirror2#props-cont-wrapped-codemirror-programming-api
+    this.state = {
+      cursor: {
+        line: 0,
+        ch: 0
+      }
+    }
   }
 
   onChangeHandler(editor, data, value) {
@@ -26,6 +36,19 @@ export class EditorCodeMirror extends React.Component {
         value
       }
     }
+
+    // reset state.cursor to the correct position
+    // otherwise it would always jump to the end
+    // (for more information see comment in construtor at this.state = ...
+    if(data.origin !== undefined) {
+      this.setState({
+        cursor: {
+          line: data.from.line,
+          ch: data.from.ch + 1
+        }
+      })
+    }
+
 
     // gives the changed value back to the LovelyEditor
     this.props.onChange(change)
@@ -50,6 +73,10 @@ export class EditorCodeMirror extends React.Component {
           value={block.data.value}
           onChange={this.onChange}
           options={options}
+          cursor={{
+            line: this.state.cursor.line,
+            ch: this.state.cursor.ch
+          }}
         />
       </div>
     )
