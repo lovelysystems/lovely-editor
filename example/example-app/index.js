@@ -288,6 +288,4 @@ class ExampleApp extends React.Component {
 
 }
 
-const App = withStyles(styles)(ExampleApp)
-
-export default App
+export default withStyles(styles)(ExampleApp)
