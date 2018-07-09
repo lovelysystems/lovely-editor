@@ -5,37 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and
 this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2018/07/05 [Unreleased][1]
-
-### Changed
-
-- *BREAKING*: changed all names starting like "oyez-" or "oy-" to either "lovely-" or "ls-"
-
-## 2018/07/04 [Unreleased][1]
-
-### Changed
-
-- *BREAKING*: relocated Delete-Button from `EditorBlock` to `ExampleBlockWrapper` => `Delete--Button` will not be included in `OyezEditor` itself anymore
-  - therefore `onBlockAction` function relocated from `</OyezEditor />` to `<ExampleApp />`
-
-- *BREAKING*: new name for the Editor: `<OyezEditor />` becomes `<LovelyEditor />`
-
 ## [Unreleased][1]
 
 ### Added
 
 - new example editors added: [CodeMirror](https://github.com/scniro/react-codemirror2)
-  and [ToastUI Editor])(https://github.com/nhnent/tui.editor)
+  and [ToastUI Editor](https://github.com/nhnent/tui.editor)
 - new storybook examples added
 
 ### Changed
 
-- example-app and related components moved to /example folder
-- EditorQuill comes with two themes: quill.snow and quill.core
+- ExampleApp and related components moved to [/example](example) folder
+- EditorQuill comes with two themes now: quill.snow.css and quill.core.css
+- Fix: set Cursor in EditorCodeMirror to avoid cursor jumping to end of
+text when re-rendering
 
 *BREAKING*
 
-- new name for the Editor: `<Editor />` becomes `<OyezEditor />`
+- relocated Delete-Button from `EditorBlock` to `ExampleBlockWrapper`:
+  `Delete--Button` will not be included in `LovelyEditor` itself anymore
+  - therefore `onBlockAction` function relocated from `</LovelyEditor />` to `<ExampleApp />`
+- new name for the Editor: `<Editor />` becomes `<LovelyEditor />`
+  - changed all css classnames, react component names and comments starting like
+    "oyez-" or "oy-" to either "lovely-" or "ls-"
 - new blockConfig structure, pass additional customizations via new `blockConfig`
   property to an Editor. See an example with EditorQuill below:
 

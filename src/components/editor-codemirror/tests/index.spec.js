@@ -70,6 +70,13 @@ describe('<EditorCodeMirror />', () => {
   describe('Behaviour test', () => {
 
     let clock = null
+    const cursorInfo = {
+      from: {
+        line: 0,
+        ch: 4
+      },
+      origin: '+input'
+    }
 
     beforeEach(() => {
       clock = sinon.useFakeTimers()
@@ -77,6 +84,34 @@ describe('<EditorCodeMirror />', () => {
 
     afterEach(() => {
       clock.restore()
+    })
+
+    it('updates it\'s state when data.origin is not undefined', () => {
+      const expected = {
+        data: {
+          value: 'newinput'
+        }
+      }
+      const onChange = sinon.spy()
+      const wrapper = shallow(
+        <EditorCodeMirror
+          block={validConfig}
+          onChange={onChange}
+        />
+      )
+
+      expect(wrapper.state()).to.equal({
+        cursor: {
+          line: 0,
+          ch: 0
+        }
+      })
+      wrapper.find(CodeMirror).props().onChange(null, cursorInfo, expected.data.value)
+      clock.tick(500)
+      expect(wrapper.state().cursor).to.equal({
+        line: 0,
+        ch: 4 + 1
+      })
     })
 
     it('changes trigger this.props.onChange by calling onChangeHandle directly', () => {
@@ -89,7 +124,7 @@ describe('<EditorCodeMirror />', () => {
       )
 
       const instance = wrapper.instance()
-      instance.onChangeHandler(null, null, 'mytest')
+      instance.onChangeHandler(null, cursorInfo, 'mytest')
 
       expect(onChange.callCount).to.equal(1)
       expect(onChange.lastCall.args[0]).to.include({
@@ -113,7 +148,7 @@ describe('<EditorCodeMirror />', () => {
         />
       )
 
-      wrapper.find(CodeMirror).props().onChange(null, null, expected.data.value)
+      wrapper.find(CodeMirror).props().onChange(null, cursorInfo, expected.data.value)
       clock.tick(500)
       expect(onChange.callCount).to.equal(1)
       expect(onChange.lastCall.args[0]).to.equal(expected)
