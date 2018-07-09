@@ -71,7 +71,11 @@ describe('<EditorCodeMirror />', () => {
 
     let clock = null
     const cursorInfo = {
-      cursor: undefined
+      from: {
+        line: 0,
+        ch: 4
+      },
+      origin: '+input'
     }
 
     beforeEach(() => {
@@ -80,6 +84,29 @@ describe('<EditorCodeMirror />', () => {
 
     afterEach(() => {
       clock.restore()
+    })
+
+    it('updates it\'s state when data.origin is not undefined', () => {
+      const expected = {
+        data: {
+          value: 'newinput'
+        }
+      }
+      const onChange = sinon.spy()
+      const wrapper = shallow(
+        <EditorCodeMirror
+          block={validConfig}
+          onChange={onChange}
+        />
+      )
+
+      // expect(wrapper.state()).to.equal(1)
+      wrapper.find(CodeMirror).props().onChange(null, cursorInfo, expected.data.value)
+      clock.tick(500)
+      expect(wrapper.state().cursor).to.equal({
+        line: 0,
+        ch: 4 + 1
+      })
     })
 
     it('changes trigger this.props.onChange by calling onChangeHandle directly', () => {

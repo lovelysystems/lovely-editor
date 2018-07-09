@@ -49,7 +49,6 @@ export class EditorCodeMirror extends React.Component {
       })
     }
 
-
     // gives the changed value back to the LovelyEditor
     this.props.onChange(change)
   }
