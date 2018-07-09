@@ -100,7 +100,12 @@ describe('<EditorCodeMirror />', () => {
         />
       )
 
-      // expect(wrapper.state()).to.equal(1)
+      expect(wrapper.state()).to.equal({
+        cursor: {
+          line: 0,
+          ch: 0
+        }
+      })
       wrapper.find(CodeMirror).props().onChange(null, cursorInfo, expected.data.value)
       clock.tick(500)
       expect(wrapper.state().cursor).to.equal({
