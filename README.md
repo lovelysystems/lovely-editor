@@ -1,10 +1,16 @@
 # LovelyEditor
 
-LovelyEditor is a React component to provide a variety of editors to add to your
+LovelyEditor is a React component to provide a variety of editors to be added to your
 app. It also gives you the opportunity to create your own editor and add it to
-the component. As a result the edited content will come in the shape of
-HTML-code to be added to your page. Each editor will create an independent
-result and therefore can be used on its own.
+the LovelyEditor-component. As a result the edited content will come in the shape of
+HTML markup to be added to your page. Each editor will create an isolated HTML
+markup of its part.
+
+![Example App](./assets/example_app.gif)
+
+The Example-App shows what our LovelyEditor can do. The app consists of 2 main parts, a toolbar and our LovelyEditor.
+The toolbar adds additional (pre-defined) Editors to our LovelyEditor. Each Editor block is extended by a Delete button, which removes an editor block from our LovelyEditor.
+Drag & Drop was added to illustrate that our LovelyEditor plays nice with other libraries.
 
 ## Table of Contents
 
@@ -20,7 +26,7 @@ result and therefore can be used on its own.
   * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
   * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
 * [How to contribute and develop](#how-to-contribute-and-develop)
-* [How to create a release](#how-to-create-a-release)
+* [How to create a release](#how-to-create-a-release-deployment)
 
 ## Features
 
@@ -33,12 +39,15 @@ result and therefore can be used on its own.
 ## Examples
 
 The following link will provide you with certain examples on how the component
-may be used (https://lovely-editor.netlify.com). By selecting one of the options
+may be used: https://lovely-editor.netlify.com. By selecting one of the options
 within "App Example" you will see a variety of possibilities on what you are
 able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
 Richtext, Images, etc.) to the application. It is also possible to use the
 same editor-type several times.
+
+###### Example with two Editors and an Example-Menu to add additional Editors
+![Two Editors with Example-Menu](./assets/two_with_menu.png)
 
 ## Requirements
 
@@ -67,6 +76,9 @@ The LovelyEditor basically consists out of three main components:
 2. [EditorBlock](src/components/editor-block)
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
+###### Structure of the LovelyEditor
+![LovelyEditor Structure](./assets/lovely_editor.png)
+
 The `LovelyEditor` rendered components tree looks like this:
 
 ```js
@@ -76,6 +88,9 @@ The `LovelyEditor` rendered components tree looks like this:
   </EditorBlock>
 </LovelyEditor>
 ```
+
+###### Single EditorBlock with eg. EditorQuill
+![Single CodeMirror Editor](./assets/react_quill.png)
 
 The main entry point in your app is the `LovelyEditor`. Its properties have to
 be specified and all necessary `EditorBlock` and `EditorComponent`s are rendered
@@ -210,6 +225,9 @@ const editorState = [
   }
 ]
 ```
+
+###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
+![Two Example-Editors](./assets/quill_and_tui.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block

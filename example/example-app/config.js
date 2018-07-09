@@ -5,21 +5,32 @@ const randomId = () => Math.floor((Math.random() * 1000) + 1)
 // EXAMPLE MENU SETUP
 export const defaultMenuState = {
   meta: {
-    title: 'ExampleMenu'
+    title: 'ExampleApp'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
   ]
 }
 
 export const menuWithAllEditors = {
   meta: {
-    title: 'ExampleMenu with all Editors'
+    title: 'ExampleApp with all Editors'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
+    { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
+    { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
+  ]
+}
+
+export const menuWithAllEditorsExceptImage = {
+  meta: {
+    title: 'ExampleApp with MaterialUI'
+  },
+  buttons: [
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
     { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
   ]
@@ -27,13 +38,13 @@ export const menuWithAllEditors = {
 
 export const templateMenu = {
   meta: {
-    title: 'ExampleMenu with Templates'
+    title: 'ExampleApp with Templates'
   },
   buttons: [
-    { action: 'add', text: 'Add Richtext', type: 'richtext', templateId: null },
-    { action: 'add', text: 'Add Richtext (Template)', type: 'richtext', templateId: 1 },
+    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
+    { action: 'add', text: 'Add Quill with Template', type: 'richtext', templateId: 1 },
     { action: 'add', text: 'Add Image', type: 'image', templateId: null },
-    { action: 'add', text: 'Add Image (Template)', type: 'image', templateId: 2 },
+    { action: 'add', text: 'Add Image with Image', type: 'image', templateId: 2 },
   ]
 }
 
@@ -64,7 +75,7 @@ export const defaultDocument = {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
-      title: 'Quill Block'
+      title: 'Quill Editor'
     }
   }]
 }

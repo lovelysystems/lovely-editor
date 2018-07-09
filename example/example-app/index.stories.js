@@ -11,6 +11,7 @@ import componentReadme from './README.md'
 // Configuration of the App (eg. default editorState)
 import {
   defaultMenuState,
+  menuWithAllEditorsExceptImage,
   templateMenu,
   menuWithAllEditors,
   defaultDocument,
@@ -58,6 +59,26 @@ storiesOf('App Example', module)
         ...defaultDocument.editorState,
         {
           id: randomId(),
+          type: 'tui',
+          data: {
+            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
+          },
+          meta: {
+            title: 'ToastUI Editor'
+          }
+        },
+        {
+          id: randomId(),
+          type: 'codemirror',
+          data: {
+            value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
+          },
+          meta: {
+            title: 'CodeMirror-Editor'
+          }
+        },
+        {
+          id: randomId(),
           type: 'image',
           data: {
             alignment: 'left',
@@ -68,7 +89,26 @@ storiesOf('App Example', module)
           meta: {
             title: 'Input Block'
           }
-        },
+        }
+      ]
+    }
+    return (
+      <App
+        document={newDocument}
+        blocksConfig={defaultBlocksConfig}
+        menuState={menuWithAllEditors}
+      />
+    )
+  })
+
+storiesOf('App Example/Customization', module)
+  .addDecorator(withReadme(componentReadme))
+  .add('with MaterialUI, custom EditorBlock and with Drag&Drop Support', () => {
+    const randomId = () => Math.floor((Math.random() * 1000) + 1)
+    const newDocument = {
+      ...defaultDocument,
+      editorState: [
+        ...defaultDocument.editorState,
         {
           id: randomId(),
           type: 'tui',
@@ -76,7 +116,7 @@ storiesOf('App Example', module)
             value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
           },
           meta: {
-            title: 'TUI-Editor'
+            title: 'ToastUI Editor'
           }
         },
         {
@@ -95,36 +135,8 @@ storiesOf('App Example', module)
       <App
         document={newDocument}
         blocksConfig={defaultBlocksConfig}
-        menuState={menuWithAllEditors}
-      />
-    )
-  })
-
-storiesOf('App Example/Customization', module)
-  .addDecorator(withReadme(componentReadme))
-  .add('with a customized example EditorBlock with Drag&Drop Support', () => {
-    const newDocument = {
-      ...defaultDocument,
-      editorState: [
-        ...defaultDocument.editorState,
-        {
-          id: 4711,
-          type: 'richtext',
-          data: {
-            value: 'This is the the second block'
-          },
-          meta: {
-            title: 'Second Richtext'
-          }
-        }
-      ]
-    }
-    return (
-      <App
-        document={newDocument}
-        blocksConfig={defaultBlocksConfig}
         blockComponent={ExampleBlockWrapper}
-        menuState={defaultMenuState}
+        menuState={menuWithAllEditorsExceptImage}
       />
     )
   })

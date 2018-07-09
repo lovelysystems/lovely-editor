@@ -172,7 +172,7 @@ class ExampleApp extends React.Component {
           value: get(templateData, 'value', '')
         },
         meta: {
-          title: 'Quill Block'
+          title: 'Quill Editor'
         }
       }
     default:
@@ -288,6 +288,4 @@ class ExampleApp extends React.Component {
 
 }
 
-const App = withStyles(styles)(ExampleApp)
-
-export default App
+export default withStyles(styles)(ExampleApp)
