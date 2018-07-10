@@ -105,7 +105,7 @@ following comprehensive example:
 ### Example App
 
 The following app showcases the usage of the `LovelyEditor` with two configured
-with pre-configured Editors (in this case `EditorQuill` and `EditorImage`) and
+with pre-configured Editors (in this case `EditorQuill` and `EditorTui`) and
 a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are

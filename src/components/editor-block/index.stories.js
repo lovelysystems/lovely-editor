@@ -48,7 +48,6 @@ class Wrapper extends React.Component {
       >
         <EditorQuill
           block={block}
-          blockConfig={finalBlockConfig}
           onChange={this.onChange}
         />
       </EditorBlock>
