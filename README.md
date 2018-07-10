@@ -104,8 +104,9 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `LovelyEditor` with  pre-configured
-Editors and a current `editorState`.
+The following app showcases the usage of the `LovelyEditor` with two configured
+with pre-configured Editors (in this case `EditorQuill` and `EditorImage`) and
+a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
 received and the `YourApp`'s `state` updated. This leads to a re-rendering of
@@ -118,13 +119,23 @@ import { LovelyEditor } from 'lovely-editor'
 // current state of LovelyEditor
 const editorState = [
   {
-    id: 2,
+    id: 1,
     type: 'richtext',
     data: {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
       title: 'Quill Block'
+    }
+  },
+  {
+    id: 2,
+    type: 'tui',
+    data: {
+      value: 'mein Text'
+    },
+    meta: {
+      title: 'TUI-Editor'
     }
   }
 ]
@@ -135,9 +146,13 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
+const editorTuiConfig = {
+  type: 'tui',
+  component: EditorTui
+}
 
 // sets which editor component should be rendered for which block.type
-const blocksConfig = [editorQuillConfig]
+const blocksConfig = [editorQuillConfig, editorTuiConfig]
 
 class YourApp extends React.Component {
   constructor(props) {
@@ -192,6 +207,16 @@ const editorState = [
     meta: {
       title: 'Quill Block'
     }
+  },
+  {
+    id: 2,
+    type: 'tui',
+    data: {
+      value: 'mein Text'
+    },
+    meta: {
+      title: 'TUI-Editor'
+    }
   }
 ]
 ```
@@ -222,8 +247,12 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
+const editorTuiConfig = {
+  type: 'tui',
+  component: EditorTui
+}
 
-const blocksConfig = [editorQuillConfig]
+const blocksConfig = [editorQuillConfig, editorTuiConfig]
 ```
 
 ### LovelyEditor Integration in your App

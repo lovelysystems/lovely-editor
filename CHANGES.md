@@ -28,7 +28,6 @@ text when re-rendering
 - new name for the Editor: `<Editor />` becomes `<LovelyEditor />`
   - changed all css classnames, react component names and comments starting like
     "oyez-" or "oy-" to either "lovely-" or "ls-"
-- removed EditorImage
 - new blockConfig structure, pass additional customizations via new `blockConfig`
   property to an Editor. See an example with EditorQuill below:
 
@@ -55,6 +54,10 @@ const blockConfig = {
   }
 }
 ```
+
+### Removed
+
+- ExampleApp does not contain example for EditorImage anymore
 
 ## 2018/05/23 [0.4.2][7]
 

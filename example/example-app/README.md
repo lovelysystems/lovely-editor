@@ -74,9 +74,9 @@ how you can customize LovelyEditor and eg. add Drag and Drop Support.
 
 ### Content Story
 
-To get or generate HTML from the content of all Editors one has to iterate over
-the block.data objects. For further information check out our example `html-preview.js`
-to see it in action.
+To get or generate HTML (depends if the Editor itself provides a HTML output)
+from the content of all Editors one has to iterate over the block.data objects.
+For further information check out our example `html-preview.js`to see it in action.
 
 ### Customization
 
