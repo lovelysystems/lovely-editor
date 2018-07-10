@@ -1,7 +1,7 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
 import { debounce, get } from 'lodash'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
+import { Controlled as CodeMirror } from 'react-codemirror2'
 
 import { BemHelper } from '../../helpers/bem-helper'
 
@@ -23,10 +23,7 @@ export class EditorCodeMirror extends React.Component {
     // otherwise it would always jump to the end
     // https://github.com/scniro/react-codemirror2#props-cont-wrapped-codemirror-programming-api
     this.state = {
-      cursor: {
-        line: 0,
-        ch: 0
-      }
+      value: get(this.props, 'block.data.value')
     }
   }
 
@@ -37,24 +34,12 @@ export class EditorCodeMirror extends React.Component {
       }
     }
 
-    // reset state.cursor to the correct position
-    // otherwise it would always jump to the end
-    // (for more information see comment in construtor at this.state = ...
-    if(data.origin !== undefined) {
-      this.setState({
-        cursor: {
-          line: data.from.line,
-          ch: data.from.ch + 1
-        }
-      })
-    }
-
     // gives the changed value back to the LovelyEditor
     this.props.onChange(change)
   }
 
   render() {
-    const { block, blockConfig } = this.props
+    const { blockConfig } = this.props
     const options = {
       lineNumbers: get(blockConfig, 'lineNumbers', false),
       mode: {
@@ -62,20 +47,19 @@ export class EditorCodeMirror extends React.Component {
         json: true,
       },
       indentUnit: 2,
-      theme: 'default'
+      theme: 'material',
     }
     return (
       <div
         {...classes()}
       >
         <CodeMirror
-          value={block.data.value}
+          value={this.state.value}
+          onBeforeChange={(editor, data, value) => {
+            this.setState({value})
+          }}
           onChange={this.onChange}
           options={options}
-          cursor={{
-            line: this.state.cursor.line,
-            ch: this.state.cursor.ch
-          }}
         />
       </div>
     )
