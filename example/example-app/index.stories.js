@@ -11,13 +11,11 @@ import componentReadme from './README.md'
 // Configuration of the App (eg. default editorState)
 import {
   defaultMenuState,
-  menuWithAllEditorsExceptImage,
   templateMenu,
   menuWithAllEditors,
   defaultDocument,
   defaultBlocksConfig,
   editorQuillConfig,
-  editorImageConfig
 } from './config'
 
 // Editor Placeholder examples
@@ -76,19 +74,6 @@ storiesOf('App Example', module)
           meta: {
             title: 'CodeMirror-Editor'
           }
-        },
-        {
-          id: randomId(),
-          type: 'image',
-          data: {
-            alignment: 'left',
-            caption: 'Hello World.',
-            size: 'medium',
-            src: 'https://picsum.photos/1000/500'
-          },
-          meta: {
-            title: 'Input Block'
-          }
         }
       ]
     }
@@ -136,7 +121,7 @@ storiesOf('App Example/Customization', module)
         document={newDocument}
         blocksConfig={defaultBlocksConfig}
         blockComponent={ExampleBlockWrapper}
-        menuState={menuWithAllEditorsExceptImage}
+        menuState={menuWithAllEditors}
       />
     )
   })
@@ -146,7 +131,7 @@ storiesOf('App Example/Customization', module)
         hideToolbarOnBlur: true
       }
     })
-    const blocksConfig = [editorQuillCustomConfig, editorImageConfig]
+    const blocksConfig = [editorQuillCustomConfig]
     return (
       <App
         document={defaultDocument}

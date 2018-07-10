@@ -7,6 +7,5 @@ export * from './model/editor-state'
 
 // Editors
 export * from './components/editor-quill'
-export * from './components/editor-image'
 export * from './components/editor-tui'
 export * from './components/editor-codemirror'

@@ -152,18 +152,7 @@ class ExampleApp extends React.Component {
 
     const randomId = () => Math.floor((Math.random() * 1000) + 1)
 
-    switch (event.type) {
-    case 'image':
-      return {
-        id: randomId(),
-        type: 'image',
-        data: {
-          ...templateData
-        },
-        meta: {
-          title: 'Image Block'
-        }
-      }
+    switch (event.type) { 
     case 'richtext':
       return {
         id: randomId(),

@@ -122,15 +122,6 @@ const editorState = [
     meta: {
       title: 'Input Block'
     }
-  }, {
-    id: 2,
-    type: 'image',
-    data: {
-      value: 'https://media.giphy.com/media/brsEO1JayBVja/giphy.gif'
-    },
-    meta: {
-      title: 'Image Block'
-    }
   }
 ]
 

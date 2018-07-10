@@ -7,7 +7,6 @@ import sinon from 'sinon'
 import { LovelyEditor } from '../'
 
 const Text = () => null
-const Image = () => null
 const CustomBlockWrapper = () => null
 const Placeholder = () => null
 
@@ -59,19 +58,16 @@ describe('LovelyEditor', () => {
         <LovelyEditor
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
-            { type: 'image', id: 'image-1', meta: {}, data: { value: 'two' } },
             { type: 'text', id: 'text-2', meta: {}, data: { value: 'three' } },
           ]}
           blocksConfig={[
             { type: 'text', component: Text },
-            { type: 'image', component: Image },
           ]}
           onChange={() => {}}
         />
       )
       expect(wrapper.find(Placeholder).length).to.equal(0)
       expect(wrapper.find(Text).length).to.equal(2)
-      expect(wrapper.find(Image).length).to.equal(1)
     })
 
     it('component passes blockConfig to both the Block and the LovelyEditor Component', () => {

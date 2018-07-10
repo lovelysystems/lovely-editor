@@ -7,8 +7,7 @@ describe('EditorState', () => {
     it('finds the block by its id', () => {
       const editorState = [
         { id: 'block-one', type: 'text' },
-        { id: 'block-two', type: 'image' },
-        { id: 'block-three', type: 'text' },
+        { id: 'block-two', type: 'text' },
       ]
       const block = EditorState.findBlock(editorState, 'block-two')
       expect(block).to.equal(editorState[1])
@@ -19,13 +18,11 @@ describe('EditorState', () => {
     it('adds the specified block to the end', () => {
       const editorState = [
         { id: 'block-one', type: 'text' },
-        { id: 'block-two', type: 'image' },
       ]
-      const block = { id: 'block-three', type: 'text' }
+      const block = { id: 'block-two', type: 'text' }
       const newEditorState = EditorState.appendBlock(editorState, block)
       expect(newEditorState).to.equal([
         editorState[0],
-        editorState[1],
         block,
       ])
     })
@@ -35,25 +32,22 @@ describe('EditorState', () => {
     it('removes the block identified by its id', () => {
       const editorState = [
         { id: 'block-one', type: 'text' },
-        { id: 'block-two', type: 'image' },
-        { id: 'block-three', type: 'text' },
+        { id: 'block-two', type: 'text' },
       ]
       const newEditorState = EditorState.removeBlock(editorState, 'block-two')
       expect(newEditorState).to.equal([
         editorState[0],
-        editorState[2],
       ])
     })
 
     it('leaves the original editor state as is', () => {
       const editorState = [
         { id: 'block-one', type: 'text' },
-        { id: 'block-two', type: 'image' },
-        { id: 'block-three', type: 'text' },
+        { id: 'block-two', type: 'text' },
       ]
       const newEditorState = EditorState.removeBlock(editorState, 'block-two')
-      expect(newEditorState).to.have.length(2)
-      expect(editorState).to.have.length(3)
+      expect(newEditorState).to.have.length(1)
+      expect(editorState).to.have.length(2)
     })
   })
 
