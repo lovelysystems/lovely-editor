@@ -5,10 +5,6 @@ node_modules
 coverage
 .nyc_output
 
-## Examples
-example/css
-example/js
-
 ## Log Files
 npm-debug.log
 

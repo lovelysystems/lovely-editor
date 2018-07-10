@@ -18,7 +18,7 @@
     "url": "https://github.com/lovelysystems/oyez-editor.git"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps && cp node_modules/quill/dist/quill.core.css dist && cp node_modules/quill/dist/quill.snow.css dist",
+    "build": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps && cp node_modules/quill/dist/quill.core.css dist && cp node_modules/quill/dist/quill.snow.css dist && node-sass --include-path scss sass/lovely-editor.scss dist/lovely-editor.css",
     "build:storybook": "build-storybook -o dist/storybook",
     "coverage": "NODE_ENV=test nyc --reporter=html --reporter=text -- mocha -r babel-core/register -r src/tests/helpers/test-setup.js --colors --exit \"./src/**/*.spec.js\" && nyc report",
     "lint": "eslint 'src/**/*.js' --fix",

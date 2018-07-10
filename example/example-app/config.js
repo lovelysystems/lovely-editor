@@ -1,4 +1,4 @@
-import { EditorQuill, EditorImage, EditorTui, EditorCodeMirror } from '../../src'
+import { EditorQuill, EditorTui, EditorCodeMirror } from '../../src'
 
 const randomId = () => Math.floor((Math.random() * 1000) + 1)
 
@@ -9,25 +9,12 @@ export const defaultMenuState = {
   },
   buttons: [
     { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
-    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
   ]
 }
 
 export const menuWithAllEditors = {
   meta: {
     title: 'ExampleApp with all Editors'
-  },
-  buttons: [
-    { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
-    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
-    { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
-    { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
-  ]
-}
-
-export const menuWithAllEditorsExceptImage = {
-  meta: {
-    title: 'ExampleApp with MaterialUI'
   },
   buttons: [
     { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
@@ -43,8 +30,6 @@ export const templateMenu = {
   buttons: [
     { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
     { action: 'add', text: 'Add Quill with Template', type: 'richtext', templateId: 1 },
-    { action: 'add', text: 'Add Image', type: 'image', templateId: null },
-    { action: 'add', text: 'Add Image with Image', type: 'image', templateId: 2 },
   ]
 }
 
@@ -85,10 +70,6 @@ export const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-export const editorImageConfig = {
-  type: 'image',
-  component: EditorImage
-}
 export const editorTuiConfig = {
   type: 'tui',
   component: EditorTui,
@@ -103,7 +84,6 @@ export const editorCodemirrorConfig = {
 
 export const defaultBlocksConfig = [
   editorQuillConfig,
-  editorImageConfig,
   editorTuiConfig,
   editorCodemirrorConfig
 ]

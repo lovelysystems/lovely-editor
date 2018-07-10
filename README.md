@@ -43,7 +43,7 @@ may be used: https://lovely-editor.netlify.com. By selecting one of the options
 within "App Example" you will see a variety of possibilities on what you are
 able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
-Richtext, Images, etc.) to the application. It is also possible to use the
+Richtext, CodeMirror, etc.) to the application. It is also possible to use the
 same editor-type several times.
 
 ###### Example with two Editors and an Example-Menu to add additional Editors
@@ -104,8 +104,8 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `LovelyEditor` with two configured
-Editors (in this case `EditorQuill` and `EditorImage`) and a current `editorState`.
+The following app showcases the usage of the `LovelyEditor` with  pre-configured
+Editors and a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
 received and the `YourApp`'s `state` updated. This leads to a re-rendering of
@@ -126,19 +126,6 @@ const editorState = [
     meta: {
       title: 'Quill Block'
     }
-  },
-  {
-    id: 4,
-    type: 'image',
-    data: {
-      alignment: 'left',
-      caption: 'Hello World.',
-      size: 'medium',
-      src: 'https://picsum.photos/1000/500'
-    },
-    meta: {
-      title: 'Input Block'
-    }
   }
 ]
 
@@ -148,13 +135,9 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-const editorImageConfig = {
-  type: 'image',
-  component: EditorImage
-}
 
 // sets which editor component should be rendered for which block.type
-const blocksConfig = [editorQuillConfig, editorImageConfig]
+const blocksConfig = [editorQuillConfig]
 
 class YourApp extends React.Component {
   constructor(props) {
@@ -209,19 +192,6 @@ const editorState = [
     meta: {
       title: 'Quill Block'
     }
-  },
-  {
-    id: 2,
-    type: 'image',
-    data: {
-      alignment: 'left',
-      caption: 'Hello World.',
-      size: 'medium',
-      src: 'https://picsum.photos/1000/500'
-    },
-    meta: {
-      title: 'Image Block'
-    }
   }
 ]
 ```
@@ -240,7 +210,7 @@ matching type configuration in the `blocksConfig` to be rendered.
 
 Then you have to provide a `blocksConfig` configurations. This means telling
 the `<Editor />` which `EditorComponent` to use for which specified type (e.g.
-`<EditorImage />` for type "image").
+`<EditorQuill />` for type "richtext").
 
 But the order and number of currently rendered Editors are specified through
 the `editorState` (see [Editor State](#editor-state)).
@@ -252,23 +222,9 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-const editorImageConfig = {
-  type: 'image',
-  component: EditorImage
-}
 
-const blocksConfig = [editorQuillConfig, editorImageConfig]
+const blocksConfig = [editorQuillConfig]
 ```
-
-For example we specified one editor with the "richtext"-type and 1 with the
-"image"-type in this order in the example editorState above.
-
-* If we would just put in the "richtext" configuration into the `blocksConfig`
-  then only the richtext Editor would be rendered.
-* If we would just put in the "image" into the `blocksConfig` then the single
-  "image"-type Editor would be rendered.
-* If we put in both (as in the examples above) first the "richtext"-type Editors
-  and then the "image"-type `EditorComponent` (eg. `<EditorImage />`) is rendered.
 
 ### LovelyEditor Integration in your App
 

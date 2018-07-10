@@ -42,7 +42,6 @@ export function ExampleMenu({menuState, onClick}) {
   //   }
   //  }]
   // },
-  // - `image:2:add:1` => an image block with values of the template id 2 should be added
   return (
     <div>
       <Typography variant="display1" gutterBottom>

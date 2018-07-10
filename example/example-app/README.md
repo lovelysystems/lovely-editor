@@ -75,9 +75,7 @@ how you can customize LovelyEditor and eg. add Drag and Drop Support.
 ### Content Story
 
 To get or generate HTML from the content of all Editors one has to iterate over
-the block.data objects. Some Editors already provide HTML (eg. EditorQuill or
-EditorTui) and others don't (eg. our EditorImage example). Then you need to take
-care of generating the HTML tag yourself. Check out our example `html-preview.js`
+the block.data objects. For further information check out our example `html-preview.js`
 to see it in action.
 
 ### Customization
