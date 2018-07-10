@@ -17,8 +17,6 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 - ExampleApp and related components moved to [/example](example) folder
 - EditorQuill comes with two themes now: quill.snow.css and quill.core.css
-- Fix: set Cursor in EditorCodeMirror to avoid cursor jumping to end of
-text when re-rendering
 
 *BREAKING*
 
