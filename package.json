@@ -2,7 +2,6 @@
   "name": "lovely-editor",
   "version": "1.0.0",
   "description": "Lovely Editor",
-  "private": true,
   "main": "dist/index.js",
   "files": [
     "dist"
