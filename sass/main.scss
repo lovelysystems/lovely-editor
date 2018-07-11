@@ -66,5 +66,7 @@ $bg-color: #eeeeee;
   padding: 0;
   border: 0;
 }
+
+@import '~font-awesome/css/font-awesome.min.css';
 @import './components/example-menu/styles';
 @import './lovely-editor';

@@ -7,6 +7,12 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/07/11 [1.0.2][9]
+
+### Changed
+
+- remove `font-awesome.min.css` dependency from LovelyEditor scss to example scss
+
 ## 2018/07/11 [1.0.0][8]
 
 ### Added
@@ -135,3 +141,4 @@ const blockConfig = {
 [6]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.0...v0.4.1
 [7]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.1...v0.4.2
 [8]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.2...v1.0.0
+[9]: https://github.com/lovelysystems/oyez-editor/compare/v1.0.0...v1.0.2
