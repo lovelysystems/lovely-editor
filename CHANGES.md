@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/07/11 [1.0.0][8]
+
 ### Added
 
 - new example editors added: [CodeMirror](https://github.com/scniro/react-codemirror2)
@@ -132,3 +134,4 @@ const blockConfig = {
 [5]: https://github.com/lovelysystems/oyez-editor/compare/v0.3.0...v0.4.0
 [6]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.0...v0.4.1
 [7]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.1...v0.4.2
+[8]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.2...v1.0.0

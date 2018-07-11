@@ -19,20 +19,20 @@
   },
   "scripts": {
     "build": "npm run build:js && npm run build:vendor-css && npm run build:css",
-    "build:js": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps ",
-    "build:vendor-css": "cp node_modules/quill/dist/quill.core.css dist && cp node_modules/quill/dist/quill.snow.css dist",
     "build:css": "node-sass --include-path scss sass/lovely-editor.scss dist/lovely-editor.min.css --output-style compressed",
+    "build:js": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps ",
     "build:storybook": "build-storybook -o dist/storybook",
+    "build:vendor-css": "cp node_modules/quill/dist/quill.core.css dist && cp node_modules/quill/dist/quill.snow.css dist",
     "coverage": "NODE_ENV=test nyc --reporter=html --reporter=text -- mocha -r babel-core/register -r src/tests/helpers/test-setup.js --colors --exit \"./src/**/*.spec.js\" && nyc report",
     "lint": "eslint 'src/**/*.js' --fix",
-    "test": "mocha -r babel-core/register -r src/tests/helpers/test-setup.js -r ignore-styles --colors \"./src/**/*.spec.js\"",
-    "test:node": "check-node-version --node '>='$(cat .nvmrc)",
-    "prebuild": "rimraf dist",
-    "pretest": "npm run test:node",
     "posttest": "npm run lint",
-    "postinstall": "npm run build",
+    "prebuild": "rimraf dist",
+    "prepublishOnly": "npm run build",
+    "pretest": "npm run test:node",
     "start": "npm run storybook",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "test": "mocha -r babel-core/register -r src/tests/helpers/test-setup.js -r ignore-styles --colors \"./src/**/*.spec.js\"",
+    "test:node": "check-node-version --node '>='$(cat .nvmrc)"
   },
   "pre-commit": [
     "lint"
