@@ -11,7 +11,7 @@ the features included in the example shown below.
 
 ```js
   data: {
-    value: '<h1>MEIN TEXT</h1>'
+    value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
   },
 ```
 
@@ -22,7 +22,7 @@ import { EditorCodeMirror } from './'
 
 const block = {
   data: {
-    value: 'console.log(\'hello\')' // currently only javascript is supported
+    value: 'console.log(\'hello\');' // currently only javascript is supported
   },
 }
 

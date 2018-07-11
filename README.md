@@ -68,6 +68,14 @@ and import it in your App with:
 import { LovelyEditor } from 'lovely-editor'
 ```
 
+If you want to use the basic styling as well you can either import it in your index.js
+
+```js
+import('lovely-editor/dist/lovely-editor.min.css')
+```
+
+Or add it to your index.html.
+
 ## LovelyEditor components
 
 The LovelyEditor basically consists out of three main components:
@@ -114,7 +122,7 @@ the `LovelyEditor` with a new valid editorState. You can find a similar example 
 [in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { LovelyEditor } from 'lovely-editor'
+import { LovelyEditor, EditorQuill, EditorTui } from 'lovely-editor'
 
 // current state of LovelyEditor
 const editorState = [
@@ -132,7 +140,7 @@ const editorState = [
     id: 2,
     type: 'tui',
     data: {
-      value: 'mein Text'
+      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
     },
     meta: {
       title: 'TUI-Editor'
@@ -199,7 +207,7 @@ A `editorState` can look similar to:
 ```js
 const editorState = [
   {
-    id: 1, // block.id
+    id: 1, // block.id, must be unique
     type: 'richtext',
     data: {
       value: '<p>Hello World. <strong>This is bold.</strong></p>'
@@ -212,7 +220,7 @@ const editorState = [
     id: 2,
     type: 'tui',
     data: {
-      value: 'mein Text'
+      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
     },
     meta: {
       title: 'TUI-Editor'
@@ -303,10 +311,11 @@ The entire code of the example can be found in the [Quickstart](#quickstart) sec
 ## How to use the styling from our Showcases
 
 If you want to use the same styling like the basic styling in our Storybook,
-you have to include the CSS from lovely-editor in your own application.
+you have to include the CSS from lovely-editor in your own application. Example
+import in SCSS:
 
-```CSS
-@import "~lovely-editor/sass/lovely-editor";
+```SCSS
+@import "~lovely-editor/dist/lovely-editor.min.css";
 ```
 
 ## How to contribute and develop
