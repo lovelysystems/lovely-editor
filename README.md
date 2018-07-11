@@ -5,6 +5,11 @@ app. It also gives you the opportunity to create your own editor and add it to
 the LovelyEditor-component. As a result the edited content will come in the shape of
 HTML markup to be added to your page. Each editor will create an isolated HTML
 markup of its part.
+This makes it very easy for you to include a variety of different Editors
+into your App and organise them and their returned value exactly the way you need
+it. Also including a new Editor that is not supported yet can be accomplished
+within just a few easy steps. 
+
 
 ![Example App](./assets/example_app.gif)
 
