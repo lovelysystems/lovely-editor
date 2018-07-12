@@ -8,7 +8,7 @@ markup of its part.
 This makes it very easy for you to include a variety of different Editors
 into your App and organise them and their returned value exactly the way you need
 it. Also including a new Editor that is not supported yet can be accomplished
-within just a few easy steps. 
+within just a few easy steps.
 
 
 ![Example App](./assets/example_app.gif)
@@ -64,7 +64,7 @@ npm 5.3.x
 ## Installation
 
 ```
-npm install lovely-editor
+npm install --save lovely-editor
 ```
 
 and import it in your App with:
@@ -247,7 +247,7 @@ matching type configuration in the `blocksConfig` to be rendered.
 ### Editor Config
 
 Then you have to provide a `blocksConfig` configurations. This means telling
-the `<Editor />` which `EditorComponent` to use for which specified type (e.g.
+the `<LovelyEditor />` which `EditorComponent` to use for which specified type (e.g.
 `<EditorQuill />` for type "richtext").
 
 But the order and number of currently rendered Editors are specified through
