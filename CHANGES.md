@@ -75,7 +75,8 @@ const blockConfig = {
 
 ### Removed
 
-- ExampleApp does not contain example for EditorImage anymore
+- *BREAKING*: `EditorImage` removed
+- ExampleApp does not contain example for `EditorImage` anymore
 
 ## 2018/05/23 [0.4.2][7]
 
