@@ -9,10 +9,10 @@ export default ({editorState=[]}) => (
       HTML Preview
     </Typography>
     {editorState.map(block => {
-      if (block.type === 'richtext') {
-        return block.data.value
+      if (block.type === 'tui') {
+        return block.data.html
       }
-      return null
+      return block.data.value
     })}
   </React.Fragment>
 )
