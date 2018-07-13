@@ -36,7 +36,7 @@ Drag & Drop was added to illustrate that our LovelyEditor plays nice with other 
   * [Editor Config](#editor-config)
   * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
   * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
-* [How to create your own Editor](#how-to-include-your-own-custom-editor)
+* [How to include your own custom Editor](#how-to-include-your-own-custom-editor)
 * [How to contribute and develop](#how-to-contribute-and-develop)
 * [How to create a release](#how-to-create-a-release-deployment)
 
@@ -61,8 +61,8 @@ same editor-type several times.
 ###### HTML-Output
 ![HTML-Output](./assets/html_preview.gif)
 
-To see what kind of HTLM-Output the Editors return and what would be a
-possibility to use it check out this Example-Story [Storybook-HTLM-Output](https://lovely-editor.netlify.com/?selectedKind=App%20Example%2FContent&selectedStory=with%20HTML%20Preview%20of%20the%20content%20of%20all%20Editors&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel)
+To see what kind of HTML-Output the Editors return check out our [example](https://lovely-editor.netlify.com/?selectedKind=App%20Example%2FContent&selectedStory=with%20HTML%20Preview%20of%20the%20content%20of%20all%20Editors&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
+The generated HTML of all editors is ready to be used in your app.
 
 ###### Example with two Editors and an Example-Menu to add additional Editors
 ![Two Editors with Example-Menu](./assets/two_with_menu.png)
@@ -337,8 +337,8 @@ import in SCSS:
 ```
 
 ## How to include your own custom Editor
-For this please check out the following explanation:
-[How to include TUI-Editor](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-tui)
+
+Take a look at the [TUI Editor implementation](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-tui) which illustrates how one can add a new custom editor.
 
 ## How to contribute and develop
 
