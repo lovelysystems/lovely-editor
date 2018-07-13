@@ -116,12 +116,20 @@ storiesOf('App Example/Customization', module)
         }
       ]
     }
+
+    const materialUIMenu = {
+      ...menuWithAllEditors,
+      meta: {
+        title: 'ExampleApp with MaterialUI'
+      },
+    }
+
     return (
       <App
         document={newDocument}
         blocksConfig={defaultBlocksConfig}
         blockComponent={ExampleBlockWrapper}
-        menuState={menuWithAllEditors}
+        menuState={materialUIMenu}
       />
     )
   })
