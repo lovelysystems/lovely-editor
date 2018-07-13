@@ -136,7 +136,7 @@ storiesOf('App Example/Customization', module)
       <App
         document={defaultDocument}
         blocksConfig={blocksConfig}
-        menuState={defaultMenuState}
+        menuState={menuWithAllEditors}
       />
     )
   })

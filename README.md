@@ -5,10 +5,11 @@ app. It also gives you the opportunity to create your own editor and add it to
 the LovelyEditor-component. As a result the edited content will come in the shape of
 HTML markup to be added to your page. Each editor will create an isolated HTML
 markup of its part.
+
 This makes it very easy for you to include a variety of different Editors
 into your App and organise them and their returned value exactly the way you need
 it. Also including a new Editor that is not supported yet can be accomplished
-within just a few easy steps. 
+within just a few easy steps.
 
 
 ![Example App](./assets/example_app.gif)
@@ -30,6 +31,7 @@ Drag & Drop was added to illustrate that our LovelyEditor plays nice with other 
   * [Editor Config](#editor-config)
   * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
   * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
+* [How to create your own Editor](#how-to-include-your-own-custom-editor)
 * [How to contribute and develop](#how-to-contribute-and-develop)
 * [How to create a release](#how-to-create-a-release-deployment)
 
@@ -50,6 +52,12 @@ able to use the component for. For example within "Menu and Quill Block Editor"
 there is an example-menu included to quickly add different editor-types (eg.
 Richtext, CodeMirror, etc.) to the application. It is also possible to use the
 same editor-type several times.
+
+###### HTML-Output
+![HTML-Output](./assets/html_preview.gif)
+
+To see what kind of HTLM-Output the Editors return and what would be a
+possibility to use it check out this Example-Story [Storybook-HTLM-Output](https://lovely-editor.netlify.com/?selectedKind=App%20Example%2FContent&selectedStory=with%20HTML%20Preview%20of%20the%20content%20of%20all%20Editors&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel)
 
 ###### Example with two Editors and an Example-Menu to add additional Editors
 ![Two Editors with Example-Menu](./assets/two_with_menu.png)
@@ -322,6 +330,10 @@ import in SCSS:
 ```SCSS
 @import "~lovely-editor/dist/lovely-editor.min.css";
 ```
+
+## How to include your own custom Editor
+For this please check out the following explanation:
+[How to include TUI-Editor](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-tui)
 
 ## How to contribute and develop
 
