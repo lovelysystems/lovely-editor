@@ -7,6 +7,12 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/07/12 [1.0.4][10]
+
+### Changed
+
+- Readme update for npmjs and change LICENCE to Apache License 2.0
+
 ## 2018/07/11 [1.0.3][9]
 
 ### Changed
@@ -148,3 +154,4 @@ const blockConfig = {
 [7]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.1...v0.4.2
 [8]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.2...v1.0.0
 [9]: https://github.com/lovelysystems/oyez-editor/compare/v1.0.0...v1.0.2
+[10]: https://github.com/lovelysystems/oyez-editor/compare/v1.0.2...v1.0.4
