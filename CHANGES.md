@@ -7,6 +7,17 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+### Added
+
+- EditorQuill allows all formats (supported by quilljs) by default. Can be controlled
+  with new `blockConfig` property `formats` (array). Check out available
+  formats [here](https://quilljs.com/docs/formats/)
+- EditorToolbar of EditorQuill enhances and more formats added
+
+### Changed
+
+- [react-quill](https://github.com/zenoamaro/react-quill) upgraded from 1.2.7 to 1.3.2
+
 ## 2018/07/12 [1.0.4][10]
 
 ### Changed

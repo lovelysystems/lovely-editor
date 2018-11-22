@@ -24,20 +24,16 @@ export class EditorQuill extends React.Component {
     //    hideToolbarOnBlur: true
     // }
     //
-    const { blockConfig } = this.props
-
     // when the user wants to hide the toolbar onBlur, we have to update the
     // initial state. hideToolbarOnBlur is one of some customization properties
     this.state = {
-      showToolbar: !get(blockConfig, 'hideToolbarOnBlur', false)
+      showToolbar: !get(props, 'blockConfig.hideToolbarOnBlur', false),
     }
 
     // one can import text, html or the raw delta. Related:
     // - https://github.com/quilljs/quill/issues/1088
     this.onChange = debounce(this.onChange.bind(this), 300, { maxWait: 1000 })
-  }
 
-  componentWillMount() {
     this.registerIcons()
   }
 
@@ -51,17 +47,25 @@ export class EditorQuill extends React.Component {
     this.props.onChange(change)
   }
 
-  // Quill Settings
-  formats() {
-    // Allowed Formats. Docu: https://quilljs.com/docs/formats/
-    return [
-      'header',
-      'bold', 'italic', 'underline',
-      'list', 'indent'
-    ]
+  /**
+   * Quill editor allowed and enabled formats
+   * See https://quilljs.com/docs/formats/
+   *
+   * Example: https://quilljs.com/standalone/full/
+   */
+  getFormats() {
+    const { blockConfig = {} } = this.props
+    // undefined will enable all formats by default
+    return blockConfig.formats || undefined
   }
-  modules() {
-    // Docu: https://quilljs.com/docs/modules/toolbar/
+
+  /**
+   * Quill modules to attach to editor (eg. toolbar)
+   * See https://quilljs.com/docs/modules/ and https://github.com/zenoamaro/react-quill#props
+   * 
+   * Example Toolbar: https://quilljs.com/standalone/full/
+   */
+  getModules() {
     const { block, blockConfig = {} } = this.props
     const { toolbarSelector } = blockConfig
     return {
@@ -108,7 +112,7 @@ export class EditorQuill extends React.Component {
         <div
           {...classes('toolbar', theme)}
           style={{
-            display: showToolbar ? 'inherit': 'none'
+            display: showToolbar ? 'inherit' : 'none'
           }}
         >
           <EditorToolbar
@@ -118,9 +122,9 @@ export class EditorQuill extends React.Component {
         </div>
         <div {...classes('editor', theme)} >
           <ReactQuill
-            formats={this.formats()}
-            modules={this.modules()}
-            onChange={this.onChange}
+            formats={this.getFormats()}
+            placeholder={placeholderText || 'Write a text...'}
+            modules={this.getModules()}
             onBlur={(previousRange, source, editor) => {
               invoke(this.props, 'blockConfig.onBlur', previousRange, source, editor)
 
@@ -135,10 +139,10 @@ export class EditorQuill extends React.Component {
                 this.setState({ showToolbar: true })
               }
             }}
-            onKeyPress={(event) => invoke(this.props, 'blockConfig.onKeyPress', event)}
+            onChange={this.onChange}
             onKeyDown={(event) => invoke(this.props, 'blockConfig.onKeyDown', event)}
+            onKeyPress={(event) => invoke(this.props, 'blockConfig.onKeyPress', event)}
             onKeyUp={(event) => invoke(this.props, 'blockConfig.onKeyUp', event)}
-            placeholder={placeholderText || 'Write a text...'}
             theme={selectedTheme}
             value={currentValue}
           />
@@ -156,17 +160,18 @@ EditorQuill.propTypes = {
     data: PropTypes.objectOf(PropTypes.string).isRequired,
   }).isRequired,
   blockConfig: PropTypes.shape({
+    formats: PropTypes.arrayOf(PropTypes.string),
     hideToolbarOnBlur: PropTypes.bool,
+    icons: PropTypes.object,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func,
     onKeyPress: PropTypes.func,
     onKeyDown: PropTypes.func,
     onKeyUp: PropTypes.func,
-    icons: PropTypes.object,
     placeholderText: PropTypes.string,
+    theme: PropTypes.string,
     toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     toolbarCallback: PropTypes.func,
-    theme: PropTypes.string
   }),
   onChange: PropTypes.func.isRequired,
 }
@@ -175,15 +180,15 @@ EditorQuill.defaultProps = {
   additionalProps: {},
   blockConfig: {
     hideToolbarOnBlur: false,
-    onBlur: () => {},
-    onFocus: () => {},
-    onKeyPress: () => {},
-    onKeyDown: () => {},
-    onKeyUp: () => {},
+    onBlur: () => { },
+    onFocus: () => { },
+    onKeyPress: () => { },
+    onKeyDown: () => { },
+    onKeyUp: () => { },
     icons: null,
     placeholderText: 'Write a text...',
     toolbar: QuillToolbar,
-    toolbarCallback: () => {},
+    toolbarCallback: () => { },
     toolbarSelector: null,
     theme: 'snow'
   }

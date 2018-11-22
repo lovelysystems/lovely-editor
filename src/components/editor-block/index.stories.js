@@ -33,10 +33,10 @@ class Wrapper extends React.Component {
   }
 
   onChange(change) {
-    const newState = clone(this.state.block)
-    newState.data = change.data
+    const newBlock = clone(this.state.block)
+    newBlock.data = change.data
     action('onChange')(change)
-    this.setState({ block: exampleBlock })
+    this.setState({ block: newBlock })
   }
 
   render() {

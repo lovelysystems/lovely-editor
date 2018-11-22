@@ -21,7 +21,7 @@ import {
 
 describe('<EditorQuill />', () => {
 
-  const customQuillToolbar = ({onToolbarClick}) => { // eslint-disable-line react/prop-types
+  const customQuillToolbar = ({ onToolbarClick }) => { // eslint-disable-line react/prop-types
     const onClick = () => {
       onToolbarClick('Toolbar clicked')
     }
@@ -44,7 +44,7 @@ describe('<EditorQuill />', () => {
       const wrapper = render(
         <EditorQuill
           block={sampleData}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -59,7 +59,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -72,7 +72,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           blockConfig={exampleBlockConfig}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -91,7 +91,7 @@ describe('<EditorQuill />', () => {
     beforeEach(() => {
       // we need to disable the Toolbar, otherwhise the test fails
       // due to some render issues. But the toolbar is not tested here anyways
-      sinon.stub(EditorQuill.prototype, 'modules').callsFake(() => {
+      sinon.stub(EditorQuill.prototype, 'getModules').callsFake(() => {
         return {
           toolbar: false
         }
@@ -99,7 +99,7 @@ describe('<EditorQuill />', () => {
     })
 
     afterEach(() => {
-      EditorQuill.prototype.modules.restore()
+      EditorQuill.prototype.getModules.restore()
     })
 
     it('ReactQuill has required properties', () => {
@@ -109,7 +109,11 @@ describe('<EditorQuill />', () => {
         'bold', 'italic', 'underline',
         'list', 'indent'
       ]
-      const editor = getRenderedEditor(expectedHtml)
+      const blockConfig = {
+        formats: expectedFormats
+      }
+
+      const editor = getRenderedEditor(expectedHtml, () => { }, blockConfig)
       const { ReactQuill } = editor
 
       expect(ReactQuill.props().theme).to.equal('snow')
@@ -154,7 +158,7 @@ describe('<EditorQuill />', () => {
     beforeEach(() => {
       // we need to disable the Toolbar, otherwhise the test fails
       // due to some render issues. But the toolbar is not tested here anyways
-      sinon.stub(EditorQuill.prototype, 'modules').callsFake(() => {
+      sinon.stub(EditorQuill.prototype, 'getModules').callsFake(() => {
         return {
           toolbar: false
         }
@@ -162,7 +166,7 @@ describe('<EditorQuill />', () => {
     })
 
     afterEach(() => {
-      EditorQuill.prototype.modules.restore()
+      EditorQuill.prototype.getModules.restore()
     })
 
     it('ReactQuill calls onChange with the new value when EditorQuill inserts html', () => {
@@ -209,7 +213,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           blockConfig={customBlockConfig}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
