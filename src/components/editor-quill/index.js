@@ -55,8 +55,8 @@ export class EditorQuill extends React.Component {
    */
   getFormats() {
     const { blockConfig = {} } = this.props
-    // undefined will enable all formats by default
-    return blockConfig.formats || undefined
+    // FYI: undefined or null will enable all formats by default
+    return blockConfig.formats
   }
 
   /**
