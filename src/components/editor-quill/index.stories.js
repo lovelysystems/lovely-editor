@@ -11,7 +11,7 @@ import { EditorQuill } from '../..'
 import componentReadme from './README.md'
 
 // Example Components for the Storybook
-export const customThemeToolbar = function({id}) {
+export const customThemeToolbar = function({ id }) {
   return (
     <div className="ql-toolbar" id={`toolbar-${id}`} >
       <select className="ql-header" defaultValue="">
@@ -38,7 +38,7 @@ export const customThemeToolbar = function({id}) {
           <i className="fa fa-list-ul" />
         </button>
         <button className="ql-indent" value="-1">
-          <i className="fa fa-indent fa-rotate-180" style={{paddingTop: 2}} />
+          <i className="fa fa-indent fa-rotate-180" style={{ paddingTop: 2 }} />
         </button>
         <button className="ql-indent" value="+1">
           <i className="fa fa-indent" />
@@ -93,9 +93,8 @@ class Wrapper extends React.Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
-      block: this.props.block //eslint-disable-line
+      block: props.block //eslint-disable-line
     }
     this.onChange = this.onChange.bind(this)
     this.onToolbarAction = this.onToolbarAction.bind(this)
@@ -173,6 +172,23 @@ storiesOf('Editors/EditorQuill', module)
           '-1': '<i class="fa fa-indent fa-rotate-180" style="padding-top: 2px;" />'
         }
       },
+      toolbar: ({ id }) => (
+        (
+          <div className="ql-toolbar" id={`toolbar-${id}`} >
+            <span className="ql-formats">
+              <button className="ql-bold" />
+              <button className="ql-italic" />
+              <button className="ql-underline" />
+            </span>
+            <span className="ql-formats">
+              <button className="ql-list" value="ordered" />
+              <button className="ql-list" value="bullet" />
+              <button className="ql-indent" value="-1" />
+              <button className="ql-indent" value="+1" />
+            </span>
+          </div>
+        )
+      )
     }
     return (
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
@@ -187,7 +203,7 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ core theme and placeholderText', () => {
+  .add('default w/ core theme, placeholderText and custom Toolbar', () => {
     const blockConfig = {
       placeholderText: 'Click to write a text...',
       toolbar: customThemeToolbar,

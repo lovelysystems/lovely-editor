@@ -3,6 +3,7 @@ import { shallow, render } from 'enzyme'
 import { expect } from 'code'
 import { merge } from 'lodash'
 import sinon from 'sinon'
+import ReactQuillComp from 'react-quill'
 
 // Components
 import { EditorQuill } from '../'
@@ -21,7 +22,7 @@ import {
 
 describe('<EditorQuill />', () => {
 
-  const customQuillToolbar = ({onToolbarClick}) => { // eslint-disable-line react/prop-types
+  const customQuillToolbar = ({ onToolbarClick }) => { // eslint-disable-line react/prop-types
     const onClick = () => {
       onToolbarClick('Toolbar clicked')
     }
@@ -44,7 +45,7 @@ describe('<EditorQuill />', () => {
       const wrapper = render(
         <EditorQuill
           block={sampleData}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -59,7 +60,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -72,7 +73,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           blockConfig={exampleBlockConfig}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -91,7 +92,7 @@ describe('<EditorQuill />', () => {
     beforeEach(() => {
       // we need to disable the Toolbar, otherwhise the test fails
       // due to some render issues. But the toolbar is not tested here anyways
-      sinon.stub(EditorQuill.prototype, 'modules').callsFake(() => {
+      sinon.stub(EditorQuill.prototype, 'getModules').callsFake(() => {
         return {
           toolbar: false
         }
@@ -99,7 +100,7 @@ describe('<EditorQuill />', () => {
     })
 
     afterEach(() => {
-      EditorQuill.prototype.modules.restore()
+      EditorQuill.prototype.getModules.restore()
     })
 
     it('ReactQuill has required properties', () => {
@@ -109,7 +110,11 @@ describe('<EditorQuill />', () => {
         'bold', 'italic', 'underline',
         'list', 'indent'
       ]
-      const editor = getRenderedEditor(expectedHtml)
+      const blockConfig = {
+        formats: expectedFormats
+      }
+
+      const editor = getRenderedEditor(expectedHtml, () => { }, blockConfig)
       const { ReactQuill } = editor
 
       expect(ReactQuill.props().theme).to.equal('snow')
@@ -154,7 +159,7 @@ describe('<EditorQuill />', () => {
     beforeEach(() => {
       // we need to disable the Toolbar, otherwhise the test fails
       // due to some render issues. But the toolbar is not tested here anyways
-      sinon.stub(EditorQuill.prototype, 'modules').callsFake(() => {
+      sinon.stub(EditorQuill.prototype, 'getModules').callsFake(() => {
         return {
           toolbar: false
         }
@@ -162,7 +167,7 @@ describe('<EditorQuill />', () => {
     })
 
     afterEach(() => {
-      EditorQuill.prototype.modules.restore()
+      EditorQuill.prototype.getModules.restore()
     })
 
     it('ReactQuill calls onChange with the new value when EditorQuill inserts html', () => {
@@ -196,6 +201,61 @@ describe('<EditorQuill />', () => {
       expect(onChange.callCount).to.equal(1)
       clock.restore()
     })
+
+    it('ReactQuill has required and custom onEvent properties', () => {
+      const blockConfig = {
+        onBlur: sinon.spy(),
+        onFocus: sinon.spy(),
+        onKeyDown: sinon.spy(),
+        onKeyPress: sinon.spy(),
+        onKeyUp: sinon.spy(),
+      }
+
+      const editor = getRenderedEditor('', () => { }, blockConfig)
+      const { ReactQuill } = editor
+
+      // simulate an event and test if blockConfig funcs where invoked
+      ReactQuill.prop('onBlur')(1, 'user', {})
+      expect(blockConfig.onBlur.calledOnce).to.equal(true)
+      expect(blockConfig.onBlur.calledWith(1, 'user', {})).to.equal(true)
+
+      ReactQuill.prop('onFocus')(1, 'user', {})
+      expect(blockConfig.onFocus.calledOnce).to.equal(true)
+      expect(blockConfig.onFocus.calledWith(1, 'user', {})).to.equal(true)
+
+      ReactQuill.prop('onKeyDown')({ data: 'some-data' })
+      expect(blockConfig.onKeyDown.calledOnce).to.equal(true)
+      expect(blockConfig.onKeyDown.calledWith({ data: 'some-data' })).to.equal(true)
+
+      ReactQuill.prop('onKeyPress')({ data: 'some-data' })
+      expect(blockConfig.onKeyPress.calledOnce).to.equal(true)
+      expect(blockConfig.onKeyPress.calledWith({ data: 'some-data' })).to.equal(true)
+
+      ReactQuill.prop('onKeyUp')({ data: 'some-data' })
+      expect(blockConfig.onKeyUp.calledOnce).to.equal(true)
+      expect(blockConfig.onKeyUp.calledWith({ data: 'some-data' })).to.equal(true)
+    })
+
+    it('ReactQuill changes the hideToolbarOnBlur state flag on onBlur or onFocus', () => {
+      const blockConfig = {
+        hideToolbarOnBlur: true
+      }
+      const wrapper = shallow(
+        <EditorQuill
+          block={sampleData}
+          blockConfig={blockConfig}
+          onChange={() => { }}
+        />
+      )
+
+      expect(wrapper.state()).to.equal({ showToolbar: false })
+
+      wrapper.find(ReactQuillComp).prop('onFocus')(1, 'user', {})
+      expect(wrapper.state()).to.equal({ showToolbar: true })
+
+      wrapper.find(ReactQuillComp).prop('onBlur')(1, 'user', {})
+      expect(wrapper.state()).to.equal({ showToolbar: false })
+    })
   })
 
   describe('Custom Toolbar Events', () => {
@@ -209,9 +269,11 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           blockConfig={customBlockConfig}
-          onChange={()=>{}}
+          onChange={() => { }}
         />
       )
+
+      expect(wrapper.state()).to.equal({ showToolbar: true })
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
       wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
       expect(customBlockConfig.toolbarCallback.calledOnce).to.equal(true)
