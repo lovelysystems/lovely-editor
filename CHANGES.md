@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+## 2018/11/23 [1.1.0][11]
+
 ### Added
 
 - EditorQuill allows all formats (supported by quilljs) by default. Can be controlled
@@ -158,7 +160,7 @@ const blockConfig = {
 * Editor Image component added (Basic Setup)
 * Drag & Drop Support (added and illustrated in Storybook)
 
-[1]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.0...HEAD
+[1]: https://github.com/lovelysystems/oyez-editor/compare/v1.1.0...HEAD
 [2]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.1.0
 [3]: https://github.com/lovelysystems/oyez-editor/compare/v0.1.0...v0.2.0
 [4]: https://github.com/lovelysystems/oyez-editor/compare/v0.2.0...v0.3.0
@@ -168,3 +170,4 @@ const blockConfig = {
 [8]: https://github.com/lovelysystems/oyez-editor/compare/v0.4.2...v1.0.0
 [9]: https://github.com/lovelysystems/oyez-editor/compare/v1.0.0...v1.0.2
 [10]: https://github.com/lovelysystems/oyez-editor/compare/v1.0.2...v1.0.4
+[11]: https://github.com/lovelysystems/oyez-editor/compare/v1.0.4...v1.1.0
