@@ -17,6 +17,7 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 ### Changed
 
 - [react-quill](https://github.com/zenoamaro/react-quill) upgraded from 1.2.7 to 1.3.2
+- changed `peerDependencies` to only include `react`, as other editors can be customized
 
 ## 2018/07/12 [1.0.4][10]
 
