@@ -12,7 +12,7 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - EditorQuill allows all formats (supported by quilljs) by default. Can be controlled
   with new `blockConfig` property `formats` (array). Check out available
   formats [here](https://quilljs.com/docs/formats/)
-- EditorToolbar of EditorQuill enhances and more formats added
+- EditorToolbar of EditorQuill enhanced and more quill formats added
 
 ### Changed
 
