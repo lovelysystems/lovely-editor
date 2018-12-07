@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactQuill, { Quill } from 'react-quill'
 
 // Helpers
-import { debounce, forOwn, get, invoke } from 'lodash'
+import { debounce, forOwn, get, invoke, merge } from 'lodash'
 import { BemHelper } from '../../helpers/bem-helper'
 import { QuillToolbar } from './toolbar'
 
@@ -53,26 +53,36 @@ export class EditorQuill extends React.Component {
    *
    * Example: https://quilljs.com/standalone/full/
    */
-  getFormats() {
-    const { blockConfig = {} } = this.props
+  getFormats(props) {
+    const { blockConfig = {} } = props
     // FYI: undefined or null will enable all formats by default
     return blockConfig.formats
   }
 
   /**
    * Quill modules to attach to editor (eg. toolbar)
-   * See https://quilljs.com/docs/modules/ and https://github.com/zenoamaro/react-quill#props
+   * 
+   * Docs
+   * - https://quilljs.com/docs/modules/
+   * - https://github.com/zenoamaro/react-quill#props
+   * 
+   * Keyboard Configuration
+   * - https://quilljs.com/docs/modules/keyboard/#configuration
    * 
    * Example Toolbar: https://quilljs.com/standalone/full/
    */
-  getModules() {
-    const { block, blockConfig = {} } = this.props
-    const { toolbarSelector } = blockConfig
-    return {
-      toolbar: {
-        container: toolbarSelector || `#toolbar-${block.id}`
-      }
-    }
+  getModules(props) {
+    const { block, blockConfig = {} } = props
+    const { modules = {}, toolbarSelector } = blockConfig
+
+    return merge({},
+      {
+        toolbar: {
+          container: toolbarSelector || `#toolbar-${block.id}`
+        }
+      },
+      modules
+    )
   }
 
   // customization of the quill editor
@@ -122,9 +132,9 @@ export class EditorQuill extends React.Component {
         </div>
         <div {...classes('editor', theme)} >
           <ReactQuill
-            formats={this.getFormats()}
+            formats={this.getFormats(this.props)}
             placeholder={placeholderText || 'Write a text...'}
-            modules={this.getModules()}
+            modules={this.getModules(this.props)}
             onBlur={(previousRange, source, editor) => {
               invoke(this.props, 'blockConfig.onBlur', previousRange, source, editor)
 

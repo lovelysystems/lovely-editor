@@ -88,11 +88,19 @@ describe('<EditorQuill />', () => {
   })
 
   describe('Data Handling Tests', () => {
+    const originalFunc = EditorQuill.prototype.getModules
 
     beforeEach(() => {
-      // we need to disable the Toolbar, otherwhise the test fails
-      // due to some render issues. But the toolbar is not tested here anyways
-      sinon.stub(EditorQuill.prototype, 'getModules').callsFake(() => {
+      /**
+       * in some tests we need to disable to the toolbar, otherwise the test
+       * fails due to some render issues. But if the test explicitly adds a
+       * toolbarSelector we let it pass.
+       */
+      sinon.stub(EditorQuill.prototype, 'getModules').callsFake(props => {
+        if (props.blockConfig.toolbarSelector) {
+          return originalFunc(props)
+        }
+
         return {
           toolbar: false
         }
@@ -117,9 +125,9 @@ describe('<EditorQuill />', () => {
       const editor = getRenderedEditor(expectedHtml, () => { }, blockConfig)
       const { ReactQuill } = editor
 
-      expect(ReactQuill.props().theme).to.equal('snow')
-      expect(ReactQuill.props().formats).to.equal(expectedFormats)
-      expect(ReactQuill.props().value).to.equal(expectedHtml)
+      expect(ReactQuill.prop('theme')).to.equal('snow')
+      expect(ReactQuill.prop('formats')).to.equal(expectedFormats)
+      expect(ReactQuill.prop('value')).to.equal(expectedHtml)
     })
 
     it('ReactQuill has required properties and customized ones', () => {
@@ -130,8 +138,43 @@ describe('<EditorQuill />', () => {
       const editor = getRenderedEditor('', undefined, customBlockConfig)
       const { ReactQuill } = editor
 
-      expect(ReactQuill.props().theme).to.equal(null)
-      expect(ReactQuill.props().placeholder).to.equal('custom placeholder')
+      expect(ReactQuill.prop('theme')).to.equal(null)
+      expect(ReactQuill.prop('placeholder')).to.equal('custom placeholder')
+    })
+
+    it('ReactQuill can handle custom modules, like custom keybindings', () => {
+      const customBlockConfig = {
+        ...exampleBlockConfig,
+        modules: {
+          keyboard: {
+            bindings: {
+              'list autofill': {
+                handler: () => true // example completely disables list autofill
+              }
+            }
+          }
+        },
+      }
+
+      const wrapper = shallow(
+        <EditorQuill
+          block={sampleData}
+          blockConfig={customBlockConfig}
+          onChange={() => { }}
+        />
+      )
+
+      expect(wrapper.find(ReactQuillComp)).to.have.length(1)
+      expect(wrapper.find(ReactQuillComp).prop('modules')).to.equal({
+        toolbar: { container: '#customToolbar' },
+        keyboard: {
+          bindings: {
+            'list autofill': {
+              handler: customBlockConfig.modules.keyboard.bindings['list autofill'].handler
+            }
+          }
+        }
+      })
     })
 
     it('component can import html', () => {
