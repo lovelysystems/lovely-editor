@@ -128,10 +128,13 @@ describe('<EditorQuill />', () => {
       expect(ReactQuill.prop('theme')).to.equal('snow')
       expect(ReactQuill.prop('formats')).to.equal(expectedFormats)
       expect(ReactQuill.prop('value')).to.equal(expectedHtml)
+      expect(ReactQuill.prop('placeholder')).to.equal('Write a text...')
+      expect(ReactQuill.prop('scrollingContainer')).to.equal(undefined)
     })
 
     it('ReactQuill has required properties and customized ones', () => {
       const customBlockConfig = {
+        scrollingContainer: '#some-selector',
         theme: 'core',
         placeholderText: 'custom placeholder'
       }
@@ -140,6 +143,7 @@ describe('<EditorQuill />', () => {
 
       expect(ReactQuill.prop('theme')).to.equal(null)
       expect(ReactQuill.prop('placeholder')).to.equal('custom placeholder')
+      expect(ReactQuill.prop('scrollingContainer')).to.equal('#some-selector')
     })
 
     it('ReactQuill can handle custom modules, like custom keybindings', () => {

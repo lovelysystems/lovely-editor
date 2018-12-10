@@ -108,7 +108,7 @@ export class EditorQuill extends React.Component {
   render() {
     const { showToolbar } = this.state
     const { block, blockConfig = {} } = this.props
-    const { hideToolbarOnBlur, placeholderText, toolbarCallback, theme } = blockConfig
+    const { hideToolbarOnBlur, placeholderText, scrollingContainer, toolbarCallback, theme } = blockConfig
     const currentValue = get(block, 'data.value', '')
 
     // Toolbar Customization Note:
@@ -155,6 +155,7 @@ export class EditorQuill extends React.Component {
             onKeyUp={(event) => invoke(this.props, 'blockConfig.onKeyUp', event)}
             theme={selectedTheme}
             value={currentValue}
+            scrollingContainer={scrollingContainer}
           />
         </div>
       </div>
