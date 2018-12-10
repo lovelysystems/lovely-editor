@@ -137,7 +137,35 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} />
     )
   })
-  .add('default w/ hideToolbarOnBlur', () => {
+  .add('without auto formatting lists', () => {
+    /**
+     * Quill formats inputs with the following pattern "1. " automatically and
+     * creates a list. So without this custom keybinding it is not possible to
+     * enter "30. " as quill will return a ordered list starting with "1.".
+     * See https://github.com/quilljs/quill/issues/2408 for more details.
+     * 
+     * To resolve this behaviour one could either reset it completely with:
+     *    handler: () => true
+     * or apply it only when the user enters "1. " but not "2. " (and other numbers)
+     *    prefix: /^\s*?(1+\.|-|\*|\[ ?\]|\[x\])$/,
+     */
+    const blockConfig = {
+      modules: {
+        keyboard: {
+          bindings: {
+            'list autofill': {
+              handler: () => true // completely disables list autofill
+            }
+          }
+        }
+      }
+    }
+
+    return (
+      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
+    )
+  })
+  .add('with hideToolbarOnBlur enabled', () => {
     const blockConfig = {
       hideToolbarOnBlur: true
     }
@@ -145,7 +173,7 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ onBlur, onFocus, onKeyPress, onKeyDown and onKeyUp events', () => {
+  .add('with onBlur, onFocus, onKeyPress, onKeyDown and onKeyUp events', () => {
     const blockConfig = {
       onBlur: action('onBlur'),
       onFocus: action('onFocus'),
@@ -157,7 +185,7 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ custom toolbar icons', () => {
+  .add('with custom toolbar icons', () => {
     const blockConfig = {
       icons: {
         bold: '<i class="fa fa-bold" aria-hidden="true"></i>',
@@ -194,7 +222,7 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ custom Toolbar', () => {
+  .add('with custom Toolbar', () => {
     const blockConfig = {
       toolbar: customQuillToolbar,
       toolbarSelector: '#customToolbar'
@@ -203,7 +231,7 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('default w/ core theme, placeholderText and custom Toolbar', () => {
+  .add('with core theme, placeholderText and custom Toolbar', () => {
     const blockConfig = {
       placeholderText: 'Click to write a text...',
       toolbar: customThemeToolbar,

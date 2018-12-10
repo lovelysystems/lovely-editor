@@ -7,6 +7,18 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 
 ## [Unreleased][1]
 
+### Added
+
+- EditorQuill supports `scrollingContainer` property
+- EditorQuill supports custom `modules` (eg. custom keybindings) supported by quilljs
+
+### Changed
+
+- changed required node version from >=8.6 to ^8.11
+- changed required npm version from >= 5.3 to ^5.5
+- changed react version from 16.3.0 to 16.4.2
+- upgrade react-quill from 1.3.2 to 1.3.3
+
 ## 2018/11/23 [1.1.0][11]
 
 ### Added
