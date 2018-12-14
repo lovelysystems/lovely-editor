@@ -53,7 +53,6 @@ props.blockConfig = {
 
 The following data properties are allowed and can be used:
 
-- `hideToolbarOnBlur`: hide the toolbar, once the Editor loses focus (onBlur)
 - `icons`: customize the icons quill renders for the format buttons (eg. for `ql-bold`)
 - `onBlur`, `onFocus`, `onKeyPress`, `onKeyDown`, `onKeyUp`: event listeners
 - `placeholderText`: will overwrite the placeholder text when the editor is empty
@@ -80,7 +79,7 @@ const exampleBlock = {
 }
 
 const blockConfig = {
-  hideToolbarOnBlur: true
+  theme: 'snow'
 }
 
 <EditorQuill

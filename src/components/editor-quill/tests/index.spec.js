@@ -282,27 +282,6 @@ describe('<EditorQuill />', () => {
       expect(blockConfig.onKeyUp.calledOnce).to.equal(true)
       expect(blockConfig.onKeyUp.calledWith({ data: 'some-data' })).to.equal(true)
     })
-
-    it('ReactQuill changes the hideToolbarOnBlur state flag on onBlur or onFocus', () => {
-      const blockConfig = {
-        hideToolbarOnBlur: true
-      }
-      const wrapper = shallow(
-        <EditorQuill
-          block={sampleData}
-          blockConfig={blockConfig}
-          onChange={() => { }}
-        />
-      )
-
-      expect(wrapper.state()).to.equal({ showToolbar: false })
-
-      wrapper.find(ReactQuillComp).prop('onFocus')(1, 'user', {})
-      expect(wrapper.state()).to.equal({ showToolbar: true })
-
-      wrapper.find(ReactQuillComp).prop('onBlur')(1, 'user', {})
-      expect(wrapper.state()).to.equal({ showToolbar: false })
-    })
   })
 
   describe('Custom Toolbar Events', () => {
@@ -320,7 +299,6 @@ describe('<EditorQuill />', () => {
         />
       )
 
-      expect(wrapper.state()).to.equal({ showToolbar: true })
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
       wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
       expect(customBlockConfig.toolbarCallback.calledOnce).to.equal(true)

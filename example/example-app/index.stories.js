@@ -133,10 +133,13 @@ storiesOf('App Example/Customization', module)
       />
     )
   })
-  .add('with a custom blockConfig for the EditorQuill (eg. hidden Toolbar)', () => {
+  .add('with a custom blockConfig for the EditorQuill (eg. toolbarOptions)', () => {
     const editorQuillCustomConfig = merge({}, editorQuillConfig, {
       blockConfig: {
-        hideToolbarOnBlur: true
+        toolbarOptions: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['clean'],
+        ]
       }
     })
     const blocksConfig = [editorQuillCustomConfig]
