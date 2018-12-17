@@ -67,6 +67,16 @@ $bg-color: #eeeeee;
   border: 0;
 }
 
+// custom class styling (inline example parchment)
+.custom-inline-class { 
+  background: #008000;
+  color: #fff;
+  font-size: 1.5em;
+  line-height: 1.75;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 @import '~font-awesome/css/font-awesome.min.css';
 @import './components/example-menu/styles';
 @import './lovely-editor';

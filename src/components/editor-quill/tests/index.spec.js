@@ -40,8 +40,7 @@ describe('<EditorQuill />', () => {
   }
 
   describe('Render Tests', () => {
-
-    it('component renders with Toolbar', () => {
+    it('renders with Toolbar', () => {
       const wrapper = render(
         <EditorQuill
           block={sampleData}
@@ -52,7 +51,7 @@ describe('<EditorQuill />', () => {
       expect(wrapper.find('#toolbar-5')).to.have.length(1)
     })
 
-    it('component renders with custom theme', () => {
+    it('renders with custom theme', () => {
       const customBlockConfig = {
         theme: 'core'
       }
@@ -68,7 +67,7 @@ describe('<EditorQuill />', () => {
       expect(wrapper.find('#toolbar-5')).to.have.length(1)
     })
 
-    it('component renders with customToolbar', () => {
+    it('renders with customToolbar', () => {
       const wrapper = render(
         <EditorQuill
           block={sampleData}
@@ -80,10 +79,118 @@ describe('<EditorQuill />', () => {
       expect(wrapper.find('#customToolbar')).to.have.length(1)
     })
 
-    it('attaches a Quill instance to the component', () => {
+    it('renders no customToolbar when toolbarOptions is defined', () => {
+      const customBlockConfig = {
+        toolbar: customQuillToolbar,
+        toolbarOptions: ['bold']
+      }
+      const wrapper = render(
+        <EditorQuill
+          blockConfig={customBlockConfig}
+          block={sampleData}
+          onChange={() => { }}
+        />
+      )
+      expect(wrapper.find(customQuillToolbar)).to.have.length(0)
+    })
+
+    it('renders with an attached Quill instance', () => {
       const wrapper = mountReactQuill()
       const quill = getQuillInstance(wrapper)
       expect(quill instanceof Quill).to.equal(true)
+    })
+  })
+
+  describe('Quill Setup', () => {
+    it('prepares formats properly', () => {
+      const customBlockConfig = {
+        formats: [
+          'header',
+          'bold', 'italic', 'underline',
+          'list', 'indent'
+        ],
+      }
+      const wrapper = shallow(
+        <EditorQuill
+          blockConfig={customBlockConfig}
+          block={sampleData}
+          onChange={() => { }}
+        />
+      )
+      const instance = wrapper.instance()
+      const result = instance.getFormats({ blockConfig: customBlockConfig })
+      expect(result).to.equal(['header', 'bold', 'italic', 'underline', 'list', 'indent'])
+    })
+
+    it('prepares formtas by invoking registerformats if defined', () => {
+      const customBlockConfig = {
+        registerFormats: sinon.spy()
+      }
+      shallow(
+        <EditorQuill
+          blockConfig={customBlockConfig}
+          block={sampleData}
+          onChange={() => { }}
+        />
+      )
+      expect(customBlockConfig.registerFormats.callCount).to.equal(1)
+    })
+
+    it('prepares modules with a default toolbar container selector', () => {
+      const customBlockConfig = {}
+      const wrapper = shallow(
+        <EditorQuill
+          blockConfig={customBlockConfig}
+          block={sampleData}
+          onChange={() => { }}
+        />
+      )
+      const instance = wrapper.instance()
+      const result = instance.getModules({ block: sampleData, blockConfig: customBlockConfig })
+      expect(result).to.equal({ toolbar: { container: '#toolbar-5' } })
+    })
+
+    it('prepares modules with a custom toolbarSelector', () => {
+      const customBlockConfig = {
+        toolbarSelector: '#some-id',
+      }
+      const wrapper = shallow(
+        <EditorQuill
+          blockConfig={customBlockConfig}
+          block={sampleData}
+          onChange={() => { }}
+        />
+      )
+      const instance = wrapper.instance()
+      const result = instance.getModules({ blockConfig: customBlockConfig })
+      expect(result).to.equal({ toolbar: { container: '#some-id' } })
+    })
+
+    it('prepares modules with provided toolbarOptions and modules', () => {
+      const customBlockConfig = {
+        toolbarOptions: ['bold'],
+        modules: { // see https://quilljs.com/docs/modules/
+          'history': {          // Enable with custom configurations
+            'delay': 2500,
+            'userOnly': true
+          },
+          'syntax': true        // Enable with default configuration
+        }
+      }
+      const wrapper = shallow(
+        <EditorQuill
+          blockConfig={customBlockConfig}
+          block={sampleData}
+          onChange={() => { }}
+        />
+      )
+      const instance = wrapper.instance()
+      const result = instance.getModules({ block: sampleData, blockConfig: customBlockConfig })
+      expect(result).to.equal({
+        toolbar: ['bold'],
+        history: { delay: 2500, userOnly: true },
+        syntax: true
+      })
     })
   })
 
@@ -282,27 +389,6 @@ describe('<EditorQuill />', () => {
       expect(blockConfig.onKeyUp.calledOnce).to.equal(true)
       expect(blockConfig.onKeyUp.calledWith({ data: 'some-data' })).to.equal(true)
     })
-
-    it('ReactQuill changes the hideToolbarOnBlur state flag on onBlur or onFocus', () => {
-      const blockConfig = {
-        hideToolbarOnBlur: true
-      }
-      const wrapper = shallow(
-        <EditorQuill
-          block={sampleData}
-          blockConfig={blockConfig}
-          onChange={() => { }}
-        />
-      )
-
-      expect(wrapper.state()).to.equal({ showToolbar: false })
-
-      wrapper.find(ReactQuillComp).prop('onFocus')(1, 'user', {})
-      expect(wrapper.state()).to.equal({ showToolbar: true })
-
-      wrapper.find(ReactQuillComp).prop('onBlur')(1, 'user', {})
-      expect(wrapper.state()).to.equal({ showToolbar: false })
-    })
   })
 
   describe('Custom Toolbar Events', () => {
@@ -320,7 +406,6 @@ describe('<EditorQuill />', () => {
         />
       )
 
-      expect(wrapper.state()).to.equal({ showToolbar: true })
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
       wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
       expect(customBlockConfig.toolbarCallback.calledOnce).to.equal(true)

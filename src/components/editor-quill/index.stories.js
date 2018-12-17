@@ -165,14 +165,6 @@ storiesOf('Editors/EditorQuill', module)
       <Wrapper block={exampleBlock} blockConfig={blockConfig} />
     )
   })
-  .add('with hideToolbarOnBlur enabled', () => {
-    const blockConfig = {
-      hideToolbarOnBlur: true
-    }
-    return (
-      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
-    )
-  })
   .add('with onBlur, onFocus, onKeyPress, onKeyDown and onKeyUp events', () => {
     const blockConfig = {
       onBlur: action('onBlur'),
@@ -198,7 +190,8 @@ storiesOf('Editors/EditorQuill', module)
         indent: {
           '+1': '<i class="fa fa-indent" aria-hidden="true"></i>',
           '-1': '<i class="fa fa-indent fa-rotate-180" style="padding-top: 2px;" />'
-        }
+        },
+        customFormat: '<i class="fa fa-pencil"/>'
       },
       toolbar: ({ id }) => (
         (
@@ -213,6 +206,7 @@ storiesOf('Editors/EditorQuill', module)
               <button className="ql-list" value="bullet" />
               <button className="ql-indent" value="-1" />
               <button className="ql-indent" value="+1" />
+              <button className="ql-customFormat" />
             </span>
           </div>
         )
@@ -297,5 +291,59 @@ storiesOf('Editors/EditorQuill', module)
     }
     return (
       <Wrapper block={contentBock} />
+    )
+  })
+  .add('with custom parchment styling', () => {
+    /**
+     * inspired by
+     * - https://stackoverflow.com/a/52851287/1238150
+     * - https://stackoverflow.com/a/38723167/1238150 (complex example)
+     * - https://codepen.io/natterstefan/pen/xmZvxe
+     * - https://codepen.io/natterstefan/pen/zyrxzO
+     */
+    const blockConfig = {
+      registerFormats: Quill => {
+        const Inline = Quill.import('blots/inline')
+        const icons = Quill.import('ui/icons')
+
+        class SpanBlock extends Inline {
+
+          static create() {
+            const node = super.create()
+            node.setAttribute('class', 'custom-inline-class')
+            return node
+          }
+
+          static formats() {
+            return true
+          }
+        } // eslint-disable-line
+
+        SpanBlock.blotName = 'customFormat'
+        SpanBlock.tagName = 'span'
+        Quill.register(SpanBlock)
+
+        // https://github.com/quilljs/quill/blob/develop/ui/icons.js
+        icons.customFormat = icons.background
+      },
+      toolbarOptions: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['customFormat'],
+        ['clean'],
+      ]
+    }
+
+    const contentBock = {
+      id: 5,
+      data: {
+        value: '<p><span class="custom-inline-class">This span has a custom class applied.</span></p><p>Click on the background button to apply the styling or remove it.</p>'
+      },
+      meta: {
+        title: 'Input Box'
+      }
+    }
+
+    return (
+      <Wrapper block={contentBock} blockConfig={blockConfig} />
     )
   })
