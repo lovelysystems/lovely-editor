@@ -24,6 +24,10 @@ export class EditorQuill extends React.Component {
 
     // additionally we register fontawesome icons
     this.registerIcons()
+
+    // register formats and modules _only once_ in the lifetime of this component
+    this.formats = this.getFormats(props)
+    this.modules = this.getModules(props)
   }
 
   // Event Listeners
@@ -148,9 +152,9 @@ export class EditorQuill extends React.Component {
         {this.renderCustomToolbar()}
         <div {...classes('editor', theme)} >
           <ReactQuill
-            formats={this.getFormats(this.props)}
+            formats={this.formats}
+            modules={this.modules}
             placeholder={placeholderText || 'Write a text...'}
-            modules={this.getModules(this.props)}
             onBlur={(previousRange, source, editor) => {
               invoke(this.props, 'blockConfig.onBlur', previousRange, source, editor)
             }}
