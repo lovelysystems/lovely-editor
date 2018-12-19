@@ -321,10 +321,16 @@ storiesOf('Editors/EditorQuill', module)
 
         SpanBlock.blotName = 'customFormat'
         SpanBlock.tagName = 'span'
-        Quill.register(SpanBlock)
+        SpanBlock.className = 'custom-inline-class'
+
+        // https://quilljs.com/docs/api/#register
+        Quill.register('formats/customFormat', SpanBlock)
 
         // https://github.com/quilljs/quill/blob/develop/ui/icons.js
         icons.customFormat = icons.background
+
+        // register allowed formats
+        return ['bold', 'italic', 'underline', 'strike', 'customFormat']
       },
       toolbarOptions: [
         ['bold', 'italic', 'underline', 'strike'],
