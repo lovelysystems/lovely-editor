@@ -40,12 +40,12 @@ export const templateMenu = {
 //   default value to the new Editor.
 export const defaultDocument = {
   template: [{
-    id: randomId(),
+    id: 1,
     data: {
       value: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>'
     }
   }, {
-    id: randomId(),
+    id: 2,
     data: {
       alignment: 'center',
       caption: 'Hello Kevin.',
