@@ -1,5 +1,5 @@
-import { configure } from '@storybook/react';
-const { setOptions } = require('@storybook/addon-options');
+import { addParameters, configure } from '@storybook/react';
+import { create } from '@storybook/theming'
 
 // load all files in /components that end with .stories.js(x)
 const req = require.context('../src/components', true, /\.stories\.js?$/)
@@ -12,11 +12,17 @@ function loadStories() {
   reqExamples.keys().forEach((filename) => reqExamples(filename))
 }
 
-setOptions({
-  name: 'Lovely Editor',
-  sortStoriesByKind: true,
-  url: '#',
-  showAddonPanel: true
-});
+addParameters({
+  options: {
+    theme: create({
+      base: 'light',
+      brandTitle: 'Lovely Editor',
+      brandUrl: 'https://lovelysystems.com',
+    }),
+    isFullscreen: false,
+    panelPosition: 'right',
+    sortStoriesByKind: true,
+  },
+})
 
 configure(loadStories, module);
