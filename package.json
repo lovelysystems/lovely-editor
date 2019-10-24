@@ -9,8 +9,8 @@
   "author": "Lovely Systems GmbH <office@lovelysystems.com>",
   "license": "Apache-2.0",
   "engines": {
-    "node": "^8.11",
-    "npm": "^5.5"
+    "node": "^12.12",
+    "npm": "^6.11.3"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,8 @@
     "build:js": "babel src --out-dir dist --ignore *.spec.js,test,tests,*.stories.js,example-* --source-maps ",
     "build:storybook": "build-storybook -o dist/storybook",
     "build:vendor-css": "cp node_modules/quill/dist/quill.core.css dist && cp node_modules/quill/dist/quill.snow.css dist",
+    "commit": "git-cz",
+    "commit-repeat": "git-cz --retry",
     "coverage": "NODE_ENV=test nyc --reporter=html --reporter=text -- mocha -r babel-core/register -r src/tests/helpers/test-setup.js --colors --exit \"./src/**/*.spec.js\" && nyc report",
     "lint": "eslint 'src/**/*.js' --fix",
     "posttest": "npm run lint",
@@ -29,16 +31,26 @@
     "prepublishOnly": "npm run build",
     "pretest": "npm run test:node",
     "start": "npm run storybook",
-    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook": "start-storybook -p 9009",
     "test": "mocha -r babel-core/register -r src/tests/helpers/test-setup.js -r ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:node": "check-node-version --node '>='$(cat .nvmrc)"
   },
-  "pre-commit": [
-    "lint"
-  ],
-  "pre-push": [
-    "test"
-  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "nyc": {
     "exclude": [
       "**/*.spec.js",
@@ -64,7 +76,6 @@
     "highlight.js": "^9.13.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
     "react-beautiful-dnd": "^6.0.2",
     "react-bem-helper": "^1.4.1",
     "react-codemirror2": "^5.1.0",
@@ -86,7 +97,9 @@
     "babel-preset-react": "6.24.1",
     "check-node-version": "3.2.0",
     "code": "5.2.0",
+    "commitizen": "^4.0.3",
     "css-loader": "0.28.9",
+    "cz-conventional-changelog": "^3.0.2",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
     "eslint": "4.18.1",
@@ -98,17 +111,18 @@
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.7.0",
     "font-awesome": "4.7.0",
+    "husky": "^3.0.9",
     "ignore-styles": "5.0.1",
     "jsdom": "11.6.2",
     "jsdom-global": "3.0.2",
+    "lint-staged": "^9.4.2",
     "mocha": "5.0.1",
     "mock-require": "3.0.2",
-    "node-sass": "4.7.2",
+    "node-sass": "4.13.0",
     "nyc": "11.4.1",
-    "pre-commit": "1.2.2",
-    "pre-push": "0.1.1",
     "prettier": "1.10.2",
     "raw-loader": "0.5.1",
+    "react": "^16.4.2",
     "react-addons-test-utils": "15.6.2",
     "react-dom": "16.7.0",
     "react-test-renderer": "16.3.0",
