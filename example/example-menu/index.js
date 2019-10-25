@@ -1,21 +1,19 @@
 import * as React from 'react'
 import PropTypes from 'prop-types'
-
 // Material-UI
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-
 // Helpers
 import { Draggable } from 'react-beautiful-dnd'
 import { get, map } from 'lodash'
+
 import { BemHelper } from '../../src/helpers/bem-helper'
 
 // Styling
 const classes = new BemHelper('example-menu')
 
-export function ExampleMenu({menuState, onClick}) {
-
-  function onClickHandler(action, type, templateId ) {
+export function ExampleMenu({ menuState, onClick }) {
+  function onClickHandler(action, type, templateId) {
     const event = { action, type, template: templateId }
     onClick(event)
   }
@@ -44,14 +42,14 @@ export function ExampleMenu({menuState, onClick}) {
   // },
   return (
     <div>
-      <Typography variant="display1" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         {title}
       </Typography>
       <div {...classes('content')}>
         {map(buttons, ({ action, text, templateId, type }, idx) => (
           <Draggable
             key={`menu-${idx}`}
-            draggableId={`${type}:${templateId || 'default' }:${action}:${idx}`}
+            draggableId={`${type}:${templateId || 'default'}:${action}:${idx}`}
             disableInteractiveElementBlocking
             index={idx}
           >
@@ -66,12 +64,20 @@ export function ExampleMenu({menuState, onClick}) {
                     variant="contained"
                     color="primary"
                     key={idx}
-                    onClick={() => { onClickHandler(action, type, templateId) }}
+                    onClick={() => {
+                      onClickHandler(action, type, templateId)
+                    }}
                     style={{
-                      transform: dragSnapshot.isDragging ? 'rotate(-10deg)' : null,
-                      backgroundColor: dragSnapshot.isDragging ? '#0d8eff' : null,
-                      border: dragSnapshot.isDragging ? '2px solid #ffffff' : null,
-                      margin: '0px 10px 10px 0px'
+                      transform: dragSnapshot.isDragging
+                        ? 'rotate(-10deg)'
+                        : null,
+                      backgroundColor: dragSnapshot.isDragging
+                        ? '#0d8eff'
+                        : null,
+                      border: dragSnapshot.isDragging
+                        ? '2px solid #ffffff'
+                        : null,
+                      margin: '0px 10px 10px 0px',
                     }}
                   >
                     {text}
@@ -92,9 +98,11 @@ ExampleMenu.propTypes = {
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
     buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func,
 }
 
 ExampleMenu.defaultProps = {
-  onClick: () => { console.log('... onClick triggered') } //eslint-disable-line
+  onClick: () => {
+    console.log('... onClick triggered')
+  },
 }
