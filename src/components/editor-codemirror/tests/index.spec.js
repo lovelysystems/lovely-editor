@@ -2,23 +2,19 @@ import React from 'react'
 import { expect } from 'code'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
-
 // component to test
 import { Controlled as CodeMirror } from 'react-codemirror2'
-import { EditorCodeMirror } from '../'
 
 // mocks
 import validConfig from './mocks/validConfig.json'
 
-describe('<EditorCodeMirror />', () => {
+import { EditorCodeMirror } from '..'
 
+describe('<EditorCodeMirror />', () => {
   describe('renders', () => {
     it('a component with a CodeMirror component', () => {
       const wrapper = shallow(
-        <EditorCodeMirror
-          block={validConfig}
-          onChange={() => {}}
-        />
+        <EditorCodeMirror block={validConfig} onChange={() => {}} />,
       )
       expect(wrapper.exists()).to.equal(true)
       expect(wrapper.find(CodeMirror).length).to.equal(1)
@@ -29,14 +25,14 @@ describe('<EditorCodeMirror />', () => {
         <EditorCodeMirror
           block={validConfig}
           blockConfig={{
-            lineNumbers: true
+            lineNumbers: true,
           }}
           onChange={() => {}}
-        />
+        />,
       )
 
       const codeMirrorProps = wrapper.find(CodeMirror).props()
-      expect(codeMirrorProps.value).to.equal('console.log(\'some log\');')
+      expect(codeMirrorProps.value).to.equal("console.log('some log');")
       expect(codeMirrorProps.onChange).to.be.a.function()
       expect(codeMirrorProps.options).to.include({
         lineNumbers: true,
@@ -45,7 +41,7 @@ describe('<EditorCodeMirror />', () => {
           json: true,
         },
         indentUnit: 2,
-        theme: 'material'
+        theme: 'material',
       })
     })
 
@@ -54,15 +50,15 @@ describe('<EditorCodeMirror />', () => {
         <EditorCodeMirror
           block={validConfig}
           blockConfig={{
-            lineNumbers: false
+            lineNumbers: false,
           }}
           onChange={() => {}}
-        />
+        />,
       )
 
       const codeMirrorProps = wrapper.find(CodeMirror).props()
       expect(codeMirrorProps.options).to.include({
-        lineNumbers: false
+        lineNumbers: false,
       })
     })
   })
@@ -81,10 +77,7 @@ describe('<EditorCodeMirror />', () => {
     it('changes trigger this.props.onChange by calling onChangeHandle directly', () => {
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <EditorCodeMirror
-          block={validConfig}
-          onChange={onChange}
-        />
+        <EditorCodeMirror block={validConfig} onChange={onChange} />,
       )
 
       const instance = wrapper.instance()
@@ -93,26 +86,26 @@ describe('<EditorCodeMirror />', () => {
       expect(onChange.callCount).to.equal(1)
       expect(onChange.lastCall.args[0]).to.include({
         data: {
-          value: 'mytest'
-        }
+          value: 'mytest',
+        },
       })
     })
 
     it('changes trigger this.props.onChange', () => {
       const expected = {
         data: {
-          value: 'newinput'
-        }
+          value: 'newinput',
+        },
       }
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <EditorCodeMirror
-          block={validConfig}
-          onChange={onChange}
-        />
+        <EditorCodeMirror block={validConfig} onChange={onChange} />,
       )
 
-      wrapper.find(CodeMirror).props().onChange(null, null, expected.data.value)
+      wrapper
+        .find(CodeMirror)
+        .props()
+        .onChange(null, null, expected.data.value)
       clock.tick(500)
       expect(onChange.callCount).to.equal(1)
       expect(onChange.lastCall.args[0]).to.equal(expected)

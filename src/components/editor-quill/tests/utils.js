@@ -5,81 +5,85 @@
 import React from 'react'
 import { mount } from 'enzyme' // eslint-disable-line
 import ReactQuill from 'react-quill'
-import { EditorQuill } from '../'
+
+import { EditorQuill } from '..'
 
 // Export Quill and setup sampleData for the various tests
-const { Quill } = ReactQuill
-const sampleData = {
+export const { Quill } = ReactQuill
+
+export const sampleData = {
   id: 5,
   data: {
-    value: ''
+    value: '',
   },
   meta: {
-    title: 'Input Box'
+    title: 'Input Box',
   },
-  type: 'richtext'
+  type: 'richtext',
 }
 
-function ReactQuillNode(props, children) {
+export function ReactQuillNode(props, children) {
   props = Object.assign({ // eslint-disable-line
-    modules: { 'toolbar': ['underline', 'bold', 'italic'] },
-    formats: ['underline', 'bold', 'italic']
-  }, props)
-
-  return React.createElement(
-    ReactQuill,
+      modules: { toolbar: ['underline', 'bold', 'italic'] },
+      formats: ['underline', 'bold', 'italic'],
+    },
     props,
-    children
   )
+
+  return React.createElement(ReactQuill, props, children)
 }
 
-function EditorQuillNode(props) {
-  return React.createElement(
-    EditorQuill,
-    props
-  )
+export function EditorQuillNode(props) {
+  return React.createElement(EditorQuill, props)
 }
 
-function mountReactQuill(props, node) {
+export function mountReactQuill(props, node) {
   return mount(ReactQuillNode(props, node))
 }
 
-function mountEditorQuill(props, node) {
+export function mountEditorQuill(props, node) {
   return mount(EditorQuillNode(props, node))
 }
 
-function getQuillInstance(wrapper) {
+export function getQuillInstance(wrapper) {
   return wrapper.instance().getEditor()
 }
 
-function getReactQuillInstance(wrapper) {
-  return wrapper.find(ReactQuill).instance().getEditor()
+export function getReactQuillInstance(wrapper) {
+  return wrapper
+    .find(ReactQuill)
+    .instance()
+    .getEditor()
 }
 
-function getQuillDOMNode(wrapper) {
+export function getQuillDOMNode(wrapper) {
   return wrapper.getDOMNode().querySelector('.ql-editor')
 }
 
-function getQuillContentsAsHTML(wrapper) {
+export function getQuillContentsAsHTML(wrapper) {
   return getQuillDOMNode(wrapper).innerHTML
 }
 
-function setReactQuillContentsFromHTML(wrapper, html) {
+export function setReactQuillContentsFromHTML(wrapper, html) {
   const editor = getReactQuillInstance(wrapper)
   return editor.clipboard.dangerouslyPasteHTML(html)
 }
 
-function getRenderedEditor(inputHtml = '', onChange = () => { }, blockConfig = undefined) {
+export function getRenderedEditor(
+  inputHtml = '',
+  onChange = () => {},
+  blockConfig = undefined,
+) {
   const blockData = Object.assign(sampleData, { data: { value: inputHtml } })
   const wrapper = mountEditorQuill({ block: blockData, onChange, blockConfig })
   return {
     wrapper,
     ReactQuill: wrapper.find(ReactQuill),
-    html: getQuillContentsAsHTML(wrapper)
+    html: getQuillContentsAsHTML(wrapper),
   }
 }
 
-module.exports = {
+export default {
   Quill,
   sampleData,
   mountReactQuill,
@@ -88,5 +92,5 @@ module.exports = {
   getQuillDOMNode,
   getRenderedEditor,
   getQuillContentsAsHTML,
-  setReactQuillContentsFromHTML
+  setReactQuillContentsFromHTML,
 }
