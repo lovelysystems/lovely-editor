@@ -105,7 +105,11 @@ export class LovelyEditor extends React.Component {
 
 LovelyEditor.propTypes = {
   additionalProps: PropTypes.shape({}),
-  blockComponent: PropTypes.func,
+  blockComponent: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.node,
+    PropTypes.shape({ render: PropTypes.func.isRequired }),
+  ]),
   blocksConfig: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.string.isRequired,

@@ -1,8 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
-
 import { get } from 'lodash'
-
 // Material-UI
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -14,8 +13,8 @@ import { EditorBlock } from '../../src'
 const styles = {
   card: {
     overflow: 'visible',
-    margin: '0px 0px 10px'
-  }
+    margin: '0px 0px 10px',
+  },
 }
 
 /**
@@ -28,20 +27,33 @@ const styles = {
  *
  * children: the single editor (eg. EditorQuill)
  */
-const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children, classes }) => {
-
+const ExampleBlockWrapper = ({
+  additionalProps,
+  block,
+  blockIndex,
+  children,
+  classes,
+}) => {
   const onDelete = () => {
     const blockId = get(block, 'id')
-    if(additionalProps !== null && additionalProps !== undefined && typeof additionalProps.onBlockAction === 'function') {
+    if (
+      additionalProps !== null &&
+      additionalProps !== undefined &&
+      typeof additionalProps.onBlockAction === 'function'
+    ) {
       additionalProps.onBlockAction({
         action: 'remove',
-        id: blockId
+        id: blockId,
       })
     }
   }
 
   return (
-    <Draggable key={`block-${block.id}`} draggableId={`block-${block.id}`} index={blockIndex}>
+    <Draggable
+      key={`block-${block.id}`}
+      draggableId={`block-${block.id}`}
+      index={blockIndex}
+    >
       {(provided, dragSnapshot) => (
         <div className="ls-example-block-wrapper">
           <div
@@ -54,7 +66,7 @@ const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children, clas
               style={{
                 backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
                 border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
-                opacity: dragSnapshot.isDragging ? '0.6' : null
+                opacity: dragSnapshot.isDragging ? '0.6' : null,
               }}
             >
               <CardContent>
@@ -64,7 +76,7 @@ const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children, clas
                   color="secondary"
                   onClick={onDelete}
                   style={{
-                    float: 'right'
+                    float: 'right',
                   }}
                 >
                   Delete
@@ -74,11 +86,13 @@ const ExampleBlockWrapper = ({additionalProps, block, blockIndex, children, clas
                   block={block}
                   style={{
                     backgroundColor: dragSnapshot.isDragging ? '#fbfbfb' : null,
-                    border: dragSnapshot.isDragging ? '2px dashed #c8c9c9' : null,
-                    opacity: dragSnapshot.isDragging ? '0.6' : null
+                    border: dragSnapshot.isDragging
+                      ? '2px dashed #c8c9c9'
+                      : null,
+                    opacity: dragSnapshot.isDragging ? '0.6' : null,
                   }}
                 >
-                  { children }
+                  {children}
                 </EditorBlock>
               </CardContent>
             </Card>

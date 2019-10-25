@@ -39,29 +39,14 @@ module.exports = {
         'no-console': 0,
         'react/prop-types': 0,
       },
+    },
+    { 
+      files: ["example/**/**.js"], 
+      rules: {
+        'import/no-extraneous-dependencies': 0,
+        'no-console': 0,
+        'react/prop-types': 0,
+      }
     }
   ]
-  // "overrides": [
-  //   {
-  //     "files": [ "src/**/*.spec.js"],
-  //     "rules": {
-  //       "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
-  //       "no-undef": "off",
-  //       "no-underscore-dangle": ["warning"],
-  //       "no-unused-vars": ["error", { "varsIgnorePattern": "should|wrapper" }],
-  //       "import/no-extraneous-dependencies": "off",
-  //       "react/no-find-dom-node": 0
-  //     }
-  //   },
-  //   {
-  //     "files": [ "src/**/*.stories.js", "example/**/*.js"],
-  //     "rules": {
-  //       "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
-  //       "no-undef": "off",
-  //       "no-underscore-dangle": ["warning"],
-  //       "import/no-extraneous-dependencies": "off",
-  //       "react/prop-types": "off"
-  //     }
-  //   }
-  // ]
 }

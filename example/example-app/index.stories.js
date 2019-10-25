@@ -4,10 +4,8 @@ import { storiesOf } from '@storybook/react'
 import withReadme from 'storybook-readme/with-readme'
 
 // Components
-import App from './'
 import ExampleBlockWrapper from './block-wrapper'
 import componentReadme from './README.md'
-
 // Configuration of the App (eg. default editorState)
 import {
   defaultMenuState,
@@ -18,8 +16,12 @@ import {
   editorQuillConfig,
 } from './config'
 
+import App from '.'
+
 // Editor Placeholder examples
-const Placeholder = () => (<div>Drag and Drop an Editor from the Menu here to start.</div>)
+const Placeholder = () => (
+  <div>Drag and Drop an Editor from the Menu here to start.</div>
+)
 
 /**
  * The actual Storybook Stories are created here with the data from above
@@ -38,7 +40,7 @@ storiesOf('App Example', module)
   .add('with an example Menu and an empty Lovely-Editor', () => {
     const newDocument = {
       ...defaultDocument,
-      editorState: []
+      editorState: [],
     }
     return (
       <App
@@ -50,7 +52,7 @@ storiesOf('App Example', module)
     )
   })
   .add('with all available Editors', () => {
-    const randomId = () => Math.floor((Math.random() * 1000) + 1)
+    const randomId = () => Math.floor(Math.random() * 1000 + 1)
     const newDocument = {
       ...defaultDocument,
       editorState: [
@@ -59,23 +61,25 @@ storiesOf('App Example', module)
           id: randomId(),
           type: 'tui',
           data: {
-            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
+            value:
+              "```js\nfunction helloWorld() {\n\tconsole.log('hello world');\n}\nhelloWorld();```",
           },
           meta: {
-            title: 'ToastUI Editor'
-          }
+            title: 'ToastUI Editor',
+          },
         },
         {
           id: randomId(),
           type: 'codemirror',
           data: {
-            value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
+            value:
+              "function helloWorld() {\n\tconsole.log('hello world');\n}\nhelloWorld();",
           },
           meta: {
-            title: 'CodeMirror-Editor'
-          }
-        }
-      ]
+            title: 'CodeMirror-Editor',
+          },
+        },
+      ],
     }
     return (
       <App
@@ -89,7 +93,7 @@ storiesOf('App Example', module)
 storiesOf('App Example/Customization', module)
   .addDecorator(withReadme(componentReadme))
   .add('with MaterialUI, custom EditorBlock and with Drag&Drop Support', () => {
-    const randomId = () => Math.floor((Math.random() * 1000) + 1)
+    const randomId = () => Math.floor(Math.random() * 1000 + 1)
     const newDocument = {
       ...defaultDocument,
       editorState: [
@@ -98,29 +102,31 @@ storiesOf('App Example/Customization', module)
           id: randomId(),
           type: 'tui',
           data: {
-            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
+            value:
+              "```js\nfunction helloWorld() {\n\tconsole.log('hello world');\n}\nhelloWorld();```",
           },
           meta: {
-            title: 'ToastUI Editor'
-          }
+            title: 'ToastUI Editor',
+          },
         },
         {
           id: randomId(),
           type: 'codemirror',
           data: {
-            value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
+            value:
+              "function helloWorld() {\n\tconsole.log('hello world');\n}\nhelloWorld();",
           },
           meta: {
-            title: 'CodeMirror-Editor'
-          }
-        }
-      ]
+            title: 'CodeMirror-Editor',
+          },
+        },
+      ],
     }
 
     const materialUIMenu = {
       ...menuWithAllEditors,
       meta: {
-        title: 'ExampleApp with MaterialUI'
+        title: 'ExampleApp with MaterialUI',
       },
     }
 
@@ -133,24 +139,27 @@ storiesOf('App Example/Customization', module)
       />
     )
   })
-  .add('with a custom blockConfig for the EditorQuill (eg. toolbarOptions)', () => {
-    const editorQuillCustomConfig = merge({}, editorQuillConfig, {
-      blockConfig: {
-        toolbarOptions: [
-          ['bold', 'italic', 'underline', 'strike'],
-          ['clean'],
-        ]
-      }
-    })
-    const blocksConfig = [editorQuillCustomConfig]
-    return (
-      <App
-        document={defaultDocument}
-        blocksConfig={blocksConfig}
-        menuState={menuWithAllEditors}
-      />
-    )
-  })
+  .add(
+    'with a custom blockConfig for the EditorQuill (eg. toolbarOptions)',
+    () => {
+      const editorQuillCustomConfig = merge({}, editorQuillConfig, {
+        blockConfig: {
+          toolbarOptions: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['clean'],
+          ],
+        },
+      })
+      const blocksConfig = [editorQuillCustomConfig]
+      return (
+        <App
+          document={defaultDocument}
+          blocksConfig={blocksConfig}
+          menuState={menuWithAllEditors}
+        />
+      )
+    },
+  )
 
 storiesOf('App Example/Content', module)
   .addDecorator(withReadme(componentReadme))
