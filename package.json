@@ -31,7 +31,7 @@
     "prepublishOnly": "npm run build",
     "pretest": "npm run test:node",
     "start": "npm run storybook",
-    "storybook": "start-storybook -p 9009 --debug-webpack",
+    "storybook": "start-storybook -p 9009",
     "test": "mocha -r babel-core/register -r src/tests/helpers/test-setup.js -r ignore-styles --colors \"./src/**/*.spec.js\"",
     "test:node": "check-node-version --node '>='$(cat .nvmrc)"
   },
