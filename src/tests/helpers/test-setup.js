@@ -2,6 +2,9 @@ import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import sinon from 'sinon'
 
+// https://www.npmjs.com/package/ignore-styles
+import 'ignore-styles'
+
 // Documentation "enzyme and jsdom"
 // - https://github.com/airbnb/enzyme/blob/master/docs/guides/jsdom.md
 //
