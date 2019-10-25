@@ -5,52 +5,52 @@ import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import componentReadme from './README.md'
 
-import { EditorTui } from './'
+import { EditorTui } from '.'
 
-const blockConfig = {
+const defaultBlockConfig = {
   initialEditType: 'markdown', // possible: "markdown" | "wysiwyg"
   previewStyle: 'vertical', // possible: "tab" | "vertical"
-  height: '400px'
+  height: '400px',
 }
 
-const block = {
+const defaultBlock = {
   data: {
-    value: '# Hello World'
+    value: '# Hello World',
   },
 }
 
 class Wrapper extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
-      block,
-      blockConfig
+      block: defaultBlock,
+      blockConfig: defaultBlockConfig,
     }
     this.onChange = this.onChange.bind(this)
   }
 
   onChange(change) {
-    const newState = clone(this.state.block)
+    const { block } = this.state
+
+    const newState = clone(block)
     newState.data = change.data
     action('onChange')(change)
     this.setState({ block: newState })
   }
 
   render() {
+    const { block, blockConfig } = this.state
+
     return (
       <EditorTui
-        block={this.state.block}
-        blockConfig={this.state.blockConfig}
-        onChange={(change) => this.onChange(change)}
+        block={block}
+        blockConfig={blockConfig}
+        onChange={this.onChange}
       />
     )
   }
-
 }
 
 storiesOf('Editors/EditorTui', module)
   .addDecorator(withReadme(componentReadme))
-  .add('default', () => (
-    <Wrapper />
-  ))
+  .add('default', () => <Wrapper />)

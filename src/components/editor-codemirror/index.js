@@ -14,32 +14,37 @@ require('codemirror/theme/material.css')
 require('codemirror/mode/javascript/javascript')
 
 export class EditorCodeMirror extends React.Component {
-
   constructor(props) {
     super(props)
-    this.onChange = debounce(this.onChangeHandler.bind(this), 300, { maxWait: 1000 })
+    this.onChange = debounce(this.onChangeHandler.bind(this), 300, {
+      maxWait: 1000,
+    })
 
     // create state for cursor to reset it to the correct position after onChange()
     // otherwise it would always jump to the end
     // https://github.com/scniro/react-codemirror2#props-cont-wrapped-codemirror-programming-api
     this.state = {
-      value: get(this.props, 'block.data.value')
+      value: get(this.props, 'block.data.value'),
     }
   }
 
   onChangeHandler(editor, data, value) {
+    const { onChange } = this.props
+
     const change = {
       data: {
-        value
-      }
+        value,
+      },
     }
 
     // gives the changed value back to the LovelyEditor
-    this.props.onChange(change)
+    onChange(change)
   }
 
   render() {
     const { blockConfig } = this.props
+    const { value } = this.state
+
     const options = {
       lineNumbers: get(blockConfig, 'lineNumbers', false),
       mode: {
@@ -49,14 +54,13 @@ export class EditorCodeMirror extends React.Component {
       indentUnit: 2,
       theme: 'material',
     }
+
     return (
-      <div
-        {...classes()}
-      >
+      <div {...classes()}>
         <CodeMirror
-          value={this.state.value}
-          onBeforeChange={(editor, data, value) => {
-            this.setState({value})
+          value={value}
+          onBeforeChange={(editor, data, newValue) => {
+            this.setState({ value: newValue })
           }}
           onChange={this.onChange}
           options={options}
@@ -64,20 +68,19 @@ export class EditorCodeMirror extends React.Component {
       </div>
     )
   }
-
 }
 
 // describes the required properties for the component
 EditorCodeMirror.displayName = 'EditorCodeMirror'
 EditorCodeMirror.propTypes = {
   block: PropTypes.shape({
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
   }).isRequired,
   blockConfig: PropTypes.shape({
-    lineNumbers: PropTypes.bool
+    lineNumbers: PropTypes.bool,
   }),
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 }
 EditorCodeMirror.defaultProps = {
-  blockConfig: {}
+  blockConfig: {},
 }

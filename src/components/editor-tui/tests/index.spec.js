@@ -4,15 +4,14 @@ import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
 // component to test
-import { EditorTui } from '../'
-
-// mocks
 import validConfig from './mocks/validConfig.json'
 
+import { EditorTui } from '..'
+
+// mocks
+
 describe('<EditorTui />', () => {
-
   describe('renders', () => {
-
     beforeEach(() => {
       window.tuiSpy.resetHistory()
     })
@@ -23,24 +22,21 @@ describe('<EditorTui />', () => {
 
     it('a ToastUI component', () => {
       const wrapper = shallow(
-        <EditorTui
-          block={validConfig}
-          onChange={() => {}}
-        />
+        <EditorTui block={validConfig} onChange={() => {}} />,
       )
 
       expect(wrapper.find('#lovely-editor-tui-1')).to.have.length(1)
     })
 
     it('a ToastUI component with the correct properties', () => {
-      const wrapper = shallow(
+      shallow(
         <EditorTui
           block={validConfig}
           blockConfig={{
-            someAdditionalProp: 1
+            someAdditionalProp: 1,
           }}
           onChange={() => {}}
-        />
+        />,
       )
 
       expect(window.tuiSpy.callCount).to.equal(1)
@@ -49,20 +45,20 @@ describe('<EditorTui />', () => {
         initialEditType: 'markdown',
         previewStyle: 'vertical',
         height: '180px',
-        someAdditionalProp: 1
+        someAdditionalProp: 1,
       })
       expect(window.tuiSpy.lastCall.args[0].events.change).to.be.a.function()
     })
 
     it('a ToastUI component with the correct (including overwritten) properties', () => {
-      const wrapper = shallow(
+      shallow(
         <EditorTui
           block={validConfig}
           blockConfig={{
-            previewStyle: 'tab'
+            previewStyle: 'tab',
           }}
           onChange={() => {}}
-        />
+        />,
       )
 
       expect(window.tuiSpy.callCount).to.equal(1)
@@ -73,14 +69,10 @@ describe('<EditorTui />', () => {
   })
 
   describe('Behaviour test', () => {
-
     it('changes trigger this.props.onChange', () => {
       const onChange = sinon.spy()
       const wrapper = shallow(
-        <EditorTui
-          block={validConfig}
-          onChange={onChange}
-        />
+        <EditorTui block={validConfig} onChange={onChange} />,
       )
 
       const instance = wrapper.instance()
@@ -92,8 +84,8 @@ describe('<EditorTui />', () => {
       expect(onChange.lastCall.args[0]).to.include({
         data: {
           value: 'some text',
-          html: '<p>some text</p>'
-        }
+          html: '<p>some text</p>',
+        },
       })
     })
   })

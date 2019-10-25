@@ -1,7 +1,8 @@
 import React from 'react'
 import { expect } from 'code'
 import { shallow } from 'enzyme'
-import { EditorBlock } from '../'
+
+import { EditorBlock } from '..'
 
 const block = {
   id: 1,
@@ -11,13 +12,12 @@ const block = {
 }
 
 describe('<EditorBlock />', () => {
-
   describe('Render Tests', () => {
     it('component renders', () => {
       const wrapper = shallow(
         <EditorBlock block={block} onAction={() => {}}>
           <div />
-        </EditorBlock>
+        </EditorBlock>,
       )
       expect(wrapper.exists()).to.equal(true)
     })
@@ -26,16 +26,20 @@ describe('<EditorBlock />', () => {
       const wrapper = shallow(
         <EditorBlock block={block} onAction={() => {}}>
           <div />
-        </EditorBlock>
+        </EditorBlock>,
       )
-      expect(wrapper.find('.ls-editor-block__title').containsMatchingElement(block.meta.title))
+      expect(
+        wrapper
+          .find('.ls-editor-block__title')
+          .containsMatchingElement(block.meta.title),
+      )
     })
 
     it('renders the child element', () => {
       const wrapper = shallow(
         <EditorBlock block={block} onAction={() => {}}>
-          <div id='child' />
-        </EditorBlock>
+          <div id="child" />
+        </EditorBlock>,
       )
       expect(wrapper.find('#child').exists()).to.equal(true)
     })
