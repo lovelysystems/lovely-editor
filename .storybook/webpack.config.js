@@ -19,7 +19,8 @@ module.exports = ({ config }) => {
     if (rule.test && rule.test.toString().includes('woff')) {
       return {
         ...rule,
-        test: /\.(svg|ico|jpg|jpeg|png|gif|webp|cur|ani|pdf)(\?.*)?$/
+        // (png|jpg|jpeg|gif|svg) files are managed below
+        test: /\.(ico|webp|cur|ani|pdf)(\?.*)?$/
       }
     }
     return rule
@@ -55,7 +56,7 @@ module.exports = ({ config }) => {
   })
 
   config.module.rules.push({
-    test: /\.(png|jpg|gif|svg)$/,
+    test: /\.(png|jpg|jpeg|gif|svg)$/,
     use: [
       {
         loader: 'file-loader',
