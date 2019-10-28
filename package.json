@@ -8,10 +8,6 @@
   ],
   "author": "Lovely Systems GmbH <office@lovelysystems.com>",
   "license": "Apache-2.0",
-  "engines": {
-    "node": "^12.12",
-    "npm": "^6.11.3"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/lovelysystems/lovely-editor.git"
