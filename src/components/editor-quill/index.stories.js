@@ -8,9 +8,9 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import { clone, merge } from 'lodash'
 
 // Component imports
-import { EditorQuill } from '../..'
-
 import componentReadme from './README.md'
+
+import { EditorQuill } from '.'
 
 // Example Components for the Storybook
 export const customThemeToolbar = ({ id }) => {

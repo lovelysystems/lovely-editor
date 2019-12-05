@@ -10,12 +10,10 @@ into your App and organise them and their returned value exactly the way you nee
 it. Also including a new Editor that is not supported yet can be accomplished
 within just a few easy steps.
 
-
 This makes it very easy for you to include a variety of different Editors
 into your App and organise them and their returned value exactly the way you need
 it. Also including a new Editor that is not supported yet can be accomplished
 within just a few easy steps.
-
 
 ![Example App](./assets/example_app.gif)
 
@@ -25,27 +23,37 @@ Drag & Drop was added to illustrate that our LovelyEditor plays nice with other 
 
 ## Table of Contents
 
-* [Features](#features)
-* [Examples](#examples)
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [LovelyEditor components](#lovelyeditor-components)
-* [Quickstart](#quickstart)
-  * [Example App](#example-app)
-  * [Editor State](#editor-state)
-  * [Editor Config](#editor-config)
-  * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
-  * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
-* [How to include your own custom Editor](#how-to-include-your-own-custom-editor)
-* [How to contribute and develop](#how-to-contribute-and-develop)
-* [How to create a release](#how-to-create-a-release-deployment)
+- [LovelyEditor](#lovelyeditor)
+  - [Table of Contents](#table-of-contents)
+  - [Features](#features)
+  - [Examples](#examples)
+    _ [HTML-Output](#html-output)
+    _ [Example with two Editors and an Example-Menu to add additional Editors](#example-with-two-editors-and-an-example-menu-to-add-additional-editors)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [LovelyEditor components](#lovelyeditor-components)
+    _ [Structure of the LovelyEditor](#structure-of-the-lovelyeditor)
+    _ [Single EditorBlock with eg. EditorQuill](#single-editorblock-with-eg-editorquill)
+  - [Quickstart](#quickstart)
+    - [Example App](#example-app)
+    - [Editor State](#editor-state) \* [Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component](#example-of-two-editors-tui-and-codemirror-within-the-lovelyeditor-component)
+    - [Editor Config](#editor-config)
+    - [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
+  - [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
+  - [How to include your own custom Editor](#how-to-include-your-own-custom-editor)
+  - [How to contribute and develop](#how-to-contribute-and-develop)
+    - [Development Setup](#development-setup)
+    - [Development Scripts](#development-scripts)
+    - [Showcases](#showcases)
+    - [Pre-commit and Pre-push Hooks](#pre-commit-and-pre-push-hooks)
+    - [How to create a release (Deployment)](#how-to-create-a-release-deployment)
 
 ## Features
 
-* Provides a variety of pre-designed editors: eg. EditorQuill
-* design and features are largely customisable: make it your own!
-* easy way to create and add your own custom editor or extend existing ones
-* use every EditorComponent (eg. EditorQuill) independently without need to
+- Provides a variety of pre-designed editors: eg. EditorQuill
+- design and features are largely customisable: make it your own!
+- easy way to create and add your own custom editor or extend existing ones
+- use every EditorComponent (eg. EditorQuill) independently without need to
   look out you for the others
 
 ## Examples
@@ -59,24 +67,26 @@ Richtext, CodeMirror, etc.) to the application. It is also possible to use the
 same editor-type several times.
 
 ###### HTML-Output
+
 ![HTML-Output](./assets/html_preview.gif)
 
 To see what kind of HTML-Output the Editors return check out our [example](https://lovely-editor.netlify.com/?selectedKind=App%20Example%2FContent&selectedStory=with%20HTML%20Preview%20of%20the%20content%20of%20all%20Editors&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 The generated HTML of all editors is ready to be used in your app.
 
 ###### Example with two Editors and an Example-Menu to add additional Editors
+
 ![Two Editors with Example-Menu](./assets/two_with_menu.png)
 
-## Requirements
+## Development Requirements
 
-```
-node 8.6.x
-npm 5.3.x
+```bash
+node v12.12.x
+npm 6.11.x
 ```
 
 ## Installation
 
-```
+```bash
 npm install --save lovely-editor
 ```
 
@@ -86,13 +96,20 @@ and import it in your App with:
 import { LovelyEditor } from 'lovely-editor'
 ```
 
-If you want to use the basic styling as well you can either import it in your index.js
+If you want to use the basic styling as well you can either import it in your
+app:
 
 ```js
+// main lovely-editor-js styling
 import('lovely-editor/dist/lovely-editor.min.css')
+
+// styling of provided lovely-editor-js editors
+import('lovely-editor/dist/editor-codemirror.min.css')
+import('lovely-editor/dist/editor-quill.min.css')
+import('lovely-editor/dist/editor-tui.min.css')
 ```
 
-Or add it to your index.html.
+Or add it to your `index.html`.
 
 ## LovelyEditor components
 
@@ -103,6 +120,7 @@ The LovelyEditor basically consists out of three main components:
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
 ###### Structure of the LovelyEditor
+
 ![LovelyEditor Structure](./assets/lovely_editor.png)
 
 The `LovelyEditor` rendered components tree looks like this:
@@ -116,6 +134,7 @@ The `LovelyEditor` rendered components tree looks like this:
 ```
 
 ###### Single EditorBlock with eg. EditorQuill
+
 ![Single CodeMirror Editor](./assets/react_quill.png)
 
 The main entry point in your app is the `LovelyEditor`. Its properties have to
@@ -139,8 +158,10 @@ received and the `YourApp`'s `state` updated. This leads to a re-rendering of
 the `LovelyEditor` with a new valid editorState. You can find a similar example also
 [in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
-```js
+````js
 import { LovelyEditor, EditorQuill, EditorTui } from 'lovely-editor'
+import { EditorQuill } from 'lovely-editor/components/editor-quill'
+import { EditorTui } from 'lovely-editor/components/editor-tui'
 
 // current state of LovelyEditor
 const editorState = [
@@ -148,33 +169,34 @@ const editorState = [
     id: 1,
     type: 'richtext',
     data: {
-      value: '<p>Hello World. <strong>This is bold.</strong></p>'
+      value: '<p>Hello World. <strong>This is bold.</strong></p>',
     },
     meta: {
-      title: 'Quill Block'
-    }
+      title: 'Quill Block',
+    },
   },
   {
     id: 2,
     type: 'tui',
     data: {
-      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
+      value:
+        "```js\nfunction helloWorld() {\n\tconsole.log('hello world');\n}\nhelloWorld();```",
     },
     meta: {
-      title: 'TUI-Editor'
-    }
-  }
+      title: 'TUI-Editor',
+    },
+  },
 ]
 
 // renders a specific component for the requested block.type
 // in this case EditorQuill would be rendered for all blocks of type "richtext"
 const editorQuillConfig = {
   type: 'richtext',
-  component: EditorQuill
+  component: EditorQuill,
 }
 const editorTuiConfig = {
   type: 'tui',
-  component: EditorTui
+  component: EditorTui,
 }
 
 // sets which editor component should be rendered for which block.type
@@ -184,7 +206,7 @@ class YourApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      editorState
+      editorState,
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -203,7 +225,7 @@ class YourApp extends React.Component {
     )
   }
 }
-```
+````
 
 ### Editor State
 
@@ -222,32 +244,34 @@ of the `<LovelyEditor />` and lets you use the change for your own purposes
 
 A `editorState` can look similar to:
 
-```js
+````js
 const editorState = [
   {
     id: 1, // block.id, must be unique
     type: 'richtext',
     data: {
-      value: '<p>Hello World. <strong>This is bold.</strong></p>'
+      value: '<p>Hello World. <strong>This is bold.</strong></p>',
     },
     meta: {
-      title: 'Quill Block'
-    }
+      title: 'Quill Block',
+    },
   },
   {
     id: 2,
     type: 'tui',
     data: {
-      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
+      value:
+        "```js\nfunction helloWorld() {\n\tconsole.log('hello world');\n}\nhelloWorld();```",
     },
     meta: {
-      title: 'TUI-Editor'
-    }
-  }
+      title: 'TUI-Editor',
+    },
+  },
 ]
-```
+````
 
 ###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
+
 ![Two Example-Editors](./assets/quill_and_tui.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
@@ -271,11 +295,11 @@ An example config could look like:
 ```js
 const editorQuillConfig = {
   type: 'richtext',
-  component: EditorQuill
+  component: EditorQuill,
 }
 const editorTuiConfig = {
   type: 'tui',
-  component: EditorTui
+  component: EditorTui,
 }
 
 const blocksConfig = [editorQuillConfig, editorTuiConfig]
@@ -293,7 +317,7 @@ class YourApp extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      editorState
+      editorState,
     }
     this.onChange = this.onChange.bind(this)
   }
@@ -351,18 +375,18 @@ install all the dependencies, required to develop.
 
 The package comes with the following npm scripts:
 
-* `npm run build`: builds the package to ./dist
-* `npm run build:storybook`: build static production version of component
+- `npm run build`: builds the package to ./dist
+- `npm run build:storybook`: build static production version of component
   library to ./build/storybook
-* `npm run coverage`: runs the tests and reports the coverage with
+- `npm run coverage`: runs the tests and reports the coverage with
   [nyc](https://github.com/istanbuljs/nyc)
-* `npm run lint`: lints JS code
-* `npm run storybook`: run local server with component library and
+- `npm run lint`: lints JS code
+- `npm run storybook`: run local server with component library and
   [Storybook](https://storybook.js.org)
-* `npm start`: similar to `npm run storybook`
-* `npm run test`: runs the tests (test files path and pattern:
+- `npm start`: similar to `npm run storybook`
+- `npm run test`: runs the tests (test files path and pattern:
   `src/**/*.spec.js`)
-* `npm run test:node`: verifies the installed and used node version
+- `npm run test:node`: verifies the installed and used node version
 
 ### Showcases
 
@@ -375,12 +399,12 @@ visit [https://lovely-editor.netlify.com](https://lovely-editor.netlify.com).
 When attempting to commit files in this repository, some taks will
 automatically run to ensure a consistently high level of code quality:
 
-* **JavaScript files (.js):**
-  * runs `eslint` and automatically fixes auto-fixable issues
+- **JavaScript files (.js):**
+  - runs `eslint` and automatically fixes auto-fixable issues
     ([see related JS guidelines here](https://github.com/airbnb/javascript))
-  * runs `prettier` and auto-formats your code
+  - runs `prettier` and auto-formats your code
     ([see what it does here](https://github.com/prettier/prettier))
-  * runs all unit tests concerning the committed files with `mocha`
+  - runs all unit tests concerning the committed files with `mocha`
 
 If any of the tasks fail (which means your code does not lint or unit tests are
 failing), your commit or push will be aborted.

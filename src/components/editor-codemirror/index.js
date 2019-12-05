@@ -7,8 +7,6 @@ import { BemHelper } from '../../helpers/bem-helper'
 
 // Styling
 const classes = new BemHelper('editor-codemirror')
-require('codemirror/lib/codemirror.css')
-require('codemirror/theme/material.css')
 
 // NOTE: currently only javascript is supported!
 require('codemirror/mode/javascript/javascript')

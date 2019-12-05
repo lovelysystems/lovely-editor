@@ -1,4 +1,6 @@
-import { EditorQuill, EditorTui, EditorCodeMirror } from '../../src'
+import { EditorQuill } from '../../src/components/editor-quill'
+import { EditorTui } from '../../src/components/editor-tui'
+import { EditorCodeMirror } from '../../src/components/editor-codemirror'
 
 const randomId = () => Math.floor(Math.random() * 1000 + 1)
 
