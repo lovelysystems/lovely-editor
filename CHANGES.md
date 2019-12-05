@@ -37,6 +37,10 @@ import('lovely-editor/dist/editor-tui.min.css')
 - upgraded npm packages to latest available minor version
 - loosen npm package version restriction
 
+### Development
+
+- fixed and applied prettier and linting rules
+
 ## 2018/12/17 [1.3.0][13]
 
 ### Added
