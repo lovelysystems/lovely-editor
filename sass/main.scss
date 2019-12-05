@@ -1,5 +1,9 @@
+/**
+* CSS for Storybook Stories
+*/
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 14px;
 }
 
@@ -26,8 +30,8 @@ $bg-color: #eeeeee;
 }
 
 .ls-example-app {
-
-  h1, h2 {
+  h1,
+  h2 {
     margin: 5px 0 10px;
   }
 
@@ -68,7 +72,7 @@ $bg-color: #eeeeee;
 }
 
 // custom class styling (inline example parchment)
-.custom-inline-class { 
+.custom-inline-class {
   background: #008000;
   color: #fff;
   font-size: 1.5em;
@@ -77,6 +81,16 @@ $bg-color: #eeeeee;
   padding-right: 10px;
 }
 
+// 3rd party
 @import '~font-awesome/css/font-awesome.min.css';
+
+// example app
 @import './components/example-menu/styles';
+
+// main lovely-editor-js styling
 @import './lovely-editor';
+
+// styling of provided lovely-editor-js editors
+@import './components/editor-quill/styles';
+@import './components/editor-tui/styles';
+@import './components/editor-codemirror/styles';

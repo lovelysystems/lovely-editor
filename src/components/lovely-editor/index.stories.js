@@ -3,7 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import withReadme from 'storybook-readme/with-readme'
 
-import { LovelyEditor, EditorQuill } from '../..'
+import { LovelyEditor } from '../..'
+import { EditorQuill } from '../editor-quill'
 
 import componentReadme from './README.md'
 

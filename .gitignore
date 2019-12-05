@@ -2,6 +2,7 @@
 node_modules
 
 ## Development && Coverage Reports
+tmp
 coverage
 .nyc_output
 
@@ -15,3 +16,4 @@ npm-debug.log
 ## Build
 dist
 *-[0-9].[0-9].[0-9].tgz
+*-[0-9].[0-9].[0-9]-*.tgz

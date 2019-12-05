@@ -9,8 +9,6 @@ import { QuillToolbar } from './toolbar'
 
 // Styling
 const classes = new BemHelper('editor-quill')
-require('react-quill/dist/quill.snow.css')
-require('react-quill/dist/quill.core.css')
 
 export class EditorQuill extends React.Component {
   constructor(props, context) {

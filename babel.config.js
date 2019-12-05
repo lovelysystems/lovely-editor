@@ -1,17 +1,14 @@
 module.exports = {
   presets: [
-    ['@babel/preset-env',
+    [
+      '@babel/preset-env',
       {
         targets: {
-          browsers: [
-            '> 1%',
-            'last 2 versions',
-            'IE 10'
-          ]
-        }
-      }
+          browsers: ['> 1%', 'last 2 versions', 'IE 10'],
+        },
+      },
     ],
-    '@babel/preset-react'
+    '@babel/preset-react',
   ],
   plugins: [
     '@babel/plugin-proposal-class-properties',
@@ -19,7 +16,7 @@ module.exports = {
   ],
   env: {
     test: {
-      plugins: ['istanbul']
-    }
-  }
+      plugins: ['istanbul'],
+    },
+  },
 }
