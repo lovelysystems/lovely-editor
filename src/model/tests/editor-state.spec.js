@@ -16,15 +16,10 @@ describe('EditorState', () => {
 
   describe('appendBlock', () => {
     it('adds the specified block to the end', () => {
-      const editorState = [
-        { id: 'block-one', type: 'text' },
-      ]
+      const editorState = [{ id: 'block-one', type: 'text' }]
       const block = { id: 'block-two', type: 'text' }
       const newEditorState = EditorState.appendBlock(editorState, block)
-      expect(newEditorState).to.equal([
-        editorState[0],
-        block,
-      ])
+      expect(newEditorState).to.equal([editorState[0], block])
     })
   })
 
@@ -35,9 +30,7 @@ describe('EditorState', () => {
         { id: 'block-two', type: 'text' },
       ]
       const newEditorState = EditorState.removeBlock(editorState, 'block-two')
-      expect(newEditorState).to.equal([
-        editorState[0],
-      ])
+      expect(newEditorState).to.equal([editorState[0]])
     })
 
     it('leaves the original editor state as is', () => {
@@ -58,7 +51,9 @@ describe('EditorState', () => {
         { id: 'b2', type: 'text', data: { value: 'mno' } },
         { id: 'b3', type: 'text', data: { value: 'xyz' } },
       ]
-      const newEditorState = EditorState.updateBlockData(editorState, 'b2', { value: 'QRS' })
+      const newEditorState = EditorState.updateBlockData(editorState, 'b2', {
+        value: 'QRS',
+      })
       expect(newEditorState).to.equal([
         editorState[0],
         { id: 'b2', type: 'text', data: { value: 'QRS' } },

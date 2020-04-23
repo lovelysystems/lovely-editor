@@ -23,8 +23,7 @@ import { filter, find, map } from 'lodash'
  *
  * @returns [ContentBlock]
  */
-const findBlock = (editorState, blockId) =>
-  find(editorState, ['id', blockId])
+const findBlock = (editorState, blockId) => find(editorState, ['id', blockId])
 
 /**
  * Creates a new EditorState with the specified block removed.
@@ -52,7 +51,7 @@ const updateBlockData = (editorState, blockId, data) =>
     if (block.id === blockId) {
       return {
         ...block,
-        data
+        data,
       }
     }
     return block
@@ -66,8 +65,7 @@ const updateBlockData = (editorState, blockId, data) =>
  *
  * @returns {EditorState}
  */
-const appendBlock = (editorState, block) =>
-  [...editorState, block]
+const appendBlock = (editorState, block) => [...editorState, block]
 
 /**
  * Inserts the block at a given index in the new EditorState
@@ -79,20 +77,19 @@ const appendBlock = (editorState, block) =>
  *
  * @returns {EditorState}
  */
-const appendBlockAtIndex = (editorState, block, idx = 0) =>
-  [
-    // part of the array before the specified index
-    ...editorState.slice(0, idx),
-    // inserted item
-    block,
-    // part of the array after the specified index
-    ...editorState.slice(idx)
-  ]
+const appendBlockAtIndex = (editorState, block, idx = 0) => [
+  // part of the array before the specified index
+  ...editorState.slice(0, idx),
+  // inserted item
+  block,
+  // part of the array after the specified index
+  ...editorState.slice(idx),
+]
 
 export const EditorState = {
   findBlock,
   removeBlock,
   updateBlockData,
   appendBlock,
-  appendBlockAtIndex
+  appendBlockAtIndex,
 }

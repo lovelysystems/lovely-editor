@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import React from 'react'
 import { storiesOf } from '@storybook/react' //eslint-disable-line
 import { action } from '@storybook/addon-actions' //eslint-disable-line
@@ -7,40 +8,43 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import { clone, merge } from 'lodash'
 
 // Component imports
-import { EditorQuill } from '../..'
 import componentReadme from './README.md'
 
+import { EditorQuill } from '.'
+
 // Example Components for the Storybook
-export const customThemeToolbar = function({ id }) {
+export const customThemeToolbar = ({ id }) => {
   return (
-    <div className="ql-toolbar" id={`toolbar-${id}`} >
+    <div className="ql-toolbar" id={`toolbar-${id}`}>
       <select className="ql-header" defaultValue="">
-        <option selected disabled>Choose here</option>
+        <option selected disabled>
+          Choose here
+        </option>
         <option value="">Paragraph</option>
         <option value="1">Header 1</option>
         <option value="2">Header 2</option>
         <option value="3">Header 3</option>
       </select>
-      <button className="ql-bold">
+      <button className="ql-bold" type="button">
         <i className="fa fa-bold" />
       </button>
-      <button className="ql-italic">
+      <button className="ql-italic" type="button">
         <i className="fa fa-italic" />
       </button>
-      <button className="ql-underline">
+      <button className="ql-underline" type="button">
         <i className="fa fa-underline" />
       </button>
       <span className="ql-formats">
-        <button className="ql-list" value="ordered">
+        <button className="ql-list" value="ordered" type="button">
           <i className="fa fa-list-ol" />
         </button>
-        <button className="ql-list" value="bullet">
+        <button className="ql-list" value="bullet" type="button">
           <i className="fa fa-list-ul" />
         </button>
-        <button className="ql-indent" value="-1">
+        <button className="ql-indent" value="-1" type="button">
           <i className="fa fa-indent fa-rotate-180" style={{ paddingTop: 2 }} />
         </button>
-        <button className="ql-indent" value="+1">
+        <button className="ql-indent" value="+1" type="button">
           <i className="fa fa-indent" />
         </button>
       </span>
@@ -48,8 +52,7 @@ export const customThemeToolbar = function({ id }) {
   )
 }
 
-const customQuillToolbar = (props) => {
-
+const customQuillToolbar = props => {
   const onClick = () => {
     if (typeof props.onToolbarClick === 'function') {
       props.onToolbarClick('customQuillToolbar >> Toolbar clicked')
@@ -57,7 +60,7 @@ const customQuillToolbar = (props) => {
   }
 
   return (
-    <div className="ql-toolbar" id="customToolbar" >
+    <div className="ql-toolbar" id="customToolbar">
       <select className="ql-header" defaultValue="">
         <option value="1" />
         <option value="2" />
@@ -69,8 +72,9 @@ const customQuillToolbar = (props) => {
         style={{
           color: '#fff',
           width: 'auto',
-          backgroundColor: '#0065cc'
+          backgroundColor: '#0065cc',
         }}
+        type="button"
       >
         Click Me
       </button>
@@ -81,16 +85,15 @@ const customQuillToolbar = (props) => {
 const exampleBlock = {
   id: 5,
   data: {
-    value: ''
+    value: '',
   },
   meta: {
-    title: 'Input Box'
+    title: 'Input Box',
   },
-  type: 'richtext'
+  type: 'richtext',
 }
 
 class Wrapper extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -105,7 +108,8 @@ class Wrapper extends React.Component {
   }
 
   onChange(change) {
-    const newState = clone(this.state.block)
+    const { block } = this.state
+    const newState = clone(block)
     newState.data = change.data
     action('onChange')(change)
     this.setState({ block: newState })
@@ -116,7 +120,7 @@ class Wrapper extends React.Component {
     const { block } = this.state
 
     const finalBlockConfig = merge({}, blockConfig, {
-      toolbarCallback: this.onToolbarAction
+      toolbarCallback: this.onToolbarAction,
     })
 
     return (
@@ -127,15 +131,12 @@ class Wrapper extends React.Component {
       />
     )
   }
-
 }
 
 storiesOf('Editors/EditorQuill', module)
   .addDecorator(withReadme(componentReadme))
   .add('default', () => {
-    return (
-      <Wrapper block={exampleBlock} />
-    )
+    return <Wrapper block={exampleBlock} />
   })
   .add('without auto formatting lists', () => {
     /**
@@ -143,7 +144,7 @@ storiesOf('Editors/EditorQuill', module)
      * creates a list. So without this custom keybinding it is not possible to
      * enter "30. " as quill will return a ordered list starting with "1.".
      * See https://github.com/quilljs/quill/issues/2408 for more details.
-     * 
+     *
      * To resolve this behaviour one could either reset it completely with:
      *    handler: () => true
      * or apply it only when the user enters "1. " but not "2. " (and other numbers)
@@ -154,16 +155,14 @@ storiesOf('Editors/EditorQuill', module)
         keyboard: {
           bindings: {
             'list autofill': {
-              handler: () => true // completely disables list autofill
-            }
-          }
-        }
-      }
+              handler: () => true, // completely disables list autofill
+            },
+          },
+        },
+      },
     }
 
-    return (
-      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
-    )
+    return <Wrapper block={exampleBlock} blockConfig={blockConfig} />
   })
   .add('with onBlur, onFocus, onKeyPress, onKeyDown and onKeyUp events', () => {
     const blockConfig = {
@@ -171,11 +170,9 @@ storiesOf('Editors/EditorQuill', module)
       onFocus: action('onFocus'),
       onKeyPress: action('onKeyPress'),
       onKeyDown: action('onKeyDown'),
-      onKeyUp: action('onKeyUp')
+      onKeyUp: action('onKeyUp'),
     }
-    return (
-      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
-    )
+    return <Wrapper block={exampleBlock} blockConfig={blockConfig} />
   })
   .add('with custom toolbar icons', () => {
     const blockConfig = {
@@ -189,41 +186,36 @@ storiesOf('Editors/EditorQuill', module)
         },
         indent: {
           '+1': '<i class="fa fa-indent" aria-hidden="true"></i>',
-          '-1': '<i class="fa fa-indent fa-rotate-180" style="padding-top: 2px;" />'
+          '-1':
+            '<i class="fa fa-indent fa-rotate-180" style="padding-top: 2px;" />',
         },
-        customFormat: '<i class="fa fa-pencil"/>'
+        customFormat: '<i class="fa fa-pencil"/>',
       },
       toolbar: ({ id }) => (
-        (
-          <div className="ql-toolbar" id={`toolbar-${id}`} >
-            <span className="ql-formats">
-              <button className="ql-bold" />
-              <button className="ql-italic" />
-              <button className="ql-underline" />
-            </span>
-            <span className="ql-formats">
-              <button className="ql-list" value="ordered" />
-              <button className="ql-list" value="bullet" />
-              <button className="ql-indent" value="-1" />
-              <button className="ql-indent" value="+1" />
-              <button className="ql-customFormat" />
-            </span>
-          </div>
-        )
-      )
+        <div className="ql-toolbar" id={`toolbar-${id}`}>
+          <span className="ql-formats">
+            <button className="ql-bold" type="button" />
+            <button className="ql-italic" type="button" />
+            <button className="ql-underline" type="button" />
+          </span>
+          <span className="ql-formats">
+            <button className="ql-list" value="ordered" type="button" />
+            <button className="ql-list" value="bullet" type="button" />
+            <button className="ql-indent" value="-1" type="button" />
+            <button className="ql-indent" value="+1" type="button" />
+            <button className="ql-customFormat" type="button" />
+          </span>
+        </div>
+      ),
     }
-    return (
-      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
-    )
+    return <Wrapper block={exampleBlock} blockConfig={blockConfig} />
   })
   .add('with custom Toolbar', () => {
     const blockConfig = {
       toolbar: customQuillToolbar,
-      toolbarSelector: '#customToolbar'
+      toolbarSelector: '#customToolbar',
     }
-    return (
-      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
-    )
+    return <Wrapper block={exampleBlock} blockConfig={blockConfig} />
   })
   .add('with core theme, placeholderText and custom Toolbar', () => {
     const blockConfig = {
@@ -231,23 +223,20 @@ storiesOf('Editors/EditorQuill', module)
       toolbar: customThemeToolbar,
       theme: 'core',
     }
-    return (
-      <Wrapper block={exampleBlock} blockConfig={blockConfig} />
-    )
+    return <Wrapper block={exampleBlock} blockConfig={blockConfig} />
   })
   .add('with imported data', () => {
     const contentBock = {
       id: 5,
       data: {
-        value: '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>'
+        value:
+          '<p>Nested List</p><ul><li>List1</li><li class="ql-indent-1">Nested List</li></ul><p><br></p><p>Hello World. <strong>This is bold.</strong></p>',
       },
       meta: {
-        title: 'Input Box'
-      }
+        title: 'Input Box',
+      },
     }
-    return (
-      <Wrapper block={contentBock} />
-    )
+    return <Wrapper block={contentBock} />
   })
   .add('with imported nested list', () => {
     const contentBock = {
@@ -262,15 +251,13 @@ storiesOf('Editors/EditorQuill', module)
                     </ul>
                   </li>
                   <li>Milk</li>
-                </ul>`
+                </ul>`,
       },
       meta: {
-        title: 'Input Box'
-      }
+        title: 'Input Box',
+      },
     }
-    return (
-      <Wrapper block={contentBock} />
-    )
+    return <Wrapper block={contentBock} />
   })
   .add('with all available formats', () => {
     const contentBock = {
@@ -283,15 +270,13 @@ storiesOf('Editors/EditorQuill', module)
           <br>
           <ul><li>List #1</li><li class="ql-indent-1">Listitem 1</li><li>List #2</li><li class="ql-indent-1">Listitem 1</li></ul>
           <br>
-          <ol><li>List #1</li><li class="ql-indent-1">Listitem 2</li><li>List #2</li><li class="ql-indent-1">Listitem 1</li></ol>`
+          <ol><li>List #1</li><li class="ql-indent-1">Listitem 2</li><li>List #2</li><li class="ql-indent-1">Listitem 1</li></ol>`,
       },
       meta: {
-        title: 'Input Box'
-      }
+        title: 'Input Box',
+      },
     }
-    return (
-      <Wrapper block={contentBock} />
-    )
+    return <Wrapper block={contentBock} />
   })
   .add('with custom parchment styling', () => {
     /**
@@ -307,7 +292,6 @@ storiesOf('Editors/EditorQuill', module)
         const icons = Quill.import('ui/icons')
 
         class SpanBlock extends Inline {
-
           static create() {
             const node = super.create()
             node.setAttribute('class', 'custom-inline-class')
@@ -336,20 +320,19 @@ storiesOf('Editors/EditorQuill', module)
         ['bold', 'italic', 'underline', 'strike'],
         ['customFormat'],
         ['clean'],
-      ]
+      ],
     }
 
     const contentBock = {
       id: 5,
       data: {
-        value: '<p><span class="custom-inline-class">This span has a custom class applied.</span></p><p>Click on the background button to apply the styling or remove it.</p>'
+        value:
+          '<p><span class="custom-inline-class">This span has a custom class applied.</span></p><p>Click on the background button to apply the styling or remove it.</p>',
       },
       meta: {
-        title: 'Input Box'
-      }
+        title: 'Input Box',
+      },
     }
 
-    return (
-      <Wrapper block={contentBock} blockConfig={blockConfig} />
-    )
+    return <Wrapper block={contentBock} blockConfig={blockConfig} />
   })

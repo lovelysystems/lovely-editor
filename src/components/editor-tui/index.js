@@ -2,20 +2,18 @@ import * as React from 'react'
 import { debounce, get } from 'lodash'
 import PropTypes from 'prop-types'
 import Editor from 'tui-editor'
+
 import { BemHelper } from '../../helpers/bem-helper'
 
 // Styling
 const classes = new BemHelper('editor-tui')
-require('codemirror/lib/codemirror.css') // codemirror
-require('tui-editor/dist/tui-editor.css') // editor ui
-require('tui-editor/dist/tui-editor-contents.css') // editor content
-require('highlight.js/styles/github.css') // code block highlight
 
 export class EditorTui extends React.Component {
-
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.onChange = debounce(this.onChangeHandler.bind(this), 300, { maxWait: 1000 })
+    this.onChange = debounce(this.onChangeHandler.bind(this), 300, {
+      maxWait: 1000,
+    })
     this.editor = null
   }
 
@@ -31,28 +29,30 @@ export class EditorTui extends React.Component {
       previewStyle: 'vertical',
       height: '180px',
       events: {
-        change: this.onChange
+        change: this.onChange,
       },
       ...blockConfig,
     })
   }
 
   onChangeHandler() {
+    const { onChange } = this.props
+
     const change = {
       data: {
         value: this.editor.getValue(),
-        html: this.editor.getHtml()
-      }
+        html: this.editor.getHtml(),
+      },
     }
 
     // gives the changed value back to the LovelyEditor
-    this.props.onChange(change)
+    onChange(change)
   }
 
   render() {
-    return <div {...classes()} id={`lovely-editor-tui-${this.props.block.id}`} />
+    const { block } = this.props
+    return <div {...classes()} id={`lovely-editor-tui-${block.id}`} />
   }
-
 }
 
 // describes the required properties for the element
@@ -63,16 +63,16 @@ EditorTui.propTypes = {
     data: PropTypes.shape({
       html: PropTypes.string, // available onChange, not possible as an input for the Editor
       value: PropTypes.string,
-    })
+    }),
   }).isRequired,
   onChange: PropTypes.func.isRequired,
   blockConfig: PropTypes.shape({
     initialEditType: PropTypes.string,
     previewStyle: PropTypes.string,
     height: PropTypes.string,
-  })
+  }),
 }
 
 EditorTui.defaultProps = {
-  blockConfig: {}
+  blockConfig: {},
 }

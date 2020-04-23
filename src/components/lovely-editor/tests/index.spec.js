@@ -4,23 +4,17 @@ import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
 // Tested Component
-import { LovelyEditor } from '../'
+import { LovelyEditor } from '..'
 
 const Text = () => null
 const CustomBlockWrapper = () => null
 const Placeholder = () => null
 
 describe('LovelyEditor', () => {
-
   describe('Render Tests', () => {
-
     it('component renders', () => {
       const wrapper = shallow(
-        <LovelyEditor
-          editorState={[]}
-          blocksConfig={[]}
-          onChange={() => {}}
-        />
+        <LovelyEditor editorState={[]} blocksConfig={[]} onChange={() => {}} />,
       )
       expect(wrapper.exists()).to.equal(true)
     })
@@ -31,12 +25,10 @@ describe('LovelyEditor', () => {
           editorState={[
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
           ]}
-          blocksConfig={[
-            { type: 'text', component: Text },
-          ]}
+          blocksConfig={[{ type: 'text', component: Text }]}
           blockComponent={CustomBlockWrapper}
           onChange={() => {}}
-        />
+        />,
       )
       expect(wrapper.find(CustomBlockWrapper).length).to.equal(1)
     })
@@ -48,7 +40,7 @@ describe('LovelyEditor', () => {
           blocksConfig={[]}
           placeholder={Placeholder}
           onChange={() => {}}
-        />
+        />,
       )
       expect(wrapper.find(Placeholder).length).to.equal(1)
     })
@@ -60,11 +52,9 @@ describe('LovelyEditor', () => {
             { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
             { type: 'text', id: 'text-2', meta: {}, data: { value: 'three' } },
           ]}
-          blocksConfig={[
-            { type: 'text', component: Text },
-          ]}
+          blocksConfig={[{ type: 'text', component: Text }]}
           onChange={() => {}}
-        />
+        />,
       )
       expect(wrapper.find(Placeholder).length).to.equal(0)
       expect(wrapper.find(Text).length).to.equal(2)
@@ -82,32 +72,33 @@ describe('LovelyEditor', () => {
           ]}
           blockComponent={CustomBlockWrapper}
           onChange={() => {}}
-        />
+        />,
       )
-      expect(wrapper.find(CustomBlockWrapper).props().blockConfig).to.equal(expectedConfig)
+      expect(wrapper.find(CustomBlockWrapper).props().blockConfig).to.equal(
+        expectedConfig,
+      )
       expect(wrapper.find(Text).props().blockConfig).to.equal(expectedConfig)
     })
   })
 
   describe('Events Tests', () => {
-
     const defaultEditorState = [
       { type: 'text', id: 'text-1', meta: {}, data: { value: 'one' } },
     ]
 
     it('component calls onChange when onContentChange is triggered', () => {
       const changedValues = { data: { value: 'This is an example Text.' } }
-      const expectedState = [ Object.assign(defaultEditorState[0], changedValues) ]
+      const expectedState = [
+        Object.assign(defaultEditorState[0], changedValues),
+      ]
 
       const onChange = sinon.spy()
       const wrapper = shallow(
         <LovelyEditor
           editorState={defaultEditorState}
-          blocksConfig={[
-            { type: 'text', component: Text },
-          ]}
+          blocksConfig={[{ type: 'text', component: Text }]}
           onChange={onChange}
-        />
+        />,
       )
 
       // start simulating onChanges
