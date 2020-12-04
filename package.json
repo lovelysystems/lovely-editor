@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "codemirror": "^5.43.0",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^10.4.1",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
