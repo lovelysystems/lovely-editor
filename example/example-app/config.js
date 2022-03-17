@@ -1,4 +1,5 @@
-import { EditorQuill, EditorTui, EditorCodeMirror } from '../../src'
+import { EditorQuill } from '../../src/components/editor-quill'
+import { EditorCodeMirror } from '../../src/components/editor-codemirror'
 
 const randomId = () => Math.floor((Math.random() * 1000) + 1)
 
@@ -70,13 +71,7 @@ export const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-export const editorTuiConfig = {
-  type: 'tui',
-  component: EditorTui,
-  blockConfig: {
-    height: '300px'
-  }
-}
+
 export const editorCodemirrorConfig = {
   type: 'codemirror',
   component: EditorCodeMirror,
@@ -84,6 +79,5 @@ export const editorCodemirrorConfig = {
 
 export const defaultBlocksConfig = [
   editorQuillConfig,
-  editorTuiConfig,
   editorCodemirrorConfig
 ]

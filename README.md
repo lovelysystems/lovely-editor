@@ -130,8 +130,8 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `LovelyEditor` with two configured
-with pre-configured Editors (in this case `EditorQuill` and `EditorTui`) and
+The following app showcases the usage of the `LovelyEditor` with one configured
+with pre-configured Editor (in this case `EditorQuill`) and
 a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
@@ -140,7 +140,7 @@ the `LovelyEditor` with a new valid editorState. You can find a similar example 
 [in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { LovelyEditor, EditorQuill, EditorTui } from 'lovely-editor'
+import { LovelyEditor, EditorQuill } from 'lovely-editor/dist/components/editor-quill'
 
 // current state of LovelyEditor
 const editorState = [
@@ -172,13 +172,9 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-const editorTuiConfig = {
-  type: 'tui',
-  component: EditorTui
-}
 
 // sets which editor component should be rendered for which block.type
-const blocksConfig = [editorQuillConfig, editorTuiConfig]
+const blocksConfig = [editorQuillConfig]
 
 class YourApp extends React.Component {
   constructor(props) {
@@ -273,12 +269,8 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-const editorTuiConfig = {
-  type: 'tui',
-  component: EditorTui
-}
 
-const blocksConfig = [editorQuillConfig, editorTuiConfig]
+const blocksConfig = [editorQuillConfig]
 ```
 
 ### LovelyEditor Integration in your App
