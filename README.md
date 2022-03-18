@@ -130,9 +130,8 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `LovelyEditor` with one configured
-with pre-configured Editor (in this case `EditorQuill`) and
-a current `editorState`.
+The following app showcases the usage of the `LovelyEditor` with one pre-configured Editor 
+(in this case `EditorQuill`) and a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
 received and the `YourApp`'s `state` updated. This leads to a re-rendering of
