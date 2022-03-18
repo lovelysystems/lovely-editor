@@ -140,7 +140,8 @@ the `LovelyEditor` with a new valid editorState. You can find a similar example 
 [in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { LovelyEditor, EditorQuill } from 'lovely-editor/dist/components/editor-quill'
+import { LovelyEditor } from 'lovely-editor'
+import { EditorQuill } from 'lovely-editor/dist/components/editor-quill'
 
 // current state of LovelyEditor
 const editorState = [
@@ -154,16 +155,6 @@ const editorState = [
       title: 'Quill Block'
     }
   },
-  {
-    id: 2,
-    type: 'tui',
-    data: {
-      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
-    },
-    meta: {
-      title: 'TUI-Editor'
-    }
-  }
 ]
 
 // renders a specific component for the requested block.type
@@ -229,22 +220,12 @@ const editorState = [
     meta: {
       title: 'Quill Block'
     }
-  },
-  {
-    id: 2,
-    type: 'tui',
-    data: {
-      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
-    },
-    meta: {
-      title: 'TUI-Editor'
-    }
   }
 ]
 ```
 
-###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
-![Two Example-Editors](./assets/quill_and_tui.png)
+###### Example of Quill Editor within the LovelyEditor-Component
+![Example-Editor](./assets/quill.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
@@ -330,7 +311,7 @@ import in SCSS:
 
 ## How to include your own custom Editor
 
-Take a look at the [TUI Editor implementation](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-tui) which illustrates how one can add a new custom editor.
+Take a look at the [Quill Editor implementation](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-quill) which illustrates how one can add a new custom editor.
 
 ## How to contribute and develop
 

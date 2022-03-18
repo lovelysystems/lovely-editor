@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { clone, merge } from 'lodash'
 
 // Component imports
-import { EditorQuill } from '../..'
+import { EditorQuill } from './'
 import componentReadme from './README.md'
 
 // Example Components for the Storybook

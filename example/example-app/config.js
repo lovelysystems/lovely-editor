@@ -19,7 +19,6 @@ export const menuWithAllEditors = {
   },
   buttons: [
     { action: 'add', text: 'Add Quill', type: 'richtext', templateId: null },
-    { action: 'add', text: 'Add ToastUI', type: 'tui', templateId: null },
     { action: 'add', text: 'Add CodeMirror', type: 'codemirror', templateId: null },
   ]
 }
