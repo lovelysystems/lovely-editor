@@ -4,4 +4,3 @@ export * from './components/editor-block'
 
 // Data and state management
 export * from './model/editor-state'
-
