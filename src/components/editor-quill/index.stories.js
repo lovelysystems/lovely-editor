@@ -2,12 +2,13 @@ import React from 'react'
 import { storiesOf } from '@storybook/react' //eslint-disable-line
 import { action } from '@storybook/addon-actions' //eslint-disable-line
 import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
+import PropTypes from 'prop-types'
 
 // Helpers
 import { clone, merge } from 'lodash'
 
 // Component imports
-import { EditorQuill } from '../..'
+import { EditorQuill } from './'
 import componentReadme from './README.md'
 
 // Example Components for the Storybook
@@ -94,7 +95,7 @@ class Wrapper extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      block: props.block //eslint-disable-line
+      block: props.block
     }
     this.onChange = this.onChange.bind(this)
     this.onToolbarAction = this.onToolbarAction.bind(this)
@@ -128,6 +129,12 @@ class Wrapper extends React.Component {
     )
   }
 
+}
+
+Wrapper.propTypes = {
+  block: PropTypes.shape({
+    data: PropTypes.object.isRequired
+  }).isRequired,
 }
 
 storiesOf('Editors/EditorQuill', module)

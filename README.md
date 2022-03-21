@@ -130,9 +130,8 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `LovelyEditor` with two configured
-with pre-configured Editors (in this case `EditorQuill` and `EditorTui`) and
-a current `editorState`.
+The following app showcases the usage of the `LovelyEditor` with one pre-configured Editor 
+(in this case `EditorQuill`) and a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
 received and the `YourApp`'s `state` updated. This leads to a re-rendering of
@@ -140,7 +139,8 @@ the `LovelyEditor` with a new valid editorState. You can find a similar example 
 [in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { LovelyEditor, EditorQuill, EditorTui } from 'lovely-editor'
+import { LovelyEditor } from 'lovely-editor'
+import { EditorQuill } from 'lovely-editor/dist/components/editor-quill'
 
 // current state of LovelyEditor
 const editorState = [
@@ -154,16 +154,6 @@ const editorState = [
       title: 'Quill Block'
     }
   },
-  {
-    id: 2,
-    type: 'tui',
-    data: {
-      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
-    },
-    meta: {
-      title: 'TUI-Editor'
-    }
-  }
 ]
 
 // renders a specific component for the requested block.type
@@ -172,13 +162,9 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-const editorTuiConfig = {
-  type: 'tui',
-  component: EditorTui
-}
 
 // sets which editor component should be rendered for which block.type
-const blocksConfig = [editorQuillConfig, editorTuiConfig]
+const blocksConfig = [editorQuillConfig]
 
 class YourApp extends React.Component {
   constructor(props) {
@@ -233,22 +219,12 @@ const editorState = [
     meta: {
       title: 'Quill Block'
     }
-  },
-  {
-    id: 2,
-    type: 'tui',
-    data: {
-      value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
-    },
-    meta: {
-      title: 'TUI-Editor'
-    }
   }
 ]
 ```
 
-###### Example of two Editors (TUI and CodeMirror) within the LovelyEditor-Component
-![Two Example-Editors](./assets/quill_and_tui.png)
+###### Example of Quill Editor within the LovelyEditor-Component
+![Example-Editor](./assets/quill.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
 individual (it can be random though) id. The id is used to identify each block
@@ -273,12 +249,8 @@ const editorQuillConfig = {
   type: 'richtext',
   component: EditorQuill
 }
-const editorTuiConfig = {
-  type: 'tui',
-  component: EditorTui
-}
 
-const blocksConfig = [editorQuillConfig, editorTuiConfig]
+const blocksConfig = [editorQuillConfig]
 ```
 
 ### LovelyEditor Integration in your App
@@ -338,7 +310,7 @@ import in SCSS:
 
 ## How to include your own custom Editor
 
-Take a look at the [TUI Editor implementation](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-tui) which illustrates how one can add a new custom editor.
+Take a look at the [Quill Editor implementation](https://github.com/lovelysystems/lovely-editor/tree/develop/src/components/editor-quill) which illustrates how one can add a new custom editor.
 
 ## How to contribute and develop
 

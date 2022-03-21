@@ -44,7 +44,7 @@ export function ExampleMenu({menuState, onClick}) {
   // },
   return (
     <div>
-      <Typography variant="display1" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         {title}
       </Typography>
       <div {...classes('content')}>

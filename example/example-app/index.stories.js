@@ -57,16 +57,6 @@ storiesOf('App Example', module)
         ...defaultDocument.editorState,
         {
           id: randomId(),
-          type: 'tui',
-          data: {
-            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
-          },
-          meta: {
-            title: 'ToastUI Editor'
-          }
-        },
-        {
-          id: randomId(),
           type: 'codemirror',
           data: {
             value: 'function helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();'
@@ -94,16 +84,6 @@ storiesOf('App Example/Customization', module)
       ...defaultDocument,
       editorState: [
         ...defaultDocument.editorState,
-        {
-          id: randomId(),
-          type: 'tui',
-          data: {
-            value: '```js\nfunction helloWorld() {\n\tconsole.log(\'hello world\');\n}\nhelloWorld();```'
-          },
-          meta: {
-            title: 'ToastUI Editor'
-          }
-        },
         {
           id: randomId(),
           type: 'codemirror',

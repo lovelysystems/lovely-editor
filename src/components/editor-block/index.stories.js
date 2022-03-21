@@ -7,7 +7,8 @@ import withReadme from 'storybook-readme/with-readme' //eslint-disable-line
 import { clone } from 'lodash'
 
 // Component imports
-import { EditorBlock, EditorQuill } from '../..'
+import { EditorBlock } from '../..'
+import { EditorQuill } from '../editor-quill'
 import componentReadme from './README.md'
 
 // Example Config
