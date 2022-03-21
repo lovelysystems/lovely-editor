@@ -12,6 +12,13 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - upgraded npm packages to latest available minor version
 - loosen npm package version restriction
 
+## 2022/03/21 [2.0.0]
+
+### Changed
+
+- remove EditorTui
+- move dependencies for EditorCodeMirror and EditorQuill to optional dependencies
+
 ## 2018/12/17 [1.3.0][13]
 
 ### Added
