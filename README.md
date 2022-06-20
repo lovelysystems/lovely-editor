@@ -10,10 +10,12 @@ into your App and organise them and their returned value exactly the way you nee
 it. Also including a new Editor that is not supported yet can be accomplished
 within just a few easy steps.
 
+
 This makes it very easy for you to include a variety of different Editors
 into your App and organise them and their returned value exactly the way you need
 it. Also including a new Editor that is not supported yet can be accomplished
 within just a few easy steps.
+
 
 ![Example App](./assets/example_app.gif)
 
@@ -23,27 +25,27 @@ Drag & Drop was added to illustrate that our LovelyEditor plays nice with other 
 
 ## Table of Contents
 
-- [Features](#features)
-- [Examples](#examples)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [LovelyEditor components](#lovelyeditor-components)
-- [Quickstart](#quickstart)
-  - [Example App](#example-app)
-  - [Editor State](#editor-state)
-  - [Editor Config](#editor-config)
-  - [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
-  - [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
-- [How to include your own custom Editor](#how-to-include-your-own-custom-editor)
-- [How to contribute and develop](#how-to-contribute-and-develop)
-- [How to create a release](#how-to-create-a-release-deployment)
+* [Features](#features)
+* [Examples](#examples)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [LovelyEditor components](#lovelyeditor-components)
+* [Quickstart](#quickstart)
+  * [Example App](#example-app)
+  * [Editor State](#editor-state)
+  * [Editor Config](#editor-config)
+  * [LovelyEditor Integration in your App](#lovelyeditor-integration-in-your-app)
+  * [How to use the styling from our Showcases](#how-to-use-the-styling-from-our-showcases)
+* [How to include your own custom Editor](#how-to-include-your-own-custom-editor)
+* [How to contribute and develop](#how-to-contribute-and-develop)
+* [How to create a release](#how-to-create-a-release-deployment)
 
 ## Features
 
-- Provides a variety of pre-designed editors: eg. EditorQuill
-- design and features are largely customisable: make it your own!
-- easy way to create and add your own custom editor or extend existing ones
-- use every EditorComponent (eg. EditorQuill) independently without need to
+* Provides a variety of pre-designed editors: eg. EditorQuill
+* design and features are largely customisable: make it your own!
+* easy way to create and add your own custom editor or extend existing ones
+* use every EditorComponent (eg. EditorQuill) independently without need to
   look out you for the others
 
 ## Examples
@@ -57,14 +59,12 @@ Richtext, CodeMirror, etc.) to the application. It is also possible to use the
 same editor-type several times.
 
 ###### HTML-Output
-
 ![HTML-Output](./assets/html_preview.gif)
 
 To see what kind of HTML-Output the Editors return check out our [example](https://lovely-editor.netlify.com/?selectedKind=App%20Example%2FContent&selectedStory=with%20HTML%20Preview%20of%20the%20content%20of%20all%20Editors&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 The generated HTML of all editors is ready to be used in your app.
 
 ###### Example with two Editors and an Example-Menu to add additional Editors
-
 ![Two Editors with Example-Menu](./assets/two_with_menu.png)
 
 ## Requirements
@@ -76,7 +76,7 @@ npm 5.3.x
 
 ## Installation
 
-The following environment variables need to be set:
+The following environment variables need to be set, scoped to `read: packages`
 
 GITHUB_TOKEN=**YOUR_PAT_FROM_GITHUB_HERE**
 
@@ -87,13 +87,13 @@ npm install --save lovely-editor
 and import it in your App with:
 
 ```js
-import { LovelyEditor } from "lovely-editor";
+import { LovelyEditor } from 'lovely-editor'
 ```
 
 If you want to use the basic styling as well you can either import it in your index.js
 
 ```js
-import("lovely-editor/dist/lovely-editor.min.css");
+import('lovely-editor/dist/lovely-editor.min.css')
 ```
 
 Or add it to your index.html.
@@ -107,7 +107,6 @@ The LovelyEditor basically consists out of three main components:
 3. Editors (eg. [EditorQuill](src/components/editor-quill))
 
 ###### Structure of the LovelyEditor
-
 ![LovelyEditor Structure](./assets/lovely_editor.png)
 
 The `LovelyEditor` rendered components tree looks like this:
@@ -121,7 +120,6 @@ The `LovelyEditor` rendered components tree looks like this:
 ```
 
 ###### Single EditorBlock with eg. EditorQuill
-
 ![Single CodeMirror Editor](./assets/react_quill.png)
 
 The main entry point in your app is the `LovelyEditor`. Its properties have to
@@ -136,7 +134,7 @@ following comprehensive example:
 
 ### Example App
 
-The following app showcases the usage of the `LovelyEditor` with one pre-configured Editor
+The following app showcases the usage of the `LovelyEditor` with one pre-configured Editor 
 (in this case `EditorQuill`) and a current `editorState`.
 The app itself controls the `LovelyEditor` by not only subscribing to the `LovelyEditor`'s
 `onChange` but also by providing it's `editorState` as a property. The changes are
@@ -145,44 +143,44 @@ the `LovelyEditor` with a new valid editorState. You can find a similar example 
 [in our Storybook](https://lovely-editor.netlify.com/?selectedKind=App%20Example&selectedStory=with%20an%20example%20Menu%20and%20EditorQuill%20Block&full=0&addons=1&stories=1&panelRight=0&addonPanel=REACT_STORYBOOK%2Freadme%2Fpanel).
 
 ```js
-import { LovelyEditor } from "lovely-editor";
-import { EditorQuill } from "lovely-editor/dist/components/editor-quill";
+import { LovelyEditor } from 'lovely-editor'
+import { EditorQuill } from 'lovely-editor/dist/components/editor-quill'
 
 // current state of LovelyEditor
 const editorState = [
   {
     id: 1,
-    type: "richtext",
+    type: 'richtext',
     data: {
-      value: "<p>Hello World. <strong>This is bold.</strong></p>",
+      value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
-      title: "Quill Block",
-    },
+      title: 'Quill Block'
+    }
   },
-];
+]
 
 // renders a specific component for the requested block.type
 // in this case EditorQuill would be rendered for all blocks of type "richtext"
 const editorQuillConfig = {
-  type: "richtext",
-  component: EditorQuill,
-};
+  type: 'richtext',
+  component: EditorQuill
+}
 
 // sets which editor component should be rendered for which block.type
-const blocksConfig = [editorQuillConfig];
+const blocksConfig = [editorQuillConfig]
 
 class YourApp extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      editorState,
-    };
-    this.onChange = this.onChange.bind(this);
+      editorState
+    }
+    this.onChange = this.onChange.bind(this)
   }
 
   onChange(change) {
-    this.setState({ editorState: change.editorState });
+    this.setState({ editorState: change.editorState })
   }
 
   render() {
@@ -192,7 +190,7 @@ class YourApp extends React.Component {
         editorState={this.state.editorState}
         onChange={this.onChange}
       />
-    );
+    )
   }
 }
 ```
@@ -218,19 +216,18 @@ A `editorState` can look similar to:
 const editorState = [
   {
     id: 1, // block.id, must be unique
-    type: "richtext",
+    type: 'richtext',
     data: {
-      value: "<p>Hello World. <strong>This is bold.</strong></p>",
+      value: '<p>Hello World. <strong>This is bold.</strong></p>'
     },
     meta: {
-      title: "Quill Block",
-    },
-  },
-];
+      title: 'Quill Block'
+    }
+  }
+]
 ```
 
 ###### Example of Quill Editor within the LovelyEditor-Component
-
 ![Example-Editor](./assets/quill.png)
 
 **Attention**: the block.id must be unique! Make sure each block has it's own
@@ -253,11 +250,11 @@ An example config could look like:
 
 ```js
 const editorQuillConfig = {
-  type: "richtext",
-  component: EditorQuill,
-};
+  type: 'richtext',
+  component: EditorQuill
+}
 
-const blocksConfig = [editorQuillConfig];
+const blocksConfig = [editorQuillConfig]
 ```
 
 ### LovelyEditor Integration in your App
@@ -270,16 +267,16 @@ state (or do even more if we want to).
 ```js
 class YourApp extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      editorState,
-    };
-    this.onChange = this.onChange.bind(this);
+      editorState
+    }
+    this.onChange = this.onChange.bind(this)
   }
 
   onChange(change) {
     // get the change from the LovelyEditor and sync the YourApp's state
-    this.setState({ editorState: change.editorState });
+    this.setState({ editorState: change.editorState })
   }
 
   //...
@@ -330,18 +327,18 @@ install all the dependencies, required to develop.
 
 The package comes with the following npm scripts:
 
-- `npm run build`: builds the package to ./dist
-- `npm run build:storybook`: build static production version of component
+* `npm run build`: builds the package to ./dist
+* `npm run build:storybook`: build static production version of component
   library to ./build/storybook
-- `npm run coverage`: runs the tests and reports the coverage with
+* `npm run coverage`: runs the tests and reports the coverage with
   [nyc](https://github.com/istanbuljs/nyc)
-- `npm run lint`: lints JS code
-- `npm run storybook`: run local server with component library and
+* `npm run lint`: lints JS code
+* `npm run storybook`: run local server with component library and
   [Storybook](https://storybook.js.org)
-- `npm start`: similar to `npm run storybook`
-- `npm run test`: runs the tests (test files path and pattern:
+* `npm start`: similar to `npm run storybook`
+* `npm run test`: runs the tests (test files path and pattern:
   `src/**/*.spec.js`)
-- `npm run test:node`: verifies the installed and used node version
+* `npm run test:node`: verifies the installed and used node version
 
 ### Showcases
 
@@ -354,12 +351,12 @@ visit [https://lovely-editor.netlify.com](https://lovely-editor.netlify.com).
 When attempting to commit files in this repository, some taks will
 automatically run to ensure a consistently high level of code quality:
 
-- **JavaScript files (.js):**
-  - runs `eslint` and automatically fixes auto-fixable issues
+* **JavaScript files (.js):**
+  * runs `eslint` and automatically fixes auto-fixable issues
     ([see related JS guidelines here](https://github.com/airbnb/javascript))
-  - runs `prettier` and auto-formats your code
+  * runs `prettier` and auto-formats your code
     ([see what it does here](https://github.com/prettier/prettier))
-  - runs all unit tests concerning the committed files with `mocha`
+  * runs all unit tests concerning the committed files with `mocha`
 
 If any of the tasks fail (which means your code does not lint or unit tests are
 failing), your commit or push will be aborted.
