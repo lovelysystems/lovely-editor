@@ -76,6 +76,8 @@ npm 5.3.x
 
 ## Installation
 
+
+
 ```
 npm install --save lovely-editor
 ```
@@ -378,3 +380,36 @@ git push && git push --tags
 ```
 
 5. Merge release in release branch (eg. `release/x.y`)
+
+## How to publish this package to GitHubPackages
+
+### Github Authentication Setup
+
+Github uses personal access tokens (PAT) for authentication. To generate one go to your Github token settings page. Consult the Github Docs for more information on how tokens work.
+
+The following environment variables need to be set:
+
+GITHUB_TOKEN=**YOUR_PAT_FROM_GITHUB_HERE**
+
+### Upload package
+
+We are using GitHub Packages to host this repo to npm.
+[GitHub Packages Docs](https://github.com/features/packages) and [here](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages)
+
+- increase version in `package.json`
+- Check in all changes and commit
+- run `git tag <version>`
+- run `git push --tags`
+- run `npm run build`
+- run `npm publish`
+
+## How to install this package in your project
+
+Add the following to your project's `.npmrc`:
+
+```
+@lovelysystems:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+If you use yarn add `always-auth=true` to the `.npmrc` as well.

@@ -1,6 +1,6 @@
 {
-  "name": "lovely-editor",
-  "version": "2.0.0",
+  "name": "@lovelysystems/lovely-editor",
+  "version": "2.1.0",
   "description": "Lovely Editor",
   "main": "dist/index.js",
   "files": [
@@ -15,6 +15,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/lovelysystems/lovely-editor.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "build": "npm run build:js && npm run build:vendor-css && npm run build:css && npm run build:editor-codemirror && npm run build:editor-quill",
