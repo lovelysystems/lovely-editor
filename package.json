@@ -114,7 +114,7 @@
     "eslint-plugin-react-hooks": "^2.2.0",
     "font-awesome": "4.7.0",
     "ignore-styles": "^5.0.1",
-    "jsdom": "15.2.0",
+    "jsdom": "16.5.0",
     "jsdom-global": "3.0.2",
     "lint-staged": "^9.4.2",
     "mocha": "6.2.2",
