@@ -13,9 +13,8 @@ import { BemHelper } from '../../src/helpers/bem-helper'
 // Styling
 const classes = new BemHelper('example-menu')
 
-export function ExampleMenu({menuState, onClick}) {
-
-  function onClickHandler(action, type, templateId ) {
+export const ExampleMenu = ({ menuState, onClick }) => {
+  function onClickHandler(action, type, templateId) {
     const event = { action, type, template: templateId }
     onClick(event)
   }
@@ -51,7 +50,7 @@ export function ExampleMenu({menuState, onClick}) {
         {map(buttons, ({ action, text, templateId, type }, idx) => (
           <Draggable
             key={`menu-${idx}`}
-            draggableId={`${type}:${templateId || 'default' }:${action}:${idx}`}
+            draggableId={`${type}:${templateId || 'default'}:${action}:${idx}`}
             disableInteractiveElementBlocking
             index={idx}
           >
@@ -66,11 +65,19 @@ export function ExampleMenu({menuState, onClick}) {
                     variant="contained"
                     color="primary"
                     key={idx}
-                    onClick={() => { onClickHandler(action, type, templateId) }}
+                    onClick={() => {
+                      onClickHandler(action, type, templateId)
+                    }}
                     style={{
-                      transform: dragSnapshot.isDragging ? 'rotate(-10deg)' : null,
-                      backgroundColor: dragSnapshot.isDragging ? '#0d8eff' : null,
-                      border: dragSnapshot.isDragging ? '2px solid #ffffff' : null,
+                      transform: dragSnapshot.isDragging
+                        ? 'rotate(-10deg)'
+                        : null,
+                      backgroundColor: dragSnapshot.isDragging
+                        ? '#0d8eff'
+                        : null,
+                      border: dragSnapshot.isDragging
+                        ? '2px solid #ffffff'
+                        : null,
                       margin: '0px 10px 10px 0px'
                     }}
                   >
@@ -90,11 +97,14 @@ export function ExampleMenu({menuState, onClick}) {
 ExampleMenu.propTypes = {
   menuState: PropTypes.shape({
     meta: PropTypes.objectOf(PropTypes.string).isRequired,
-    buttons: PropTypes.arrayOf(PropTypes.object).isRequired,
+    buttons: PropTypes.arrayOf(PropTypes.object).isRequired
   }).isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func
 }
 
 ExampleMenu.defaultProps = {
-  onClick: () => { console.log('... onClick triggered') } //eslint-disable-line
+  onClick: () => {
+    // eslint-disable-next-line no-console
+    console.log('... onClick triggered')
+  }
 }

@@ -1,7 +1,7 @@
 {
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true,
     "node": true,
@@ -9,6 +9,10 @@
     "mocha": true
   },
   "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
     "ecmaFeatures": {
       "arrowFunctions": true,
       "blockBindings": true,
@@ -22,7 +26,16 @@
   "globals": {
     "document": true
   },
+  "ignorePatterns": ["*.stories.js"],
   "rules": {
+    "no-param-reassign": "off",
+    "jsx-a11y/control-has-associated-label": "warn",
+    "prefer-object-spread": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-curly-newline": "off",
+    "import/no-useless-path-segments": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/destructuring-assignment": "off",
     "eol-last": ["error", "always"],
     "arrow-body-style": [0],
     "class-methods-use-this": "off",
@@ -30,30 +43,36 @@
     "func-names": ["error", "never"],
     "function-paren-newline": ["off"],
     "handle-callback-err": "error",
-    "indent": ["error", 2],
     "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["src/tests/helpers/test-setup.js", "**/*.test.js", "**/*.spec.js"]}],
-    "import/prefer-default-export": 0,
-    "max-nested-callbacks": [
+    "import/no-extraneous-dependencies": [
       "error",
-      5
+      {
+        "devDependencies": [
+          "src/tests/helpers/test-setup.js",
+          "**/*.test.js",
+          "**/*.spec.js"
+        ]
+      }
     ],
+    "import/prefer-default-export": 0,
+    "max-nested-callbacks": ["error", 5],
     "no-console": ["error"],
     "no-else-return": "error", //["error", { allowElseIf: true }]
     "no-eval": "error",
     "no-extra-boolean-cast": "off",
     "no-plusplus": "off",
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-    "no-unused-vars": ["error", {"args": "none"}],
+    "no-unused-vars": ["error", { "args": "none" }],
     "no-use-before-define": [
-      "error", {
+      "error",
+      {
         "functions": true,
         "classes": true
       }
     ],
     "no-var": 1,
     "quotes": ["error", "single"],
-    "padded-blocks": ["error", { "classes": "always" }],
+    "padded-blocks": "off",
     "prefer-arrow-callback": [0, { "allowNamedFunctions": true }],
     "react/forbid-prop-types": 0,
     "react/jsx-filename-extension": 0, // we don't require all files containing JSX code to end with ,jsx, e.g. test files and stories
@@ -64,22 +83,22 @@
   },
   "overrides": [
     {
-      "files": [ "src/**/*.spec.js"],
+      "files": ["src/**/*.spec.js"],
       "rules": {
         "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
         "no-undef": "off",
-        "no-underscore-dangle": ["warning"],
+        "no-underscore-dangle": ["warn"],
         "no-unused-vars": ["error", { "varsIgnorePattern": "should|wrapper" }],
         "import/no-extraneous-dependencies": "off",
         "react/no-find-dom-node": 0
       }
     },
     {
-      "files": [ "src/**/*.stories.js", "example/**/*.js"],
+      "files": ["src/**/*.stories.js", "example/**/*.js"],
       "rules": {
         "no-console": ["error", { "allow": ["debug", "error", "warn"] }],
         "no-undef": "off",
-        "no-underscore-dangle": ["warning"],
+        "no-underscore-dangle": ["warn"],
         "import/no-extraneous-dependencies": "off",
         "react/prop-types": "off"
       }

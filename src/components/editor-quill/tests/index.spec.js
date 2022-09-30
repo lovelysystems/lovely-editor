@@ -21,15 +21,17 @@ import {
 } from './utils'
 
 describe('<EditorQuill />', () => {
-
-  const customQuillToolbar = ({ onToolbarClick }) => { // eslint-disable-line react/prop-types
+  const customQuillToolbar = ({ onToolbarClick }) => {
+    // eslint-disable-line react/prop-types
     const onClick = () => {
       onToolbarClick('Toolbar clicked')
     }
 
     return (
-      <div className="ql-toolbar" id="customToolbar" >
-        <button onClick={onClick}>Click Me</button>
+      <div className="ql-toolbar" id="customToolbar">
+        <button type="button" onClick={onClick}>
+          Click Me
+        </button>
       </div>
     )
   }
@@ -42,10 +44,7 @@ describe('<EditorQuill />', () => {
   describe('Render Tests', () => {
     it('renders with Toolbar', () => {
       const wrapper = render(
-        <EditorQuill
-          block={sampleData}
-          onChange={() => { }}
-        />
+        <EditorQuill block={sampleData} onChange={() => {}} />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
       expect(wrapper.find('#toolbar-5')).to.have.length(1)
@@ -59,7 +58,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -72,7 +71,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           blockConfig={exampleBlockConfig}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       expect(wrapper.find('.quill')).to.have.length(1)
@@ -88,7 +87,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       expect(wrapper.find(customQuillToolbar)).to.have.length(0)
@@ -104,22 +103,25 @@ describe('<EditorQuill />', () => {
   describe('Quill Setup', () => {
     it('prepares formats properly', () => {
       const customBlockConfig = {
-        formats: [
-          'header',
-          'bold', 'italic', 'underline',
-          'list', 'indent'
-        ],
+        formats: ['header', 'bold', 'italic', 'underline', 'list', 'indent']
       }
       const wrapper = shallow(
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       const instance = wrapper.instance()
       const result = instance.getFormats({ blockConfig: customBlockConfig })
-      expect(result).to.equal(['header', 'bold', 'italic', 'underline', 'list', 'indent'])
+      expect(result).to.equal([
+        'header',
+        'bold',
+        'italic',
+        'underline',
+        'list',
+        'indent'
+      ])
     })
 
     it('prepares formtas by invoking registerformats if defined', () => {
@@ -130,7 +132,7 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       expect(customBlockConfig.registerFormats.callCount).to.equal(1)
@@ -142,23 +144,26 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       const instance = wrapper.instance()
-      const result = instance.getModules({ block: sampleData, blockConfig: customBlockConfig })
+      const result = instance.getModules({
+        block: sampleData,
+        blockConfig: customBlockConfig
+      })
       expect(result).to.equal({ toolbar: { container: '#toolbar-5' } })
     })
 
     it('prepares modules with a custom toolbarSelector', () => {
       const customBlockConfig = {
-        toolbarSelector: '#some-id',
+        toolbarSelector: '#some-id'
       }
       const wrapper = shallow(
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       const instance = wrapper.instance()
@@ -169,23 +174,28 @@ describe('<EditorQuill />', () => {
     it('prepares modules with provided toolbarOptions and modules', () => {
       const customBlockConfig = {
         toolbarOptions: ['bold'],
-        modules: { // see https://quilljs.com/docs/modules/
-          'history': {          // Enable with custom configurations
-            'delay': 2500,
-            'userOnly': true
+        modules: {
+          // see https://quilljs.com/docs/modules/
+          history: {
+            // Enable with custom configurations
+            delay: 2500,
+            userOnly: true
           },
-          'syntax': true        // Enable with default configuration
+          syntax: true // Enable with default configuration
         }
       }
       const wrapper = shallow(
         <EditorQuill
           blockConfig={customBlockConfig}
           block={sampleData}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
       const instance = wrapper.instance()
-      const result = instance.getModules({ block: sampleData, blockConfig: customBlockConfig })
+      const result = instance.getModules({
+        block: sampleData,
+        blockConfig: customBlockConfig
+      })
       expect(result).to.equal({
         toolbar: ['bold'],
         history: { delay: 2500, userOnly: true },
@@ -222,14 +232,17 @@ describe('<EditorQuill />', () => {
       const expectedHtml = '<p><strong>Hello World.</strong></p>'
       const expectedFormats = [
         'header',
-        'bold', 'italic', 'underline',
-        'list', 'indent'
+        'bold',
+        'italic',
+        'underline',
+        'list',
+        'indent'
       ]
       const blockConfig = {
         formats: expectedFormats
       }
 
-      const editor = getRenderedEditor(expectedHtml, () => { }, blockConfig)
+      const editor = getRenderedEditor(expectedHtml, () => {}, blockConfig)
       const { ReactQuill } = editor
 
       expect(ReactQuill.prop('theme')).to.equal('snow')
@@ -264,14 +277,14 @@ describe('<EditorQuill />', () => {
               }
             }
           }
-        },
+        }
       }
 
       const wrapper = shallow(
         <EditorQuill
           block={sampleData}
           blockConfig={customBlockConfig}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
 
@@ -281,7 +294,9 @@ describe('<EditorQuill />', () => {
         keyboard: {
           bindings: {
             'list autofill': {
-              handler: customBlockConfig.modules.keyboard.bindings['list autofill'].handler
+              handler:
+                customBlockConfig.modules.keyboard.bindings['list autofill']
+                  .handler
             }
           }
         }
@@ -301,15 +316,16 @@ describe('<EditorQuill />', () => {
     })
 
     it('component can import nested lists (2 levels)', () => {
-      const inputHtml = '<ul><li>Hello World.</li><li><ul><li>How are you?</li></ul></li></ul>'
-      const expectedHtml = '<ul><li>Hello World.</li></ul><ul><li class="ql-indent-1">How are you?</li></ul>'
+      const inputHtml =
+        '<ul><li>Hello World.</li><li><ul><li>How are you?</li></ul></li></ul>'
+      const expectedHtml =
+        '<ul><li>Hello World.</li></ul><ul><li class="ql-indent-1">How are you?</li></ul>'
       const { html } = getRenderedEditor(inputHtml)
       expect(html).to.equal(expectedHtml)
     })
   })
 
   describe('Events Tests', () => {
-
     beforeEach(() => {
       // we need to disable the Toolbar, otherwhise the test fails
       // due to some render issues. But the toolbar is not tested here anyways
@@ -362,10 +378,10 @@ describe('<EditorQuill />', () => {
         onFocus: sinon.spy(),
         onKeyDown: sinon.spy(),
         onKeyPress: sinon.spy(),
-        onKeyUp: sinon.spy(),
+        onKeyUp: sinon.spy()
       }
 
-      const editor = getRenderedEditor('', () => { }, blockConfig)
+      const editor = getRenderedEditor('', () => {}, blockConfig)
       const { ReactQuill } = editor
 
       // simulate an event and test if blockConfig funcs where invoked
@@ -379,15 +395,21 @@ describe('<EditorQuill />', () => {
 
       ReactQuill.prop('onKeyDown')({ data: 'some-data' })
       expect(blockConfig.onKeyDown.calledOnce).to.equal(true)
-      expect(blockConfig.onKeyDown.calledWith({ data: 'some-data' })).to.equal(true)
+      expect(blockConfig.onKeyDown.calledWith({ data: 'some-data' })).to.equal(
+        true
+      )
 
       ReactQuill.prop('onKeyPress')({ data: 'some-data' })
       expect(blockConfig.onKeyPress.calledOnce).to.equal(true)
-      expect(blockConfig.onKeyPress.calledWith({ data: 'some-data' })).to.equal(true)
+      expect(blockConfig.onKeyPress.calledWith({ data: 'some-data' })).to.equal(
+        true
+      )
 
       ReactQuill.prop('onKeyUp')({ data: 'some-data' })
       expect(blockConfig.onKeyUp.calledOnce).to.equal(true)
-      expect(blockConfig.onKeyUp.calledWith({ data: 'some-data' })).to.equal(true)
+      expect(blockConfig.onKeyUp.calledWith({ data: 'some-data' })).to.equal(
+        true
+      )
     })
   })
 
@@ -402,14 +424,20 @@ describe('<EditorQuill />', () => {
         <EditorQuill
           block={sampleData}
           blockConfig={customBlockConfig}
-          onChange={() => { }}
+          onChange={() => {}}
         />
       )
 
       expect(wrapper.find(customQuillToolbar)).to.have.length(1)
-      wrapper.find(customQuillToolbar).dive().find('button').simulate('click')
+      wrapper
+        .find(customQuillToolbar)
+        .dive()
+        .find('button')
+        .simulate('click')
       expect(customBlockConfig.toolbarCallback.calledOnce).to.equal(true)
-      expect(customBlockConfig.toolbarCallback.calledWith('Toolbar clicked')).to.equal(true)
+      expect(
+        customBlockConfig.toolbarCallback.calledWith('Toolbar clicked')
+      ).to.equal(true)
     })
   })
 })

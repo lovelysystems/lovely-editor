@@ -14,13 +14,14 @@ import { withStyles } from '@material-ui/core/styles'
 import { BemHelper } from '../../src/helpers/bem-helper'
 import { EditorState } from '../../src/model/editor-state'
 
-
 // Components
 import { LovelyEditor } from '../../src'
 import { ExampleMenu } from '../example-menu'
 import HTMLPreview from './html-preview'
 
-const dragDropPlaceholder = () => (<div>Add an Editor from the Menu here to start.</div>)
+const dragDropPlaceholder = () => (
+  <div>Add an Editor from the Menu here to start.</div>
+)
 
 // Styling
 const classes = new BemHelper('example-app')
@@ -33,7 +34,6 @@ const styles = {
 }
 
 class ExampleApp extends React.Component {
-
   constructor(props, context) {
     super(props, context)
     this.state = {
@@ -82,13 +82,13 @@ class ExampleApp extends React.Component {
     let newState = null
     let block = null
     switch (event.action) {
-    case 'remove':
-      // find the block we just changed and remove it
-      block = EditorState.findBlock(editorState, event.id)
-      newState = EditorState.removeBlock(editorState, event.id)
-      break
-    default:
-      newState = editorState
+      case 'remove':
+        // find the block we just changed and remove it
+        block = EditorState.findBlock(editorState, event.id)
+        newState = EditorState.removeBlock(editorState, event.id)
+        break
+      default:
+        newState = editorState
     }
 
     const editorChange = {
@@ -103,7 +103,7 @@ class ExampleApp extends React.Component {
    * triggered, once the user let go of the just dragged element
    * @param  {object}   result see https://github.com/atlassian/react-beautiful-dnd#result-dropresult
    */
-  onDragEnd = (result) => {
+  onDragEnd = result => {
     // dropped outside the list
     if (!result.destination) {
       return
@@ -126,7 +126,11 @@ class ExampleApp extends React.Component {
       const event = { type, template, action: dndAction }
       const newBlock = this.getBlockTemplate(event)
       const newIndex = result.destination.index
-      const newEditor = EditorState.appendBlockAtIndex(newEditorState, newBlock, newIndex)
+      const newEditor = EditorState.appendBlockAtIndex(
+        newEditorState,
+        newBlock,
+        newIndex
+      )
       this.setState({
         editorState: [...newEditor]
       })
@@ -138,7 +142,7 @@ class ExampleApp extends React.Component {
    * @param  {object}   event the event that just triggered the request to get a new block
    * @return {object}         the new block with all its properties
    */
-  getBlockTemplate = (event) => {
+  getBlockTemplate = event => {
     const { document: dc } = this.props
     let template = null
     let templateData = null
@@ -146,35 +150,38 @@ class ExampleApp extends React.Component {
     // let's check if the event.template has a valid template.id in the document
     // and if so let's use the template when adding the type below
     if (event.template) {
-      template = find(dc.template, tm => (tm && tm.id === parseInt(event.template, 10)))
+      template = find(
+        dc.template,
+        tm => tm && tm.id === parseInt(event.template, 10)
+      )
       templateData = get(template, 'data', {})
     }
 
-    const randomId = () => Math.floor((Math.random() * 1000) + 1)
+    const randomId = () => Math.floor(Math.random() * 1000 + 1)
 
-    switch (event.type) { 
-    case 'richtext':
-      return {
-        id: randomId(),
-        type: 'richtext',
-        data: {
-          value: get(templateData, 'value', '')
-        },
-        meta: {
-          title: 'Quill Editor'
+    switch (event.type) {
+      case 'richtext':
+        return {
+          id: randomId(),
+          type: 'richtext',
+          data: {
+            value: get(templateData, 'value', '')
+          },
+          meta: {
+            title: 'Quill Editor'
+          }
         }
-      }
-    default:
-      return {
-        id: randomId(),
-        type: event.type,
-        data: {
-          value: ''
-        },
-        meta: {
-          title: 'Editor'
+      default:
+        return {
+          id: randomId(),
+          type: event.type,
+          data: {
+            value: ''
+          },
+          meta: {
+            title: 'Editor'
+          }
         }
-      }
     }
   }
 
@@ -195,7 +202,13 @@ class ExampleApp extends React.Component {
 
   render() {
     const { editorState } = this.state
-    const { menuState, blocksConfig, blockComponent, placeholder, showPreview } = this.props
+    const {
+      menuState,
+      blocksConfig,
+      blockComponent,
+      placeholder,
+      showPreview
+    } = this.props
 
     const additionalProps = {
       onBlockAction: this.onBlockAction
@@ -203,17 +216,19 @@ class ExampleApp extends React.Component {
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div {...classes('container')} >
-          <Droppable droppableId='droppable-menu' isDropDisabled direction='horizontal'>
+        <div {...classes('container')}>
+          <Droppable
+            droppableId="droppable-menu"
+            isDropDisabled
+            direction="horizontal"
+          >
             {(dropProvided, snapshot) => (
               <div
                 ref={dropProvided.innerRef}
                 data-dragging={snapshot.isDraggingOver}
                 {...dropProvided.droppableProps}
               >
-                <Card
-                  className={this.props.classes.card}
-                >
+                <Card className={this.props.classes.card}>
                   <CardContent>
                     <ExampleMenu
                       menuState={menuState}
@@ -226,16 +241,14 @@ class ExampleApp extends React.Component {
           </Droppable>
           <div {...classes(showPreview ? 'content-preview' : 'content')}>
             <div {...classes(showPreview ? 'editor-preview' : 'editor')}>
-              <Droppable droppableId='droppable-editor'>
+              <Droppable droppableId="droppable-editor">
                 {(dropProvided, snapshot) => (
                   <div
                     ref={dropProvided.innerRef}
                     data-dragging={snapshot.isDraggingOver}
                     {...dropProvided.droppableProps}
                   >
-                    <Card
-                      className={this.props.classes.card}
-                    >
+                    <Card className={this.props.classes.card}>
                       <CardContent>
                         <LovelyEditor
                           additionalProps={additionalProps}
@@ -243,12 +256,15 @@ class ExampleApp extends React.Component {
                           blockComponent={blockComponent || undefined}
                           blocksConfig={blocksConfig}
                           onChange={this.onChange}
-                          placeholder={!snapshot.isDraggingOver
-                            ? (placeholder || undefined)
-                            : (dragDropPlaceholder || undefined)
+                          placeholder={
+                            !snapshot.isDraggingOver
+                              ? placeholder || undefined
+                              : dragDropPlaceholder || undefined
                           }
                           style={{
-                            backgroundColor: snapshot.isDraggingOver ? '#989898' : null
+                            backgroundColor: snapshot.isDraggingOver
+                              ? '#989898'
+                              : null
                           }}
                         />
                       </CardContent>
@@ -259,10 +275,8 @@ class ExampleApp extends React.Component {
               </Droppable>
             </div>
             {showPreview && (
-              <div {...classes('preview')} >
-                <Card
-                  className={this.props.classes.card}
-                >
+              <div {...classes('preview')}>
+                <Card className={this.props.classes.card}>
                   <CardContent>
                     <HTMLPreview editorState={editorState} />
                   </CardContent>
@@ -274,7 +288,6 @@ class ExampleApp extends React.Component {
       </DragDropContext>
     )
   }
-
 }
 
 export default withStyles(styles)(ExampleApp)
