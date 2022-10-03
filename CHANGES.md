@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and
 this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased / [2.1.0]
+## 2022/10/03 [3.0.0]
+
+### Changed
+
+- upgrade dependencies due to node update in amna
+
+## 2022/06/20 [2.1.0]
 
 ### Changed
 
@@ -95,7 +101,7 @@ this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html
 - ExampleApp and related components moved to [/example](example) folder
 - EditorQuill comes with two themes now: quill.snow.css and quill.core.css
 
-*BREAKING*
+_BREAKING_
 
 - relocated Delete-Button from `EditorBlock` to `ExampleBlockWrapper`:
   `Delete--Button` will not be included in `LovelyEditor` itself anymore
@@ -132,76 +138,76 @@ const blockConfig = {
 
 ### Removed
 
-- *BREAKING*: `EditorImage` removed
+- _BREAKING_: `EditorImage` removed
 - ExampleApp does not contain example for `EditorImage` anymore
 
 ## 2018/05/23 [0.4.2][7]
 
 ### Changed
 
-* EditorImage: custom Toolbar receives `onChange` property
+- EditorImage: custom Toolbar receives `onChange` property
 
 ## 2018/05/22 [0.4.1][6]
 
 ### Added
 
-* EditorImage can work with a custom Editor component
+- EditorImage can work with a custom Editor component
 
 ## 2018/04/26 [0.4.0][5]
 
 ### Added
 
-* added `react` with version 16.2.0 as a peerDependency
+- added `react` with version 16.2.0 as a peerDependency
 
 ### Changed
 
-* Upgraded react-beautiful-dnd [from 4.0.1 to 6.0.2](https://github.com/atlassian/react-beautiful-dnd/releases/tag/v6.0.2)
+- Upgraded react-beautiful-dnd [from 4.0.1 to 6.0.2](https://github.com/atlassian/react-beautiful-dnd/releases/tag/v6.0.2)
 
 ### Removed
 
-* Removed `react-beautiful-dnd` peerDependency, as it is only required in the Storybook
+- Removed `react-beautiful-dnd` peerDependency, as it is only required in the Storybook
   presentation, but not for the core oyez-editor product
 
 ## 2018/04/11 [0.3.0][4]
 
 ### Added
 
-* Added new event listeners to ReactQuill: onKeyPress, onKeyDown, onKeyUp
+- Added new event listeners to ReactQuill: onKeyPress, onKeyDown, onKeyUp
 
 ### Changed
 
-* ReactQuill invokes onBlur, OnFocus and other events to the provided `blockConfig.onBlur`
+- ReactQuill invokes onBlur, OnFocus and other events to the provided `blockConfig.onBlur`
   etc. functions
-* upgrade all node packages to latest version (eg. react-quill to 1.2.7)
+- upgrade all node packages to latest version (eg. react-quill to 1.2.7)
 
 ## 2018/02/21 [0.2.0][3]
 
 ### Added
 
-* EditorQuill: can import and register custom icons for the EditorToolbar (with
+- EditorQuill: can import and register custom icons for the EditorToolbar (with
   quill's snow theme)
 
-* All levels of the <Editor> components (eg. blocks and editors like quill)
+- All levels of the <Editor> components (eg. blocks and editors like quill)
   receive the `additionalProps` property, if it is passed to the <Editor />.
   This property can include additional data for any component.
-* each block in the `blocksConfig` can now contain a `data` property, which contains
+- each block in the `blocksConfig` can now contain a `data` property, which contains
   customizations for the given block.type.
-  * Example customization for the <EditorQuill />
-    * whether or not the Toolbar should fade out when the editor lost focus or not
-    * replace the editor's Toolbar with a custom one
-  * Example customization for the <EditorImage />
-    * replace the editor's Toolbar with a custom one
+  - Example customization for the <EditorQuill />
+    - whether or not the Toolbar should fade out when the editor lost focus or not
+    - replace the editor's Toolbar with a custom one
+  - Example customization for the <EditorImage />
+    - replace the editor's Toolbar with a custom one
 
 ## 2018/02/12 [0.1.0][2]
 
 ### Added
 
-* Initial Project Setup with Lint, Test and Bundle Setup
-* Basic Editor Components Setup (Editor, EditorBlock and Example Components)
-* Storybook implemented to showcase Editor Components
-* Quill Editor Component implemented (Basic Setup)
-* Editor Image component added (Basic Setup)
-* Drag & Drop Support (added and illustrated in Storybook)
+- Initial Project Setup with Lint, Test and Bundle Setup
+- Basic Editor Components Setup (Editor, EditorBlock and Example Components)
+- Storybook implemented to showcase Editor Components
+- Quill Editor Component implemented (Basic Setup)
+- Editor Image component added (Basic Setup)
+- Drag & Drop Support (added and illustrated in Storybook)
 
 [1]: https://github.com/lovelysystems/oyez-editor/compare/v1.2.0...HEAD
 [2]: https://github.com/lovelysystems/oyez-editor/releases/tag/v0.1.0

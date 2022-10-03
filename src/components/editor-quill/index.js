@@ -13,7 +13,6 @@ require('react-quill/dist/quill.snow.css')
 require('react-quill/dist/quill.core.css')
 
 export class EditorQuill extends React.Component {
-
   constructor(props, context) {
     super(props, context)
 
@@ -34,7 +33,7 @@ export class EditorQuill extends React.Component {
   onChange(html) {
     const change = {
       data: {
-        value: html,
+        value: html
       }
     }
     this.props.onChange(change)
@@ -61,14 +60,14 @@ export class EditorQuill extends React.Component {
 
   /**
    * Quill modules to attach to editor (eg. toolbar)
-   * 
+   *
    * Docs
    * - https://quilljs.com/docs/modules/
    * - https://github.com/zenoamaro/react-quill#props
-   * 
+   *
    * Keyboard Configuration
    * - https://quilljs.com/docs/modules/keyboard/#configuration
-   * 
+   *
    * Example Toolbar: https://quilljs.com/standalone/full/
    */
   getModules(props) {
@@ -79,7 +78,8 @@ export class EditorQuill extends React.Component {
       container: toolbarSelector || `#toolbar-${block.id}`
     }
 
-    return merge({},
+    return merge(
+      {},
       {
         toolbar: toolbarOptions || customToolbar
       },
@@ -94,7 +94,14 @@ export class EditorQuill extends React.Component {
       const icons = Quill.import('ui/icons')
       forOwn(blockConfig.icons, (value, key) => {
         // these specialIcons have subsettings (eg. list with ordered, bullet)
-        const specialIcons = ['align', 'direction', 'float', 'indent', 'list', 'script']
+        const specialIcons = [
+          'align',
+          'direction',
+          'float',
+          'indent',
+          'list',
+          'script'
+        ]
         if (specialIcons.includes(key)) {
           icons[key] = {
             ...icons[key],
@@ -115,9 +122,9 @@ export class EditorQuill extends React.Component {
       /**
        * if the user provides toolbarOptions, do not render custom toolbar and
        * use quill's standard toolbar instead
-       * 
+       *
        * example:
-       * 
+       *
        * const toolbarOptions = [
        *   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
        *   ['blockquote', 'code-block'],
@@ -132,11 +139,8 @@ export class EditorQuill extends React.Component {
     const EditorToolbar = get(blockConfig, 'toolbar') || QuillToolbar
 
     return (
-      <div {...classes('toolbar', theme)} >
-        <EditorToolbar
-          id={block.id}
-          onToolbarClick={toolbarCallback}
-        />
+      <div {...classes('toolbar', theme)}>
+        <EditorToolbar id={block.id} onToolbarClick={toolbarCallback} />
       </div>
     )
   }
@@ -145,26 +149,36 @@ export class EditorQuill extends React.Component {
     const { block, blockConfig = {} } = this.props
     const { placeholderText, scrollingContainer, theme } = blockConfig
     const currentValue = get(block, 'data.value', '')
-    const selectedTheme = (theme === 'core') ? null : 'snow' // null = will reset theme
+    const selectedTheme = theme === 'core' ? null : 'snow' // null = will reset theme
 
     return (
       <div {...classes('container', theme)}>
         {this.renderCustomToolbar()}
-        <div {...classes('editor', theme)} >
+        <div {...classes('editor', theme)}>
           <ReactQuill
             formats={this.formats}
             modules={this.modules}
             placeholder={placeholderText || 'Write a text...'}
             onBlur={(previousRange, source, editor) => {
-              invoke(this.props, 'blockConfig.onBlur', previousRange, source, editor)
+              invoke(
+                this.props,
+                'blockConfig.onBlur',
+                previousRange,
+                source,
+                editor
+              )
             }}
             onFocus={(range, source, editor) => {
               invoke(this.props, 'blockConfig.onFocus', range, source, editor)
             }}
             onChange={this.onChange}
-            onKeyDown={(event) => invoke(this.props, 'blockConfig.onKeyDown', event)}
-            onKeyPress={(event) => invoke(this.props, 'blockConfig.onKeyPress', event)}
-            onKeyUp={(event) => invoke(this.props, 'blockConfig.onKeyUp', event)}
+            onKeyDown={event =>
+              invoke(this.props, 'blockConfig.onKeyDown', event)
+            }
+            onKeyPress={event =>
+              invoke(this.props, 'blockConfig.onKeyPress', event)
+            }
+            onKeyUp={event => invoke(this.props, 'blockConfig.onKeyUp', event)}
             theme={selectedTheme}
             value={currentValue}
             scrollingContainer={scrollingContainer}
@@ -173,14 +187,13 @@ export class EditorQuill extends React.Component {
       </div>
     )
   }
-
 }
 
 EditorQuill.propTypes = {
   additionalProps: PropTypes.object,
   block: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    data: PropTypes.objectOf(PropTypes.string).isRequired,
+    data: PropTypes.objectOf(PropTypes.string).isRequired
   }).isRequired,
   blockConfig: PropTypes.shape({
     formats: PropTypes.arrayOf(PropTypes.string),
@@ -194,24 +207,24 @@ EditorQuill.propTypes = {
     registerFormats: PropTypes.func,
     theme: PropTypes.string,
     toolbar: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    toolbarCallback: PropTypes.func,
+    toolbarCallback: PropTypes.func
   }),
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
 EditorQuill.defaultProps = {
   additionalProps: {},
   blockConfig: {
-    onBlur: () => { },
-    onFocus: () => { },
-    onKeyPress: () => { },
-    onKeyDown: () => { },
-    onKeyUp: () => { },
+    onBlur: () => {},
+    onFocus: () => {},
+    onKeyPress: () => {},
+    onKeyDown: () => {},
+    onKeyUp: () => {},
     icons: null,
     placeholderText: 'Write a text...',
     registerFormats: null,
     toolbar: QuillToolbar,
-    toolbarCallback: () => { },
+    toolbarCallback: () => {},
     toolbarSelector: null,
     theme: 'snow'
   }
