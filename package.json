@@ -112,7 +112,7 @@
     "jsdom": "20.0.1",
     "jsdom-global": "3.0.2",
     "lint-staged": "^9.4.2",
-    "mocha": "6.2.3",
+    "mocha": "10.2.0",
     "mock-require": "3.0.3",
     "node-sass": "7.0.3",
     "node-sass-package-importer": "^5.3.2",
